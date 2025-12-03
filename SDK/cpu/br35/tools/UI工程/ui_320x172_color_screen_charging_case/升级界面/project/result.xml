@@ -1,0 +1,28 @@
+﻿<?xml version="2.0" encoding="UTF-8"?>
+<Resbuilder>
+    <PageList>
+        <Page id="0">
+            <ColorList>
+                <Color id="0">000000</Color>
+                <Color id="1">00AAFF</Color>
+                <Color id="2">666666</Color>
+                <Color id="3">FF0000</Color>
+                <Color id="4">FFFFFF</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="AL22" id="1" convert_size="285" compress_size="285" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch_lite\AC707N\download_v100\UI工程\ui_320x172_color_screen_charging_case_jinxin\升级界面\project\config\#26白\%.png</Picture>
+                <Picture format="ARGB8565" id="2" convert_size="945" compress_size="652" ratio="68.99%">D:\work_space\workspace\br35\visual_svn\standard\watch_lite\AC707N\download_v100\UI工程\ui_320x172_color_screen_charging_case_jinxin\升级界面\project\config\#26白\0.png</Picture>
+                <Picture format="ARGB8565" id="3" convert_size="945" compress_size="395" ratio="41.80%">D:\work_space\workspace\br35\visual_svn\standard\watch_lite\AC707N\download_v100\UI工程\ui_320x172_color_screen_charging_case_jinxin\升级界面\project\config\#26白\1.png</Picture>
+                <Picture format="ARGB8565" id="4" convert_size="945" compress_size="466" ratio="49.31%">D:\work_space\workspace\br35\visual_svn\standard\watch_lite\AC707N\download_v100\UI工程\ui_320x172_color_screen_charging_case_jinxin\升级界面\project\config\#26白\2.png</Picture>
+                <Picture format="ARGB8565" id="5" convert_size="945" compress_size="549" ratio="58.10%">D:\work_space\workspace\br35\visual_svn\standard\watch_lite\AC707N\download_v100\UI工程\ui_320x172_color_screen_charging_case_jinxin\升级界面\project\config\#26白\3.png</Picture>
+                <Picture format="ARGB8565" id="6" convert_size="945" compress_size="470" ratio="49.74%">D:\work_space\workspace\br35\visual_svn\standard\watch_lite\AC707N\download_v100\UI工程\ui_320x172_color_screen_charging_case_jinxin\升级界面\project\config\#26白\4.png</Picture>
+                <Picture format="ARGB8565" id="7" convert_size="945" compress_size="518" ratio="54.81%">D:\work_space\workspace\br35\visual_svn\standard\watch_lite\AC707N\download_v100\UI工程\ui_320x172_color_screen_charging_case_jinxin\升级界面\project\config\#26白\5.png</Picture>
+                <Picture format="ARGB8565" id="8" convert_size="945" compress_size="631" ratio="66.77%">D:\work_space\workspace\br35\visual_svn\standard\watch_lite\AC707N\download_v100\UI工程\ui_320x172_color_screen_charging_case_jinxin\升级界面\project\config\#26白\6.png</Picture>
+                <Picture format="ARGB8565" id="9" convert_size="945" compress_size="362" ratio="38.31%">D:\work_space\workspace\br35\visual_svn\standard\watch_lite\AC707N\download_v100\UI工程\ui_320x172_color_screen_charging_case_jinxin\升级界面\project\config\#26白\7.png</Picture>
+                <Picture format="ARGB8565" id="10" convert_size="945" compress_size="661" ratio="69.95%">D:\work_space\workspace\br35\visual_svn\standard\watch_lite\AC707N\download_v100\UI工程\ui_320x172_color_screen_charging_case_jinxin\升级界面\project\config\#26白\8.png</Picture>
+                <Picture format="ARGB8565" id="11" convert_size="945" compress_size="619" ratio="65.50%">D:\work_space\workspace\br35\visual_svn\standard\watch_lite\AC707N\download_v100\UI工程\ui_320x172_color_screen_charging_case_jinxin\升级界面\project\config\#26白\9.png</Picture>
+            </PictureList>
+            <CellList/>
+        </Page>
+    </PageList>
+</Resbuilder>

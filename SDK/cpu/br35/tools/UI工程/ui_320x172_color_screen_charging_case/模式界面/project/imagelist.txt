@@ -1,0 +1,2 @@
+power_on.png|D:/work_space/workspace/br35/visual_svn/standard/watch_lite/AC707N/download_v100/UI工程/ui_320x172_color_screen_charging_case/模式界面/project/config/image_resources/power_on/power_on.pngbaskslash equal zero else
+config/image_resources/power_on/power_on.png

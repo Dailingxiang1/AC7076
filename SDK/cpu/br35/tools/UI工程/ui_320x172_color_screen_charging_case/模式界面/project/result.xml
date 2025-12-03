@@ -1,0 +1,419 @@
+﻿<?xml version="2.0" encoding="UTF-8"?>
+<Resbuilder>
+    <PageList>
+        <Page id="0">
+            <ColorList>
+                <Color id="0">000000</Color>
+            </ColorList>
+            <PictureList/>
+            <CellList/>
+        </Page>
+        <Page id="1">
+            <ColorList>
+                <Color id="0">000000</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="ARGB8565" id="1" convert_size="18753" compress_size="6037" ratio="32.19%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\power_on\power_on.png</Picture>
+            </PictureList>
+            <CellList/>
+        </Page>
+        <Page id="2">
+            <ColorList>
+                <Color id="0">000000</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="ARGB8888" id="1" convert_size="15288" compress_size="4000" ratio="26.16%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\sys_menu\power_on_off\img_power_off.png</Picture>
+            </PictureList>
+            <CellList/>
+        </Page>
+        <Page id="3">
+            <ColorList>
+                <Color id="0">000000</Color>
+                <Color id="1">FFFFFF</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="A8" id="1" convert_size="3443" compress_size="1395" ratio="40.52%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\5min.png</Picture>
+                <Picture format="AL44" id="2" convert_size="3488" compress_size="1671" ratio="47.91%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\10min.png</Picture>
+                <Picture format="AL44" id="3" convert_size="3488" compress_size="1723" ratio="49.40%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\30min.png</Picture>
+                <Picture format="AL22" id="4" convert_size="1732" compress_size="1732" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\60min.png</Picture>
+                <Picture format="A8" id="5" convert_size="3603" compress_size="406" ratio="11.27%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\ic_next_press.png</Picture>
+                <Picture format="A8" id="6" convert_size="3603" compress_size="406" ratio="11.27%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\ic_prev_press.png</Picture>
+                <Picture format="AL44" id="7" convert_size="3648" compress_size="837" ratio="22.94%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\ic_next_release.png</Picture>
+                <Picture format="AL44" id="8" convert_size="3648" compress_size="837" ratio="22.94%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\ic_prev_release.png</Picture>
+                <Picture format="AL22" id="9" convert_size="168" compress_size="168" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_0.png</Picture>
+                <Picture format="A8" id="10" convert_size="315" compress_size="146" ratio="46.35%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_1.png</Picture>
+                <Picture format="A8" id="11" convert_size="315" compress_size="163" ratio="51.75%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_2.png</Picture>
+                <Picture format="A8" id="12" convert_size="315" compress_size="156" ratio="49.52%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_3.png</Picture>
+                <Picture format="A8" id="13" convert_size="315" compress_size="149" ratio="47.30%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_4.png</Picture>
+                <Picture format="A8" id="14" convert_size="315" compress_size="143" ratio="45.40%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_5.png</Picture>
+                <Picture format="AL22" id="15" convert_size="168" compress_size="168" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_6.png</Picture>
+                <Picture format="A8" id="16" convert_size="315" compress_size="139" ratio="44.13%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_7.png</Picture>
+                <Picture format="AL22" id="17" convert_size="168" compress_size="168" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_8.png</Picture>
+                <Picture format="AL22" id="18" convert_size="168" compress_size="168" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_9.png</Picture>
+                <Picture format="A8" id="19" convert_size="185" compress_size="60" ratio="32.43%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_12.png</Picture>
+                <Picture format="A8" id="20" convert_size="185" compress_size="60" ratio="32.43%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_13.png</Picture>
+                <Picture format="ARGB8565" id="21" convert_size="18000" compress_size="1896" ratio="10.53%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\rect_background\120x50.png</Picture>
+                <Picture format="ARGB8565" id="22" convert_size="18000" compress_size="1860" ratio="10.33%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\rect_background\120x50_1.png</Picture>
+            </PictureList>
+            <CellList>
+                <Cell id="3">LANGUAGE41</Cell>
+                <Cell id="21">LANGUAGE165</Cell>
+            </CellList>
+        </Page>
+        <Page id="4">
+            <ColorList>
+                <Color id="0">000000</Color>
+                <Color id="1">01FF79</Color>
+                <Color id="2">FFFFFF</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="ARGB8565" id="1" convert_size="11532" compress_size="2208" ratio="19.15%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\phone\hung_up.png</Picture>
+                <Picture format="AL88" id="2" convert_size="8456" compress_size="2976" ratio="35.19%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\phone\mute_on.png</Picture>
+                <Picture format="ARGB8565" id="3" convert_size="11532" compress_size="2748" ratio="23.83%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\phone\mute_off.png</Picture>
+                <Picture format="ARGB8565" id="4" convert_size="11532" compress_size="2126" ratio="18.44%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\phone\hung_down.png</Picture>
+                <Picture format="ARGB8565" id="5" convert_size="3888" compress_size="1120" ratio="28.81%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\phone\icon_mute_on.png</Picture>
+                <Picture format="A8" id="6" convert_size="1299" compress_size="507" ratio="39.03%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\phone\icon_mute_off.png</Picture>
+                <Picture format="A8" id="7" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\0.png</Picture>
+                <Picture format="A8" id="8" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\1.png</Picture>
+                <Picture format="A8" id="9" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\2.png</Picture>
+                <Picture format="A8" id="10" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\3.png</Picture>
+                <Picture format="A8" id="11" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\4.png</Picture>
+                <Picture format="A8" id="12" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\5.png</Picture>
+                <Picture format="A8" id="13" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\6.png</Picture>
+                <Picture format="A8" id="14" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\7.png</Picture>
+                <Picture format="A8" id="15" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\8.png</Picture>
+                <Picture format="A8" id="16" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\9.png</Picture>
+                <Picture format="AL22" id="17" convert_size="60" compress_size="60" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\12.png</Picture>
+            </PictureList>
+            <CellList>
+                <Cell id="18">LANGUAGE134</Cell>
+                <Cell id="24">LANGUAGE168</Cell>
+            </CellList>
+        </Page>
+        <Page id="5">
+            <ColorList>
+                <Color id="0">000000</Color>
+                <Color id="1">FFFFFF</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="A8" id="1" convert_size="6403" compress_size="2159" ratio="33.72%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\ringing.png</Picture>
+                <Picture format="ARGB8565" id="2" convert_size="18000" compress_size="1896" ratio="10.53%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\rect_background\120x50.png</Picture>
+                <Picture format="ARGB8565" id="3" convert_size="18000" compress_size="1860" ratio="10.33%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\rect_background\120x50_1.png</Picture>
+            </PictureList>
+            <CellList>
+                <Cell id="22">LANGUAGE166</Cell>
+                <Cell id="23">LANGUAGE167</Cell>
+            </CellList>
+        </Page>
+        <Page id="6">
+            <ColorList>
+                <Color id="0">000000</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="AL88" id="1" convert_size="29568" compress_size="7358" ratio="24.89%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\takephoto\takephoto.png</Picture>
+            </PictureList>
+            <CellList/>
+        </Page>
+        <Page id="7">
+            <ColorList>
+                <Color id="0">000000</Color>
+                <Color id="1">00FF00</Color>
+                <Color id="2">FF0000</Color>
+                <Color id="3">FFFFFF</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="A8" id="1" convert_size="679" compress_size="252" ratio="37.11%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\charge\lightning.png</Picture>
+                <Picture format="AL88" id="2" convert_size="34568" compress_size="11070" ratio="32.02%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\charge\charge_bg1.png</Picture>
+                <Picture format="A8" id="3" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\0.png</Picture>
+                <Picture format="A8" id="4" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\1.png</Picture>
+                <Picture format="A8" id="5" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\2.png</Picture>
+                <Picture format="A8" id="6" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\3.png</Picture>
+                <Picture format="A8" id="7" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\4.png</Picture>
+                <Picture format="A8" id="8" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\5.png</Picture>
+                <Picture format="A8" id="9" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\6.png</Picture>
+                <Picture format="A8" id="10" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\7.png</Picture>
+                <Picture format="A8" id="11" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\8.png</Picture>
+                <Picture format="A8" id="12" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\9.png</Picture>
+            </PictureList>
+            <CellList/>
+        </Page>
+        <Page id="8">
+            <ColorList>
+                <Color id="0">000000</Color>
+                <Color id="1">D9EE94</Color>
+            </ColorList>
+            <PictureList/>
+            <CellList/>
+        </Page>
+        <Page id="9">
+            <ColorList>
+                <Color id="0">000000</Color>
+                <Color id="1">FFFFFF</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="ARGB8565" id="1" convert_size="10800" compress_size="2481" ratio="22.97%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\volume\add_selected.png</Picture>
+                <Picture format="ARGB8565" id="2" convert_size="10800" compress_size="2142" ratio="19.83%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\volume\sub_selected.png</Picture>
+                <Picture format="ARGB8565" id="3" convert_size="10800" compress_size="2512" ratio="23.26%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\volume\add_connected.png</Picture>
+                <Picture format="ARGB8565" id="4" convert_size="10800" compress_size="2142" ratio="19.83%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\volume\sub_connected.png</Picture>
+                <Picture format="ARGB8565" id="5" convert_size="10800" compress_size="2481" ratio="22.97%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\volume\add_not_connected.png</Picture>
+                <Picture format="ARGB8565" id="6" convert_size="10800" compress_size="2142" ratio="19.83%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\volume\sub_not_connected.png</Picture>
+                <Picture format="AL22" id="7" convert_size="488" compress_size="488" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\0.png</Picture>
+                <Picture format="AL22" id="8" convert_size="488" compress_size="488" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\1.png</Picture>
+                <Picture format="AL22" id="9" convert_size="488" compress_size="488" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\2.png</Picture>
+                <Picture format="AL22" id="10" convert_size="488" compress_size="488" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\3.png</Picture>
+                <Picture format="AL22" id="11" convert_size="488" compress_size="488" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\4.png</Picture>
+                <Picture format="AL22" id="12" convert_size="488" compress_size="488" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\5.png</Picture>
+                <Picture format="AL22" id="13" convert_size="488" compress_size="488" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\6.png</Picture>
+                <Picture format="AL22" id="14" convert_size="488" compress_size="488" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\7.png</Picture>
+                <Picture format="AL22" id="15" convert_size="488" compress_size="488" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\8.png</Picture>
+                <Picture format="AL22" id="16" convert_size="488" compress_size="488" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\9.png</Picture>
+            </PictureList>
+            <CellList/>
+        </Page>
+        <Page id="10">
+            <ColorList>
+                <Color id="0">000000</Color>
+                <Color id="1">FFFFFF</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="ARGB8565" id="1" convert_size="10800" compress_size="2007" ratio="18.58%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\open_selected.png</Picture>
+                <Picture format="ARGB8565" id="2" convert_size="10800" compress_size="1272" ratio="11.78%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\close_selected.png</Picture>
+                <Picture format="ARGB8565" id="3" convert_size="10800" compress_size="2773" ratio="25.68%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\open_connected.png</Picture>
+                <Picture format="ARGB8565" id="4" convert_size="10800" compress_size="1878" ratio="17.39%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\close_connected.png</Picture>
+                <Picture format="ARGB8888" id="5" convert_size="14400" compress_size="1910" ratio="13.26%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\adaptive_selected.png</Picture>
+                <Picture format="ARGB8565" id="6" convert_size="10800" compress_size="2771" ratio="25.66%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\open_not_connected.png</Picture>
+                <Picture format="ARGB8888" id="7" convert_size="14400" compress_size="2637" ratio="18.31%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\adaptive_connected.png</Picture>
+                <Picture format="ARGB8565" id="8" convert_size="10800" compress_size="1876" ratio="17.37%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\close_not_connected.png</Picture>
+                <Picture format="ARGB8565" id="9" convert_size="10800" compress_size="1944" ratio="18.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\transparent_selected.png</Picture>
+                <Picture format="ARGB8565" id="10" convert_size="10800" compress_size="2598" ratio="24.06%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\transparent_connected.png</Picture>
+                <Picture format="ARGB8888" id="11" convert_size="14400" compress_size="2634" ratio="18.29%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\adaptive_not_connected.png</Picture>
+                <Picture format="ARGB8565" id="12" convert_size="10800" compress_size="2591" ratio="23.99%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\transparent_not_connected.png</Picture>
+            </PictureList>
+            <CellList>
+                <Cell id="1">LANGUAGE33</Cell>
+            </CellList>
+        </Page>
+        <Page id="11">
+            <ColorList>
+                <Color id="0">000000</Color>
+                <Color id="1">FFFFFF</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="A8" id="1" convert_size="3603" compress_size="406" ratio="11.27%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_selected.png</Picture>
+                <Picture format="A8" id="2" convert_size="3603" compress_size="406" ratio="11.27%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_selected.png</Picture>
+                <Picture format="AL44" id="3" convert_size="3648" compress_size="837" ratio="22.94%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_connected.png</Picture>
+                <Picture format="AL44" id="4" convert_size="3648" compress_size="837" ratio="22.94%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_connected.png</Picture>
+                <Picture format="AL44" id="5" convert_size="3648" compress_size="829" ratio="22.72%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_not_connected.png</Picture>
+                <Picture format="AL44" id="6" convert_size="3648" compress_size="829" ratio="22.72%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_not_connected.png</Picture>
+            </PictureList>
+            <CellList>
+                <Cell id="17">LANGUAGE121</Cell>
+                <Cell id="16">LANGUAGE120</Cell>
+                <Cell id="15">LANGUAGE119</Cell>
+                <Cell id="13">LANGUAGE117</Cell>
+                <Cell id="12">LANGUAGE116</Cell>
+                <Cell id="2">LANGUAGE34</Cell>
+                <Cell id="11">LANGUAGE115</Cell>
+                <Cell id="14">LANGUAGE118</Cell>
+            </CellList>
+        </Page>
+        <Page id="12">
+            <ColorList>
+                <Color id="0">000000</Color>
+                <Color id="1">FFFFFF</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="ARGB8565" id="1" convert_size="10800" compress_size="2172" ratio="20.11%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\play_connected.png</Picture>
+                <Picture format="ARGB8565" id="2" convert_size="10800" compress_size="1893" ratio="17.53%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\pause_connected.png</Picture>
+                <Picture format="ARGB8565" id="3" convert_size="10800" compress_size="2156" ratio="19.96%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\next_track_selected.png</Picture>
+                <Picture format="ARGB8565" id="4" convert_size="10800" compress_size="1893" ratio="17.53%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\pause_not_connected.png</Picture>
+                <Picture format="ARGB8565" id="5" convert_size="10800" compress_size="2114" ratio="19.57%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\prev_track_conected.png</Picture>
+                <Picture format="ARGB8565" id="6" convert_size="10800" compress_size="2114" ratio="19.57%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\prev_track_selected.png</Picture>
+                <Picture format="ARGB8565" id="7" convert_size="10800" compress_size="2156" ratio="19.96%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\next_track_connected.png</Picture>
+                <Picture format="ARGB8565" id="8" convert_size="10800" compress_size="2156" ratio="19.96%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\next_track_not_connected.png</Picture>
+                <Picture format="ARGB8565" id="9" convert_size="10800" compress_size="2114" ratio="19.57%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\prev_track_not_connected.png</Picture>
+            </PictureList>
+            <CellList/>
+        </Page>
+        <Page id="13">
+            <ColorList>
+                <Color id="0">000000</Color>
+                <Color id="1">FFFFFF</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="A8" id="1" convert_size="259" compress_size="131" ratio="50.58%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\L.png</Picture>
+                <Picture format="A8" id="2" convert_size="259" compress_size="131" ratio="50.58%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\R.png</Picture>
+                <Picture format="AL44" id="3" convert_size="304" compress_size="224" ratio="73.68%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\charge.png</Picture>
+                <Picture format="AL44" id="4" convert_size="304" compress_size="244" ratio="80.26%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\L_charge.png</Picture>
+                <Picture format="ARGB8888" id="5" convert_size="1024" compress_size="256" ratio="25.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\R_charge.png</Picture>
+                <Picture format="AL44" id="6" convert_size="304" compress_size="224" ratio="73.68%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\lowpower.png</Picture>
+                <Picture format="A8" id="7" convert_size="259" compress_size="131" ratio="50.58%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\chargingbay.png</Picture>
+                <Picture format="AL22" id="8" convert_size="254" compress_size="254" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\ble_connected.png</Picture>
+                <Picture format="AL44" id="9" convert_size="532" compress_size="345" ratio="64.85%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\ble_edr_connected.png</Picture>
+                <Picture format="AL44" id="10" convert_size="532" compress_size="345" ratio="64.85%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\ble_not_connected.png</Picture>
+                <Picture format="A8" id="11" convert_size="73" compress_size="51" ratio="69.86%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\0.png</Picture>
+                <Picture format="A8" id="12" convert_size="73" compress_size="51" ratio="69.86%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\1.png</Picture>
+                <Picture format="A8" id="13" convert_size="73" compress_size="51" ratio="69.86%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\2.png</Picture>
+                <Picture format="A8" id="14" convert_size="73" compress_size="51" ratio="69.86%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\3.png</Picture>
+                <Picture format="A8" id="15" convert_size="73" compress_size="51" ratio="69.86%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\4.png</Picture>
+                <Picture format="A8" id="16" convert_size="73" compress_size="51" ratio="69.86%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\5.png</Picture>
+                <Picture format="A8" id="17" convert_size="73" compress_size="51" ratio="69.86%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\6.png</Picture>
+                <Picture format="A8" id="18" convert_size="73" compress_size="51" ratio="69.86%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\7.png</Picture>
+                <Picture format="A8" id="19" convert_size="73" compress_size="51" ratio="69.86%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\8.png</Picture>
+                <Picture format="A8" id="20" convert_size="73" compress_size="51" ratio="69.86%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\9.png</Picture>
+                <Picture format="A8" id="21" convert_size="243" compress_size="123" ratio="50.62%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\001.png</Picture>
+                <Picture format="A8" id="22" convert_size="243" compress_size="123" ratio="50.62%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\002.png</Picture>
+                <Picture format="A8" id="23" convert_size="243" compress_size="123" ratio="50.62%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\003.png</Picture>
+                <Picture format="A8" id="24" convert_size="243" compress_size="123" ratio="50.62%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\004.png</Picture>
+                <Picture format="A8" id="25" convert_size="243" compress_size="123" ratio="50.62%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\005.png</Picture>
+                <Picture format="A8" id="26" convert_size="243" compress_size="123" ratio="50.62%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\006.png</Picture>
+                <Picture format="A8" id="27" convert_size="243" compress_size="107" ratio="44.03%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\007.png</Picture>
+                <Picture format="A8" id="28" convert_size="243" compress_size="123" ratio="50.62%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\008.png</Picture>
+                <Picture format="A8" id="29" convert_size="243" compress_size="123" ratio="50.62%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\009.png</Picture>
+                <Picture format="A8" id="30" convert_size="243" compress_size="123" ratio="50.62%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\0010.png</Picture>
+                <Picture format="A8" id="31" convert_size="163" compress_size="39" ratio="23.93%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\0011.png</Picture>
+                <Picture format="AL22" id="32" convert_size="62" compress_size="62" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\percent_sign.png</Picture>
+            </PictureList>
+            <CellList/>
+        </Page>
+        <Page id="14">
+            <ColorList>
+                <Color id="0">000000</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="A8" id="1" convert_size="11399" compress_size="999" ratio="8.76%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\screensaver\box.png</Picture>
+                <Picture format="AL44" id="2" convert_size="3648" compress_size="837" ratio="22.94%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_connected.png</Picture>
+                <Picture format="AL44" id="3" convert_size="3648" compress_size="837" ratio="22.94%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_connected.png</Picture>
+            </PictureList>
+            <CellList/>
+        </Page>
+        <Page id="15">
+            <ColorList>
+                <Color id="0">000000</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="AL44" id="1" convert_size="3648" compress_size="1261" ratio="34.57%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\tiktok\like.png</Picture>
+                <Picture format="ARGB8565" id="2" convert_size="10800" compress_size="1291" ratio="11.95%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\tiktok\liked.png</Picture>
+                <Picture format="ARGB8565" id="3" convert_size="10800" compress_size="887" ratio="8.21%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_selected.png</Picture>
+                <Picture format="ARGB8565" id="4" convert_size="10800" compress_size="946" ratio="8.76%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_selected.png</Picture>
+                <Picture format="ARGB8565" id="5" convert_size="10800" compress_size="1969" ratio="18.23%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_connected.png</Picture>
+                <Picture format="ARGB8565" id="6" convert_size="10800" compress_size="2048" ratio="18.96%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_connected.png</Picture>
+                <Picture format="ARGB8565" id="7" convert_size="10800" compress_size="1951" ratio="18.06%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_not_connected.png</Picture>
+                <Picture format="ARGB8565" id="8" convert_size="10800" compress_size="2034" ratio="18.83%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_not_connected.png</Picture>
+            </PictureList>
+            <CellList/>
+        </Page>
+        <Page id="16">
+            <ColorList>
+                <Color id="0">000000</Color>
+                <Color id="1">FFFFFF</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="AL44" id="1" convert_size="3648" compress_size="837" ratio="22.94%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_connected.png</Picture>
+                <Picture format="AL44" id="2" convert_size="3648" compress_size="837" ratio="22.94%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_connected.png</Picture>
+            </PictureList>
+            <CellList>
+                <Cell id="10">LANGUAGE71</Cell>
+                <Cell id="5">LANGUAGE48</Cell>
+            </CellList>
+        </Page>
+        <Page id="17">
+            <ColorList>
+                <Color id="0">000000</Color>
+                <Color id="1">FFFFFF</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="AL44" id="1" convert_size="6048" compress_size="742" ratio="12.27%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\looking_for_earphone\background_1.png</Picture>
+                <Picture format="ARGB8565" id="2" convert_size="18000" compress_size="1222" ratio="6.79%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\looking_for_earphone\background_2.png</Picture>
+                <Picture format="AL88" id="3" convert_size="12768" compress_size="3556" ratio="27.85%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\looking_for_earphone\pause_search.png</Picture>
+                <Picture format="ARGB8565" id="4" convert_size="11220" compress_size="2525" ratio="22.50%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\looking_for_earphone\take_off_earphone.png</Picture>
+                <Picture format="ARGB8565" id="5" convert_size="18000" compress_size="2676" ratio="14.87%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\looking_for_earphone\left_start_connected.png</Picture>
+                <Picture format="ARGB8565" id="6" convert_size="18000" compress_size="2725" ratio="15.14%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\looking_for_earphone\right_start_connected.png</Picture>
+                <Picture format="ARGB8565" id="7" convert_size="18000" compress_size="2663" ratio="14.79%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\looking_for_earphone\left_start_not_connected.png</Picture>
+                <Picture format="ARGB8565" id="8" convert_size="18000" compress_size="2717" ratio="15.09%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\looking_for_earphone\right_start_not_connected.png</Picture>
+            </PictureList>
+            <CellList>
+                <Cell id="19">LANGUAGE163</Cell>
+                <Cell id="20">LANGUAGE164</Cell>
+                <Cell id="4">LANGUAGE43</Cell>
+                <Cell id="21">LANGUAGE165</Cell>
+            </CellList>
+        </Page>
+        <Page id="18">
+            <ColorList>
+                <Color id="0">000000</Color>
+                <Color id="1">FFFFFF</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="ARGB8565" id="1" convert_size="24000" compress_size="1564" ratio="6.52%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\screen_brightness\0.png</Picture>
+                <Picture format="ARGB8565" id="2" convert_size="24000" compress_size="1971" ratio="8.21%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\screen_brightness\1.png</Picture>
+                <Picture format="ARGB8565" id="3" convert_size="24000" compress_size="1962" ratio="8.18%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\screen_brightness\2.png</Picture>
+                <Picture format="ARGB8565" id="4" convert_size="24000" compress_size="1961" ratio="8.17%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\screen_brightness\3.png</Picture>
+                <Picture format="ARGB8565" id="5" convert_size="24000" compress_size="1966" ratio="8.19%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\screen_brightness\4.png</Picture>
+                <Picture format="ARGB8565" id="6" convert_size="24000" compress_size="1738" ratio="7.24%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\screen_brightness\5.png</Picture>
+                <Picture format="AL44" id="7" convert_size="3648" compress_size="837" ratio="22.94%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_connected.png</Picture>
+                <Picture format="ARGB8565" id="8" convert_size="10800" compress_size="1969" ratio="18.23%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_connected.png</Picture>
+            </PictureList>
+            <CellList>
+                <Cell id="6">LANGUAGE50</Cell>
+            </CellList>
+        </Page>
+        <Page id="19">
+            <ColorList>
+                <Color id="0">000000</Color>
+                <Color id="1">FF0000</Color>
+                <Color id="2">FFFFFF</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="ARGB8888" id="1" convert_size="6400" compress_size="1600" ratio="25.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\time_set\date.png</Picture>
+                <Picture format="ARGB8565" id="2" convert_size="10080" compress_size="1510" ratio="14.98%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\time_set\sure.png</Picture>
+                <Picture format="ARGB8888" id="3" convert_size="6400" compress_size="1600" ratio="25.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\time_set\time.png</Picture>
+                <Picture format="ARGB8565" id="4" convert_size="10080" compress_size="1690" ratio="16.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\time_set\return.png</Picture>
+                <Picture format="AL44" id="5" convert_size="14648" compress_size="972" ratio="6.64%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\time_set\background_1.png</Picture>
+                <Picture format="AL44" id="6" convert_size="7120" compress_size="686" ratio="9.63%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\time_set\list_background.png</Picture>
+                <Picture format="A8" id="7" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\0.png</Picture>
+                <Picture format="A8" id="8" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\1.png</Picture>
+                <Picture format="A8" id="9" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\2.png</Picture>
+                <Picture format="A8" id="10" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\3.png</Picture>
+                <Picture format="A8" id="11" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\4.png</Picture>
+                <Picture format="A8" id="12" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\5.png</Picture>
+                <Picture format="A8" id="13" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\6.png</Picture>
+                <Picture format="A8" id="14" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\7.png</Picture>
+                <Picture format="A8" id="15" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\8.png</Picture>
+                <Picture format="A8" id="16" convert_size="195" compress_size="99" ratio="50.77%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\9.png</Picture>
+                <Picture format="AL22" id="17" convert_size="131" compress_size="131" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\0.png</Picture>
+                <Picture format="AL22" id="18" convert_size="131" compress_size="131" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\1.png</Picture>
+                <Picture format="AL22" id="19" convert_size="131" compress_size="131" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\2.png</Picture>
+                <Picture format="AL22" id="20" convert_size="131" compress_size="131" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\3.png</Picture>
+                <Picture format="AL22" id="21" convert_size="131" compress_size="131" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\4.png</Picture>
+                <Picture format="AL22" id="22" convert_size="131" compress_size="131" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\5.png</Picture>
+                <Picture format="AL22" id="23" convert_size="131" compress_size="131" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\6.png</Picture>
+                <Picture format="AL22" id="24" convert_size="131" compress_size="131" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\7.png</Picture>
+                <Picture format="AL22" id="25" convert_size="131" compress_size="131" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\8.png</Picture>
+                <Picture format="AL22" id="26" convert_size="131" compress_size="131" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\9.png</Picture>
+                <Picture format="A8" id="27" convert_size="241" compress_size="95" ratio="39.42%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\colon.png</Picture>
+                <Picture format="A8" id="28" convert_size="241" compress_size="95" ratio="39.42%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\colon_1.png</Picture>
+                <Picture format="AL22" id="29" convert_size="152" compress_size="152" ratio="100.00%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\semicolon.png</Picture>
+            </PictureList>
+            <CellList/>
+        </Page>
+        <Page id="20">
+            <ColorList>
+                <Color id="0">000000</Color>
+                <Color id="1">FFFFFF</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="ARGB8565" id="1" convert_size="8112" compress_size="2197" ratio="27.08%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\restore\icon_off.png</Picture>
+                <Picture format="ARGB8565" id="2" convert_size="8112" compress_size="2169" ratio="26.74%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\restore\icon_mode.png</Picture>
+                <Picture format="ARGB8565" id="3" convert_size="8112" compress_size="2169" ratio="26.74%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\restore\icon_restart.png</Picture>
+                <Picture format="ARGB8565" id="4" convert_size="8112" compress_size="2147" ratio="26.47%">D:\work_space\workspace\br35\visual_svn\standard\watch\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\restore\icon_recovery.png</Picture>
+            </PictureList>
+            <CellList>
+                <Cell id="9">LANGUAGE67</Cell>
+                <Cell id="7">LANGUAGE65</Cell>
+                <Cell id="8">LANGUAGE66</Cell>
+                <Cell id="25">LANGUAGE169</Cell>
+            </CellList>
+        </Page>
+    </PageList>
+</Resbuilder>

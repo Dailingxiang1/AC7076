@@ -1,0 +1,2 @@
+ANI6.bmp|E:/br35/br35_lite_copy/UIπ§≥Ã/ui_320x172_color_screen_charging_case/±Ì≈Ã4/project/config/lock_screen_wallpaper/ANI6.bmpbaskslash equal zero else
+config/lock_screen_wallpaper/ANI6.bmp

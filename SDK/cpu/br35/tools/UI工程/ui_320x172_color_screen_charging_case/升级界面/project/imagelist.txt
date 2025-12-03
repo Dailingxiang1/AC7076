@@ -1,0 +1,20 @@
+h67_0.png|D:/chenyongqi_work/watch_work/br35/color_screen/Public - develop/colorscreen/sdk/SDK/cpu/br35/tools/UI工程/ui_320x172_new - 0912/升级界面/project/config/size48/h67_0.pngbaskslash equal zero else
+config/size48/h67_0.png
+h67_1.png|D:/chenyongqi_work/watch_work/br35/color_screen/Public - develop/colorscreen/sdk/SDK/cpu/br35/tools/UI工程/ui_320x172_new - 0912/升级界面/project/config/size48/h67_1.pngbaskslash equal zero else
+config/size48/h67_1.png
+h67_2.png|D:/chenyongqi_work/watch_work/br35/color_screen/Public - develop/colorscreen/sdk/SDK/cpu/br35/tools/UI工程/ui_320x172_new - 0912/升级界面/project/config/size48/h67_2.pngbaskslash equal zero else
+config/size48/h67_2.png
+h67_3.png|D:/chenyongqi_work/watch_work/br35/color_screen/Public - develop/colorscreen/sdk/SDK/cpu/br35/tools/UI工程/ui_320x172_new - 0912/升级界面/project/config/size48/h67_3.pngbaskslash equal zero else
+config/size48/h67_3.png
+h67_4.png|D:/chenyongqi_work/watch_work/br35/color_screen/Public - develop/colorscreen/sdk/SDK/cpu/br35/tools/UI工程/ui_320x172_new - 0912/升级界面/project/config/size48/h67_4.pngbaskslash equal zero else
+config/size48/h67_4.png
+h67_5.png|D:/chenyongqi_work/watch_work/br35/color_screen/Public - develop/colorscreen/sdk/SDK/cpu/br35/tools/UI工程/ui_320x172_new - 0912/升级界面/project/config/size48/h67_5.pngbaskslash equal zero else
+config/size48/h67_5.png
+h67_6.png|D:/chenyongqi_work/watch_work/br35/color_screen/Public - develop/colorscreen/sdk/SDK/cpu/br35/tools/UI工程/ui_320x172_new - 0912/升级界面/project/config/size48/h67_6.pngbaskslash equal zero else
+config/size48/h67_6.png
+h67_7.png|D:/chenyongqi_work/watch_work/br35/color_screen/Public - develop/colorscreen/sdk/SDK/cpu/br35/tools/UI工程/ui_320x172_new - 0912/升级界面/project/config/size48/h67_7.pngbaskslash equal zero else
+config/size48/h67_7.png
+h67_8.png|D:/chenyongqi_work/watch_work/br35/color_screen/Public - develop/colorscreen/sdk/SDK/cpu/br35/tools/UI工程/ui_320x172_new - 0912/升级界面/project/config/size48/h67_8.pngbaskslash equal zero else
+config/size48/h67_8.png
+h67_9.png|D:/chenyongqi_work/watch_work/br35/color_screen/Public - develop/colorscreen/sdk/SDK/cpu/br35/tools/UI工程/ui_320x172_new - 0912/升级界面/project/config/size48/h67_9.pngbaskslash equal zero else
+config/size48/h67_9.png

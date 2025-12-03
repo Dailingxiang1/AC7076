@@ -1,0 +1,83 @@
+#ifndef __LCD_CONF_H__
+#define __LCD_CONF_H__
+
+#include "app_config.h"
+
+#if defined(TCFG_LCD_SPI_ICNA3310B_ENABLE) && TCFG_LCD_SPI_ICNA3310B_ENABLE
+#define LCD_WIDTH  466
+#define LCD_HEIGHT 466
+#endif
+
+
+#if defined(TCFG_LCD_SPI_GC9B71_ENABLE) && TCFG_LCD_SPI_GC9B71_ENABLE
+#define LCD_WIDTH  320
+#define LCD_HEIGHT 386
+#endif
+
+
+#if defined(TCFG_LCD_SPI_ST77916_ENABLE) && TCFG_LCD_SPI_ST77916_ENABLE
+#define LCD_WIDTH  320
+#define LCD_HEIGHT 385
+#endif
+
+
+#if defined(TCFG_LCD_SPI_SH8501A_ENABLE) && TCFG_LCD_SPI_SH8501A_ENABLE
+#define LCD_WIDTH  240
+#define LCD_HEIGHT 296
+#endif
+
+#if defined(TCFG_LCD_SPI_SH8601A_ENABLE) && TCFG_LCD_SPI_SH8601A_ENABLE
+#define LCD_WIDTH  454
+#define LCD_HEIGHT 454
+#endif
+
+#if defined(TCFG_LCD_QSPI_ST77903_V2_ENABLE) && TCFG_LCD_QSPI_ST77903_V2_ENABLE
+#define LCD_WIDTH  400
+#define LCD_HEIGHT 400
+#endif
+
+#if defined(TCFG_LCD_QSPI_jd9161c_ENABLE) && TCFG_LCD_QSPI_jd9161c_ENABLE
+#define LCD_WIDTH  480
+#define LCD_HEIGHT 480
+#endif
+
+#if defined(TCFG_LCD_SPI_RM69330_ENABLE) && TCFG_LCD_SPI_RM69330_ENABLE
+#define LCD_WIDTH  454
+#define LCD_HEIGHT 454
+#endif
+
+#if defined(TCFG_LCD_QSPI_SD3302_ENABLE) && TCFG_LCD_QSPI_SD3302_ENABLE
+#define LCD_WIDTH  466
+#define LCD_HEIGHT 466
+#endif
+
+
+#if defined(TCFG_LCD_MCU_JD5858_ENABLE) && TCFG_LCD_MCU_JD5858_ENABLE
+#define LCD_WIDTH  360
+#define LCD_HEIGHT 360
+#endif
+
+#if defined(TCFG_LCD_RGB_ST7789V_ENABLE) && TCFG_LCD_RGB_ST7789V_ENABLE
+#define LCD_WIDTH  240
+#define LCD_HEIGHT 240
+#endif
+
+#if defined(TCFG_LCD_RGB_ENABLE) && TCFG_LCD_RGB_ENABLE
+#define LCD_WIDTH  480
+#define LCD_HEIGHT 272
+#endif
+
+#if defined(TCFG_LCD_GC9307_172X320) && TCFG_LCD_GC9307_172X320
+#define LCD_WIDTH  172
+#define LCD_HEIGHT 320
+#endif
+
+#ifndef LCD_WIDTH
+#error "Macro LCD_WIDTH Undefined"
+#endif
+
+#ifndef LCD_HEIGHT
+#error "Macro LCD_HEIGHT Undefined"
+#endif
+
+#endif

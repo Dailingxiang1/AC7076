@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CodeBlocks_project_file>
+<FileVersion major="1" minor="6" />
+<Project>
+<Option title="AC707N_SensorHub" />
+<Option compiler="q32s_lto_compiler" />
+<Build>
+<Target title="Release">
+<Option output="apps/bsp/cpu/br35/post_build/p11.elf" prefix_auto="0" extension_auto="0" />
+<Option object_output="obj/Release/" />
+<Option type="1" />
+<Option compiler="q32s_lto_compiler" />
+<Compiler>
+<Add option="-integrated-as" />
+<Add option="-g" />
+<Add option="-O0" />
+<Add option="-flto" />
+<Add option="-Os" />
+<Add option="-Wcast-align" />
+<Add option="-Wall" />
+<Add option="-fallow-pointer-null" />
+<Add option="-Wincompatible-pointer-types" />
+<Add option="-fprefer-gnu-section" />
+<Add option="-Werror=undef" />
+<Add option="-Wframe-larger-than=32" />
+<Add option="-Werror=incompatible-pointer-types" />
+<Add option="-Werror=return-type" />
+<Add option="-Werror=implicit-function-declaration" />
+<Add option="-Wno-unused-variable" />
+<Add option="-Wno-unused-function" />
+<Add option="-Wno-cast-align" />
+<Add option="-Werror" />
+<Add option="-D__GCC_Q32S__" />
+<Add option="-DPMU_SYSTEM" />
+<Add option="-DCONFIG_FPGA_ENABLE" />
+<Add directory="apps" />
+<Add directory="apps/bsp/cpu/br35/config" />
+<Add directory="include/driver" />
+<Add directory="include/driver/cpu/br35" />
+<Add directory="include/system" />
+<Add directory="include/system/typedef" />
+<Add directory="include/system/cpu/br35" />
+<Add directory="include/utils" />
+<Add directory="apps/sensor" />
+<Add directory="apps/sensor/driver_vc_hr_11" />
+</Compiler>
+<Linker>
+<Add option="--plugin-opt=-inline-threshold=5" />
+<Add option="--plugin-opt=save-temps" />
+<Add option="--plugin-opt=-inline-normal-into-special-section=true" />
+<Add option="--plugin-opt=-dont-used-symbol-list=malloc,free,sprintf,printf,puts,putchar" />
+<Add option="--sort-common" />
+<Add option="--plugin-opt=-warn-stack-size=32" />
+<Add option="--start-group" />
+<Add option="apps/bsp/cpu/br35/liba/system.a" />
+<Add option="apps/bsp/cpu/br35/liba/cpu.a" />
+<Add option="apps/bsp/cpu/br35/liba/utils.a" />
+<Add option="apps/bsp/cpu/br35/liba/sensor_algorithm_jl_gesture.a" />
+<Add option="--end-group" />
+<Add option="-Tapps/bsp/cpu/br35/p11.ld" />
+<Add option="-M=apps/bsp/cpu/br35/post_build/p11.map" />
+<Add library="C:\JL\pi32\q32s-lib\libm.a" />
+</Linker>
+<ExtraCommands>
+<Add before="$compiler $options $includes -D__LD__ -E -P apps\bsp\cpu\br35\p11_ld.c -o apps\bsp\cpu\br35\p11.ld" />
+<Mode before="always" />
+<Add after="apps\bsp\cpu\br35\post_build\download.bat p11" />
+<Mode after="always" />
+</ExtraCommands>
+</Target>
+</Build>
+<Unit filename="apps/bsp/cpu/br35/bsp.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/bsp/cpu/br35/clock.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/bsp/cpu/br35/config/lib_config.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/bsp/cpu/br35/config/lib_config.h" />
+<Unit filename="apps/bsp/cpu/br35/config/log_config.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/bsp/cpu/br35/config/sdk_config.h" />
+<Unit filename="apps/bsp/cpu/br35/iic_api.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/bsp/cpu/br35/iic_soft.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/bsp/cpu/br35/ipc_spin_lock.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/bsp/cpu/br35/power/power_app.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/bsp/cpu/br35/power/power_config.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/bsp/cpu/br35/setup.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/bsp/cpu/br35/uart.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/debug/debug.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/main.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/main.h" />
+<Unit filename="apps/msg/msg.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/sensor/driver_mmc5603/driver_mmc5603.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/sensor/driver_sc7a20/driver_sc7a20.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/sensor/driver_vc_hr_11/driver_vc_hr_11.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/sensor/driver_vc_hr_11/vcHr11Hci.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/sensor/driver_vc_hr_11/vcHr11Hci.h" />
+<Unit filename="apps/sensor/sensor_driver.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/sensor/sensor_driver.h" />
+<Unit filename="apps/sensor/sensor_service_wrist_tilt.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/sensor/sensor_service_wrist_tilt.h" />
+<Unit filename="include/driver/cpu/br35/bsp.h" />
+<Unit filename="include/driver/cpu/br35/clock/boot_xosc.h" />
+<Unit filename="include/driver/cpu/br35/clock/clock.h" />
+<Unit filename="include/driver/cpu/br35/clock/config.h" />
+<Unit filename="include/driver/cpu/br35/clock/p11_clk_cfg.h" />
+<Unit filename="include/driver/cpu/br35/clock_interface.h" />
+<Unit filename="include/driver/cpu/br35/gpio.h" />
+<Unit filename="include/driver/cpu/br35/iic_api.h" />
+<Unit filename="include/driver/cpu/br35/iic_hw_v2.h" />
+<Unit filename="include/driver/cpu/br35/iic_soft.h" />
+<Unit filename="include/driver/cpu/br35/io_imap.h" />
+<Unit filename="include/driver/cpu/br35/ipc_spin_lock.h" />
+<Unit filename="include/driver/cpu/br35/p11_gptimer.h" />
+<Unit filename="include/driver/cpu/br35/power/p11/lp_ipc.h" />
+<Unit filename="include/driver/cpu/br35/power/p11/lp_msg.h" />
+<Unit filename="include/driver/cpu/br35/power/p11/p11_api.h" />
+<Unit filename="include/driver/cpu/br35/power/p11/p11_clock_hw.h" />
+<Unit filename="include/driver/cpu/br35/power/p11/p11_csfr.h" />
+<Unit filename="include/driver/cpu/br35/power/p11/p11_io_imap.h" />
+<Unit filename="include/driver/cpu/br35/power/p11/p11_io_omap.h" />
+<Unit filename="include/driver/cpu/br35/power/p11/p11_mmap.h" />
+<Unit filename="include/driver/cpu/br35/power/p11/p11_rom_api.h" />
+<Unit filename="include/driver/cpu/br35/power/p11/p11_sfr.h" />
+<Unit filename="include/driver/cpu/br35/power/p33/p33_access.h" />
+<Unit filename="include/driver/cpu/br35/power/p33/p33_api.h" />
+<Unit filename="include/driver/cpu/br35/power/p33/p33_sfr.h" />
+<Unit filename="include/driver/cpu/br35/power/power_api.h" />
+<Unit filename="include/driver/cpu/br35/power/power_app.h" />
+<Unit filename="include/driver/cpu/br35/power/power_manage.h" />
+<Unit filename="include/driver/cpu/br35/power/power_port.h" />
+<Unit filename="include/driver/cpu/br35/power/power_wakeup.h" />
+<Unit filename="include/driver/cpu/br35/power_interface.h" />
+<Unit filename="include/driver/cpu/br35/timer.h" />
+<Unit filename="include/driver/cpu/br35/uart.h" />
+<Unit filename="include/system/cpu/br35/debug.h" />
+<Unit filename="include/system/cpu/br35/hwi.h" />
+<Unit filename="include/system/cpu/br35/includes.h" />
+<Unit filename="include/system/cpu/br35/interrupt_hw.h" />
+<Unit filename="include/system/delay.h" />
+<Unit filename="include/system/typedef/assert.h" />
+<Unit filename="include/system/typedef/typedef.h" />
+<Unit filename="include/system/usr_timer.h" />
+<Unit filename="include/utils/bank_switch.h" />
+<Unit filename="include/utils/circular_buf.h" />
+<Unit filename="include/utils/printf.h" />
+</Project>
+</CodeBlocks_project_file>

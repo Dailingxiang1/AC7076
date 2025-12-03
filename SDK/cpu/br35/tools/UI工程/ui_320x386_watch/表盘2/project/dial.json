@@ -1,0 +1,1354 @@
+{
+    "-name": "dial",
+    "-type": "project",
+    "activePage": 0,
+    "chip_type": "BR35",
+    "dpi_type": "72",
+    "lang_excel": "../../多国语言/多国语言_watch.xls",
+    "pages": [
+        {
+            "-class": "ScenesScreen",
+            "-name": "ScenesScreen",
+            "-type": "page",
+            "caption": "页面_0",
+            "isActive": true,
+            "layer": [
+                {
+                    "-class": "NewLayer",
+                    "-name": "图层_0",
+                    "-type": "NewLayer",
+                    "caption": "图层",
+                    "icon": "config/images/layer.ico",
+                    "layout": [
+                        {
+                            "-class": "NewLayout",
+                            "-name": "布局_1",
+                            "-type": "NewLayout",
+                            "caption": "布局",
+                            "clip": true,
+                            "icon": "config/images/layout.ico",
+                            "layout": [
+                                {
+                                    "-class": "NewLayout",
+                                    "-name": "watch_51",
+                                    "-type": "NewLayout",
+                                    "caption": "watch",
+                                    "clip": true,
+                                    "icon": "../../../UITools/control/ex/watch.png",
+                                    "layout": [
+                                        {
+                                            "-class": "NewFrame",
+                                            "-name": "watch_hour",
+                                            "-type": "ImageList",
+                                            "caption": "watch_hour",
+                                            "icon": "config/images/page_white_vector.png",
+                                            "property": [
+                                                {
+                                                    "-name": "id",
+                                                    "-type": "id",
+                                                    "caption": "ID号",
+                                                    "ename": "NewFrame_2",
+                                                    "id": 0
+                                                },
+                                                {
+                                                    "-name": "element_css",
+                                                    "-type": "struct",
+                                                    "caption": "CSS元素",
+                                                    "info": "",
+                                                    "struct": [
+                                                        [
+                                                            {
+                                                                "-name": "hori_align",
+                                                                "-type": "enum",
+                                                                "caption": "水平对齐方式",
+                                                                "default": "HORI_ALIGN_CENTER",
+                                                                "enum": [
+                                                                    {
+                                                                        "HORI_ALIGN_LEFT": 0
+                                                                    },
+                                                                    {
+                                                                        "HORI_ALIGN_CENTER": 1
+                                                                    },
+                                                                    {
+                                                                        "HORI_ALIGN_RIGHT": 2
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "vert_align",
+                                                                "-type": "enum",
+                                                                "caption": "垂直对齐方式",
+                                                                "default": "VERT_ALIGN_CENTER",
+                                                                "enum": [
+                                                                    {
+                                                                        "VERT_ALIGN_TOP": 0
+                                                                    },
+                                                                    {
+                                                                        "VERT_ALIGN_CENTER": 1
+                                                                    },
+                                                                    {
+                                                                        "VERT_ALIGN_BOTTOM": 2
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "invisible",
+                                                                "-type": "enum",
+                                                                "caption": "默认隐藏",
+                                                                "default": "false",
+                                                                "enum": [
+                                                                    {
+                                                                        "true": 1
+                                                                    },
+                                                                    {
+                                                                        "false": 0
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "flags",
+                                                                "-type": "enum",
+                                                                "caption": "标志",
+                                                                "default": "ELM_FLAG_NORMAL",
+                                                                "enum": [
+                                                                    {
+                                                                        "ELM_FLAG_NORMAL": 0
+                                                                    },
+                                                                    {
+                                                                        "ELM_FLAG_HEAD": 1
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "background_color",
+                                                                "-type": "background-color",
+                                                                "background-color": "",
+                                                                "caption": "背景颜色"
+                                                            },
+                                                            {
+                                                                "-name": "rect",
+                                                                "-type": "rect",
+                                                                "caption": "坐标",
+                                                                "rect": {
+                                                                    "height": 161,
+                                                                    "width": 46,
+                                                                    "x": 206,
+                                                                    "y": 93
+                                                                }
+                                                            },
+                                                            {
+                                                                "-name": "border",
+                                                                "-type": "border",
+                                                                "border": {
+                                                                    "bottom": 0,
+                                                                    "left": 0,
+                                                                    "right": 0,
+                                                                    "top": 0
+                                                                },
+                                                                "caption": "边框",
+                                                                "gray-color": 0
+                                                            },
+                                                            {
+                                                                "-name": "background_image",
+                                                                "-type": "background-image",
+                                                                "background-image": "",
+                                                                "caption": "背景图片",
+                                                                "image-type": ""
+                                                            }
+                                                        ]
+                                                    ]
+                                                },
+                                                {
+                                                    "-name": "cent_x",
+                                                    "-type": "int16",
+                                                    "caption": "图片旋转中心点: X",
+                                                    "default": 23,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "cent_y",
+                                                    "-type": "int16",
+                                                    "caption": "图片旋转中心点: Y",
+                                                    "default": 134,
+                                                    "is_update": true,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "dst_cent_x",
+                                                    "-type": "int16",
+                                                    "caption": "屏幕旋转中心点: X",
+                                                    "default": 160,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "dst_cent_y",
+                                                    "-type": "int16",
+                                                    "caption": "屏幕旋转中心点: Y",
+                                                    "default": 193,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "image",
+                                                    "-type": "piclist",
+                                                    "caption": "图片列表",
+                                                    "default": "",
+                                                    "image-compress": "true",
+                                                    "image-compress-level": "",
+                                                    "image-type": "",
+                                                    "list": [
+                                                    ],
+                                                    "maxlength": 30
+                                                }
+                                            ],
+                                            "tip": "",
+                                            "version": "1",
+                                            "widget": [
+                                            ]
+                                        },
+                                        {
+                                            "-class": "NewFrame",
+                                            "-name": "watch_min",
+                                            "-type": "ImageList",
+                                            "caption": "watch_min",
+                                            "icon": "config/images/page_white_vector.png",
+                                            "property": [
+                                                {
+                                                    "-name": "id",
+                                                    "-type": "id",
+                                                    "caption": "ID号",
+                                                    "ename": "NewFrame_3",
+                                                    "id": 0
+                                                },
+                                                {
+                                                    "-name": "element_css",
+                                                    "-type": "struct",
+                                                    "caption": "CSS元素",
+                                                    "info": "",
+                                                    "struct": [
+                                                        [
+                                                            {
+                                                                "-name": "hori_align",
+                                                                "-type": "enum",
+                                                                "caption": "水平对齐方式",
+                                                                "default": "HORI_ALIGN_CENTER",
+                                                                "enum": [
+                                                                    {
+                                                                        "HORI_ALIGN_LEFT": 0
+                                                                    },
+                                                                    {
+                                                                        "HORI_ALIGN_CENTER": 1
+                                                                    },
+                                                                    {
+                                                                        "HORI_ALIGN_RIGHT": 2
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "vert_align",
+                                                                "-type": "enum",
+                                                                "caption": "垂直对齐方式",
+                                                                "default": "VERT_ALIGN_CENTER",
+                                                                "enum": [
+                                                                    {
+                                                                        "VERT_ALIGN_TOP": 0
+                                                                    },
+                                                                    {
+                                                                        "VERT_ALIGN_CENTER": 1
+                                                                    },
+                                                                    {
+                                                                        "VERT_ALIGN_BOTTOM": 2
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "invisible",
+                                                                "-type": "enum",
+                                                                "caption": "默认隐藏",
+                                                                "default": "false",
+                                                                "enum": [
+                                                                    {
+                                                                        "true": 1
+                                                                    },
+                                                                    {
+                                                                        "false": 0
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "flags",
+                                                                "-type": "enum",
+                                                                "caption": "标志",
+                                                                "default": "ELM_FLAG_NORMAL",
+                                                                "enum": [
+                                                                    {
+                                                                        "ELM_FLAG_NORMAL": 0
+                                                                    },
+                                                                    {
+                                                                        "ELM_FLAG_HEAD": 1
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "background_color",
+                                                                "-type": "background-color",
+                                                                "background-color": "",
+                                                                "caption": "背景颜色"
+                                                            },
+                                                            {
+                                                                "-name": "rect",
+                                                                "-type": "rect",
+                                                                "caption": "坐标",
+                                                                "rect": {
+                                                                    "height": 227,
+                                                                    "width": 46,
+                                                                    "x": 206,
+                                                                    "y": 16
+                                                                }
+                                                            },
+                                                            {
+                                                                "-name": "border",
+                                                                "-type": "border",
+                                                                "border": {
+                                                                    "bottom": 0,
+                                                                    "left": 0,
+                                                                    "right": 0,
+                                                                    "top": 0
+                                                                },
+                                                                "caption": "边框",
+                                                                "gray-color": 0
+                                                            },
+                                                            {
+                                                                "-name": "background_image",
+                                                                "-type": "background-image",
+                                                                "background-image": "",
+                                                                "caption": "背景图片",
+                                                                "image-type": "ARGB8565"
+                                                            }
+                                                        ]
+                                                    ]
+                                                },
+                                                {
+                                                    "-name": "cent_x",
+                                                    "-type": "int16",
+                                                    "caption": "图片旋转中心点: X",
+                                                    "default": 22,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "cent_y",
+                                                    "-type": "int16",
+                                                    "caption": "图片旋转中心点: Y",
+                                                    "default": 202,
+                                                    "is_update": true,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "dst_cent_x",
+                                                    "-type": "int16",
+                                                    "caption": "屏幕旋转中心点: X",
+                                                    "default": 160,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "dst_cent_y",
+                                                    "-type": "int16",
+                                                    "caption": "屏幕旋转中心点: Y",
+                                                    "default": 193,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "image",
+                                                    "-type": "piclist",
+                                                    "caption": "图片列表",
+                                                    "default": "",
+                                                    "image-compress": "true",
+                                                    "image-compress-level": "",
+                                                    "image-type": "",
+                                                    "list": [
+                                                    ],
+                                                    "maxlength": 30
+                                                }
+                                            ],
+                                            "tip": "",
+                                            "version": "1",
+                                            "widget": [
+                                            ]
+                                        },
+                                        {
+                                            "-class": "NewFrame",
+                                            "-name": "watch_sec",
+                                            "-type": "ImageList",
+                                            "caption": "watch_sec",
+                                            "icon": "config/images/page_white_vector.png",
+                                            "property": [
+                                                {
+                                                    "-name": "id",
+                                                    "-type": "id",
+                                                    "caption": "ID号",
+                                                    "ename": "NewFrame_4",
+                                                    "id": 0
+                                                },
+                                                {
+                                                    "-name": "element_css",
+                                                    "-type": "struct",
+                                                    "caption": "CSS元素",
+                                                    "info": "",
+                                                    "struct": [
+                                                        [
+                                                            {
+                                                                "-name": "hori_align",
+                                                                "-type": "enum",
+                                                                "caption": "水平对齐方式",
+                                                                "default": "HORI_ALIGN_CENTER",
+                                                                "enum": [
+                                                                    {
+                                                                        "HORI_ALIGN_LEFT": 0
+                                                                    },
+                                                                    {
+                                                                        "HORI_ALIGN_CENTER": 1
+                                                                    },
+                                                                    {
+                                                                        "HORI_ALIGN_RIGHT": 2
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "vert_align",
+                                                                "-type": "enum",
+                                                                "caption": "垂直对齐方式",
+                                                                "default": "VERT_ALIGN_CENTER",
+                                                                "enum": [
+                                                                    {
+                                                                        "VERT_ALIGN_TOP": 0
+                                                                    },
+                                                                    {
+                                                                        "VERT_ALIGN_CENTER": 1
+                                                                    },
+                                                                    {
+                                                                        "VERT_ALIGN_BOTTOM": 2
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "invisible",
+                                                                "-type": "enum",
+                                                                "caption": "默认隐藏",
+                                                                "default": "false",
+                                                                "enum": [
+                                                                    {
+                                                                        "true": 1
+                                                                    },
+                                                                    {
+                                                                        "false": 0
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "flags",
+                                                                "-type": "enum",
+                                                                "caption": "标志",
+                                                                "default": "ELM_FLAG_NORMAL",
+                                                                "enum": [
+                                                                    {
+                                                                        "ELM_FLAG_NORMAL": 0
+                                                                    },
+                                                                    {
+                                                                        "ELM_FLAG_HEAD": 1
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "background_color",
+                                                                "-type": "background-color",
+                                                                "background-color": "",
+                                                                "caption": "背景颜色"
+                                                            },
+                                                            {
+                                                                "-name": "rect",
+                                                                "-type": "rect",
+                                                                "caption": "坐标",
+                                                                "rect": {
+                                                                    "height": 227,
+                                                                    "width": 46,
+                                                                    "x": 206,
+                                                                    "y": 16
+                                                                }
+                                                            },
+                                                            {
+                                                                "-name": "border",
+                                                                "-type": "border",
+                                                                "border": {
+                                                                    "bottom": 0,
+                                                                    "left": 0,
+                                                                    "right": 0,
+                                                                    "top": 0
+                                                                },
+                                                                "caption": "边框",
+                                                                "gray-color": 0
+                                                            },
+                                                            {
+                                                                "-name": "background_image",
+                                                                "-type": "background-image",
+                                                                "background-image": "",
+                                                                "caption": "背景图片",
+                                                                "image-type": ""
+                                                            }
+                                                        ]
+                                                    ]
+                                                },
+                                                {
+                                                    "-name": "cent_x",
+                                                    "-type": "int16",
+                                                    "caption": "图片旋转中心点: X",
+                                                    "default": 22,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "cent_y",
+                                                    "-type": "int16",
+                                                    "caption": "图片旋转中心点: Y",
+                                                    "default": 202,
+                                                    "is_update": true,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "dst_cent_x",
+                                                    "-type": "int16",
+                                                    "caption": "屏幕旋转中心点: X",
+                                                    "default": 160,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "dst_cent_y",
+                                                    "-type": "int16",
+                                                    "caption": "屏幕旋转中心点: Y",
+                                                    "default": 193,
+                                                    "max": 32768,
+                                                    "min": 0
+                                                },
+                                                {
+                                                    "-name": "image",
+                                                    "-type": "piclist",
+                                                    "caption": "图片列表",
+                                                    "default": "",
+                                                    "image-compress": "true",
+                                                    "image-compress-level": "",
+                                                    "image-type": "",
+                                                    "list": [
+                                                    ],
+                                                    "maxlength": 30
+                                                }
+                                            ],
+                                            "tip": "",
+                                            "version": "1",
+                                            "widget": [
+                                            ]
+                                        },
+                                        {
+                                            "-class": "NewFrame",
+                                            "-name": "时间",
+                                            "-type": "Time",
+                                            "caption": "时间",
+                                            "icon": "",
+                                            "property": [
+                                                {
+                                                    "-name": "id",
+                                                    "-type": "id",
+                                                    "caption": "唯一ID号",
+                                                    "ename": "BaseForm",
+                                                    "id": 0
+                                                },
+                                                {
+                                                    "-name": "element_css",
+                                                    "-type": "struct",
+                                                    "caption": "CSS元素",
+                                                    "info": "",
+                                                    "struct": [
+                                                        [
+                                                            {
+                                                                "-name": "hori_align",
+                                                                "-type": "enum",
+                                                                "caption": "水平对齐方式",
+                                                                "default": "HORI_ALIGN_CENTER",
+                                                                "enum": [
+                                                                    {
+                                                                        "HORI_ALIGN_LEFT": 0
+                                                                    },
+                                                                    {
+                                                                        "HORI_ALIGN_CENTER": 1
+                                                                    },
+                                                                    {
+                                                                        "HORI_ALIGN_RIGHT": 2
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "vert_align",
+                                                                "-type": "enum",
+                                                                "caption": "垂直对齐方式",
+                                                                "default": "VERT_ALIGN_CENTER",
+                                                                "enum": [
+                                                                    {
+                                                                        "VERT_ALIGN_TOP": 0
+                                                                    },
+                                                                    {
+                                                                        "VERT_ALIGN_CENTER": 1
+                                                                    },
+                                                                    {
+                                                                        "VERT_ALIGN_BOTTOM": 2
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "invisible",
+                                                                "-type": "enum",
+                                                                "caption": "默认隐藏",
+                                                                "default": "false",
+                                                                "enum": [
+                                                                    {
+                                                                        "true": 1
+                                                                    },
+                                                                    {
+                                                                        "false": 0
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "flags",
+                                                                "-type": "enum",
+                                                                "caption": "标志",
+                                                                "default": "ELM_FLAG_NORMAL",
+                                                                "enum": [
+                                                                    {
+                                                                        "ELM_FLAG_NORMAL": 0
+                                                                    },
+                                                                    {
+                                                                        "ELM_FLAG_HEAD": 1
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "background_color",
+                                                                "-type": "background-color",
+                                                                "background-color": "",
+                                                                "caption": "背景颜色"
+                                                            },
+                                                            {
+                                                                "-name": "rect",
+                                                                "-type": "rect",
+                                                                "caption": "坐标",
+                                                                "rect": {
+                                                                    "height": 92,
+                                                                    "width": 120,
+                                                                    "x": 100,
+                                                                    "y": 89
+                                                                }
+                                                            },
+                                                            {
+                                                                "-name": "border",
+                                                                "-type": "border",
+                                                                "border": {
+                                                                    "bottom": 0,
+                                                                    "left": 0,
+                                                                    "right": 0,
+                                                                    "top": 0
+                                                                },
+                                                                "caption": "边框",
+                                                                "gray-color": 0
+                                                            },
+                                                            {
+                                                                "-name": "background_image",
+                                                                "-type": "background-image",
+                                                                "background-image": "",
+                                                                "caption": "背景图片"
+                                                            }
+                                                        ]
+                                                    ]
+                                                },
+                                                {
+                                                    "-name": "source",
+                                                    "-type": "text-str",
+                                                    "caption": "数据源",
+                                                    "default": "rtc",
+                                                    "maxlength": 8
+                                                },
+                                                {
+                                                    "-name": "format",
+                                                    "-type": "text-str",
+                                                    "caption": "格式",
+                                                    "default": "h",
+                                                    "maxlength": 12
+                                                },
+                                                {
+                                                    "-name": "color",
+                                                    "-type": "color",
+                                                    "caption": "文字颜色",
+                                                    "color": "#000000"
+                                                },
+                                                {
+                                                    "-name": "color",
+                                                    "-type": "color",
+                                                    "caption": "高亮颜色",
+                                                    "color": "#FFFFFF"
+                                                },
+                                                {
+                                                    "-name": "number",
+                                                    "-type": "arrlist",
+                                                    "caption": "数字图片列表",
+                                                    "default": "config/w2/watchface2_time_0.png",
+                                                    "image-compress": "",
+                                                    "image-compress-level": "",
+                                                    "image-compress-way": "BestSpaceSize",
+                                                    "image-type": "AUTO",
+                                                    "list": [
+                                                        "config/w2/watchface2_time_0.png",
+                                                        "config/w2/watchface2_time_1.png",
+                                                        "config/w2/watchface2_time_2.png",
+                                                        "config/w2/watchface2_time_3.png",
+                                                        "config/w2/watchface2_time_4.png",
+                                                        "config/w2/watchface2_time_5.png",
+                                                        "config/w2/watchface2_time_6.png",
+                                                        "config/w2/watchface2_time_7.png",
+                                                        "config/w2/watchface2_time_8.png",
+                                                        "config/w2/watchface2_time_9.png"
+                                                    ],
+                                                    "maxlength": 10
+                                                },
+                                                {
+                                                    "-name": "delimiter",
+                                                    "-type": "arrlist",
+                                                    "caption": "分隔符图片列表",
+                                                    "default": "",
+                                                    "list": [
+                                                    ],
+                                                    "maxlength": 5
+                                                },
+                                                {
+                                                    "-name": "auto_cnt",
+                                                    "-type": "enum",
+                                                    "caption": "自动记时",
+                                                    "default": "YES",
+                                                    "enum": [
+                                                        {
+                                                            "YES": 1
+                                                        },
+                                                        {
+                                                            "NO": 0
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "tip": "",
+                                            "version": "1",
+                                            "widget": [
+                                            ]
+                                        },
+                                        {
+                                            "-class": "NewFrame",
+                                            "-name": "时间_1",
+                                            "-type": "Time",
+                                            "caption": "时间",
+                                            "icon": "",
+                                            "property": [
+                                                {
+                                                    "-name": "id",
+                                                    "-type": "id",
+                                                    "caption": "唯一ID号",
+                                                    "ename": "BaseForm_1",
+                                                    "id": 0
+                                                },
+                                                {
+                                                    "-name": "element_css",
+                                                    "-type": "struct",
+                                                    "caption": "CSS元素",
+                                                    "info": "",
+                                                    "struct": [
+                                                        [
+                                                            {
+                                                                "-name": "hori_align",
+                                                                "-type": "enum",
+                                                                "caption": "水平对齐方式",
+                                                                "default": "HORI_ALIGN_CENTER",
+                                                                "enum": [
+                                                                    {
+                                                                        "HORI_ALIGN_LEFT": 0
+                                                                    },
+                                                                    {
+                                                                        "HORI_ALIGN_CENTER": 1
+                                                                    },
+                                                                    {
+                                                                        "HORI_ALIGN_RIGHT": 2
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "vert_align",
+                                                                "-type": "enum",
+                                                                "caption": "垂直对齐方式",
+                                                                "default": "VERT_ALIGN_CENTER",
+                                                                "enum": [
+                                                                    {
+                                                                        "VERT_ALIGN_TOP": 0
+                                                                    },
+                                                                    {
+                                                                        "VERT_ALIGN_CENTER": 1
+                                                                    },
+                                                                    {
+                                                                        "VERT_ALIGN_BOTTOM": 2
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "invisible",
+                                                                "-type": "enum",
+                                                                "caption": "默认隐藏",
+                                                                "default": "false",
+                                                                "enum": [
+                                                                    {
+                                                                        "true": 1
+                                                                    },
+                                                                    {
+                                                                        "false": 0
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "flags",
+                                                                "-type": "enum",
+                                                                "caption": "标志",
+                                                                "default": "ELM_FLAG_NORMAL",
+                                                                "enum": [
+                                                                    {
+                                                                        "ELM_FLAG_NORMAL": 0
+                                                                    },
+                                                                    {
+                                                                        "ELM_FLAG_HEAD": 1
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "-name": "background_color",
+                                                                "-type": "background-color",
+                                                                "background-color": "",
+                                                                "caption": "背景颜色"
+                                                            },
+                                                            {
+                                                                "-name": "rect",
+                                                                "-type": "rect",
+                                                                "caption": "坐标",
+                                                                "rect": {
+                                                                    "height": 92,
+                                                                    "width": 120,
+                                                                    "x": 100,
+                                                                    "y": 199
+                                                                }
+                                                            },
+                                                            {
+                                                                "-name": "border",
+                                                                "-type": "border",
+                                                                "border": {
+                                                                    "bottom": 0,
+                                                                    "left": 0,
+                                                                    "right": 0,
+                                                                    "top": 0
+                                                                },
+                                                                "caption": "边框",
+                                                                "gray-color": 0
+                                                            },
+                                                            {
+                                                                "-name": "background_image",
+                                                                "-type": "background-image",
+                                                                "background-image": "",
+                                                                "caption": "背景图片"
+                                                            }
+                                                        ]
+                                                    ]
+                                                },
+                                                {
+                                                    "-name": "source",
+                                                    "-type": "text-str",
+                                                    "caption": "数据源",
+                                                    "default": "rtc",
+                                                    "maxlength": 8
+                                                },
+                                                {
+                                                    "-name": "format",
+                                                    "-type": "text-str",
+                                                    "caption": "格式",
+                                                    "default": "m",
+                                                    "maxlength": 12
+                                                },
+                                                {
+                                                    "-name": "color",
+                                                    "-type": "color",
+                                                    "caption": "文字颜色",
+                                                    "color": "#000000"
+                                                },
+                                                {
+                                                    "-name": "color",
+                                                    "-type": "color",
+                                                    "caption": "高亮颜色",
+                                                    "color": "#FFFFFF"
+                                                },
+                                                {
+                                                    "-name": "number",
+                                                    "-type": "arrlist",
+                                                    "caption": "数字图片列表",
+                                                    "default": "config/w2/watchface2_time_0.png",
+                                                    "image-compress": "",
+                                                    "image-compress-level": "",
+                                                    "image-compress-way": "BestSpaceSize",
+                                                    "image-type": "AUTO",
+                                                    "list": [
+                                                        "config/w2/watchface2_time_0.png",
+                                                        "config/w2/watchface2_time_1.png",
+                                                        "config/w2/watchface2_time_2.png",
+                                                        "config/w2/watchface2_time_3.png",
+                                                        "config/w2/watchface2_time_4.png",
+                                                        "config/w2/watchface2_time_5.png",
+                                                        "config/w2/watchface2_time_6.png",
+                                                        "config/w2/watchface2_time_7.png",
+                                                        "config/w2/watchface2_time_8.png",
+                                                        "config/w2/watchface2_time_9.png"
+                                                    ],
+                                                    "maxlength": 10
+                                                },
+                                                {
+                                                    "-name": "delimiter",
+                                                    "-type": "arrlist",
+                                                    "caption": "分隔符图片列表",
+                                                    "default": "",
+                                                    "list": [
+                                                    ],
+                                                    "maxlength": 5
+                                                },
+                                                {
+                                                    "-name": "auto_cnt",
+                                                    "-type": "enum",
+                                                    "caption": "自动记时",
+                                                    "default": "YES",
+                                                    "enum": [
+                                                        {
+                                                            "YES": 1
+                                                        },
+                                                        {
+                                                            "NO": 0
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "tip": "",
+                                            "version": "1",
+                                            "widget": [
+                                            ]
+                                        }
+                                    ],
+                                    "property": [
+                                        {
+                                            "-name": "id",
+                                            "-type": "id",
+                                            "caption": "ID号",
+                                            "ename": "NewLayout_1",
+                                            "id": 0
+                                        },
+                                        {
+                                            "-name": "element_css",
+                                            "-type": "struct",
+                                            "caption": "CSS元素",
+                                            "info": "",
+                                            "struct": [
+                                                [
+                                                    {
+                                                        "-name": "hori_align",
+                                                        "-type": "enum",
+                                                        "caption": "水平对齐方式",
+                                                        "default": "HORI_ALIGN_CENTER",
+                                                        "enum": [
+                                                            {
+                                                                "HORI_ALIGN_LEFT": 0
+                                                            },
+                                                            {
+                                                                "HORI_ALIGN_CENTER": 1
+                                                            },
+                                                            {
+                                                                "HORI_ALIGN_RIGHT": 2
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "-name": "vert_align",
+                                                        "-type": "enum",
+                                                        "caption": "垂直对齐方式",
+                                                        "default": "VERT_ALIGN_CENTER",
+                                                        "enum": [
+                                                            {
+                                                                "VERT_ALIGN_TOP": 0
+                                                            },
+                                                            {
+                                                                "VERT_ALIGN_CENTER": 1
+                                                            },
+                                                            {
+                                                                "VERT_ALIGN_BOTTOM": 2
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "-name": "invisible",
+                                                        "-type": "enum",
+                                                        "caption": "默认隐藏",
+                                                        "default": "false",
+                                                        "enum": [
+                                                            {
+                                                                "true": 1
+                                                            },
+                                                            {
+                                                                "false": 0
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "-name": "flags",
+                                                        "-type": "enum",
+                                                        "caption": "标志",
+                                                        "default": "ELM_FLAG_NORMAL",
+                                                        "enum": [
+                                                            {
+                                                                "ELM_FLAG_NORMAL": 0
+                                                            },
+                                                            {
+                                                                "ELM_FLAG_HEAD": 1
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "-name": "background_color",
+                                                        "-type": "background-color",
+                                                        "background-color": "",
+                                                        "caption": "背景颜色"
+                                                    },
+                                                    {
+                                                        "-name": "rect",
+                                                        "-type": "rect",
+                                                        "caption": "坐标",
+                                                        "rect": {
+                                                            "height": 385,
+                                                            "width": 320,
+                                                            "x": 0,
+                                                            "y": 0
+                                                        }
+                                                    },
+                                                    {
+                                                        "-name": "border",
+                                                        "-type": "border",
+                                                        "border": {
+                                                            "bottom": 0,
+                                                            "left": 0,
+                                                            "right": 0,
+                                                            "top": 0
+                                                        },
+                                                        "caption": "边框",
+                                                        "gray-color": 0
+                                                    },
+                                                    {
+                                                        "-name": "background_image",
+                                                        "-type": "background-image",
+                                                        "background-image": "config/w2/watchface_bg_02.png",
+                                                        "caption": "背景图片",
+                                                        "image-compress": "true",
+                                                        "image-compress-level": "",
+                                                        "image-compress-way": "BestSpaceSize",
+                                                        "image-type": "ARGB8888"
+                                                    }
+                                                ]
+                                            ]
+                                        },
+                                        {
+                                            "-name": "source",
+                                            "-type": "text-str",
+                                            "caption": "数据源",
+                                            "default": "rtc",
+                                            "maxlength": 8
+                                        }
+                                    ],
+                                    "tip": "",
+                                    "version": "1",
+                                    "widget": [
+                                    ]
+                                }
+                            ],
+                            "property": [
+                                {
+                                    "-name": "id",
+                                    "-type": "id",
+                                    "caption": "ID号",
+                                    "ename": "BaseForm_3",
+                                    "id": 0
+                                },
+                                {
+                                    "-name": "element_css",
+                                    "-type": "struct",
+                                    "caption": "CSS元素",
+                                    "info": "",
+                                    "struct": [
+                                        [
+                                            {
+                                                "-name": "hori_align",
+                                                "-type": "enum",
+                                                "caption": "水平对齐方式",
+                                                "default": "HORI_ALIGN_CENTER",
+                                                "enum": [
+                                                    {
+                                                        "HORI_ALIGN_LEFT": 0
+                                                    },
+                                                    {
+                                                        "HORI_ALIGN_CENTER": 1
+                                                    },
+                                                    {
+                                                        "HORI_ALIGN_RIGHT": 2
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "-name": "vert_align",
+                                                "-type": "enum",
+                                                "caption": "垂直对齐方式",
+                                                "default": "VERT_ALIGN_CENTER",
+                                                "enum": [
+                                                    {
+                                                        "VERT_ALIGN_TOP": 0
+                                                    },
+                                                    {
+                                                        "VERT_ALIGN_CENTER": 1
+                                                    },
+                                                    {
+                                                        "VERT_ALIGN_BOTTOM": 2
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "-name": "invisible",
+                                                "-type": "enum",
+                                                "caption": "默认隐藏",
+                                                "default": "false",
+                                                "enum": [
+                                                    {
+                                                        "true": 1
+                                                    },
+                                                    {
+                                                        "false": 0
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "-name": "flags",
+                                                "-type": "enum",
+                                                "caption": "标志",
+                                                "default": "ELM_FLAG_NORMAL",
+                                                "enum": [
+                                                    {
+                                                        "ELM_FLAG_NORMAL": 0
+                                                    },
+                                                    {
+                                                        "ELM_FLAG_HEAD": 1
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "-name": "background_color",
+                                                "-type": "background-color",
+                                                "background-color": "",
+                                                "caption": "背景颜色"
+                                            },
+                                            {
+                                                "-name": "rect",
+                                                "-type": "rect",
+                                                "caption": "坐标",
+                                                "rect": {
+                                                    "height": 385,
+                                                    "width": 320,
+                                                    "x": 0,
+                                                    "y": 0
+                                                }
+                                            },
+                                            {
+                                                "-name": "border",
+                                                "-type": "border",
+                                                "border": {
+                                                    "bottom": 0,
+                                                    "left": 0,
+                                                    "right": 0,
+                                                    "top": 0
+                                                },
+                                                "caption": "边框",
+                                                "gray-color": 0
+                                            },
+                                            {
+                                                "-name": "background_image",
+                                                "-type": "background-image",
+                                                "background-image": "",
+                                                "caption": "背景图片",
+                                                "image-compress": "",
+                                                "image-compress-level": "",
+                                                "image-type": ""
+                                            }
+                                        ]
+                                    ]
+                                }
+                            ],
+                            "tip": "",
+                            "version": "1",
+                            "widget": [
+                            ]
+                        }
+                    ],
+                    "property": [
+                        {
+                            "-name": "id",
+                            "-type": "id",
+                            "caption": "ID号",
+                            "ename": "BaseForm_2",
+                            "id": 0
+                        },
+                        {
+                            "-name": "element_css",
+                            "-type": "struct",
+                            "caption": "CSS元素",
+                            "info": "",
+                            "struct": [
+                                [
+                                    {
+                                        "-name": "hori_align",
+                                        "-type": "enum",
+                                        "caption": "水平对齐方式",
+                                        "default": "HORI_ALIGN_CENTER",
+                                        "enum": [
+                                            {
+                                                "HORI_ALIGN_LEFT": 0
+                                            },
+                                            {
+                                                "HORI_ALIGN_CENTER": 1
+                                            },
+                                            {
+                                                "HORI_ALIGN_RIGHT": 2
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "-name": "vert_align",
+                                        "-type": "enum",
+                                        "caption": "垂直对齐方式",
+                                        "default": "VERT_ALIGN_CENTER",
+                                        "enum": [
+                                            {
+                                                "VERT_ALIGN_TOP": 0
+                                            },
+                                            {
+                                                "VERT_ALIGN_CENTER": 1
+                                            },
+                                            {
+                                                "VERT_ALIGN_BOTTOM": 2
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "-name": "invisible",
+                                        "-type": "enum",
+                                        "caption": "默认隐藏",
+                                        "default": "false",
+                                        "enum": [
+                                            {
+                                                "true": 1
+                                            },
+                                            {
+                                                "false": 0
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "-name": "flags",
+                                        "-type": "enum",
+                                        "caption": "标志",
+                                        "default": "ELM_FLAG_NORMAL",
+                                        "enum": [
+                                            {
+                                                "ELM_FLAG_NORMAL": 0
+                                            },
+                                            {
+                                                "ELM_FLAG_HEAD": 1
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "-name": "background_color",
+                                        "-type": "background-color",
+                                        "background-color": "",
+                                        "caption": "背景颜色"
+                                    },
+                                    {
+                                        "-name": "rect",
+                                        "-type": "rect",
+                                        "caption": "坐标",
+                                        "rect": {
+                                            "height": 385,
+                                            "width": 320,
+                                            "x": 0,
+                                            "y": 0
+                                        }
+                                    },
+                                    {
+                                        "-name": "border",
+                                        "-type": "border",
+                                        "border": {
+                                            "bottom": 0,
+                                            "left": 0,
+                                            "right": 0,
+                                            "top": 0
+                                        },
+                                        "caption": "边框",
+                                        "gray-color": 0
+                                    },
+                                    {
+                                        "-name": "background_image",
+                                        "-type": "background-image",
+                                        "background-image": "",
+                                        "caption": "背景图片",
+                                        "image-type": ""
+                                    }
+                                ]
+                            ]
+                        }
+                    ],
+                    "tip": "",
+                    "version": "1",
+                    "widget": [
+                    ]
+                }
+            ],
+            "property": [
+                {
+                    "rect": {
+                        "height": 385,
+                        "width": 320,
+                        "x": 0,
+                        "y": 0
+                    }
+                }
+            ]
+        }
+    ],
+    "project": [
+    ],
+    "text_type": "1bpp",
+    "texttype_type": "index"
+}

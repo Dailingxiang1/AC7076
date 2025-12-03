@@ -1,0 +1,41 @@
+﻿<?xml version="2.0" encoding="UTF-8"?>
+<Resbuilder>
+    <PageList>
+        <Page id="0">
+            <ColorList>
+                <Color id="0">000000</Color>
+                <Color id="1">FF0000</Color>
+                <Color id="2">FFFFFF</Color>
+            </ColorList>
+            <PictureList>
+                <Picture format="AL44" id="1" convert_size="948" compress_size="455" ratio="48.00%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\w1\left.png</Picture>
+                <Picture format="AL44" id="2" convert_size="948" compress_size="515" ratio="54.32%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\w1\right.png</Picture>
+                <Picture format="A8" id="3" convert_size="195" compress_size="99" ratio="50.77%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\w1\battery_level_image\0.png</Picture>
+                <Picture format="A8" id="4" convert_size="195" compress_size="99" ratio="50.77%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\w1\battery_level_image\1.png</Picture>
+                <Picture format="A8" id="5" convert_size="195" compress_size="99" ratio="50.77%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\w1\battery_level_image\2.png</Picture>
+                <Picture format="A8" id="6" convert_size="195" compress_size="99" ratio="50.77%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\w1\battery_level_image\3.png</Picture>
+                <Picture format="A8" id="7" convert_size="195" compress_size="99" ratio="50.77%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\w1\battery_level_image\4.png</Picture>
+                <Picture format="A8" id="8" convert_size="195" compress_size="99" ratio="50.77%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\w1\battery_level_image\5.png</Picture>
+                <Picture format="A8" id="9" convert_size="195" compress_size="99" ratio="50.77%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\w1\battery_level_image\6.png</Picture>
+                <Picture format="A8" id="10" convert_size="195" compress_size="99" ratio="50.77%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\w1\battery_level_image\7.png</Picture>
+                <Picture format="A8" id="11" convert_size="195" compress_size="99" ratio="50.77%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\w1\battery_level_image\8.png</Picture>
+                <Picture format="A8" id="12" convert_size="195" compress_size="99" ratio="50.77%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\w1\battery_level_image\9.png</Picture>
+                <Picture format="RGB888" id="13" convert_size="165120" compress_size="27520" ratio="16.67%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\lock_screen_wallpaper\ANI6.bmp</Picture>
+                <Picture format="AL44" id="14" convert_size="12288" compress_size="2959" ratio="24.08%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\lock_screen_wallpaper\lock.png</Picture>
+                <Picture format="A8" id="15" convert_size="1827" compress_size="660" ratio="36.12%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\lock_screen_wallpaper\h38_0.png</Picture>
+                <Picture format="A8" id="16" convert_size="1827" compress_size="387" ratio="21.18%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\lock_screen_wallpaper\h38_1.png</Picture>
+                <Picture format="A8" id="17" convert_size="1827" compress_size="470" ratio="25.73%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\lock_screen_wallpaper\h38_2.png</Picture>
+                <Picture format="A8" id="18" convert_size="1827" compress_size="482" ratio="26.38%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\lock_screen_wallpaper\h38_3.png</Picture>
+                <Picture format="A8" id="19" convert_size="1827" compress_size="548" ratio="29.99%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\lock_screen_wallpaper\h38_4.png</Picture>
+                <Picture format="A8" id="20" convert_size="1827" compress_size="454" ratio="24.85%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\lock_screen_wallpaper\h38_5.png</Picture>
+                <Picture format="A8" id="21" convert_size="1827" compress_size="565" ratio="30.93%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\lock_screen_wallpaper\h38_6.png</Picture>
+                <Picture format="A8" id="22" convert_size="1827" compress_size="425" ratio="23.26%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\lock_screen_wallpaper\h38_7.png</Picture>
+                <Picture format="A8" id="23" convert_size="1827" compress_size="670" ratio="36.67%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\lock_screen_wallpaper\h38_8.png</Picture>
+                <Picture format="A8" id="24" convert_size="1827" compress_size="551" ratio="30.16%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\lock_screen_wallpaper\h38_9.png</Picture>
+                <Picture format="A8" id="25" convert_size="675" compress_size="165" ratio="24.44%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\lock_screen_wallpaper\h38_10.png</Picture>
+                <Picture format="A8" id="26" convert_size="323" compress_size="163" ratio="50.46%">E:\br35\br35_lite_copy\UI工程\ui_320x172_color_screen_charging_case\表盘4\project\config\w1\battery_level_image\percent_sign.png</Picture>
+            </PictureList>
+            <CellList/>
+        </Page>
+    </PageList>
+</Resbuilder>

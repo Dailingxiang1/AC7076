@@ -1,0 +1,31 @@
+{
+    "configurations": [
+        {
+            "cStandard": "c99",
+            "compilerPath": "C:/JL/pi32/bin/clang.exe",
+            "cppStandard": "c++11",
+            "defines": [
+                "__GCC_Q32S__",
+                "PMU_SYSTEM",
+                "CONFIG_FPGA_ENABLE",
+                "__Q32S__"
+            ],
+            "includePath": [
+                "${workspaceFolder}/apps",
+                "${workspaceFolder}/apps/bsp/cpu/br35/config",
+                "${workspaceFolder}/include/driver",
+                "${workspaceFolder}/include/driver/cpu/br35",
+                "${workspaceFolder}/include/system",
+                "${workspaceFolder}/include/system/typedef",
+                "${workspaceFolder}/include/system/cpu/br35",
+                "${workspaceFolder}/include/utils",
+                "${workspaceFolder}/apps/sensor",
+                "${workspaceFolder}/apps/sensor/driver_vc_hr_11",
+                "C:/JL/pi32/q32s-include"
+            ],
+            "intelliSenseMode": "clang-x86",
+            "name": "AC707N_SensorHub"
+        }
+    ],
+    "version": 4
+}

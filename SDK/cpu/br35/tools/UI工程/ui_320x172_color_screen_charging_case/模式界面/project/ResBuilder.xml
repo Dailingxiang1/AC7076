@@ -1,0 +1,537 @@
+<?xml version='2.0' encoding='UTF-8'?>
+<Resbuilder>
+        <Items>
+                <text>2bpp</text>
+                <dpi>72</dpi>
+                <text_type>index</text_type>
+                <LanguageList>
+                        <language_name LANG="Chinese_Simplified">简体中文</language_name>
+                        <language_name LANG="Chinese_Traditional">繁体中文</language_name>
+                        <language_name LANG="Japanese">日语</language_name>
+                        <language_name LANG="Korean">韩语</language_name>
+                        <language_name LANG="English">英语</language_name>
+                        <language_name LANG="French">法语</language_name>
+                        <language_name LANG="German">德语</language_name>
+                        <language_name LANG="Italian">意大利语</language_name>
+                        <language_name LANG="Dutch">荷兰语</language_name>
+                        <language_name LANG="Portuguese">葡萄牙语</language_name>
+                        <language_name LANG="Spanish">西班牙语</language_name>
+                        <language_name LANG="Swedish">瑞典语</language_name>
+                        <language_name LANG="Czech">捷克语</language_name>
+                        <language_name LANG="Danish">丹麦语</language_name>
+                        <language_name LANG="Polish">波兰语</language_name>
+                        <language_name LANG="Russian">俄国语</language_name>
+                        <language_name LANG="Turkey">土耳其语</language_name>
+                        <language_name LANG="Hebrew">希伯来语</language_name>
+                        <language_name LANG="Thai">泰语</language_name>
+                        <language_name LANG="Hungarian">匈牙利语</language_name>
+                        <language_name LANG="Romanian">罗马尼亚语</language_name>
+                        <language_name LANG="Arabic">阿拉伯语</language_name>
+                        <language_name LANG="Vietnamese">越南语</language_name>
+                        <language_name LANG="Malay">马来语</language_name>
+                </LanguageList>
+                <Fonts>
+                        <font00 lfCharSet="134" lfItalic="0" lfHeight="-32" lfEscapement="0" lfQuality="0" lfFaceName="Cambria" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font01 lfCharSet="134" lfItalic="0" lfHeight="-32" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font02 lfCharSet="134" lfItalic="0" lfHeight="-32" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font03 lfCharSet="134" lfItalic="0" lfHeight="-32" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font04 lfCharSet="134" lfItalic="0" lfHeight="-32" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font05 lfCharSet="134" lfItalic="0" lfHeight="-32" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font06 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font07 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font08 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font09 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font10 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font11 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font12 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font13 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font14 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font15 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font16 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font17 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font18 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font19 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font20 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font21 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font22 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                        <font23 lfCharSet="134" lfItalic="0" lfHeight="-16" lfEscapement="0" lfQuality="0" lfFaceName="宋体" lfUnderline="0" lfStrikeOut="0" lfWidth="0" lfClipPrecision="0" lfWeight="400" lfOrientation="0" lfPitchAndFamily="2" lfOutPrecision="0"/>
+                </Fonts>
+                <endian>LITTLEENDIAN</endian>
+                <paneltype>TFTPANEL</paneltype>
+                <picture_path>NULL</picture_path>
+                <excel_path>../../多国语言/多国语言_watch.xls</excel_path>
+                <PageList>
+                        <Page id="0">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                </ColorList>
+                                <PictureList/>
+                                <CellList/>
+                        </Page>
+                        <Page id="1">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\power_on\power_on.png</Picture>
+                                </PictureList>
+                                <CellList/>
+                        </Page>
+                        <Page id="2">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\sys_menu\power_on_off\img_power_off.png</Picture>
+                                </PictureList>
+                                <CellList/>
+                        </Page>
+                        <Page id="3">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                        <Color>FFFFFF</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_7.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_8.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_0.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\ic_next_release.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_6.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\60min.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_4.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\ic_next_press.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\ic_prev_release.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_9.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_3.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\rect_background\120x50_1.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\rect_background\120x50.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_13.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\30min.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_1.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_5.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\10min.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\ic_prev_press.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\5min.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_12.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\data\size51\h60_2.png</Picture>
+                                </PictureList>
+                                <CellList>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE41</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE165</Cell>
+                                </CellList>
+                        </Page>
+                        <Page id="4">
+                                <ColorList>
+                                        <Color>FFFFFF</Color>
+                                        <Color>000000</Color>
+                                        <Color>01FF79</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\8.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\phone\hung_up.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\phone\mute_off.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\7.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\3.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\9.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\phone\icon_mute_on.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\1.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\5.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\phone\icon_mute_off.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\0.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\phone\mute_on.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\6.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\phone\hung_down.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\2.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\4.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\12.png</Picture>
+                                </PictureList>
+                                <CellList>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE134</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE168</Cell>
+                                </CellList>
+                        </Page>
+                        <Page id="5">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                        <Color>FFFFFF</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\alarm\ringing.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\rect_background\120x50.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\rect_background\120x50_1.png</Picture>
+                                </PictureList>
+                                <CellList>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE167</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE166</Cell>
+                                </CellList>
+                        </Page>
+                        <Page id="6">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\takephoto\takephoto.png</Picture>
+                                </PictureList>
+                                <CellList/>
+                        </Page>
+                        <Page id="7">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                        <Color>FFFFFF</Color>
+                                        <Color>FF0000</Color>
+                                        <Color>00FF00</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\8.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\charge\charge_bg1.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\3.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\charge\lightning.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\2.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\6.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\4.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\5.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\9.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\0.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\1.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\7.png</Picture>
+                                </PictureList>
+                                <CellList/>
+                        </Page>
+                        <Page id="8">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                        <Color>D9EE94</Color>
+                                </ColorList>
+                                <PictureList/>
+                                <CellList/>
+                        </Page>
+                        <Page id="9">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                        <Color>FFFFFF</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\4.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\volume\add_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\3.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\9.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\volume\add_not_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\1.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\volume\sub_selected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\5.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\2.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\volume\add_selected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\0.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\volume\sub_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\6.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\7.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_28x34\8.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\volume\sub_not_connected.png</Picture>
+                                </PictureList>
+                                <CellList/>
+                        </Page>
+                        <Page id="10">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                        <Color>FFFFFF</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="ARGB8565" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\transparent_selected.png</Picture>
+                                        <Picture fmt="ARGB8565" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\transparent_not_connected.png</Picture>
+                                        <Picture fmt="ARGB8888" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\adaptive_connected.png</Picture>
+                                        <Picture fmt="ARGB8565" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\close_connected.png</Picture>
+                                        <Picture fmt="ARGB8565" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\close_selected.png</Picture>
+                                        <Picture fmt="ARGB8565" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\transparent_connected.png</Picture>
+                                        <Picture fmt="ARGB8888" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\adaptive_not_connected.png</Picture>
+                                        <Picture fmt="ARGB8888" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\adaptive_selected.png</Picture>
+                                        <Picture fmt="ARGB8565" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\close_not_connected.png</Picture>
+                                        <Picture fmt="ARGB8565" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\open_not_connected.png</Picture>
+                                        <Picture fmt="ARGB8565" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\open_selected.png</Picture>
+                                        <Picture fmt="ARGB8565" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\denoise\open_connected.png</Picture>
+                                </PictureList>
+                                <CellList>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE33</Cell>
+                                </CellList>
+                        </Page>
+                        <Page id="11">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                        <Color>FFFFFF</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_not_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_selected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_selected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_not_connected.png</Picture>
+                                </PictureList>
+                                <CellList>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE115</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE118</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE116</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE120</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE34</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE117</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE119</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE121</Cell>
+                                </CellList>
+                        </Page>
+                        <Page id="12">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                        <Color>FFAA7F</Color>
+                                        <Color>FFFFFF</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\next_track_not_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\prev_track_not_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\pause_not_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\play_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\next_track_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\icon_list.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\next_track_selected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\pause_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\icon_change.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\prev_track_selected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\music\prev_track_conected.png</Picture>
+                                </PictureList>
+                                <CellList>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE48</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE74</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE73</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE75</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE72</Cell>
+                                </CellList>
+                        </Page>
+                        <Page id="13">
+                                <ColorList>
+                                        <Color>FFFFFF</Color>
+                                        <Color>000000</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\L.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\008.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\4.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\0011.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\lowpower.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\R_charge.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\007.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\2.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\ble_not_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\L_charge.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\001.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\ble_edr_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\charge.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\0010.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\005.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\6.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\chargingbay.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\0.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\8.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\1.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\ble_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\003.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\3.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\5.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\percent_sign.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\top_bar\R.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\006.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\7.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\004.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\009.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x20\002.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_7x10\9.png</Picture>
+                                </PictureList>
+                                <CellList/>
+                        </Page>
+                        <Page id="14">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\screensaver\box.png</Picture>
+                                </PictureList>
+                                <CellList/>
+                        </Page>
+                        <Page id="15">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="ARGB8565" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_not_connected.png</Picture>
+                                        <Picture fmt="ARGB8565" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_not_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\tiktok\liked.png</Picture>
+                                        <Picture fmt="ARGB8565" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_connected.png</Picture>
+                                        <Picture fmt="ARGB8565" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\tiktok\like.png</Picture>
+                                        <Picture fmt="ARGB8565" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_selected.png</Picture>
+                                        <Picture fmt="ARGB8565" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_selected.png</Picture>
+                                </PictureList>
+                                <CellList/>
+                        </Page>
+                        <Page id="16">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                        <Color>FFFFFF</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_connected.png</Picture>
+                                </PictureList>
+                                <CellList>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE48</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE71</Cell>
+                                </CellList>
+                        </Page>
+                        <Page id="17">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                        <Color>FFFFFF</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\looking_for_earphone\left_start_not_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\looking_for_earphone\left_start_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\looking_for_earphone\background_2.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\looking_for_earphone\right_start_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\looking_for_earphone\take_off_earphone.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\looking_for_earphone\pause_search.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\looking_for_earphone\background_1.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\looking_for_earphone\right_start_not_connected.png</Picture>
+                                </PictureList>
+                                <CellList>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE43</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE164</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE163</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE165</Cell>
+                                </CellList>
+                        </Page>
+                        <Page id="18">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                        <Color>FFFFFF</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\screen_brightness\2.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\screen_brightness\3.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\screen_brightness\5.png</Picture>
+                                        <Picture fmt="ARGB8565" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\next_connected.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\screen_brightness\4.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\screen_brightness\0.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\screen_brightness\1.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\more\common_switch_pic\prev_connected.png</Picture>
+                                </PictureList>
+                                <CellList>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE50</Cell>
+                                </CellList>
+                        </Page>
+                        <Page id="19">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                        <Color>FFFFFF</Color>
+                                        <Color>FF0000</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\7.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\7.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\4.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\8.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\3.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\colon_1.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\time_set\return.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\9.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\0.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\time_set\list_background.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\semicolon.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\1.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\5.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\time_set\time.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\0.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\time_set\sure.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\2.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\6.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\5.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\3.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\9.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\2.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\4.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\8.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\1.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\time_set\date.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_14x17\colon.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\6.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\time_set\background_1.png</Picture>
+                                </PictureList>
+                                <CellList/>
+                        </Page>
+                        <Page id="20">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                        <Color>FFFFFF</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\restore\icon_restart.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\restore\icon_recovery.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\restore\icon_mode.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\restore\icon_off.png</Picture>
+                                </PictureList>
+                                <CellList>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE66</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE169</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE65</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE67</Cell>
+                                </CellList>
+                        </Page>
+                        <Page id="21">
+                                <ColorList>
+                                        <Color>000000</Color>
+                                        <Color>FFFFFF</Color>
+                                </ColorList>
+                                <PictureList>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\notice\1.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\notice\3.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\9.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\2.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\0.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\3.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\8.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\1.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\4.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\notice\qq.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\11.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\5.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\notice\default.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\notice\wechat.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\notice\dingtalk.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\7.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\notice\2.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\phone\phone_call.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\common\num\num_white_12x16\6.png</Picture>
+                                        <Picture fmt="AUTO" compress_en="true" compress="BestSpaceSize">E:\br35_new_download\AC707N\download_master\UI工程\ui_320x172_color_screen_charging_case\模式界面\project\config\image_resources\notice\message.png</Picture>
+                                </PictureList>
+                                <CellList>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE68</Cell>
+                                        <Cell compress_method="soft" text_type="index">LANGUAGE69</Cell>
+                                </CellList>
+                        </Page>
+                </PageList>
+                <language>0x0000000000e586ff</language>
+                <bmp_transparent_color>0x00FFFFFF</bmp_transparent_color>
+                <png_background_color>0x00000000</png_background_color>
+                <chip_type/>
+                <spec_color_list>NULL</spec_color_list>
+                <png2jpg_list>NULL</png2jpg_list>
+                <res>result</res>
+                <resfilename>result.bin</resfilename>
+                <headerfilename>result.h</headerfilename>
+                <image_compress_method>quicklz</image_compress_method>
+                <string_compress_method>rle</string_compress_method>
+                <palette_type>rgb</palette_type>
+                <percent>100%</percent>
+                <excel_crc/>
+                <excel_row/>
+                <rotate>0</rotate>
+        </Items>
+</Resbuilder>

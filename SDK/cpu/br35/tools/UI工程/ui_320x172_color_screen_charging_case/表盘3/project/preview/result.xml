@@ -1,0 +1,12 @@
+﻿<?xml version="2.0" encoding="UTF-8"?>
+<Resbuilder>
+    <PageList>
+        <Page id="0">
+            <ColorList/>
+            <PictureList>
+                <Picture format="ARGB8888" id="1" convert_size="33600" compress_size="8400" ratio="25.00%">D:\2025\7076_7014UI\SDK\cpu\br35\tools\UI工程\ui_320x172\表盘界面\project\config\锁屏\4.png</Picture>
+            </PictureList>
+            <CellList/>
+        </Page>
+    </PageList>
+</Resbuilder>

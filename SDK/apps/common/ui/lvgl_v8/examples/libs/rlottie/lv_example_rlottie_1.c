@@ -1,0 +1,38 @@
+#ifdef SUPPORT_MS_EXTENSIONS
+#pragma bss_seg(".lv_ui_core.data.bss")
+#pragma data_seg(".lv_ui_core.data")
+#pragma const_seg(".lv_ui_core.text.const")
+#pragma code_seg(".lv_ui_core.text")
+#endif
+#include "../../lv_examples.h"
+#if LV_BUILD_EXAMPLES
+#if LV_USE_RLOTTIE
+
+/**
+ * Load an lottie animation from flash
+ */
+void lv_example_rlottie_1(void)
+{
+    extern const uint8_t lv_example_rlottie_approve[];
+    lv_obj_t *lottie = lv_rlottie_create_from_raw(lv_scr_act(), 32, 32, (const void *)lv_example_rlottie_approve);
+    lv_obj_center(lottie);
+
+
+    /*extern const char FingerprintRaw[];*/
+    /*lv_obj_t *lottie = lv_rlottie_create_from_raw(lv_scr_act(), 32, 32, (const void*)FingerprintRaw);*/
+    /*lv_obj_center(lottie);*/
+}
+
+#else
+void lv_example_rlottie_1(void)
+{
+    /*TODO
+     *fallback for online examples*/
+
+    lv_obj_t *label = lv_label_create(lv_scr_act());
+    lv_label_set_text(label, "Rlottie is not installed");
+    lv_obj_center(label);
+}
+
+#endif
+#endif
