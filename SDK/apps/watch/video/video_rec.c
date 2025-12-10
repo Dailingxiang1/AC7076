@@ -31,11 +31,15 @@ struct video_rec_handle {
     int video_rate;
     int sample_rate;
     void (*ui_refresh_cb)(int status);
+    int bytes_per_sample;
 };
 static struct video_rec_handle *video_rec;
 #define __this (video_rec)
 
-//摄像头流程 camera_manager_init->start->read->read_done->read...->stop->exit.
+
+extern uint32_t timer_get_ms(void);
+
+//摄像头流程 bf30a2_camera_init->start->read->read_done->read...->stop->exit.
 //麦克风流程 pcm_data_init->read->read_done->read...->exit.
 
 extern int jljpeg_stream_src_data_copy(u8 *buf, int size);
@@ -181,17 +185,17 @@ static void video_show_task(void *priv)
                 frame_cnt = 0;
                 /* break; */
             } else if (msg[0] == Q_AVI_TASK_REC_STOP) {
-
                 log_debug("avi task rec stop!\n");
                 if (out_fd) {
                     ret = AVI_close(out_fd);
                     if (ret) {
                         log_error("camera devide avi close err :%d \n", ret);
-                        ASSERT(0);
+                        __this->write_error = 1;
+                        /* ASSERT(0); */
                     } else {
                         log_debug("avi write success \n");
-                        out_fd = NULL;
                     }
+                    out_fd = NULL;
                 }
                 if (__this->pcm_hdl) {
                     pcm_data_exit(__this->pcm_hdl);
@@ -229,6 +233,23 @@ static void video_show_task(void *priv)
                 __this->write_error = AVI_write_frame(out_fd, (char *)jpeg_data, jpeg_data_len, 1);
             }
             camera_manager_read_done(jpeg_data);
+#if 0
+            static int cam_last_msec = 0;
+            static int cam_frame_sum = 0;
+            static int cam_frame_cnt = 0;
+            if (cam_last_msec) {
+                u32 cur_msec  = jiffies_msec();
+                u32 offset  = jiffies_msec2offset(cam_last_msec, cur_msec);
+                cam_frame_sum += offset;
+                cam_frame_cnt ++;
+                if (cam_frame_cnt && cam_frame_sum) {
+                    u32 avg  = cam_frame_sum / cam_frame_cnt;
+                    u32 fps = 1000 / avg;
+                    printf("CAM avg:%d fps:%d \n", avg, fps);
+                }
+            }
+            cam_last_msec = jiffies_msec();
+#endif
         }
 
         if (out_fd && (cyc_time != -1)) {
@@ -287,14 +308,12 @@ int jlcamera_video_rec_init(void)
     //初始化驱动
     ret = camera_manager_init();
     if (ret) {
-        //TODO
-        return -1;
+        goto __err;
     }
     //启动摄像头
     ret = camera_manager_start();
     if (ret) {
-        //TODO
-        return -1;
+        goto __err;
     }
     int fps;
     camera_manager_get_dev_fps(&fps);
@@ -307,11 +326,19 @@ int jlcamera_video_rec_init(void)
     snprintf(__this->avi_task_name, sizeof(__this->avi_task_name), "video_show_task");
     if (os_task_create(video_show_task, __this, 8, 1024, 1024, __this->avi_task_name)) {
         log_error("avi task create fail \n");
-        //TODO
-        return -1;
+        goto __err;
     }
 
     return 0;
+__err:
+    log_error("%s err\n", __func__);
+    camera_manager_stop();
+    camera_manager_deinit();
+    if (__this) {
+        free(__this);
+        __this = NULL;
+    }
+    return -1;
 }
 /* ------------------------------------------------------------------------------------*/
 /**
@@ -322,22 +349,21 @@ int jlcamera_video_rec_init(void)
 /* ------------------------------------------------------------------------------------*/
 int jlcamera_video_rec_deinit(void)
 {
-
-    printf("%s %d", __func__, __LINE__);
+    /* printf("%s %d", __func__, __LINE__); */
     /* void dma_memcpy_wait_idle(void); */
     /* dma_memcpy_wait_idle(); */
-
     camera_manager_stop();
-    OS_SEM task_kill_sem;
-    os_sem_create(&task_kill_sem, 0);
-    int msg = (int)&task_kill_sem;
-    os_taskq_del_type(__this->avi_task_name, Q_AVI_TASK_REC_START);
-    os_taskq_del_type(__this->avi_task_name, Q_AVI_TASK_REC_STOP);
-    os_taskq_post_type(__this->avi_task_name, Q_AVI_TASK_KILL, 1, &msg);
-    os_sem_pend(&task_kill_sem, 0);
-    os_sem_del(&task_kill_sem, OS_DEL_ALWAYS);
-    task_kill(__this->avi_task_name);
-
+    if (__this) {
+        OS_SEM task_kill_sem;
+        os_sem_create(&task_kill_sem, 0);
+        int msg = (int)&task_kill_sem;
+        os_taskq_del_type(__this->avi_task_name, Q_AVI_TASK_REC_START);
+        os_taskq_del_type(__this->avi_task_name, Q_AVI_TASK_REC_STOP);
+        os_taskq_post_type(__this->avi_task_name, Q_AVI_TASK_KILL, 1, &msg);
+        os_sem_pend(&task_kill_sem, 0);
+        os_sem_del(&task_kill_sem, OS_DEL_ALWAYS);
+        task_kill(__this->avi_task_name);
+    }
 
     camera_manager_deinit();
     clock_unlock("camera_video");
@@ -442,6 +468,214 @@ static void avi_task(void *priv)
     }
 }
 
+//基于音频时间进行补帧(音频包太大有误差)
+static void avi_task_dup1(void *priv)
+{
+    int ret = 0;
+    int msg[8];
+    int frame_cnt = 0;
+    int cyc_time = 30;  //循环录影时间，单位秒
+    u8 *pcm_data, *jpeg_data;
+    int pcm_data_len, jpeg_data_len;
+
+    char *filename = "storage/sd0/C/VID_****.AVI";
+    avi_t *out_fd = AVI_open_output_file(filename);
+    if (out_fd == NULL) {
+        printf("open file erro\n");
+        os_time_dly(-1);
+    }
+
+    AVI_set_video(out_fd, BF30A2_INPUT_W, BF30A2_INPUT_H, __this->video_rate, "MJPG");
+    AVI_set_audio(out_fd, 1, __this->sample_rate, 16, WAVE_FORMAT_PCM, 0);//默认单声道s16格式
+
+    // --- 用于补帧的统计变量 ---
+    u32 total_audio_bytes = 0;                  // 累加收到并写入的音频字节数
+    const int bytes_per_sample = __this->bytes_per_sample;
+    const int video_rate = __this->video_rate;
+    const int sample_rate = __this->sample_rate;
+    int dup_frame_cnt  = 0;     //调试使用
+
+    while (1) {
+        u8 read_data = 0;
+
+        if (os_taskq_accept(ARRAY_SIZE(msg), msg) == OS_TASKQ) {
+            if (msg[0] == Q_AVI_TASK_KILL) {
+                if (out_fd) {
+                    AVI_close(out_fd);
+                }
+                printf("avi task exit !\n");
+                os_sem_post((OS_SEM *)msg[1]);
+                os_time_dly(-1);
+                break;
+            }
+        }
+
+        if (pcm_data_read(__this->pcm_hdl, &pcm_data, &pcm_data_len) == 0) {
+            read_data = 1;
+            AVI_write_audio(out_fd, (char *)pcm_data, pcm_data_len);
+
+            // 累加已写入的音频字节（用于推算应该产生的视频帧数）
+            total_audio_bytes += pcm_data_len;
+
+            pcm_data_read_done(__this->pcm_hdl, pcm_data);
+        }
+        if (bf30a2_camera_data_read(&jpeg_data, &jpeg_data_len) == 0) {
+            read_data = 1;
+            frame_cnt ++;
+
+            AVI_write_frame(out_fd, (char *)jpeg_data, jpeg_data_len, 1);
+            bf30a2_camera_read_done(jpeg_data);
+
+            // 基于音频进度推算并补帧
+            if (total_audio_bytes >= sample_rate * bytes_per_sample) {
+                u32 total_audio_samples = total_audio_bytes / bytes_per_sample; // 整数
+                u32 expected_frames = (total_audio_samples * video_rate) / sample_rate;
+
+                if (expected_frames > frame_cnt) {
+                    ret = AVI_dup_frame(out_fd);
+                    if (!ret) {
+                        dup_frame_cnt++;
+                        frame_cnt++;
+                        printf("avi dup video frame :%d  cur frame:%d \n", dup_frame_cnt, frame_cnt);
+                    }
+                }
+            }
+        }
+
+
+        if (frame_cnt >= __this->video_rate * cyc_time) {
+            ret = AVI_close(out_fd);
+            if (ret) {
+                printf("bf30a2 avi close err :%d \n", ret);
+
+            } else {
+                printf("avi write success \n");
+            }
+
+            out_fd = AVI_open_output_file(filename);
+            if (out_fd == NULL) {
+                printf("open file erro\n");
+                break;
+            }
+            AVI_set_video(out_fd, BF30A2_INPUT_W, BF30A2_INPUT_H, __this->video_rate, "MJPG");
+            AVI_set_audio(out_fd, 1, __this->sample_rate, 16, WAVE_FORMAT_PCM, 0);//默认单声道s16格式
+            frame_cnt = 0;
+            dup_frame_cnt = 0;
+            total_audio_bytes = 0;
+        }
+
+        //没有读到数据
+        if (!read_data) {
+            //根据音频包计算延时
+            u32 delay_ms = ((float)__this->aframe_size / (__this->sample_rate * 2)) * 1000;
+            u32 tick = delay_ms / 10;
+            os_time_dly(tick + 1);
+        }
+
+    }
+}
+
+//基于系统时间进行补帧
+static void avi_task_dup2(void *priv)
+{
+    int ret = 0;
+    int msg[8];
+    int frame_cnt = 0;
+    int cyc_time = 30;  //循环录影时间，单位秒
+    u8 *pcm_data, *jpeg_data;
+    int pcm_data_len, jpeg_data_len;
+
+    char *filename = "storage/sd0/C/VID_****.AVI";
+    avi_t *out_fd = AVI_open_output_file(filename);
+    if (out_fd == NULL) {
+        printf("open file erro\n");
+        os_time_dly(-1);
+    }
+
+    AVI_set_video(out_fd, BF30A2_INPUT_W, BF30A2_INPUT_H, __this->video_rate, "MJPG");
+    AVI_set_audio(out_fd, 1, __this->sample_rate, 16, WAVE_FORMAT_PCM, 0);//默认单声道s16格式
+
+    // --- 用于补帧的统计变量 ---
+    const int video_rate = __this->video_rate;
+    u32 start_ms = timer_get_ms();   // 每次 open file 时重置
+    int dup_frame_cnt  = 0;          // 调试使用
+
+    while (1) {
+        u8 read_data = 0;
+
+        if (os_taskq_accept(ARRAY_SIZE(msg), msg) == OS_TASKQ) {
+            if (msg[0] == Q_AVI_TASK_KILL) {
+                if (out_fd) {
+                    AVI_close(out_fd);
+                }
+                printf("avi task exit !\n");
+                os_sem_post((OS_SEM *)msg[1]);
+                os_time_dly(-1);
+                break;
+            }
+        }
+
+        if (pcm_data_read(__this->pcm_hdl, &pcm_data, &pcm_data_len) == 0) {
+            read_data = 1;
+            AVI_write_audio(out_fd, (char *)pcm_data, pcm_data_len);
+            pcm_data_read_done(__this->pcm_hdl, pcm_data);
+        }
+        if (bf30a2_camera_data_read(&jpeg_data, &jpeg_data_len) == 0) {
+            read_data = 1;
+            frame_cnt ++;
+            AVI_write_frame(out_fd, (char *)jpeg_data, jpeg_data_len, 1);
+            bf30a2_camera_read_done(jpeg_data);
+
+            // --------- 基于系统时钟检查是否需要补帧 ---------
+            u32 now = timer_get_ms();
+            u32 elapsed_ms = now - start_ms;
+            u32 expected_frames = (elapsed_ms * video_rate) / 1000;
+            if (expected_frames > frame_cnt) {
+                ret = AVI_dup_frame(out_fd);
+                if (!ret) {
+                    dup_frame_cnt++;
+                    frame_cnt++;
+                    printf("avi dup video frame :%d  cur frame:%d \n", dup_frame_cnt, frame_cnt);
+                }
+            }
+
+        }
+
+        if (frame_cnt >= __this->video_rate * cyc_time) {
+            ret = AVI_close(out_fd);
+            if (ret) {
+                printf("bf30a2 avi close err :%d \n", ret);
+
+            } else {
+                printf("avi write success \n");
+            }
+
+            out_fd = AVI_open_output_file(filename);
+            if (out_fd == NULL) {
+                printf("open file erro\n");
+                break;
+            }
+            AVI_set_video(out_fd, BF30A2_INPUT_W, BF30A2_INPUT_H, __this->video_rate, "MJPG");
+            AVI_set_audio(out_fd, 1, __this->sample_rate, 16, WAVE_FORMAT_PCM, 0);//默认单声道s16格式
+            frame_cnt = 0;
+            dup_frame_cnt = 0;
+            start_ms = timer_get_ms();
+        }
+
+        //没有读到数据
+        if (!read_data) {
+            //根据音频包计算延时
+            u32 delay_ms = ((float)__this->aframe_size / (__this->sample_rate * 2)) * 1000;
+            u32 tick = delay_ms / 10;
+            os_time_dly(tick + 1);
+        }
+
+    }
+}
+
+
+
+
 int video_rec_start_demo(void)
 {
     int ret = 0;
@@ -458,7 +692,8 @@ int video_rec_start_demo(void)
     }
     __this->video_rate = BF30A2_INPUT_FPS / 2; //视频帧率
 
-    __this->sample_rate = 8000; //音频采样率
+    __this->sample_rate = 8000;             //音频采样率
+    __this->bytes_per_sample = 2;            // 单声道 s16 -> 每采样 2 字节
     __this->aframe_size = 4096;
     __this->pcm_hdl = pcm_data_init(__this->sample_rate, __this->aframe_size, __this->aframe_size * 10);
     if (!__this->pcm_hdl) {
@@ -472,6 +707,14 @@ int video_rec_start_demo(void)
         //TODO
         return -1;
     }
+
+    /*     __this->video_rate = 20; //可配置一个摄像头达不到的帧率，模拟需要补帧的情况 */
+    /* //根据系统时间进行补帧 */
+    /* if (os_task_create(avi_task_dup2, __this, 8, 1024, 1024, __this->avi_task_name)) { */
+    /* printf("avi task create fail \n"); */
+    /* //TODO */
+    /* return -1; */
+    /* } */
 
     return 0;
 }

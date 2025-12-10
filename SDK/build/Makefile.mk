@@ -631,6 +631,7 @@ c_SRC_FILES := \
 	apps/watch/mode/music/music_key_msg_table.c \
 	apps/watch/mode/power_on/power_on.c \
 	apps/watch/mode/update/update.c \
+	apps/watch/mode/video/video.c \
 	apps/watch/net/net_event.c \
 	apps/watch/product_test/product_test.c \
 	apps/watch/product_test/pt_gpio.c \

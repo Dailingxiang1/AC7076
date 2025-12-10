@@ -165,6 +165,11 @@ static int show_onchange(void *ctr, enum element_change_event e, void *arg)
 {
     switch (e) {
     case ON_CHANGE_INIT:
+        struct unumber num;
+        num.type = TYPE_NUM;
+        num.numbs = 1;
+        num.number[0] = 20;
+        ui_number_update_by_id(AI_TIME, &num);
         send_0X09_ENTER();
         break;
     case ON_CHANGE_FIRST_SHOW:
@@ -254,6 +259,7 @@ static void AI_time1_handler(void *priv)//20秒倒计时，不息屏
     if (i_flag == 0) { //20倒计时结束后，超时标志位置1
         i_flag = 20;
         ai_timeout = true;
+        ui_text_show_index_by_id(AI_TEXT, 0);
     } else if (flag_button == 0) { //按钮控件按下，开始录音倒计时
         i_flag = 20;
     }
@@ -391,7 +397,7 @@ static void AI_thinking_handler(void *priv)
         ui_core_redraw(pic);
     }
     flag++;
-    if (flag == 25) { //等待5秒没有获得信号，切到列表
+    if (flag == 100) { //等待5秒没有获得信号，切到列表
         flag = 0;
         page_showtxt();
     }
@@ -480,10 +486,10 @@ static void reflash_gettxt_handler(void *priv)
 static void reflash_gettxtII_handler(void *priv)
 {
     if (ai_txt1) {
-        ui_text_set_textu_by_id(AI_TXT1, (char *)ai_txt1, strlen((char *)ai_txt1), FONT_DEFAULT | FONT_SHOW_SCROLL);
+        ui_text_set_textu_by_id(AI_TXT1, (char *)ai_txt1, strlen((char *)ai_txt1), FONT_DEFAULT);
     } else {
         ai_txt1 = NULL;
-        ui_text_set_textu_by_id(AI_TXT1, (char *)ai_txt1, 0, FONT_DEFAULT | FONT_SHOW_SCROLL);
+        ui_text_set_textu_by_id(AI_TXT1, (char *)ai_txt1, 0, FONT_DEFAULT);
     }
 }
 void memset_txt(void)

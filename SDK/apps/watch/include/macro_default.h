@@ -734,6 +734,9 @@
 //*********************************************************************************//
 //						        VIDEO CONFIG                                       //
 //*********************************************************************************//
+#ifndef TCFG_APP_VIDEO_EN
+#define TCFG_APP_VIDEO_EN	    	DISABLE
+#endif
 #ifndef TCFG_VIDEO_DIAL_ENABLE
 #define TCFG_VIDEO_DIAL_ENABLE 		DISABLE
 #endif

@@ -60,6 +60,7 @@ struct camera_handle {
     // JPEG 编码线程
     char task_name[32];
     u8 task_runing;
+    u8 task_stoping;
     OS_SEM task_kill_sem;
 
     // SPI接收行数统计
@@ -164,6 +165,16 @@ static void camera_jpeg_dec_task(void *priv)
     u32 enc_time;
 
     while (hdl->task_runing) {
+        if (hdl->task_stoping) {
+            log_char('L');
+            os_time_dly(1);
+            if (lbuf_data) {
+                lbuf_free(lbuf_data);
+                lbuf_data = NULL;
+            }
+            line_cnt = 0;
+            continue;
+        }
         u8 *chunk = NULL;
         /* dma_memcpy_wait_idle(); */
         chunk = queue_buf_pop(__this->qbuf);
@@ -222,6 +233,31 @@ static void camera_jpeg_dec_task(void *priv)
         if (software_jpegenc_line(jpegenc_hdl, cur_bits, remain_size,
                                   in_buf, DMA_CAMERA_SIZE, line_cnt, &out_bits_size)) {
             log_error("software jpgenc line err \n");
+            printf("jpeg enc err,reset !!!\n");
+            //pass当前帧
+            queue_buf_reset(__this->qbuf);
+            line_cnt = 0;
+            if (lbuf_data) {
+                lbuf_free(lbuf_data);
+                lbuf_data = NULL;
+                /* os_time_dly(1); */
+                /* continue; */
+            }
+            //reset jpg_hd
+            software_jpegenc_exit(jpegenc_hdl);
+            jpegenc_hdl = software_jpegenc_init(
+                              __this->dev->width,
+                              __this->dev->height,
+                              __this->dev->width  + SPI_FHEAD_SIZE,
+                              jpeg_qval);
+
+            if (!jpegenc_hdl) {
+                log_error("software jpegenc init err \n");
+                //下面禁止加打印{
+                os_sem_post(&__this->task_kill_sem);
+                os_time_dly(-1);
+                //}
+            }
             continue;
         }
 
@@ -308,6 +344,9 @@ int camera_spi_deinit()
 
 int camera_manager_start(void)
 {
+    if (!__this) {
+        return -1;
+    }
     int ret = 0;
 
     mem_stats();
@@ -384,11 +423,11 @@ __err:
 
 int camera_manager_stop(void)
 {
-
-    printf("%s %d", __func__, __LINE__);
+    if (!__this) {
+        return -1;
+    }
     camera_manager_suspend();
     camera_spi_deinit();
-
 
     if (__this->task_runing) {
         __this->task_runing = 0;
@@ -397,7 +436,6 @@ int camera_manager_stop(void)
 
         task_kill(__this->task_name);
     }
-
     if (__this->qbuf) {
         queue_buf_destroy(__this->qbuf);
         __this->qbuf = NULL;
@@ -406,14 +444,12 @@ int camera_manager_stop(void)
         free_psram(__this->lbuf_ptr);
         __this->lbuf_ptr = NULL;
     }
-
     for (int i = 0; i < ARRAY_SIZE(__this->dma_recv_buf); i++) {
         if (__this->dma_recv_buf[i]) {
             free(__this->dma_recv_buf[i]);
             __this->dma_recv_buf[i] = NULL;
         }
     }
-
     return 0;
 }
 
@@ -444,7 +480,39 @@ void camera_manager_suspend(void)
     }
     __this->dev->supend();
 }
+void camera_manager_deep_resume(void)
+{
+    if (!__this) {
+        return ;
+    }
+    if (!__this->dev) {
+        return ;
+    }
+    queue_buf_reset(__this->qbuf);
+    __this->dma_recv_buf_index = 0;
+    __this->spi_recv_line_cnt = 0;
+    if (__this->dev->init) {
+        __this->dev->init();
+    }
+    camera_spi_init();
+    camera_manager_resume();
+    __this->task_stoping = 0;
+}
 
+void camera_manager_deep_suspend(void)
+{
+    if (!__this) {
+        return ;
+    }
+    if (!__this->dev) {
+        return ;
+    }
+    __this->task_stoping = 1;
+    camera_spi_deinit();
+    if (__this->dev->deinit) {
+        __this->dev->deinit();
+    }
+}
 static int camera_manager_dev_check(void)
 {
     struct camera_device *dev = NULL;
@@ -464,8 +532,8 @@ int camera_manager_init(void)
 {
     ASSERT(!__this);
     __this = malloc(sizeof(struct camera_handle));
+    memset(__this, 0, sizeof(struct camera_handle));
     camera_manager_dev_check();
-
     if (!__this->dev) {
         return -1;
     }
@@ -478,18 +546,22 @@ int camera_manager_init(void)
 
 int camera_manager_deinit(void)
 {
+    int ret = -1;
     if (!__this) {
         return -1;
     }
     if (!__this->dev) {
-        return -1;
+        goto __err;
     }
     if (!__this->dev->deinit) {
-        return -1;
+        goto __err;
     }
-    int  ret = __this->dev->deinit();
-    free(__this);
-    __this = NULL;
+    ret = __this->dev->deinit();
+__err:
+    if (__this) {
+        free(__this);
+        __this = NULL;
+    }
     return ret;
 
 }
@@ -545,3 +617,4 @@ int camera_manager_get_dev_fps(int *fps)
     }
     return -1;
 }
+

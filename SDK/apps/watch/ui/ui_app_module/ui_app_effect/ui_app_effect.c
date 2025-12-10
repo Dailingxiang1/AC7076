@@ -1216,6 +1216,10 @@ static void menu_list_anim_ready_cb(struct _ui_anim_t *p)
         if (elm) {
             ui_hide(__this->target_page);
         }
+        if (__this->target_page == ID_WINDOW_NOTICE) {
+            extern u8 create_control_by_menu_set(u8 en);
+            create_control_by_menu_set(1);
+        }
         UI_SHOW_WINDOW(__this->target_page);
     }
     /* 清空过渡动画任务链 */

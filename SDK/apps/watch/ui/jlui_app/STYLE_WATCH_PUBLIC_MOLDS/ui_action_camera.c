@@ -128,8 +128,10 @@ void camera_dec_reflush_sync(int status)
     int msg[3] = {0};
 
     if (!status) {
+        //正常刷新
         msg[0] = (int)camera_dec_flush;
     } else {
+        //异常显示
         msg[0] = (int) camera_rec_err;
     }
     msg[1] = 1;
@@ -178,6 +180,9 @@ static int cam_ctrl_view_video(int enable)
 }
 static void cam_camera_photo_savc_cb(char *path)
 {
+    if (jljpeg_stream_src_data_get()) {
+        return;
+    }
     jljpeg_stream_src_data_save_to_file(path);
     if (__this && (__this->photo_save_cnt > 0)) {
         __this->photo_save_cnt--;
@@ -357,6 +362,29 @@ static int cam_handler_prepare_cb(void *ctrl, int count, int start)
 
     return 0;
 }
+
+//****************************************************************************************//
+//							    消息处理
+//****************************************************************************************//
+static int ui_video_show_exit_handler(const char *type, u32 arg)
+{
+    log_info("[%s]", __func__);
+
+    switch (__this->layout_curr) {
+    case CAM_SHOW_LAYOUT:
+        cam_layout_sw(CAM_PHOTO_LAYOUT);
+        break;
+    default:
+        break;
+    }
+    return true;
+}
+
+static const struct uimsg_handl ui_msg_handler[] = {
+    { "video_show_exit",          ui_video_show_exit_handler         },
+    { NULL, NULL},      /* 必须以此结尾！ */
+};
+
 //****************************************************************************************//
 //								提醒
 //****************************************************************************************//
@@ -390,6 +418,7 @@ static int cam_layer_onchange(void *ctrl, enum element_change_event event, void 
         //图层初始化变量
         /* f_format("sd0","fat",0); */
         cam_ctrl_init();
+        ui_register_msg_handler(ID_WINDOW_CAMERA, ui_msg_handler);
         break;
     case ON_CHANGE_RELEASE:
         cam_ctrl_deinit();
@@ -522,6 +551,10 @@ static int cam_camera_layout_onchange(void *ctrl, enum element_change_event even
                        jljpeg_stream_src_data_len_get());
         break;
     case ON_CHANGE_RELEASE:
+        if (__this->video_doing) {
+            jlcamera_video_rec_stop();
+            __this->video_doing = 0;
+        }
         //关闭摄像头
         jlcamera_video_rec_deinit();
         //关闭jpeg数据流解码
@@ -817,6 +850,8 @@ static int cam_photo_list_ontouch(void *_ctrl, struct element_touch_event *e)
             if (__this->view_remap[i] == dyn_idx) {
                 if (!__this->view_vaild[i]) {
                     return true;
+                } else {
+                    break;
                 }
             }
         }
@@ -912,7 +947,88 @@ static void avi_flush_timer(void *p)
     jlgpu_scheduler_wait_sync();
 }
 void __jpeg_draw_cb_gpu(int id, u8 *dst_buf, struct rect *dst_r, struct rect *src_r, u8 bytes_per_pixel, void *priv, void *matrix);
+static void camera_video_dec_flush(void)
+{
+    struct element *elm;
+    elm = ui_core_get_element_by_id(CAM_SHOW_LAYOUT);
+    if (elm != NULL) {
+        /* printf(">>>>>>elm != NULL"); */
+        ui_redraw(CAM_SHOW_LAYOUT);
+    }
+}
+
+void video_dec_reflush_sync(int status)
+{
+    void jlui_malloc_ram_info_dump();
+    /* jlui_malloc_ram_info_dump(); */
+    log_debug("%s status:%d !!\n", __func__, status);
+
+    int msg[3] = {0};
+
+    if (!status) {
+        //正常刷新
+        msg[0] = (int) camera_video_dec_flush;
+    } else {
+        //异常显示
+    }
+    msg[1] = 1;
+    msg[2] = 0;
+    int ret = os_taskq_post_type("ui", Q_CALLBACK, 3, msg);
+}
+
+#if 0//使用video_dec解码测试.
+
+extern int video_dec_init();
+extern int video_dec_deinit();
+extern int video_dec_set_path(s8(*path)[64], u8 path_number);
+extern int video_dec_start(u8 index, u8 mode);
+extern int video_dec_refresh_cb_register(void (*cb)(int status));
+extern int video_dec_stop();
 static int cam_show_layout_onchange(void *ctrl, enum element_change_event event, void *arg)
+{
+    struct ui_grid *grid = (struct ui_grid *)ctrl;
+    struct element *elm = (struct element *)ctrl;
+    struct draw_context *dc = (struct draw_context *)arg;
+    switch (event) {
+    case ON_CHANGE_INIT:
+        if (!__this->sel_path) {
+            break;
+        }
+        if (__this->view_video) {
+            video_dec_init();
+            video_dec_refresh_cb_register(video_dec_reflush_sync);
+            video_dec_set_path((s8(*)[64])__this->sel_path, 1);
+            video_dec_start(0, 0);
+        }
+        break;
+    case ON_CHANGE_SHOW_POST:
+        if (!__this->sel_path) {
+            break;
+        }
+        ui_custom_draw_clear(dc);
+        if (__this->view_video) {
+            //实时显示画面
+            if (!jljpeg_stream_src_data_len_get()) {
+                //码流数据为空时不显示
+                break;
+            }
+            jpeg_image_ram(dc, 40, 0, 240, 320,
+                           jljpeg_stream_src_data_get(),
+                           jljpeg_stream_src_data_len_get());
+        }
+        break;
+    case ON_CHANGE_RELEASE:
+        video_dec_stop();
+        video_dec_deinit();
+        break;
+    default:
+        break;
+    }
+    return false;
+}
+#endif
+
+static int cam_show_layout_onchange1(void *ctrl, enum element_change_event event, void *arg)
 {
     struct ui_grid *grid = (struct ui_grid *)ctrl;
     struct element *elm = (struct element *)ctrl;
@@ -935,11 +1051,11 @@ static int cam_show_layout_onchange(void *ctrl, enum element_change_event event,
             if (!get_aviplay_handle()) {
                 break;
             }
-            /* u16 timer_id = 0; */
-            /* if (!avi_get_avi_playtimer_id()) { */
-            /* timer_id = sys_timeout_add((void *)elm->id, (avi_flush_timer), 10); // 强制满帧刷新 */
-            /* avi_set_avi_playtimer_id(timer_id); */
-            /* } */
+            u16 timer_id = 0;
+            if (!avi_get_avi_playtimer_id()) {
+                timer_id = sys_timeout_add((void *)elm->id, (avi_flush_timer), 10); // 强制满帧刷新
+                avi_set_avi_playtimer_id(timer_id);
+            }
             u32 avip = (u32)get_avi_player_st_handle();
             log_debug("player->st %x %d %d ", avip, avi_get_width(get_avi_player_st_handle()), avi_get_height(get_avi_player_st_handle()));
             ui_draw(dc,
@@ -970,9 +1086,9 @@ static int cam_show_layout_onchange(void *ctrl, enum element_change_event event,
     }
     return false;
 }
-
 REGISTER_UI_EVENT_HANDLER(CAM_SHOW_LAYOUT)
-.onchange = cam_show_layout_onchange,
+/* .onchange = cam_show_layout_onchange, */
+.onchange = cam_show_layout_onchange1,
  .onkey = NULL,
   .ontouch =  NULL,
 };

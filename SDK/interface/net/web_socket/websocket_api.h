@@ -166,5 +166,18 @@ int  websockets_serv_socket_hanshack(struct websocket_struct *websockets_info);
 int  websockets_serv_socket_init(struct websocket_struct *websockets_info);
 int websockets_struct_check(int sizeof_struct);
 
+void __attribute__((weak))jl_websocket_api_free(void *pv);
+
+void __attribute__((weak)) *jl_websocket_api_malloc(size_t size);
+
+void __attribute__((weak)) *jl_websocket_api_zalloc(size_t size);
+
+void __attribute__((weak)) *jl_websocket_api_realloc(void *ptr, size_t size);
+
+#define websocket_api_free		jl_websocket_api_free
+#define websocket_api_malloc	jl_websocket_api_malloc
+#define websocket_api_zalloc	jl_websocket_api_zalloc
+#define websocket_api_realloc	jl_websocket_api_realloc
+
 #endif
 

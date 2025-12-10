@@ -92,7 +92,7 @@ u8 ntp_client_get_time_status(void);
 	When it succeed, it will post the net_event NET_NTP_GET_TIME_SUCC and set the ntp_client_time_status to 1.
 */
 /*----------------------------------------------------------------------------*/
-void ntp_client_get_time(const char *host);
+int ntp_client_get_time(const char *host);
 
 
 

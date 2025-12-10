@@ -123,6 +123,7 @@ typedef struct {
 typedef struct {
 
     void   *fdes;              /* File descriptor of AVI file */
+    void   *index_fdes;              /* File descriptor of AVI file */
     long   mode;              /* 0 for reading, 1 for writing */
 
     long   width;             /* Width  of a video frame */

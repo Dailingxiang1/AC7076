@@ -87,6 +87,7 @@ static int uvc_layout_onchange(void *ctrl, enum element_change_event event, void
 
     switch (event) {
     case ON_CHANGE_INIT:
+        ui_auto_shut_down_disable();
         jljpeg_stream_init();
         jluvc_set_refresh_cb(ui_uvc_ui_reflush);
         break;
@@ -97,6 +98,7 @@ static int uvc_layout_onchange(void *ctrl, enum element_change_event event, void
         }
         dc = (struct draw_context *)arg;
         /* ui_custom_draw_clear(dc); */
+        /* put_buf(jljpeg_stream_src_data_get(),128); */
         jlgpu_scheduler_wait_sync();
         jlgpu_task_clean_up_by_id(dc->gpu_task_head, dc->elm->id, 0x1);
         jpeg_image_ram(dc, 0, 0, UVC_JPG_WIDTH	, UVC_JPG_HEIGHT,
@@ -105,6 +107,7 @@ static int uvc_layout_onchange(void *ctrl, enum element_change_event event, void
         break;
     case ON_CHANGE_RELEASE:
         jljpeg_stream_deinit();
+        ui_auto_shut_down_enable();
         break;
     default:
         return false;

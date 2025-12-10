@@ -2608,6 +2608,9 @@ struct image_unit {
     struct image_file image;	// 图片信息
     struct flash_file_info flash;	// flash信息
     struct image_unit *next;
+
+    u32 mmu_clut_offset; //颜色表偏移
+    u32 mmu_clut_tab;	 //颜色表地址
 };
 
 struct image_list {
@@ -3550,6 +3553,9 @@ static int jlui_show_image_text(struct draw_context *dc, struct ui_text_attrs *t
             || (img->image.format == PIXEL_FMT_A2)
             || (img->image.format == PIXEL_FMT_A1)
            ) {
+            ui_res_get_image_flash_info(&img->flash, &ui_load_info_table[dc->prj].image_file_info, &img->image);
+            img->mmu_clut_offset = img->flash.offset;
+            img->mmu_clut_tab = (u32)img->flash.tab;
             int tab_size = get_clut_format_tabsize(img->image.format, img->image.clut_format);
             img->image.offset += tab_size;
             img->image.len -= tab_size;
@@ -3733,6 +3739,22 @@ __strpic_with_text:	// 如果多国语言用编码模式，则在这里用字库
         task_param.gpu_free_data = dc->gpu_free_data;
         /* task_param.task_id = GPU_TASK_ID(dc->page, dc->elm->id, elm_index); */
         /* task_param.element_id = dc->elm->id; */
+        if ((UI_TEXT_ENCODE_IMAGE == text->format)
+            && ((img->image.format == PIXEL_FMT_AL88)
+                || (img->image.format == PIXEL_FMT_AL44)
+                || (img->image.format == PIXEL_FMT_AL22)
+                || (img->image.format == PIXEL_FMT_L8)
+                || (img->image.format == PIXEL_FMT_L4)
+                || (img->image.format == PIXEL_FMT_L2)
+                || (img->image.format == PIXEL_FMT_L1)
+                || (img->image.format == PIXEL_FMT_A8)
+                || (img->image.format == PIXEL_FMT_A4)
+                || (img->image.format == PIXEL_FMT_A2)
+                || (img->image.format == PIXEL_FMT_A1)
+               )) {
+            task_param.texture.mmu_clut_offset = img->mmu_clut_offset;
+            task_param.texture.mmu_clut_tab = (u8 *)img->mmu_clut_tab;
+        }
         task_param.clut_format = task_param.image.clut_format;
         task_param.has_clut = task_param.image.has_clut;
         task_param.format = res_format_to_gpu(task_param.image.format);

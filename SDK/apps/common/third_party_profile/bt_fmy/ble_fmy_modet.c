@@ -1,7 +1,7 @@
 #include "system/includes.h"
 #include "gSensor/gSensor_manage.h"
 #include "ble_fmy_modet.h"
-#include "user_p11_cmd.h"
+
 #if (TCFG_GSENSOR_ENABLE && TCFG_P11GSENSOR_EN)
 
 #if GSENSOR_PRINTF_ENABLE

@@ -71,6 +71,7 @@
 #include "media/includes.h"
 #include "audio_config.h"
 #include "gpio.h"
+#include "app_task.h"
 
 #define LOG_TAG_CONST AVI_VIDEO
 #define LOG_TAG "[AVI_VIDEO]"
@@ -122,6 +123,8 @@ static const char *avi_files[] = {
     "storage/UI_FAT/C/Btest.avi",
     // 可以继续添加更多文件
 };
+static u16 task_switch_flag;
+
 #define AVI_FILE_COUNT (sizeof(avi_files) / sizeof(avi_files[0]))
 
 static void parse_list_chunk(FILE *file, long list_end, ChunkCallback callback,
@@ -231,7 +234,7 @@ static void pcm_cbuf_deinit(void)
     log_info("\n[pcm_cbuf_deinit]mem_status:\n");
     mem_stats();
 }
-
+__attribute__((weak))
 u8 get_avi_audio_status()
 {
     if (__this == NULL) {
@@ -289,6 +292,13 @@ void avi_play_shutdown(void)
     u32 rets;
     __asm__ volatile("%0 = rets":"=r"(rets));
     log_info("\n\n avi_play_shutdown rets=%x\n\n", rets);
+#if TCFG_APP_VIDEO_EN
+    if (app_get_current_mode_name() == APP_MODE_VIDEO) {
+        app_mode_stack_clr(APP_MODE_VIDEO);
+        app_task_switch_back();
+    }
+#endif
+
     if (__this == NULL) {
         return ;
     }
@@ -1941,10 +1951,41 @@ void *get_avi_player_st_handle()
 {
     return __this->st;
 }
+
+#if TCFG_APP_VIDEO_EN
+static void app_video_mode_switch(void *priv)
+{
+    u16 flag = (u16)priv;
+    if (flag != task_switch_flag) {
+        log_info("\n\n %s, %d \n\n", __func__, __LINE__);
+        log_info("flag:%d, %d \n", flag, task_switch_flag);
+        return;
+    }
+
+    ++task_switch_flag;
+    if (app_get_current_mode_name() == APP_MODE_VIDEO) {
+        return;
+    }
+    int ret = app_task_switch_to(APP_MODE_VIDEO, NULL_VALUE);
+    if (ret == FALSE) {
+        sys_timeout_add((void *)(long)task_switch_flag, app_video_mode_switch, 500);
+    }
+}
+#endif
+
 void *animig_open(char *name, int window_id, int arg)
 {
 
     u8 type = 0;
+
+#if TCFG_APP_VIDEO_EN
+    if (app_get_current_mode_name() != APP_MODE_VIDEO) {
+        int ret = app_task_switch_to(APP_MODE_VIDEO, NULL_VALUE);
+        if (ret == FALSE) {
+            sys_timeout_add((void *)(long)task_switch_flag, app_video_mode_switch, 500);
+        }
+    }
+#endif
 
     void *f = fopen(name, "r");
     if (f == NULL) {

@@ -117,6 +117,7 @@ static u8 rdec_enter_deepsleep(void)
     for (u32 i = 0; i < RDEC_MAX_NUM; i++) {
         RDEC *RDECx = (RDEC *)rdec_id2rdec(i);
         if (RDECx->CON == 0) {
+            rdec_reg[i].con = 0;
             continue;
         }
         rdec_reg[i].con = RDECx->CON;

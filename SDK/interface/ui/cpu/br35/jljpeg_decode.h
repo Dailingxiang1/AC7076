@@ -20,9 +20,9 @@ extern "C" {
 /* 当上层触发解码动作的速度比解码速度慢时，使用 2 个buff即保证每次来取数据都有已经解码完成的内容，改大没有意义 */
 
 //#define BIT_BUFF_NUM    1
-#ifndef BIT_BUFF_NUM
-#define BIT_BUFF_NUM    1
-#endif
+// #ifndef BIT_BUFF_NUM
+// #define BIT_BUFF_NUM    1
+// #endif
 /* Allow the number of cached MUC blocks , Default to 2 , 双buff乒乓或者单buff阻塞使用 */
 /* 大致情况和 MCU 类似，主要考虑到输入bit流需要时32位对齐的地址空间，原始 bit 流需要从 flash 或者 SD 卡之中进行拷贝到RAM中，因此建议乒乓操作, 更多的 buff 没有意义，因为取 bit 流的动作会比解码动作慢 */
 
@@ -211,7 +211,7 @@ typedef struct _jdec_opj {
     u16 *std_huffman_table;
     u32 *huffman;
     jdec_mcu_buff mcu_buff[MCU_BUFF_NUM];	/* MCU_BUFF_NUM mcu block buffers: 这些 buff 负责暂存解码后的 MCU 块数据和 MCU 块信息 */
-    jdec_bit_buff bit_buff[BIT_BUFF_NUM];	/* BIT_BUFF_NUM bit stream buffers: 这些 buff 负责暂存原始的 JPEG 数据或者 JPEG 段信息 */
+    jdec_bit_buff *bit_buff;	/* BIT_BUFF_NUM bit stream buffers: 这些 buff 负责暂存原始的 JPEG 数据或者 JPEG 段信息 */
     u8 *line_buf;							/*mcu解码后数据先暂存到linebuf再统一变换输出，同时缓存部分数据给下一次解码使用，避免重复*/
     struct rect draw_rect;					/*jpeg在屏幕的绘制区域*/
     struct rect jpeg_rect;					/*在jpeg解码的相对位置*/

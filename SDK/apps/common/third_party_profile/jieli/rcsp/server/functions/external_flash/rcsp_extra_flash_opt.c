@@ -1129,7 +1129,7 @@ static u16 get_communication_mtu(u16 expect_mtu)
    @note
 */
 /*----------------------------------------------------------------------------*/
-int rcsp_get_extra_flash_info(void *priv, u8 *resp_data)
+int rcsp_get_extra_flash_info(void *priv, u8 **p_resp_data)
 {
     struct RcspModel *rcspModel = (struct RcspModel *)priv;
     int data_len = 0;
@@ -1151,6 +1151,13 @@ int rcsp_get_extra_flash_info(void *priv, u8 *resp_data)
     u16 screen_height = 0;
     get_cur_srreen_width_and_height(&screen_width, &screen_height);
 
+    u8 *resp_data = zalloc(sizeof(flash_size) + sizeof(fat_size) + sizeof(sys_type) + sizeof(g_eflash_state_flag) + \
+                           sizeof(version) + sizeof(resp_mtu) + sizeof(sector) + sizeof(ver_len) + ver_len + \
+                           sizeof(recv_mtu) + sizeof(screen_width) + sizeof(screen_height));
+    if (!resp_data) {
+        *p_resp_data = NULL;
+        return -1;
+    }
     // 填充
     data_len = 0; // 用作计数
     data_len += rcsp_extra_flash_opt_data_fill(resp_data + data_len, (u8 *)&flash_size, sizeof(flash_size));
@@ -1168,6 +1175,7 @@ int rcsp_get_extra_flash_info(void *priv, u8 *resp_data)
     data_len += rcsp_extra_flash_opt_data_fill(resp_data + data_len, (u8 *)&recv_mtu, sizeof(recv_mtu));
     data_len += rcsp_extra_flash_opt_data_fill(resp_data + data_len, (u8 *)&screen_width, sizeof(screen_width));
     data_len += rcsp_extra_flash_opt_data_fill(resp_data + data_len, (u8 *)&screen_height, sizeof(screen_height));
+    *p_resp_data = resp_data;
     return data_len;
 }
 
@@ -1744,54 +1752,61 @@ int rcsp_extra_flash_opt(u8 *param, u16 len, u8 OpCode, u8 OpCode_SN)
     u8 offset = 0;
     u8 opt_flag = param[offset++];
     u8 state = param[offset++];
+    u8 *resp_buf = zalloc(100);
+    if (!resp_buf) {
+        return -1;
+    }
+    ASSERT(len <= 100);
+    memcpy(resp_buf, param, len);
 
     switch (opt_flag) {
     case CURR_SYSTEM_OPT_READ:
-        result = rcsp_extra_flash_read_opt(param, &len, offset, state);
+        result = rcsp_extra_flash_read_opt(resp_buf, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_WRITE:
-        result = rcsp_extra_flash_write_opt(param, &len, offset, state, OpCode);
+        result = rcsp_extra_flash_write_opt(resp_buf, &len, offset, state, OpCode);
         break;
     case CURR_SYSTEM_OPT_INSERT:
-        result = rcsp_extra_flash_insert_opt(param, &len, offset, state);
+        result = rcsp_extra_flash_insert_opt(resp_buf, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_DIAL:
-        result = rcsp_extra_flash_dial_opt(param, &len, offset, state);
+        result = rcsp_extra_flash_dial_opt(resp_buf, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_ERASE:
-        result = rcsp_extra_flash_erase_opt(param, &len, offset, state);
+        result = rcsp_extra_flash_erase_opt(resp_buf, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_DELETE:
-        result = rcsp_extra_flash_delete_opt(param, &len, offset, state);
+        result = rcsp_extra_flash_delete_opt(resp_buf, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_UPDATE_FAT:
-        result = rcsp_extra_flash_update_fat_opt(param, &len, offset, state);
+        result = rcsp_extra_flash_update_fat_opt(resp_buf, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_UPDATE_UI:
-        result = rcsp_extra_flash_update_ui_opt(param, &len, offset, state);
+        result = rcsp_extra_flash_update_ui_opt(resp_buf, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_TRAN_REPLY:
-        result = rcsp_extra_flash_update_state_to_app(param, &len, offset, state);
+        result = rcsp_extra_flash_update_state_to_app(resp_buf, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_UPDATE_FLAG:
-        result = rcsp_extra_flash_ota_update_state(param, &len, offset, state);
+        result = rcsp_extra_flash_ota_update_state(resp_buf, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_RESTORE:
-        result = rcsp_extra_flash_restore(param, &len, offset, state);
+        result = rcsp_extra_flash_restore(resp_buf, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_FILE_INFO_GET:
-        result = rcsp_extra_flash_file_info_get(param, &len, offset, state);
+        result = rcsp_extra_flash_file_info_get(resp_buf, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_REMAIN_SPACE:
-        result = rcsp_extra_flash_remain_space(param, &len, offset, state);
+        result = rcsp_extra_flash_remain_space(resp_buf, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_RES_SPACE:
-        result = rcsp_extra_flash_res_space(param, &len, offset, state);
+        result = rcsp_extra_flash_res_space(resp_buf, &len, offset, state);
         break;
     }
 
-    u16 resp_len = rcsp_extra_flash_opt_resp_data_get(param + 1, len, opt_flag, state) + 1;
-    rcsp_extra_flash_opt_resp(0, OpCode, OpCode_SN, param, resp_len);
+    u16 resp_len = rcsp_extra_flash_opt_resp_data_get(resp_buf + 1, len, opt_flag, state) + 1;
+    rcsp_extra_flash_opt_resp(0, OpCode, OpCode_SN, resp_buf, resp_len);
+    free(resp_buf);
     return result;
 }
 

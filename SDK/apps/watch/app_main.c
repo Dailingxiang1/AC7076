@@ -51,6 +51,7 @@
 #include "clock_manager/clock_manager.h"
 #include "product_test.h"
 #include "chgbox_ctrl.h"
+#include "app_video.h"
 
 #define LOG_TAG             "[APP]"
 #define LOG_ERROR_ENABLE
@@ -767,7 +768,12 @@ static void app_task_loop(void *p)
             mode = app_enter_rcsp_mode(g_mode_switch_arg);
             break;
 #endif
-
+#if TCFG_APP_VIDEO_EN
+        case APP_MODE_VIDEO:
+            log_info("APP_MODE_VIDEO \n");
+            mode = app_enter_video_mode(g_mode_switch_arg);
+            break;
+#endif
         default:
             break;
         }

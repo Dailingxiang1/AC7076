@@ -13,12 +13,12 @@
 int rcsp_extra_flash_opt(u8 *data, u16 len, u8 OpCode, u8 OpCode_SN);
 //*----------------------------------------------------------------------------*/
 /**@brief    填充表盘操作第一条命令的数据回复包
-   @param    resp_data:数据回复包
+   @param    resp_data:获取数据回复包
    @return   负数-失败，正数-数据长度
    @note
 */
 /*----------------------------------------------------------------------------*/
-int rcsp_get_extra_flash_info(void *priv, u8 *resp_data);
+int rcsp_get_extra_flash_info(void *priv, u8 **p_resp_data);
 //*----------------------------------------------------------------------------*/
 /**@brief    外部flash开始操作
    @param

@@ -21,6 +21,7 @@ enum app_mode_t {
     APP_MODE_SPDIF    = 11,
     APP_MODE_RCSP     = 12,
     APP_MODE_SMARTBOX = 13,
+    APP_MODE_VIDEO    = 14,
 
 };
 

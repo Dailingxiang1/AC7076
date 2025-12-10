@@ -28,6 +28,9 @@
 #include "avilib.h"
 #include "app_config.h"
 
+//创建另外的文件存储AVI索引, 节约ram内存。在结束录像时合并索引到AVI文件中
+#define AVI_INDXE_FILE_ENABLE  1
+
 //#include <time.h>
 #if TCFG_PSRAM_DEV_ENABLE
 #define malloc(size)       malloc_psram(size)
@@ -80,7 +83,7 @@ static size_t avi_write(void *fd, char *buf, size_t len)
 
     while (r < len) {
         n = fwrite(buf + r, 1, len - r, (FILE *)fd);
-        if ((ssize_t)n < 0) {
+        if ((ssize_t)n <= 0) {
             return n;
         }
 
@@ -174,52 +177,107 @@ static int avi_add_chunk(avi_t *AVI, unsigned char *tag, unsigned char *data, in
     return 0;
 }
 
+static int avi_add_idx_chunk(avi_t *AVI, u32 length)
+{
+    unsigned char c[8] = { 'i', 'd', 'x', '1', 0, 0, 0, 0 };
+    long2str(c + 4, length);
+
+    if (avi_write(AVI->fdes, (char *)c, 8) != 8) {
+        fseek(AVI->fdes, AVI->pos, SEEK_SET);
+        AVI_errno = AVI_ERR_WRITE;
+        return -1;
+    }
+
+    /* Update file position */
+    AVI->pos += 8;
+
+    return 0;
+}
+
+static int avi_add_idx_data(avi_t *AVI, unsigned char *data, int length)
+{
+    /* Output tag, length and data, restore previous position
+       if the write fails */
+
+    length = PAD_EVEN(length);
+
+    if (avi_write(AVI->fdes, (char *)data, length) != length) {
+        fseek(AVI->fdes, AVI->pos, SEEK_SET);
+        AVI_errno = AVI_ERR_WRITE;
+        return -1;
+    }
+
+    /* Update file position */
+
+    AVI->pos += length;
+
+    //fprintf(stderr, "pos=%lu %s\n", AVI->pos, tag);
+    return 0;
+}
+
 static int avi_add_index_entry(avi_t *AVI, unsigned char *tag, long flags, unsigned long pos, unsigned long len)
 {
     void *ptr;
 
-    if (AVI->n_idx >= AVI->max_idx) {
+    if (AVI->index_fdes) {
+        unsigned char c[16];
 
-        size_t old_count = AVI->max_idx;          // 原有元素个数
-        size_t elem_size = 16;                    // 每个元素大小
-        size_t new_count = old_count + 4096;      // 扩容后的元素个数
-        size_t new_size  = new_count * elem_size; // 扩容后的字节数
+        memcpy(c, tag, 4);
+        long2str(c + 4, flags);
+        //pos - movi_addr
+        long2str(c + 8, pos - (HEADERBYTES - 4));
+        long2str(c + 12, len);
 
-        // 1. 分配新的内存块
-        void *new_idx = malloc(new_size);
-        if (!new_idx) {
-            // 申请失败，保持原状或做错误处理
-            AVI_errno = AVI_ERR_NO_MEM;
+        //写入索引文件
+        if (avi_write(AVI->index_fdes, (char *)c, 16) != 16) {
+            printf("wirte index fail \n");
+            AVI_errno = AVI_ERR_WRITE;
             return -1;
         }
+    } else {
+        if (AVI->n_idx >= AVI->max_idx) {
 
-        memcpy(new_idx, AVI->idx, old_count * elem_size);
+            size_t old_count = AVI->max_idx;          // 原有元素个数
+            size_t elem_size = 16;                    // 每个元素大小
+            size_t new_count = old_count + 4096;      // 扩容后的元素个数
+            size_t new_size  = new_count * elem_size; // 扩容后的字节数
 
-        free((void *)AVI->idx);
+            // 1. 分配新的内存块
+            void *new_idx = malloc(new_size);
+            if (!new_idx) {
+                // 申请失败，保持原状或做错误处理
+                AVI_errno = AVI_ERR_NO_MEM;
+                return -1;
+            }
 
-        AVI->idx     = new_idx;
-        AVI->max_idx = new_count;
+            memcpy(new_idx, AVI->idx, old_count * elem_size);
 
-        /* ptr = realloc((void *)AVI->idx, (AVI->max_idx + 4096) * 16); */
+            free((void *)AVI->idx);
 
-        /*         if (ptr == 0) { */
-        /* AVI_errno = AVI_ERR_NO_MEM; */
-        /* return -1; */
-        /* } */
-        /* AVI->max_idx += 4096; */
-        /* AVI->idx = (unsigned char((*)[16])) ptr; */
+            AVI->idx     = new_idx;
+            AVI->max_idx = new_count;
+
+            /* ptr = realloc((void *)AVI->idx, (AVI->max_idx + 4096) * 16); */
+
+            /*         if (ptr == 0) { */
+            /* AVI_errno = AVI_ERR_NO_MEM; */
+            /* return -1; */
+            /* } */
+            /* AVI->max_idx += 4096; */
+            /* AVI->idx = (unsigned char((*)[16])) ptr; */
+        }
+
+        /* Add index entry */
+
+        //   fprintf(stderr, "INDEX %s %ld %lu %lu\n", tag, flags, pos, len);
+
+        memcpy(AVI->idx[AVI->n_idx], tag, 4);
+        long2str(AVI->idx[AVI->n_idx] + 4, flags);
+        //TODO
+        //pos - movi_addr
+        long2str(AVI->idx[AVI->n_idx] + 8, pos - (HEADERBYTES - 4));
+        long2str(AVI->idx[AVI->n_idx] + 12, len);
     }
-
-    /* Add index entry */
-
-    //   fprintf(stderr, "INDEX %s %ld %lu %lu\n", tag, flags, pos, len);
-
-    memcpy(AVI->idx[AVI->n_idx], tag, 4);
-    long2str(AVI->idx[AVI->n_idx] + 4, flags);
-    //TODO
-    //pos - movi_addr
-    long2str(AVI->idx[AVI->n_idx] + 8, pos - (HEADERBYTES - 4));
-    long2str(AVI->idx[AVI->n_idx] + 12, len);
 
     /* Update counter */
 
@@ -288,6 +346,28 @@ avi_t *AVI_open_output_file(char *filename)
         return 0;
     }
 
+#if AVI_INDXE_FILE_ENABLE
+    //创建索引文件
+    char index_filename[128];
+    char *dir_path = strrchr(filename, '/');
+    strcpy(index_filename, filename);
+    if (dir_path) {
+        dir_path++;
+        sprintf(index_filename + (dir_path - filename), "IDX_****.idx");
+    } else {
+        sprintf(index_filename, "%s.idx", filename);
+    }
+    /* printf("index :%s \n", index_filename); */
+    AVI->index_fdes = fopen(index_filename, "w+");
+    if (AVI->index_fdes == NULL) {
+        printf("fopen index file err \n");
+        fclose(AVI->fdes);
+        AVI_errno = AVI_ERR_OPEN;
+        free(AVI);
+        return 0;
+    }
+#endif
+
     /* Write out HEADERBYTES bytes, the header will go here
        when we are finished with writing */
 
@@ -298,6 +378,9 @@ avi_t *AVI_open_output_file(char *filename)
     if (i != HEADERBYTES) {
         fclose(AVI->fdes);
         AVI->fdes = NULL;
+#if AVI_INDXE_FILE_ENABLE
+        fdelete(AVI->index_fdes);
+#endif
         AVI_errno = AVI_ERR_WRITE;
         free(AVI);
         return 0;
@@ -642,7 +725,7 @@ int avi_update_header(avi_t *AVI)
 static int avi_close_output_file(avi_t *AVI)
 {
 
-    int ret, njunk, sampsize, hasIndex, ms_per_frame, frate, idxerror, flag;
+    int ret = 0, njunk, sampsize, hasIndex, ms_per_frame, frate, idxerror, flag;
     unsigned long movi_len;
     int hdrl_start, strl_start, j;
     unsigned char AVI_header[HEADERBYTES];
@@ -664,7 +747,43 @@ static int avi_close_output_file(avi_t *AVI)
 
     idxerror = 0;
     //   fprintf(stderr, "pos=%lu, index_len=%ld             \n", AVI->pos, AVI->n_idx*16);
-    ret = avi_add_chunk(AVI, (unsigned char *)"idx1", (unsigned char *)AVI->idx, AVI->n_idx * 16);
+    if (AVI->index_fdes) {
+        //合并索引文件到AVI文件中
+        int buffer_size = 1024;
+        unsigned char *index_data = (unsigned char *)malloc(buffer_size);
+        if (!index_data) {
+            idxerror = 1;
+            AVI_errno = AVI_ERR_NO_MEM;
+        } else {
+            //读取索引文件内容
+            /* fflush(AVI->index_fdes); */
+            u32 index_file_size = flen(AVI->index_fdes);
+
+            fseek(AVI->index_fdes, 0, SEEK_SET);
+
+            size_t read_bytes = avi_read(AVI->index_fdes, (char *)index_data, buffer_size);
+            avi_add_idx_chunk(AVI, index_file_size);
+            while (read_bytes > 0) {
+                //写入AVI文件中
+                ret = avi_add_idx_data(AVI, index_data, read_bytes);
+                hasIndex = (ret == 0);
+                if (ret) {
+                    idxerror = 1;
+                    AVI_errno = AVI_ERR_WRITE_INDEX;
+                    break;
+                }
+                read_bytes = avi_read(AVI->index_fdes, (char *)index_data, buffer_size);
+            }
+            free(index_data);
+        }
+        //删除索引文件
+        fdelete(AVI->index_fdes);
+        //(AVI->index_fdes);
+        AVI->index_fdes = NULL;
+    } else {
+        //内存索引写入AVI文件中
+        ret = avi_add_chunk(AVI, (unsigned char *)"idx1", (unsigned char *)AVI->idx, AVI->n_idx * 16);
+    }
     hasIndex = (ret == 0);
     //fprintf(stderr, "pos=%lu, index_len=%d\n", AVI->pos, hasIndex);
 

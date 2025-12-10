@@ -29,6 +29,9 @@ int camera_manager_stop(void);
 void camera_manager_resume(void);
 void camera_manager_suspend(void);
 
+void camera_manager_deep_resume(void);
+void camera_manager_deep_suspend(void);
+
 int camera_manager_init(void);
 int camera_manager_deinit(void);
 

@@ -447,6 +447,8 @@ static void ai_txt_empty_handler(void *priv)
         char empty_str_copy[50] = "您好像并没有说话";
         strcpy(empty_str, empty_str_copy);
         ui_text_set_textu_by_id(AI_DIAL_TXT, (char *)empty_str, strlen((char *)empty_str), FONT_DEFAULT | FONT_SHOW_MULTI_LINE);
+    } else {
+        ui_text_set_textu_by_id(AI_DIAL_TXT, (char *)ai_dial_txt1, strlen((char *)ai_dial_txt1), FONT_DEFAULT);
     }
 }
 
@@ -685,6 +687,30 @@ static int AI_dialogue_ontouch(void *ctr, struct element_touch_event *e)
     }
     return true;
 }
+static int AI_dial_time_onchange(void *ctr, enum element_change_event e, void *arg)
+{
+    struct ui_number *ui_num = (struct ui_number *)ctr;
+    struct unumber num;
+    switch (e) {
+    case ON_CHANGE_INIT:
+        cuntdown_flag = 60;
+        num.type = TYPE_NUM;
+        num.numbs = 1;
+        num.number[0] = cuntdown_flag;
+        ui_number_update(ui_num, &num);
+        break;
+    default:
+        break;
+    }
+    return 0;
+}
+
+
+REGISTER_UI_EVENT_HANDLER(AI_DIALOGUE)
+.onchange = AI_dialogue_onchange,
+ .onkey = NULL,
+  .ontouch = NULL,
+};
 
 REGISTER_UI_EVENT_HANDLER(AI_DIALOGUE)
 .onchange = AI_dialogue_onchange,
@@ -696,6 +722,12 @@ REGISTER_UI_EVENT_HANDLER(AI_DIAL_VOICE)
  .onkey = NULL,
   .ontouch = AI_dialogue_ontouch,
 };
+REGISTER_UI_EVENT_HANDLER(AI_DIAL_TIME)
+.onchange = AI_dial_time_onchange,
+ .onkey = NULL,
+  .ontouch = NULL,
+};
+
 //****************************************************************************************/
 //								layout3-AI表盘											//
 /****************************************************************************************/

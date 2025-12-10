@@ -64,10 +64,13 @@ int JL_rcsp_extra_flash_cmd_resp(void *priv, u8 OpCode, u8 OpCode_SN, u8 *data, 
         }
         break;
     case JL_OPCODE_EXTRA_FLASH_INFO: // 0xD6 - 获取外部Flash信息
-        ret = rcsp_get_extra_flash_info(priv, data);
+        u8 *resp_data = NULL;
+        ret = rcsp_get_extra_flash_info(priv, &resp_data);
         if (ret >= 0) {
             u16 data_len = (u16) ret;
-            JL_CMD_response_send(OpCode, JL_PRO_STATUS_SUCCESS, OpCode_SN, data, data_len, 0, NULL);
+            JL_CMD_response_send(OpCode, JL_PRO_STATUS_SUCCESS, OpCode_SN, resp_data, data_len, 0, NULL);
+            free(resp_data);
+            resp_data = NULL;
             ret = rcsp_extra_flash_opt_start();
         } else {
             JL_CMD_response_send(OpCode, JL_PRO_STATUS_FAIL, OpCode_SN, NULL, 0, 0, NULL);

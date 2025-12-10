@@ -17,6 +17,7 @@
 #include "vad_main.h"
 #include "ifly_socket.h"
 #include "cat1/cat1_common.h"
+#include "font/language_list.h"
 
 #if TCFG_IFLYTEK_ENABLE  //科大讯飞网络版
 
@@ -45,6 +46,7 @@
 
 // ui参数
 struct ifly_ui_t {
+    u8 net_fail;
     u16 time_id;		// 定时器
     u16 task_create_timer;
     u16 switch_pic_cnt; // 动图循环
@@ -184,11 +186,17 @@ REGISTER_UI_EVENT_HANDLER(IFLY_BUTTON_TTS_PLAY)
 
 static void reflash_gettxt_handler(void *priv)
 {
-    if (ifly_check_net_connect() == false) {
+    u8 *net_fail = (u8 *)priv;
+    if (ifly_check_net_connect() == false && !(*net_fail)) {
         UI_MSG_POST("tts_network_no_connect");
     }
 
     ui_auto_shut_down_re_run();
+
+    font_lang_set(UnicodeMixRightword);
+    ui_text_set_textu_by_id(AI_4,
+                            p_ifly_net->local_text, strlen(p_ifly_net->local_text),
+                            FONT_DEFAULT | FONT_SHOW_MULTI_LINE);
 
     ui_text_set_textu_by_id(IFLY_TEXT_TTS_TXT,
                             p_ifly_net->ai_text, strlen(p_ifly_net->ai_text),
@@ -217,7 +225,12 @@ static int showtxt_onchange(void *ctr, enum element_change_event e, void *arg)
             sys_timer_del(ifly_ui->time_id);
             ifly_ui->time_id = 0;
         }
-        ifly_ui->time_id = sys_timer_add(NULL, reflash_gettxt_handler, 1000);
+        if (ifly_check_net_connect()) {
+            ifly_ui->net_fail = 0;
+        } else {
+            ifly_ui->net_fail = 1;
+        }
+        ifly_ui->time_id = sys_timer_add((void *)&ifly_ui->net_fail, reflash_gettxt_handler, 1000);
         break;
     case ON_CHANGE_FIRST_SHOW:
         break;
@@ -502,6 +515,26 @@ REGISTER_UI_EVENT_HANDLER(IFLY_LAYOUT_VAD)
   .ontouch = NULL,
 };
 
+static int no_connect_ontouch(void *ctr, struct element_touch_event *e)
+{
+    switch (e->event) {
+    case ELM_EVENT_TOUCH_R_MOVE:
+        if (ifly_ui && ifly_ui->cur_layout) {
+            ui_hide(IFLY_LAYOUT_NO_CONNECT);
+            ui_show(ifly_ui->cur_layout);
+            return true;
+        }
+        break;
+    default:
+        break;
+    }
+    return false;
+}
+REGISTER_UI_EVENT_HANDLER(IFLY_LAYOUT_NO_CONNECT)
+.onchange = NULL,
+ .onkey = NULL,
+  .ontouch = no_connect_ontouch,
+};
 
 static void ifly_no_content_time_deal(void *priv)
 {

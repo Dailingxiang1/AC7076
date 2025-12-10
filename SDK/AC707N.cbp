@@ -1760,6 +1760,7 @@
 <Unit filename="apps/watch/include/app_testbox.h" />
 <Unit filename="apps/watch/include/app_tone.h" />
 <Unit filename="apps/watch/include/app_version.h" />
+<Unit filename="apps/watch/include/app_video.h" />
 <Unit filename="apps/watch/include/audio_app_def.h" />
 <Unit filename="apps/watch/include/audio_manager.h" />
 <Unit filename="apps/watch/include/battery_manager.h" />
@@ -1879,6 +1880,7 @@
 <Unit filename="apps/watch/mode/rtc/rtc_app_msg_handler.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="apps/watch/mode/rtc/rtc_key_msg_table.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="apps/watch/mode/update/update.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/watch/mode/video/video.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="apps/watch/net/net_event.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="apps/watch/product_test/product_test.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="apps/watch/product_test/product_test.h" />
@@ -2323,7 +2325,6 @@
 <Unit filename="cpu/br35/ui_driver/lcd_drive/lcd_spi/lcd_spi_st7789_BOE1.54_update_240x240.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="cpu/br35/ui_driver/lcd_drive/lcd_spi/lcd_spi_st7789v_240x240.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="cpu/br35/ui_driver/lcd_drive/lcd_spi/oled_spi_nb3030_172x320.c"><Option compilerVer="CC"/></Unit>
-<Unit filename="cpu/br35/user_p11_cmd.h" />
 <Unit filename="cpu/components/iic_api.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="cpu/components/iic_soft.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="cpu/components/ir_decoder.c"><Option compilerVer="CC"/></Unit>

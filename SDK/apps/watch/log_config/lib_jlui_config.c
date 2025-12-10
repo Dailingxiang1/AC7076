@@ -59,16 +59,25 @@ const int ENABLE_PSRAM_UI_FRAME = 0;				//psram特效，暂不使用
 const int JLUI_CORE_GRID_KEY_VER = 0x1;				//列表编码器转动版本
 const int UI_NANDFLASH_RES_BY_PACKRES = TCFG_NANDFLASH_UI_FAT_ENABLE;	//使用标准fat+packres打包资源
 const int UI_CORE_FOCUS_FILTER_ENABLE  = 1;
-
-
-const int config_jpeg_isr_delay_us = 50;			//参考值100,最小50
-const int JLJPEG_STREAM_ENABLE  = 1;
-const int config_jpeg_sync_wait_in_irq = 0;			//在中断同步等待
 #if CONFIG_DOUBLE_BANK_ENABLE
 const int UI_RES_FLASH_TAB_OFFSET = 0x20;			//双备份内置资源偏移
 #else
 const int UI_RES_FLASH_TAB_OFFSET = 0x0;
 #endif
+//================================================//
+//                JPEG  						  //
+//================================================//
+const int config_jpeg_isr_delay_us = 50;			//参考值100,最小50
+const int JLJPEG_STREAM_ENABLE  = 1;
+#if TCFG_HOST_UVC_ENABLE
+const int config_jpeg_sync_wait_in_irq = 1;			//在中断同步等待，效率低
+const int config_jpeg_ff_rst_enable = 1;			//支持带DRI标志的图片，部分摄像头只输出这种类型的图片
+#else
+const int config_jpeg_sync_wait_in_irq = 0;			//在中断同步等待
+const int config_jpeg_ff_rst_enable = 0;			//支持带DRI标志的图片，非UVC功能不开，由app等转码。带DRI标志解码效率低
+#endif
+const int config_jpeg_pend_timeout = 20;			//
+
 //================================================//
 //                GPU中断 						  //
 //================================================//
@@ -97,7 +106,11 @@ const int KHMER_MODE_SWITCH       = 0;
 const int INDIC_MODE_SWITCH       = 0;
 const int TIBETAN_MODE_SWITCH     = 0;
 const int MIXLEFT_MODE_SWITCH     = 0;
+#if TCFG_IFLYTEK_ENABLE
+const int MIXRIGHT_MODE_SWITCH    = 1;
+#else
 const int MIXRIGHT_MODE_SWITCH    = 0;
+#endif
 const int FONT_UNIC_SWITCH        = 1;
 const int FONT_USE_PTR = !TCFG_NANDFLASH_DEV_ENABLE;
 const int SCALE_EFFECT_WITHOUT_PSRAM_ENABLE = 0;
@@ -115,7 +128,7 @@ const u32 config_ui_alloc_psram_mod_sel	=	\
         BIT(UI_MODULE_RESOURCE) | \
         BIT(UI_MODULE_GPU) | \
         BIT(UI_MODULE_FONT) | \
-        BIT(UI_MODULE_JPEG) | \
+        /* BIT(UI_MODULE_JPEG) | \ */ \
         BIT(UI_MODULE_CACHE) | \
         BIT(UI_MODULE_CUSTOM_DRAW);
 #else
