@@ -275,6 +275,7 @@ int mic_data_write(void *mic, void *data, int len)
     struct voice_mic_data *fb = (struct voice_mic_data *)mic;
     int wlen = 0;
     wlen = cbuf_write(&fb->cbuf, data, len);
+    //如果有较多丢包，要开下读的putchar打印，评估是否需要加大cbuf
     if (wlen < len) {
         putchar('D');
     }
@@ -285,9 +286,11 @@ int mic_data_read(void *mic, void *data, int len)
     struct voice_mic_data *fb = (struct voice_mic_data *)mic;
     /* printf("%s. %d, %d", __func__, len, cbuf_get_data_len(&fb->cbuf)); */
     if (cbuf_get_data_len(&fb->cbuf) < len) {
+        /* putchar('B'); */
         return 0;
     } else {
         int wlen = cbuf_read(&fb->cbuf, data, len);
+        /* putchar('G'); */
         return wlen;
     }
 }

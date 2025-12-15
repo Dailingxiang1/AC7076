@@ -709,6 +709,7 @@ void hexagon_effect_init(struct element *curr_elm, bool list_flag)
     if (__this->init) {
         return;
     }
+
     if (polytope == POLYTOPE_SIX) {
         __this->polytope_type = POLYTOPE_SIX;
     } else if (polytope == POLYTOPE_EIGHT) {
@@ -721,6 +722,7 @@ void hexagon_effect_init(struct element *curr_elm, bool list_flag)
         return;
     }
 
+    __this->init = 1;
     struct ui_platform_api *platform_api = ui_get_platform_api();
     ASSERT(platform_api);
     struct draw_context dc_tmp = {0};
@@ -892,7 +894,7 @@ void hexagon_effect_init(struct element *curr_elm, bool list_flag)
         }
     }
 
-    __this->init = 1;
+    /* __this->init = 1; */
 }
 
 /* ------------------------------------------------------------------------------------*/

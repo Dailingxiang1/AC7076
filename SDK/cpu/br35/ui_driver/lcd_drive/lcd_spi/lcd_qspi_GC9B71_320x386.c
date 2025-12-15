@@ -40,7 +40,7 @@
 #define LCD_W       LCD_WIDTH
 #define LCD_H       LCD_HEIGHT
 #define LCD_BLOCK_W LCD_WIDTH
-#define LCD_BLOCK_H 20
+#define LCD_BLOCK_H 16
 #define BUF_NUM     2
 
 #define LCD_FORMAT OUTPUT_FORMAT_RGB565

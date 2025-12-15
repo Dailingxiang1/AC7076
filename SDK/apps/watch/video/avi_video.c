@@ -84,24 +84,10 @@
 #include "avi_video.h"
 #include "avi_audio_player.h"
 #if TCFG_VIDEO_DIAL_ENABLE
+#define AVI_TASK_NAME "avi_task"
 #define NEW_PARSE_RIFF_FILE 1 // 该宏打开使用新的文件解析流程，与旧流程主要区别在于兼容packres工具打包后的avi资源解析
 #define DEFAULT_DWSUGGESTEDBUFFER_SIZE 20*1024
-#define PCM_CBUF_SIZE (4*1024) /* 根据负载可调 320B*3帧约等于1KB */
-enum avi_status {
-    AVI_PLAY_STATUS = 1,
-    AVI_STOP_STATUS,
-};
-enum {
-    MIC2DAC_STATUS_STOP = 0,
-    MIC2DAC_STATUS_START,
-    MIC2DAC_STATUS_PAUSE, // 暂时未添加这个状态
-};
-enum {
-    AVI_PLAY_ONCE = 0,
-    AVI_PLAY_LOOP,
-    AVI_PLAY_SEQUENCE,
-};
-
+#define PCM_CBUF_SIZE (20*1024) /* 根据负载可调 320B*3帧约等于1KB */
 struct avi_fs_info {
     FILE *fp;
     u32 offset;
@@ -111,10 +97,9 @@ struct avi_fs_info {
 };
 
 cbuffer_t avi_pcm_cbuf;
-OS_MUTEX avi_pcm_mutex;
-u8 usr_test_flag = 0;
-static u8 avi_play_mode  = 0;
+static u8 avi_play_mode  = AVI_PLAY_LOOP;
 static MV_DRAW *avi_player = NULL;
+static PLAY_VIDEO_PATH_MANAGE *video_path_mange = NULL;
 #define __this			(avi_player)
 /* static void *gpu_task_head; */
 static void *avi_taskp;
@@ -124,6 +109,7 @@ static const char *avi_files[] = {
     // 可以继续添加更多文件
 };
 static u16 task_switch_flag;
+/* static u8 __this->param.is_audio_mute = 1; */
 
 #define AVI_FILE_COUNT (sizeof(avi_files) / sizeof(avi_files[0]))
 
@@ -164,11 +150,13 @@ extern u32 ps_ram_size[];
 extern int avi_get_width(void *avip);
 extern int avi_get_height(void *avip);
 extern int avi_fluh(void *priv);
+extern void malloc_list_update_rets(void *buf, int rets);
 
 
 void avi_stop(void *avip);
 void avi_pause(void *avip);
 void animig_close(void *ap);
+/* void *animig_open(char *name, AVI_PARAM param, int arg); */
 
 
 
@@ -178,6 +166,10 @@ void animig_close(void *ap);
 
 static void *avi_zalloc(size_t size)
 {
+    u32 rets;
+    __asm__ volatile("%0 = rets":"=r"(rets));
+
+
     void *p = NULL;
 #if TCFG_PSRAM_DEV_ENABLE
     p = malloc_psram(size);
@@ -185,16 +177,23 @@ static void *avi_zalloc(size_t size)
 #else
     p = zalloc(size);
 #endif
+    malloc_list_update_rets(p, rets);
+
     return p;
 }
 static void *avi_malloc(size_t size)
 {
+    u32 rets;
+    __asm__ volatile("%0 = rets":"=r"(rets));
+
+
     void *p = NULL;
 #if TCFG_PSRAM_DEV_ENABLE
     p  = malloc_psram(size);
 #else
     p  = malloc(size);
 #endif
+    malloc_list_update_rets(p, rets);
     return p;
 }
 static void avi_free(void *pv)
@@ -216,7 +215,6 @@ static void pcm_cbuf_init(void)
     }
     ASSERT(__this->avi_pcm_buf, "pcm cbuf avi_malloc fail\n");
     cbuf_init(&avi_pcm_cbuf, __this->avi_pcm_buf, PCM_CBUF_SIZE);
-    os_mutex_create(&avi_pcm_mutex);
     __this->avi_audio_start = 1;
     log_info("\n[pcm_cbuf_init]mem_status:\n");
     mem_stats();
@@ -229,7 +227,6 @@ static void pcm_cbuf_deinit(void)
         cbuf_clear(&avi_pcm_cbuf);
         avi_free(__this->avi_pcm_buf);
         __this->avi_pcm_buf = NULL;
-        os_mutex_del(&avi_pcm_mutex, 0);
     }
     log_info("\n[pcm_cbuf_deinit]mem_status:\n");
     mem_stats();
@@ -314,20 +311,72 @@ void avi_play_shutdown(void)
     log_info("\n\n[avi_play_shutdown]mem_status:\n");
     mem_stats();
 }
+void video_manage_init()
+{
+    video_path_mange = avi_zalloc(sizeof(PLAY_VIDEO_PATH_MANAGE));
+}
 void set_avi_play_mode(u8 mode)
 {
     avi_play_mode = mode;
     avi_play_shutdown();
 }
 // 播放下一个文件
-void *animig_open(char *name, int window_id, int arg);
 void avi_play_next(void)
 {
+    AVI_PARAM param;
+    if (__this != NULL) {
+
+        memcpy(&param, &(__this->param), sizeof(AVI_PARAM));//拷贝当前配置
+    }
+    u8 is_dial = __this->param.is_dial;
+    u8 *video_path = NULL;
+    if (is_dial == 0) {
+        video_path = (u8 *)param.fname;
+
+    } else {
+        video_path = (u8 *)watch_avi_get_related_path(watch_get_style());
+    }
+    if (video_path == NULL) {
+        log_error("%s path is NULL");
+        return ;
+    }
     if (!__this->avi_is_switching) {
         avi_switch_timelock();
         wdt_clear();
         avi_play_shutdown();
-        avi_player = animig_open((char *)watch_avi_get_related_path(watch_get_style()), 0, 3); // 缓存3帧可以达到流畅播放30FPS
+        avi_player = animig_open((char *)video_path, param, 3); // 缓存3帧可以达到流畅播放30FPS
+        /* avi_player = (MV_DRAW *) animig_open((char *)set_avi_play_file(), 0, 3); // 缓存3帧可以达到流畅播放30FPS */
+        __this->avi_playtimer = 0;
+        // UI_HIDE_CURR_WINDOW();
+        // UI_SHOW_WINDOW(AVI_WINDOW);
+        // UI_SHOW_WINDOW(STYLE_DIAL_ID(WATCH));
+    }
+}
+void avi_play_loop(void)
+{
+    AVI_PARAM param;
+    if (__this != NULL) {
+
+        memcpy(&param, &(__this->param), sizeof(AVI_PARAM));//拷贝当前配置
+    }
+    u8 is_dial = __this->param.is_dial;
+    u8 *video_path = NULL;
+
+    if (is_dial == 0) {
+        video_path = (u8 *)param.fname;
+
+    } else {
+        video_path = (u8 *)watch_avi_get_related_path(watch_get_style());
+    }
+    if (video_path == NULL) {
+        log_error("%s path is NULL");
+        return ;
+    }
+    if (!__this->avi_is_switching) {
+        avi_switch_timelock();
+        wdt_clear();
+        avi_play_shutdown();
+        avi_player = animig_open((char *)video_path, param, 3); // 缓存3帧可以达到流畅播放30FPS
         /* avi_player = (MV_DRAW *) animig_open((char *)set_avi_play_file(), 0, 3); // 缓存3帧可以达到流畅播放30FPS */
         __this->avi_playtimer = 0;
         // UI_HIDE_CURR_WINDOW();
@@ -338,17 +387,35 @@ void avi_play_next(void)
 // 播放上一个文件
 void avi_play_prev(void)
 {
+    AVI_PARAM param;
+    if (__this != NULL) {
+
+        memcpy(&param, &(__this->param), sizeof(AVI_PARAM));//拷贝当前配置
+    }
+    u8 is_dial = __this->param.is_dial;
+    u8 *video_path = NULL;
+    if (is_dial == 0) {
+
+        video_path = (u8 *)param.fname;
+    } else {
+        video_path = (u8 *)watch_avi_get_related_path(watch_get_style());
+    }
+    if (video_path == NULL) {
+        log_error("%s path is NULL");
+        return ;
+    }
     if (!__this->avi_is_switching) {
         avi_switch_timelock();
         wdt_clear();
         avi_play_shutdown();
-        __this->avi_index--;
-        if (__this->avi_index < 0) {
-            __this->avi_index = AVI_FILE_COUNT - 1;
-        }
+        avi_player = animig_open((char *)video_path, param, 3); // 缓存3帧可以达到流畅播放30FPS
+        /* avi_player = (MV_DRAW *) animig_open((char *)set_avi_play_file(), 0, 3); // 缓存3帧可以达到流畅播放30FPS */
+        __this->avi_playtimer = 0;
         // UI_HIDE_CURR_WINDOW();
         // UI_SHOW_WINDOW(AVI_WINDOW);
+        // UI_SHOW_WINDOW(STYLE_DIAL_ID(WATCH));
     }
+
 }
 
 
@@ -364,7 +431,7 @@ static size_t avi_fread(void *ptr, size_t size, size_t nmemb, FILE *stream)
 #define rewind(fp) fseek(fp, 0, SEEK_SET)
 
 
-void parse_riff_file(FILE *file, ChunkCallback callback, void *user_param, int curr_pos)
+char  parse_riff_file(FILE *file, ChunkCallback callback, void *user_param, int curr_pos)
 {
     char *head = "";
 
@@ -391,13 +458,13 @@ void parse_riff_file(FILE *file, ChunkCallback callback, void *user_param, int c
     /* 读取RIFF头 */
     if (avi_fread(chunk_id, 1, 4, file) != 4) {
         log_error("Failed to read chunk ID");
-        return;
+        return -AVI_READ_CHUNK_ID_FAIL;
     }
     chunk_id[4] = '\0';
 
     if (avi_fread(&chunk_size, 4, 1, file) != 1) {
         log_error("Failed to read chunk size");
-        return;
+        return -AVI_READ_CHUNK_SIZE_FAIL;
     }
     log_info("\n\n\n\n\nRIFF chunk_size: %d\n\n\n\n\n", chunk_size);
     /* 校验块大小合法性 */
@@ -406,7 +473,7 @@ void parse_riff_file(FILE *file, ChunkCallback callback, void *user_param, int c
     if (current_pos + chunk_size > file_size) {
         log_info("校验块大小合法性 %d %d %d", (int)current_pos, chunk_size, (int)file_size);
         log_error("RIFF chunk size exceeds file size");
-        return;
+        return -AVI_FILE_LEN_ERR;
     }
 
     /* 处理子块 */
@@ -422,13 +489,13 @@ void parse_riff_file(FILE *file, ChunkCallback callback, void *user_param, int c
         /* 读取子块头 */
         if (avi_fread(sub_chunk_id, 1, 4, file) != 4) {
             log_error("Failed to read sub chunk ID");
-            return;
+            return -AVI_READ_SUB_CHUNK_ID_FAIL;
         }
         sub_chunk_id[4] = '\0';
 
         if (avi_fread(&sub_chunk_size, 4, 1, file) != 1) {
             log_error("Failed to read sub chunk size");
-            return;
+            return -AVI_READ_SUB_CHUNK_ID_FAIL;
         }
 
         /* 校验子块大小 */
@@ -436,7 +503,7 @@ void parse_riff_file(FILE *file, ChunkCallback callback, void *user_param, int c
         if (current_pos + sub_chunk_size > file_size) {
             log_info("校验子块大小 %d %d %d", (int)current_pos, sub_chunk_size, (int)file_size);
             log_error("Sub chunk exceeds file size");
-            return;
+            return -AVI_SUB_CHUNK_LEN_ERR;
         }
 
         off_t sub_start = ftell(file) - 8 - __this->file_offset; // 计算子块起始位置
@@ -447,7 +514,7 @@ void parse_riff_file(FILE *file, ChunkCallback callback, void *user_param, int c
             char list_type[5] = {0};
             if (avi_fread(list_type, 1, 4, file) != 4) {
                 log_error("Failed to read LIST type");
-                return;
+                return -AVI_LIST_TYPE_ERR;
             }
             list_type[4] = '\0';
 
@@ -487,6 +554,7 @@ void parse_riff_file(FILE *file, ChunkCallback callback, void *user_param, int c
             fseek(file, 1, SEEK_CUR);
         }
     }
+    return 0;
 }
 /* LIST块解析实现 */
 static void parse_list_chunk(FILE *file, long list_end, ChunkCallback callback,
@@ -804,15 +872,16 @@ void *avi_open(const char *path, int en_buf, int redrawid)
 
     log_info("%s %d %s", __func__, __LINE__, path);
     FILE *fp = fopen(path, "r");
+    AVIPlayer *player = avi_zalloc(sizeof(AVIPlayer));
     wdt_clear();
     log_info("%s %d fp %p", __func__, __LINE__, fp);
     mem_stats();
     if (!fp) {
-        return NULL;
+        log_error("%s open file fail ");
+        goto __err;
     }
     log_info("%s %d", __func__, __LINE__);
     mem_stats();
-    AVIPlayer *player = avi_zalloc(sizeof(AVIPlayer));
     player->file = fp;
     player->redrawid = redrawid;
     log_info("%s %d", __func__, __LINE__);
@@ -820,14 +889,19 @@ void *avi_open(const char *path, int en_buf, int redrawid)
     // 解析文件结构
     log_info("\n\n\nBefore parse_riff_file: file position: %u\n", ftell(fp));
 
-    parse_riff_file(fp, parse_callback, player, 0);
+    char parse_ret = parse_riff_file(fp, parse_callback, player, 0);
+    if (parse_ret != 0) {
+        log_error("%s check file fail =%d", __func__, parse_ret);
+        goto __err;
+    }
     log_info("%s %d", __func__, __LINE__);
     mem_stats();
     rewind(fp);
 
     if (player->avih_header.dwTotalFrames == 0) {
-        avi_free(player);
-        return NULL;
+
+        log_error("%s frames info no get ");
+        goto __err;
     }
 
     void *usr_mmu = strstr(path, "virfat_flash");
@@ -853,7 +927,7 @@ void *avi_open(const char *path, int en_buf, int redrawid)
         player->cache.cnt = en_buf;
         player->cache.block_len = len;
 
-        player->cache.data = malloc_psram(player->cache.cnt * player->cache.block_len);
+        player->cache.data = avi_zalloc(player->cache.cnt * player->cache.block_len);
         ASSERT(player->cache.data);
         player->cache.m = avi_zalloc(player->cache.cnt * sizeof(mjpegdata));
 
@@ -891,6 +965,12 @@ void *avi_open(const char *path, int en_buf, int redrawid)
     os_mutex_create(&p->mutex);
 
     return player;
+__err:
+    printf("\n [ERROR] %s -[yuyu] %d\n", __FUNCTION__, __LINE__);
+    void avi_close(void *avip);
+    avi_close(player);
+
+    return NULL;
 }
 
 void avi_close(void *avip)
@@ -997,10 +1077,9 @@ void avi_pause()
     /* AVIPlayer *p = (AVIPlayer *)avip; */
 
     AVIPlayer *p = (AVIPlayer *)__this->st;
-    if (avi_player == NULL || avi_player->pause == 1) {
+    if (__this == NULL || __this->pause == 1 || p == NULL) {
         return;
     }
-    printf("\n [ERROR] %s -[yuyu] %d\n", __FUNCTION__, __LINE__);
     p->ui_work = 2;
     avi_player->pause = 1;
 
@@ -1020,7 +1099,9 @@ void avi_pcm_open(void *avip)
 {
     AVIPlayer *p = (AVIPlayer *)avip;
     // 初始化循环缓冲区和互斥锁
-
+    if (p->audio_format.wFormatTag == 0) {
+        return ;
+    }
     pcm_cbuf_init();
 
     // 创建AI voice播放参数
@@ -1053,6 +1134,9 @@ void avi_pcm_open(void *avip)
 void avi_pcm_close(void *avip)
 {
     AVIPlayer *p = (AVIPlayer *)avip;
+    if (p->audio_format.wFormatTag == 0) {
+        return ;
+    }
     log_info("%s %d ", __func__, __LINE__);
 
     pcm_cbuf_deinit();
@@ -1118,7 +1202,7 @@ int avi_exec(void *avip, DisplayMJpegFunc jpgcb, PlayPCMFunc pcmcb)
     AVIPlayer *p = (AVIPlayer *)avip;
     int argv[2] = {0};
     int ret;
-    // log_info("%s %d is_playing %d", __func__, __LINE__, p->is_playing);
+    /* log_info("%s %d is_playing %d,", __func__, __LINE__, p->is_playing); */
 
     if (!p) {
         return -1;
@@ -1135,8 +1219,12 @@ int avi_exec(void *avip, DisplayMJpegFunc jpgcb, PlayPCMFunc pcmcb)
             switch (avi_play_mode) {
             case AVI_PLAY_LOOP:
                 // 默认模式，单视频循环
-                p->current_pos = 0;
-                avi_seek(avip, 0.0);
+                /* p->current_pos = 0; */
+                /* avi_seek(avip, 0.0); */
+                argv[0] = (int)avi_play_loop;
+                argv[1] = 0;
+                ret = os_taskq_post_type("ui", Q_CALLBACK, 2, argv);
+
                 log_info("\n\n[AVI_PLAY_LOOP]%s %d is_playing %d\n\n", __func__, __LINE__, p->is_playing);
                 return -1;
                 break;
@@ -1677,17 +1765,17 @@ static int  _write_jlaudio(void *player, u8 *ptr, int len)
     AVIPlayer *pp = (AVIPlayer *)player;
     // log_info("[_write_aivoice] len:%d\n", len);
     int cnt = 0;
-    while (len) {
-        /* os_mutex_pend(&avi_pcm_mutex, 0); */
-        u32 w = cbuf_write(&avi_pcm_cbuf, ptr, len); // 直接按len写，返回实际写入
-        // log_info("[cbuf_write] w:%d\n", w);
-        /* os_mutex_post(&avi_pcm_mutex); */
-        if (w == 0) {
-            os_time_dly(1);
-            continue;
+    if (__this->param.is_audio_mute != 1) {
+        while (len) {
+            u32 w = cbuf_write(&avi_pcm_cbuf, ptr, len); // 直接按len写，返回实际写入
+            /* log_info("[cbuf_write] w:%d len=%d\n", w, len); */
+            if (w == 0) {
+                os_time_dly(1);
+                continue;
+            }
+            ptr += w;
+            len -= w;
         }
-        ptr += w;
-        len -= w;
     }
     pp->jump_mjpeg = jiffies_usec();
     return len;
@@ -1890,6 +1978,7 @@ static void md_flush(MV_DRAW *md)
     // log_info("11 %d", jiffies_msec());
 
     AVIPlayer *p = (AVIPlayer *)md->st;
+    /* printf("[msg]%s-%d>>>>>>>>>>>md->pause=%d,p->avih_header.dwMicroSecPerFrame=%d p->audio_format.wFormatTag=%d", __FUNCTION__, __LINE__, md->pause, p->avih_header.dwMicroSecPerFrame, p->audio_format.wFormatTag); */
 
     if (md->pause == 1) {
         md->flushTimer = sys_timeout_add(md, (void(*)(void *))md_flush, p->avih_header.dwMicroSecPerFrame / 2000);
@@ -1898,7 +1987,7 @@ static void md_flush(MV_DRAW *md)
     avi_fluh(md->st);
 
 
-    if (p->audio_format.wFormatTag == 0x0001) {
+    if (p->audio_format.wFormatTag == 0x0001 && __this->param.is_audio_mute != 1) {
         md->flushTimer = sys_timeout_add(md, (void(*)(void *))md_flush, p->avih_header.dwMicroSecPerFrame / 2000);
     } else {
         md->flushTimer = sys_timeout_add(md, (void(*)(void *))md_flush, p->avih_header.dwMicroSecPerFrame / 1000);
@@ -1926,14 +2015,16 @@ void play_task(MV_DRAW *md)
         //  play
         if (msg[1] == AVI_PLAY_STATUS) {
             log_info("avi play");
-            avi_pcm_open(md->st);
             md->flushTimer = sys_timeout_add(md, (void(*)(void *))md_flush, 1);
         }
 
         // stop
         if (msg[1] == AVI_STOP_STATUS) {
             log_info("avi stop");
-            avi_pcm_close(md->st);
+            if (__this->param.is_audio_mute != 1) {
+
+                avi_pcm_close(md->st);
+            }
             if (md->flushTimer) {
                 sys_timeout_del(md->flushTimer);
                 md->flushTimer = 0;
@@ -1973,7 +2064,7 @@ static void app_video_mode_switch(void *priv)
 }
 #endif
 
-void *animig_open(char *name, int window_id, int arg)
+void *animig_open(char *name, AVI_PARAM param, int arg)
 {
 
     u8 type = 0;
@@ -1987,7 +2078,7 @@ void *animig_open(char *name, int window_id, int arg)
     }
 #endif
 
-    void *f = fopen(name, "r");
+    FILE *f = fopen(name, "r");
     if (f == NULL) {
         log_info("open file fail %s", name);
         return NULL;
@@ -2014,42 +2105,62 @@ void *animig_open(char *name, int window_id, int arg)
     MV_DRAW *md = avi_zalloc(sizeof(MV_DRAW));
     __this = md;
     ASSERT(__this);
+    memcpy(&(__this->param), &param, sizeof(AVI_PARAM));
     os_sem_create(&md->mv_sem, 0);
     md->type = type;
     md->repeat = -1;
 
     if (md->type == 2) {
         md->st = avi_open(name, arg, 0);
+        AVIPlayer *p = (AVIPlayer *)(md->st);
+        if (md->st == NULL) {
+            goto __err;
+        }
+        if (p->width > LCD_WIDTH || p->height > LCD_HEIGHT) {
+            log_error("vidoe width %d or height%d over lcd width %d or height %d", p->width, p->height, LCD_WIDTH, LCD_HEIGHT);
+            goto __err;
+        }
+        if (__this->param.is_audio_mute != 1) {
+            avi_pcm_open(md->st);
+        }
         wdt_clear();
-        ASSERT(md->st);
         avi_fluh(md->st);
     }
+    /* strcpy(__this->param.fname,name,) */
+    /* char *taskname = strrchr(name, '/'); */
+    /* taskname = taskname ? taskname + 1 : name; */
+    /* taskname = "avi_task"; */
+    u8 fname_len = (sizeof(__this->param.fname) / sizeof(__this->param.fname[0]));
+    strncpy(__this->param.fname, name, fname_len);
+    printf("[msg]%s-%d>>>>>>>>>>>__this->param.fname=%s", __FUNCTION__, __LINE__, __this->param.fname);
+    __this->param.fname[fname_len - 1] = '\0';
+    log_info("create %s", AVI_TASK_NAME);
+    task_create((void(*)(void *))play_task, md, AVI_TASK_NAME);
 
-    char *taskname = strrchr(name, '/');
-    taskname = taskname ? taskname + 1 : name;
-    taskname = "avi_task";
-    strcpy(md->fname, taskname);
-    log_info("create %s", taskname);
-    task_create((void(*)(void *))play_task, md, "avi_task");
-
-    os_taskq_post(md->fname, 1, AVI_PLAY_STATUS);
+    os_taskq_post(AVI_TASK_NAME, 1, AVI_PLAY_STATUS);
     return md;
+__err:
+    void avi_close(void *avip);
+    avi_close(md->st);
+    __this = NULL;
+    if (md) {
+        avi_free(md);
+    }
+    return NULL;
 }
 
 void animig_close(void *ap)
 {
     MV_DRAW *md = ap;
-    char *taskname = strrchr(md->fname, '/');
-    taskname = taskname ? taskname + 1 : md->fname;
 
     // while (md->act != -1) {
     //     md->act = 0;
     //     os_time_dly(1);
     // }\\
 
-    os_taskq_post(md->fname, 1, AVI_STOP_STATUS);
+    os_taskq_post(AVI_TASK_NAME, 1, AVI_STOP_STATUS);
     os_sem_pend(&md->mv_sem, 0);
-    log_info("kill %s", taskname);
+    log_info("kill %s", AVI_TASK_NAME);
     jlgpu_scheduler_wait_sync();
     task_kill("avi_task");
 

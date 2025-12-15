@@ -251,6 +251,8 @@ void cube_effect_init(struct element *curr_elm, struct rect *lcd_rect)
     if (__this->init) {
         return;
     }
+
+    __this->init = 1;
     struct ui_platform_api *platform_api = ui_get_platform_api();
     ASSERT(platform_api);
     struct draw_context dc_tmp = {0};
@@ -411,7 +413,7 @@ void cube_effect_init(struct element *curr_elm, struct rect *lcd_rect)
     }
 
     __this->dial_page_index = -1;
-    __this->init = 1;
+    /* __this->init = 1; */
     for (int i = 1; i < 6; i++) {
         win = __this->page_id[i];
         if (win == DIAL_PAGE_0) {

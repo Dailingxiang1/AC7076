@@ -27,6 +27,7 @@
 #define LOG_ERROR_ENABLE
 #define LOG_DEBUG_ENABLE
 #define LOG_INFO_ENABLE
+#define LOG_WARN_ENABLE
 #define LOG_CLI_ENABLE
 #include "debug.h"
 
@@ -61,6 +62,103 @@ struct jpeg_stream_info {
 
 #define GPU_TASK_ID(page, id, index)	((page << 26) | (0 << 24) | (id << 8) | index)
 
+#define JLGPU_TASK_ROTATE_CONFIG(tran) \
+{ \
+	task_param.rotate_en = dc->elm->rotate_en; \
+	if (task_param.rotate_en && dc->elm->css.part) { \
+		(tran)->rotate_cx = dc->elm->css.part->rotate.cent_x; \
+		(tran)->rotate_cy = dc->elm->css.part->rotate.cent_y; \
+		(tran)->rotate_dx = dc->elm->css.part->rotate.dx; \
+		(tran)->rotate_dy = dc->elm->css.part->rotate.dy; \
+		(tran)->rotate_angle = dc->elm->css.part->rotate.angle; \
+		log_debug("%s(), rotate_en: %d, cx:%d, cy:%d, dx:%d, dy:%d, angle:%f\n", __func__, \
+				task_param.rotate_en, (tran)->rotate_cx, (tran)->rotate_cy, \
+				(tran)->rotate_dx, (tran)->rotate_dy, (tran)->rotate_angle); \
+	} \
+}
+
+#define JLGPU_TASK_SCALE_CONFIG(tran) \
+{ \
+	task_param.scale_en = dc->elm->ratio_en; \
+	if (task_param.scale_en && dc->elm->css.part) { \
+		(tran)->ratio_w = dc->elm->css.part->ratio.ratio_w; \
+		(tran)->ratio_h = dc->elm->css.part->ratio.ratio_h; \
+		log_debug("%s(), scale_en: %d, ratio_w: %f, ratio_h: %f\n", __func__, \
+				task_param.scale_en, (tran)->ratio_w, (tran)->ratio_h); \
+	} \
+}
+
+#define INHERIT_PARENT_AFFINE(tran) \
+{ \
+	for (; elm; elm = elm->parent) { \
+		pJLGPUTaskUnit_t task_parent = jlgpu_get_task_by_id(dc->gpu_task_head, JLGPU_ID_NONE, elm->id); \
+		if (task_parent && task_parent->info.matrix) { \
+			log_info("%s(), get parent affine! parent elm_id: 0x%x\n", __func__, elm->id); \
+			task_param.matrix = task_parent->info.matrix; \
+			struct rect parent_rect = {0}; \
+			ui_core_get_element_rect_relative_screen(elm, &parent_rect); \
+			/* ui_core_get_element_rect_relative_parent(elm, &parent_rect); */ \
+			/* DUMP_RECT(__func__, __LINE__, "parent", &parent_rect); */ \
+			task_param.draw.left -= (/* parent_rect.left < 0 ? 0 : */ parent_rect.left); \
+			task_param.draw.top -= (/* parent_rect.top < 0 ? 0 : */ parent_rect.top); \
+			if (task_param.draw.height <= 0 || task_param.draw.width <= 0) { \
+				task_param.invisible = true; \
+			} \
+			if (task_param.rotate_en) { \
+				(tran)->rotate_dx -= parent_rect.left; \
+				(tran)->rotate_dy -= parent_rect.top; \
+			} \
+		} \
+	} \
+}
+
+#define JLGPU_TASK_INHERIT_PARENT(tran) \
+{ \
+	if (dc->elm && dc->elm->parent) { \
+		log_debug("%s(), get parent info!:%x\n", __func__,dc->elm->id); \
+		struct element *elm = dc->elm->parent; \
+		struct element *par = elm->parent; \
+		if ((par) && (ui_id2type(par->id) == CTRL_TYPE_GRID)) { \
+			elm = par; \
+		} \
+		u8 is_overstepping_parent; \
+		pJLGPUTaskUnit_t task_parent = jlgpu_get_task_by_id(dc->gpu_task_head, JLGPU_ID_NONE, elm->id); \
+		if (task_parent) { \
+			is_overstepping_parent = false; \
+            struct element *elm = ui_core_get_element_by_id(task_parent->info.element_id); \
+            if (elm) { \
+                ui_core_get_element_rect_relative_screen(elm, &task_param.area); \
+                jlgpu_shift_rect(&task_param.area); \
+            } else { \
+			    jlgpu_get_task_rect(task_parent, &task_param.area); \
+            } \
+		} else { \
+			is_overstepping_parent = true; \
+			/* ui_core_get_element_abs_rect(elm, &task_param.area); */ \
+			ui_core_get_element_rect_relative_screen(elm, &task_param.area); \
+		} \
+		log_info("%s(), parent area[%d, %d, %d, %d]\n", __func__, \
+				task_param.area.left, task_param.area.top, task_param.area.width, task_param.area.height); \
+		INHERIT_PARENT_AFFINE(tran); \
+		if (task_param.matrix && is_overstepping_parent) { \
+			gpu_boundbox_t parent_area; \
+			parent_area.minx = task_param.area.left; \
+			parent_area.maxx = task_param.area.width + parent_area.minx; \
+			parent_area.miny = task_param.area.top; \
+			parent_area.maxy = task_param.area.height + parent_area.miny; \
+			gpu_matrix_get_boundbox(task_param.matrix, &parent_area, &parent_area); \
+			task_param.area.left = parent_area.minx; \
+			task_param.area.width = parent_area.maxx - parent_area.minx; \
+			task_param.area.top = parent_area.miny; \
+			task_param.area.height = parent_area.maxy - parent_area.miny; \
+		} else if (is_overstepping_parent) { \
+			jlgpu_shift_rect(&task_param.area); \
+			/* struct lcd_info *lcd_info = &(((struct ui_priv *)__this)->info); */ \
+			/* task_param.area.left += ((GPU_BOUND_BOX_MAX - lcd_info->width) / 2); */ \
+			/* task_param.area.top += ((GPU_BOUND_BOX_MAX - lcd_info->height) / 2); */ \
+		} \
+	} \
+}
 
 extern u32 usr_mmu_hash(u32 hash, u8 *data, int len);
 extern void *jpeg_module_opj_create_file(void *path, int path_len, u32 check, u32 index, u32 task_id, u32 elm_id);
@@ -400,7 +498,7 @@ void *cache_gpu_input_jpeg_data_file(void *head, pJLGPUTaskParam_t task_param, u
     int jpeg_src_data_len = 0;
     log_debug("@@@@@ cache_addr: 0x%x\n crc:0x%x path:%s", (u32)cache_addr, check, path);
     if (!cache_addr) {//解码jpeg到psram
-        log_debug("%s path%s", __func__, path);
+        printf("%s path%s", __func__, path);
 
         if (strstr(path, "avi") || strstr(path, "AVI")) {
             log_debug("AVI");
@@ -544,7 +642,10 @@ void *cache_gpu_input_jpeg_data_file(void *head, pJLGPUTaskParam_t task_param, u
 
     task_param->image.width = (width + 15) / 16 * 16;
     task_param->image.height = (height + 15) / 16 * 16;
-
+    task_param->crop_en = ((task_param->image.width != width)
+                           || (task_param->image.height != height)) ? 1 : 0;
+    task_param->texture.crop.width  = width;
+    task_param->texture.crop.height  = height;
     if (cache_addr) {
         gpu_input_stream_cache_vaild_value_set_by_index((u32)cache_addr, 3);
     }
@@ -609,8 +710,12 @@ int jpeg_image_file_psram(struct draw_context *dc, int left, int top, int width,
     task_param.scale_en = scale_en;
     task_param.texture.tran.ratio_w = scale_f;
     task_param.texture.tran.ratio_h = scale_f;
+
+    /* 继承父控件变换 */
+    JLGPU_TASK_INHERIT_PARENT(&task_param.fill.tran);
     if (task_param.texture.data) {
-        jlgpu_update_task_by_id(dc->gpu_task_head, task_param.task_id, task_param.element_id, &task_param);
+        pJLGPUTaskUnit_t taskp = jlgpu_update_task_by_id(dc->gpu_task_head, task_param.task_id, task_param.element_id, &task_param);
+        /* jlgpu_dump_task_info(taskp,0); */
     }
     return 0;
 }

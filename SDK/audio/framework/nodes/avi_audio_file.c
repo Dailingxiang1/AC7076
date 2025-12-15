@@ -22,10 +22,8 @@ struct avi_audio_file_handle {
     const struct stream_file_ops *file_ops;
 };
 
-extern const int OPUS_SRINDEX; // 选择opus解码文件的帧大小，0代表一帧40字节，1代表一帧80字节，2代表一帧160字节
 extern u32 bt_audio_conn_clock_time(void *addr);
 extern cbuffer_t avi_pcm_cbuf;
-extern OS_MUTEX avi_pcm_mutex;
 
 static int avi_fseek(void *_hdl, u32 fpos)
 {
@@ -77,17 +75,14 @@ static enum stream_node_state avi_audio_get_frame(void *file, struct stream_fram
 #if TCFG_VIDEO_DIAL_ENABLE // avi 音频pcm数据读取
 
     if (get_avi_audio_status()) {
-        os_mutex_pend(&avi_pcm_mutex, 0);
         u32 data_len = cbuf_get_data_size(&avi_pcm_cbuf);
         // printf("[cbuf_get_data_size] data_len:%d\n", data_len);
         if (data_len >= fram_len) {
             cbuf_read(&avi_pcm_cbuf, frame->data, fram_len);
             // printf("[cbuf_read] fram_len:%d\n", fram_len);
-            os_mutex_post(&avi_pcm_mutex);
             frame->len = fram_len;
             // printf("[avi_audio_get_frame] frame->len:%d\n", frame->len);
         } else {
-            os_mutex_post(&avi_pcm_mutex);
             // puts("silent audio data\n");
             memset(frame->data, 0, fram_len); // 数据不足时填零静音
             frame->len = 0;//fram_len;
@@ -128,28 +123,12 @@ static void avi_audio_tick_handler(void *priv, u8 source)
 
 static int avi_audio_file_get_fmt(struct avi_audio_file_handle *hdl, struct stream_fmt *fmt)
 {
-#if 0
-    fmt->coding_type = AUDIO_CODING_OPUS;
-    fmt->sample_rate = 16000;
-    fmt->channel_mode = AUDIO_CH_MIX;
-#else
-
-    extern const int CONFIG_OGG_OPUS_DEC_SUPPORT;
-
-#if TCFG_DEC_OGG_OPUS_ENABLE
-    if (CONFIG_OGG_OPUS_DEC_SUPPORT) {
-        fmt->sample_rate = 48000;
-    }
-    return hdl->file_ops->get_fmt(hdl->file, fmt);
-#else
     fmt->coding_type = hdl->param.coding_type;
     fmt->sample_rate = hdl->param.sample_rate;
     fmt->channel_mode = hdl->param.channel_mode;
     fmt->frame_dms = hdl->param.frame_dms;
     fmt->bit_rate = hdl->param.bit_rate;
     printf("%s  0x%x, %d, %d, %d, %d\n", __FUNCTION__, fmt->coding_type, fmt->sample_rate, fmt->channel_mode, fmt->frame_dms, fmt->bit_rate);
-#endif
-#endif
     return 0;
 }
 
@@ -218,12 +197,7 @@ static void avi_audio_file_release(void *file)
 REGISTER_SOURCE_NODE_PLUG(avi_audio_file_plug) = {
     .uuid = NODE_UUID_VIDEO_DEC,
     .init = avi_audio_file_init,
-#if TCFG_DEC_OGG_OPUS_ENABLE
-    .read = avi_fread,
-    .seek = avi_fseek,
-#else
     .get_frame = avi_audio_get_frame,
-#endif
     .ioctl = avi_audio_file_ioctl,
     .release = avi_audio_file_release,
 };

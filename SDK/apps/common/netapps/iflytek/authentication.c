@@ -61,7 +61,7 @@ struct auth_info_t {
     struct tm pt;
 };
 
-extern void ntp_client_get_time(const char *host);
+extern int ntp_client_get_time(const char *host);
 extern size_t strftime_2(char *ptr, size_t maxsize, const char *format, const struct tm *timeptr);
 
 /* void *_calloc_r(struct _reent *r, size_t a, size_t b) */
@@ -134,12 +134,11 @@ char *ifly_authentication(char *host_name, char *host, char *path, int retry)
 __retry:
     //获取网络时间
     /* ntp_client_get_time("s2c.time.edu.cn"); */
-    ntp_client_get_time("ntp.ntsc.ac.cn");
-    /* int ntp = ntp_client_get_time("s2c.time.edu.cn"); */
-    /* if (ntp == -1) { */
-    /*     log_error("get ntp error!!\n"); */
-    /*     return NULL; */
-    /* } */
+    int ntp = ntp_client_get_time("s2c.time.edu.cn");
+    if (ntp == -1) {
+        log_error("get ntp error!!\n");
+        return NULL;
+    }
     int week = ifly_get_sys_time(&(auth->curtime));
     auth->pt.tm_year = auth->curtime.year - 1900;
     auth->pt.tm_mon = auth->curtime.month - 1;

@@ -4,6 +4,7 @@
 #include "camera_manager.h"
 #include "avilib.h"
 #include "pcm_data.h"
+#include "mic_data.h"
 #include "clock_manager/clock_manager.h"
 
 #define LOG_TAG_CONST      	VIDEO_REC
@@ -15,6 +16,16 @@
 #define LOG_CLI_ENABLE
 #include "debug.h"
 #if TCFG_CAMERA_MANAGER_ENABLE
+/*
+	是否使用独立pcm线程管理mic数据,
+	会消耗更多的ram(11*4k)，直接获取mic数据仅需要(3*4k+512)
+	默认不开
+*/
+#define MIC_DATA_FORM_PCM_TASK_ENABLE		0
+
+#define MIC_FREMA_SIZE						(4*1024)
+#define MIC_BUFFER_SIZE						(MIC_FREMA_SIZE*2+512)
+#define MIC_SIMPLE_RATE						(8000)
 
 enum {
     Q_AVI_TASK_KILL   = (Q_USER + 100),
@@ -22,8 +33,23 @@ enum {
     Q_AVI_TASK_REC_STOP,
 };
 
+struct fill_frame {
+    u32 start_msecs;//开始录像时间
+    u32 msecs;//上一次补帧时间
+    u32 secs;//录像时间
+    u32 fnum;//需要补帧的数
+    u32 cnt_fnum;//总帧数
+    u16 fps;//目标帧率
+    u16 one_sec_fps;//1秒实际帧率
+    u8  fill_frame_en;
+    u8  droping_frame_en;
+};
+
+
 struct video_rec_handle {
     void *pcm_hdl;
+    void *mic;
+    u8 *mic_frame;
     char avi_task_name[32];
     u8 write_error;				//写文件异常
     u8 busy;
@@ -32,9 +58,19 @@ struct video_rec_handle {
     int sample_rate;
     void (*ui_refresh_cb)(int status);
     int bytes_per_sample;
+    struct fill_frame fill;
 };
 static struct video_rec_handle *video_rec;
 #define __this (video_rec)
+
+#if TCFG_PSRAM_DEV_ENABLE
+#define malloc(size)       malloc_psram(size)
+#define free(ptr)          free_psram(ptr)
+#else
+#define malloc(size)       malloc(size)
+#define free(ptr)          free(ptr)
+#endif
+
 
 
 extern uint32_t timer_get_ms(void);
@@ -112,6 +148,101 @@ int jlcamera_video_rec_stop()
     return os_taskq_post_type(__this->avi_task_name, Q_AVI_TASK_REC_STOP, 0, NULL);
 }
 
+/* ------------------------------------------------------------------------------------*/
+/**
+ * @brief 补帧模块初始化
+ *
+ * @return
+ */
+/* ------------------------------------------------------------------------------------*/
+static void jljpeg_frame_fill_init()
+{
+    if (!__this) {
+        log_error("%s not init\n", __func__);
+        return;
+    }
+    memset(&__this->fill, 0, sizeof(struct fill_frame));
+    __this->fill.fps = __this->video_rate;
+    __this->fill.start_msecs = jiffies_msec();;
+    __this->fill.msecs = jiffies_msec();
+    __this->fill.droping_frame_en = 1;
+    __this->fill.fill_frame_en = 1;
+}
+
+/* ------------------------------------------------------------------------------------*/
+/**
+ * @brief 补帧模块判断(需要运行在写帧后面)
+ *
+ * @return
+ */
+/* ------------------------------------------------------------------------------------*/
+static void jljpeg_frame_fill_judge(avi_t *out_fd, u32 frame_cnt)
+{
+    if (!__this) {
+        log_error("%s not init\n", __func__);
+        return;
+    }
+
+    u32 cur_fcnt;
+    u32 need_fcnt;
+
+    __this->fill.cnt_fnum += frame_cnt;
+
+    __this->fill.one_sec_fps += frame_cnt;
+
+
+    if (jiffies_msec2offset(__this->fill.msecs, jiffies_msec()) >= 1000) {
+        __this->fill.secs = (jiffies_msec2offset(__this->fill.start_msecs, jiffies_msec())) / 1000;
+        if (!__this->fill.secs) {
+            __this->fill.secs = 1;
+        }
+        need_fcnt = __this->fill.secs * __this->fill.fps;
+        cur_fcnt = __this->fill.cnt_fnum + __this->fill.fnum;
+        if (cur_fcnt < need_fcnt) {
+            __this->fill.fnum += need_fcnt - cur_fcnt;
+        }
+        __this->fill.msecs = jiffies_msec();
+        /* printf("avi dup video fps :%d  act fps:%d ,ext fps: %d %d\n", __this->fill.cnt_fnum / __this->fill.secs, __this->fill.one_sec_fps, __this->fill.fps,__this->fill.fnum); */
+        __this->fill.one_sec_fps = 0;
+    }
+
+    if (__this->fill.fnum && __this->fill.fill_frame_en) {
+        int  ret = AVI_dup_frame(out_fd);
+        if (!ret) {
+            __this->fill.cnt_fnum++;
+            __this->fill.fnum--;
+
+        }
+    }
+}
+
+/* ------------------------------------------------------------------------------------*/
+/**
+ * @brief 动态丢帧补帧模块判断(需要运行在写帧前面)
+ *
+ * @return
+ */
+/* ------------------------------------------------------------------------------------*/
+static int jljpeg_frame_dropping_judge()
+{
+    if (!__this || !__this->fill.droping_frame_en) {
+        return 0;
+    }
+    u32 msecs = jiffies_msec2offset(__this->fill.msecs, jiffies_msec());
+    /* printf("%d %d %d\n",(__this->fill.one_sec_fps+1) , (msecs*__this->fill.fps/1000),msecs); */
+    if ((__this->fill.one_sec_fps) > (msecs * __this->fill.fps / 1000) + 1) {
+        /* printf("fps > %d ,need droping\n",__this->fill.fps); */
+        if (__this->fill.fnum) {
+            __this->fill.fnum--;
+            return 0;
+        }
+        return 1;
+    }
+    return 0;
+}
+
+
+
 static void video_show_task(void *priv)
 {
     log_debug("%s enter>>>>>>>>>>>>>>>>>>>>\n ", __func__);
@@ -148,10 +279,21 @@ static void video_show_task(void *priv)
                         out_fd = NULL;
                     }
                 }
+#if MIC_DATA_FORM_PCM_TASK_ENABLE
                 if (__this->pcm_hdl) {
                     pcm_data_exit(__this->pcm_hdl);
                     __this->pcm_hdl = NULL;
                 }
+#else
+                if (__this->mic) {
+                    mic_data_close(__this->mic);
+                    __this->mic = NULL;
+                }
+                if (__this->mic_frame) {
+                    free(__this->mic_frame);
+                    __this->mic_frame = NULL;
+                }
+#endif
                 log_debug("%s exit >>>>>>>>>>>>>>>>>>>>\n ", __func__);
                 //下面禁止加打印{
                 os_sem_post((OS_SEM *)msg[1]);
@@ -163,7 +305,7 @@ static void video_show_task(void *priv)
                 cyc_time = msg[2];
                 __this->write_error = 0;
                 log_debug("avi task rec start <%s> cyc_time:%d !\n", filename, cyc_time);
-
+#if MIC_DATA_FORM_PCM_TASK_ENABLE
                 __this->pcm_hdl = pcm_data_init(__this->sample_rate, __this->aframe_size, __this->aframe_size * 10);
                 if (!__this->pcm_hdl) {
                     //TODO
@@ -172,6 +314,23 @@ static void video_show_task(void *priv)
                     __this->write_error = -1;
                     continue;
                 }
+#else
+                __this->mic = mic_data_open(VOICE_MCU_MIC, MIC_BUFFER_SIZE, MIC_SIMPLE_RATE);
+                if (!__this->mic) {
+                    //TODO
+                    log_error("avi task rec start pcm err!!!\n");
+                    /* break; */
+                    __this->write_error = -1;
+                    continue;
+                }
+                __this->mic_frame = malloc(MIC_FREMA_SIZE);
+                if (!__this->mic_frame) {
+                    log_error("avi task rec start pcm err!!!\n");
+                    /* break; */
+                    __this->write_error = -1;
+                    continue;
+                }
+#endif
                 out_fd = AVI_open_output_file(filename);
                 if (out_fd == NULL) {
                     log_error("open file erro\n");
@@ -182,6 +341,7 @@ static void video_show_task(void *priv)
                 AVI_set_video_suggestbuffersize(out_fd, 20 * 1024); //建议缓存区20k，解码用
                 AVI_set_video(out_fd, frame_width, frame_height, __this->video_rate, "MJPG");
                 AVI_set_audio(out_fd, 1, __this->sample_rate, 16, WAVE_FORMAT_PCM, 0);//默认单声道s16格式
+                jljpeg_frame_fill_init();
                 frame_cnt = 0;
                 /* break; */
             } else if (msg[0] == Q_AVI_TASK_REC_STOP) {
@@ -197,11 +357,21 @@ static void video_show_task(void *priv)
                     }
                     out_fd = NULL;
                 }
+#if MIC_DATA_FORM_PCM_TASK_ENABLE
                 if (__this->pcm_hdl) {
                     pcm_data_exit(__this->pcm_hdl);
                     __this->pcm_hdl = NULL;
                 }
-
+#else
+                if (__this->mic) {
+                    mic_data_close(__this->mic);
+                    __this->mic = NULL;
+                }
+                if (__this->mic_frame) {
+                    free(__this->mic_frame);
+                    __this->mic_frame = NULL;
+                }
+#endif
                 __this->write_error = 0;
                 /* break; */
             }
@@ -212,11 +382,20 @@ static void video_show_task(void *priv)
         log_char('C');
         //录像输出
         if (out_fd) {
+#if MIC_DATA_FORM_PCM_TASK_ENABLE
             if (pcm_data_read(__this->pcm_hdl, &pcm_data, &pcm_data_len) == 0) {
                 read_data = 1;
                 __this->write_error = AVI_write_audio(out_fd, (char *)pcm_data, pcm_data_len);
                 pcm_data_read_done(__this->pcm_hdl, pcm_data);
             }
+#else
+            if (__this->mic && __this->mic_frame) {
+                if (mic_data_read(__this->mic, __this->mic_frame, MIC_FREMA_SIZE)) {
+                    read_data = 1;
+                    __this->write_error = AVI_write_audio(out_fd, (char *)__this->mic_frame, MIC_FREMA_SIZE);
+                }
+            }
+#endif
         }
         if (camera_manager_data_read(&jpeg_data, &jpeg_data_len) == 0) {
             log_char('M');
@@ -230,7 +409,14 @@ static void video_show_task(void *priv)
             }
 #endif
             if (out_fd) {		//录像输出
-                __this->write_error = AVI_write_frame(out_fd, (char *)jpeg_data, jpeg_data_len, 1);
+
+
+                if (!jljpeg_frame_dropping_judge()) {
+                    __this->write_error = AVI_write_frame(out_fd, (char *)jpeg_data, jpeg_data_len, 1);
+                    jljpeg_frame_fill_judge(out_fd, 1); //补帧计算
+                } else {
+                    jljpeg_frame_fill_judge(out_fd, 0); //补帧计算
+                }
             }
             camera_manager_read_done(jpeg_data);
 #if 0
@@ -302,7 +488,11 @@ int jlcamera_video_rec_init(void)
 {
     int ret = 0;
     ASSERT(!__this);
-    __this = zalloc(sizeof(struct video_rec_handle));
+    __this = malloc(sizeof(struct video_rec_handle));
+    if (!__this) {
+        goto __err;
+    }
+    memset(__this, 0, sizeof(struct video_rec_handle));
     __this->busy = 1;
     clock_lock("camera_video", clk_get_max_frequency());
     //初始化驱动
@@ -320,8 +510,8 @@ int jlcamera_video_rec_init(void)
     //视频帧率
     __this->video_rate = fps / 2;
     //音频采样率
-    __this->sample_rate = 8000;
-    __this->aframe_size = 4096;
+    __this->sample_rate = MIC_SIMPLE_RATE;
+    __this->aframe_size = MIC_FREMA_SIZE;
 
     snprintf(__this->avi_task_name, sizeof(__this->avi_task_name), "video_show_task");
     if (os_task_create(video_show_task, __this, 8, 1024, 1024, __this->avi_task_name)) {

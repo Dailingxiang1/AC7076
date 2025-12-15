@@ -519,6 +519,7 @@ void cube_reflection_effect_init(struct element *curr_elm)
         return;
     }
 
+    __this->init = 1;
     struct ui_platform_api *platform_api = ui_get_platform_api();
     ASSERT(platform_api);
     struct draw_context dc_tmp = {0};
@@ -653,7 +654,7 @@ void cube_reflection_effect_init(struct element *curr_elm)
 
     __this->curr_elm = curr_elm;
 
-    __this->init = 1;
+    /* __this->init = 1; */
 }
 
 /* ------------------------------------------------------------------------------------*/

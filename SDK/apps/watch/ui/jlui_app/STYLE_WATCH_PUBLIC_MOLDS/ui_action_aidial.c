@@ -705,13 +705,6 @@ static int AI_dial_time_onchange(void *ctr, enum element_change_event e, void *a
     return 0;
 }
 
-
-REGISTER_UI_EVENT_HANDLER(AI_DIALOGUE)
-.onchange = AI_dialogue_onchange,
- .onkey = NULL,
-  .ontouch = NULL,
-};
-
 REGISTER_UI_EVENT_HANDLER(AI_DIALOGUE)
 .onchange = AI_dialogue_onchange,
  .onkey = NULL,

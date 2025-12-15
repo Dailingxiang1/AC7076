@@ -193,9 +193,11 @@ void *jl_mbedtls_calloc(unsigned long count, unsigned long size)
 
 #if WEBSOCKET_API_USE_PSRAM
 #define WEBSOCKET_API_MALLOC(size) 		    malloc_psram(size)
+#define WEBSOCKET_API_REALLOC(ptr, size) 	realloc_psram(ptr, size)
 #define WEBSOCKET_API_FREE(ptr) 			free_psram(ptr)
 #else
 #define WEBSOCKET_API_MALLOC(size) 		    malloc(size)
+#define WEBSOCKET_API_REALLOC(ptr, size) 	realloc(ptr, size)
 #define WEBSOCKET_API_FREE(ptr) 			free(ptr)
 #endif
 
@@ -216,6 +218,33 @@ void *websocket_api_malloc(size_t size)
     return p;
 }
 
+void jl_websocket_api_free(void *pv)
+{
+    if (pv != NULL) {
+        WEBSOCKET_API_FREE(pv);
+        pv = NULL;
+    }
+}
+
+void *jl_websocket_api_malloc(size_t size)
+{
+    void *p = WEBSOCKET_API_MALLOC(size);
+    return p;
+}
+
+void *jl_websocket_api_zalloc(size_t size)
+{
+    void *ptr = WEBSOCKET_API_MALLOC(size);
+    if (ptr) {
+        memset(ptr, 0, size);
+    }
+    return ptr;
+}
+
+void *jl_websocket_api_realloc(void *ptr, size_t size)
+{
+    return WEBSOCKET_API_REALLOC(ptr, size);
+}
 #else
 const int CONFIG_LWIP_NET_ENABLE = 0;
 #endif

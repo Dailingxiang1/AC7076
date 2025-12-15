@@ -186,7 +186,7 @@ char *ifly_tts_format_text_data(void)
     cJSON *cjson_data = NULL;
 
     char *buf = net_iflytek_malloc(MAX_SPARKDESK_LEN * 4);   // 因base64编码比字符串要大，根据需要加大buf
-    mbedtls_base64_encode((unsigned char *)buf, MAX_SPARKDESK_LEN, (size_t *)&out_len, (unsigned char *)tts_info.param->text_res, strlen(tts_info.param->text_res) + 1);
+    mbedtls_base64_encode((unsigned char *)buf, MAX_SPARKDESK_LEN * 4, (size_t *)&out_len, (unsigned char *)tts_info.param->text_res, strlen(tts_info.param->text_res) + 1);
 //定义最长回答
 
     cjson_test = cJSON_CreateObject();

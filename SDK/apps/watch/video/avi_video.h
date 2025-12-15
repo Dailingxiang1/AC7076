@@ -92,6 +92,21 @@ typedef void (*ChunkCallback)(FILE *file,
 
 
 #pragma pack(push, 1)
+enum avi_status {
+    AVI_PLAY_STATUS = 1,
+    AVI_STOP_STATUS,
+};
+enum {
+    MIC2DAC_STATUS_STOP = 0,
+    MIC2DAC_STATUS_START,
+    MIC2DAC_STATUS_PAUSE, // 暂时未添加这个状态
+};
+enum {
+    AVI_PLAY_ONCE = 0,
+    AVI_PLAY_LOOP,
+    AVI_PLAY_SEQUENCE,
+};
+
 
 typedef struct {
     uint32_t dwMicroSecPerFrame;  // 每帧时长（微秒）
@@ -175,6 +190,17 @@ typedef enum {
     STREAM_AUDIO
 } StreamType;
 
+typedef enum {
+    AVI_READ_CHUNK_ID_FAIL = 1,
+    AVI_READ_CHUNK_SIZE_FAIL,
+    AVI_READ_SUB_CHUNK_ID_FAIL,
+    AVI_READ_SUB_CHUNK_SIZE_FAIL,
+    AVI_LIST_TYPE_ERR,
+    AVI_FILE_LEN_ERR,
+    AVI_SUB_CHUNK_LEN_ERR
+} AVI_ERR_CODE;
+
+
 typedef struct {
     // 文件信息
     FILE *file;
@@ -205,8 +231,8 @@ typedef struct {
     int bits_per_sample;
     u8 auds_vol;
     u8 auds_drop;
-    int auds_idx;
     u8 auds_exit;
+    int auds_idx;
     u16 auds_inr;
     int auds_rate;
     int auds_total;
@@ -243,8 +269,14 @@ void *avi_open(const char *path, int en_buf, int redrawid);
 void avi_close(void *avip);
 int avi_fluh(void *priv);
 typedef struct {
-    void *fp;
+    u8 is_dial;
+    u8 is_audio_mute;
+    u8 mode;
     char fname[64];
+} AVI_PARAM;
+
+typedef struct {
+    void *fp;
     OS_SEM mv_sem;
     void *st;   // 解码器
     int drawid;
@@ -257,6 +289,7 @@ typedef struct {
     u8 avi_is_switching;
     u8 avi_index;
     u16 avi_playtimer;
+    AVI_PARAM param;
     int start;
     int time;
     int frameCount;
@@ -265,6 +298,12 @@ typedef struct {
     u8 *avi_pcm_buf;
     long file_offset;
 } MV_DRAW;
+typedef struct {
+    u8 **file_path;
+    u8 *cur_index;
+
+} PLAY_VIDEO_PATH_MANAGE;
+
 
 
 
@@ -294,7 +333,8 @@ int avi_get_redrawid(void *avip);
 float avi_get_total_sec(void *avip);
 void *avi_get_view_file_info(void *priv);
 
-void *animig_open(char *name, int window_id, int arg);
+// void *animig_open(char *name, int window_id, int arg);
+void *animig_open(char *name, AVI_PARAM param, int arg);
 
 void avi_set_avi_playtimer_id(u16 timer_id);
 u16 avi_get_avi_playtimer_id();

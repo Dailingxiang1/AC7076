@@ -850,8 +850,6 @@ void *cache_gpu_input_jpeg_data(void *head, pJLGPUTaskParam_t task_param, void *
             return NULL;
         }
         //cache
-        /* u32 jpeg_stride = 2 * (jpg_hd->width + 7) / 8 * 8; */
-        /* u32 jpeg_height_align = (jpg_hd->height + 7) / 8 * 8; */
         u32 jpeg_width_align = (jpg_hd->width + 15) / 16  * 16;
         u32 jpeg_stride = 2 * jpeg_width_align;
         u32 jpeg_height_align = (jpg_hd->height + 15) / 16 * 16;
@@ -881,6 +879,8 @@ void *cache_gpu_input_jpeg_data(void *head, pJLGPUTaskParam_t task_param, void *
 
     task_param->image.width = (width + 15) / 16 * 16;
     task_param->image.height = (height + 15) / 16 * 16;
+
+
 
     if (cache_addr) {
         gpu_input_stream_cache_vaild_value_set_by_index((u32)cache_addr, 3);

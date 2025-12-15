@@ -131,9 +131,7 @@ static int ai_text_rx_cb(u8 ai_text, u8 *data, int len)
         memcpy((void *)ai_txt1, data, len);
         ai_txt1[len] = '\0';
     }
-    if (ai_text == 2) {
-        UI_MSG_POST("AI_ERROR");
-    }
+    UI_MSG_POST("AI_ERROR");
 // UTF8
     ai_txttempa = tts_txt;
     ai_txttempb = ai_txt2;

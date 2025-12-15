@@ -750,6 +750,8 @@ static int watch_dial_bgp_deinit(struct watch_param *param)
     }
     return 0;
 }
+
+extern char *watch_avi_get_related_path(u8 cur_watch);
 static int watch_dial_bgp_init(struct watch_param *param)
 {
     watch_dial_bgp_deinit(param);
@@ -757,19 +759,22 @@ static int watch_dial_bgp_init(struct watch_param *param)
     char *bg_path;
     u8 watch_mode_type = 0;
 #if TCFG_VIDEO_DIAL_ENABLE
+    AVI_PARAM avi_dial_param;
     syscfg_read(CFG_DIAL_TYPE_SEL, (u8 *)&watch_mode_type, 1);
     if (watch_mode_type == 1) {
 
-        extern char *watch_avi_get_related_path(u8 cur_watch);
         bg_path = watch_avi_get_related_path(watch_get_style());
 
         log_debug("cur watch style %d, bgp_path:%s\n\n\n\n\n", watch_get_style(), bg_path);
         /* bg_path=NULL; */
 
         if (bg_path) {
-            animig_open((char *)bg_path, 0, 3); // 缓存3帧可以达到流畅播放30FPS
+            avi_dial_param.is_dial = 1;
+            avi_dial_param.is_audio_mute = 0;
+            set_avi_play_mode(AVI_PLAY_LOOP);
+            animig_open((char *)bg_path, avi_dial_param, 3); // 缓存3帧可以达到流畅播放30FPS
             avi_set_avi_playtimer_id(0);
-            if (ui_in_effect()) {
+            if (ui_in_effect() || dial_sel_state()) {
                 if (get_aviplay_handle() != NULL) {
                     avi_pause();
                 }
@@ -859,6 +864,7 @@ static int WATCH_onchange(void *ctr, enum element_change_event e, void *arg)
     u8 slow_sec = 0;
 #if TCFG_VIDEO_DIAL_ENABLE
     u16 avi_playtimer ;
+    static u8 watch_mode_type = 0;
 #endif
     /* printf("%s %d", __func__, e); */
     switch (e) {
@@ -887,10 +893,24 @@ static int WATCH_onchange(void *ctr, enum element_change_event e, void *arg)
         ui_page_move_en_callback(is_ui_page_move_enable);
         watch_load_sidebar(elm);
         watch_dial_bgp_init(&dial_param);
+#if TCFG_VIDEO_DIAL_ENABLE
+        syscfg_read(CFG_DIAL_TYPE_SEL, (u8 *)&watch_mode_type, 1);
+#endif
         ui_auto_shut_down_enable();
         break;
 #if TCFG_VIDEO_DIAL_ENABLE
     case ON_CHANGE_SHOW_POST:
+        if (watch_mode_type == 1) {
+
+            if (ui_in_effect() || ui_page_get_busy() || dial_sel_state()) {
+                char *bg_path = watch_avi_get_related_path(watch_get_style());
+                if (bg_path) {
+                    extern int jpeg_image_file_psram(struct draw_context * dc, int left, int top, int width, int height, char *path, int path_len, int scale_en, float scale_f);
+                    jpeg_image_file_psram(dc, 0, 0, 320, 384, bg_path, strlen(bg_path), 0, 1.0f);
+                }
+            }
+        }
+
         // 保护措施，防止avi资源释放后访问空指针
         if (get_avi_pause_status()) {
             // printf("\n\n avi_player is already free!!!!!!!\n");

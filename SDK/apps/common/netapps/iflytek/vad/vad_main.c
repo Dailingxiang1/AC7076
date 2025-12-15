@@ -178,6 +178,16 @@ static void ifly_vad_recv_cb(u8 *j_str, u32 len, u8 type)
     }
     vad_info.status = IFLY_VAD_STATUS_RECV;
 
+    cJSON *cjson_code = cJSON_GetObjectItem(cjson_root, "code");
+    if (cjson_code && cjson_code->valueint != 0) {
+        log_error("code error...%d\n", cjson_code->valueint);
+        if (vad_info.status <= IFLY_VAD_STATUS_RECV_END) {
+            vad_info.status = IFLY_VAD_STATUS_RECV_ERROR;
+        }
+        vad_info.param->event_cb(IFLY_VAD_EVT_NETWORK_RECV_ERROR, vad_info.param);
+        return;
+    }
+
     cJSON *cjson_data = cJSON_GetObjectItem(cjson_root, "data");
     cJSON *cjson_status = cJSON_GetObjectItem(cjson_data, "status");
     cJSON *cjson_result = cJSON_GetObjectItem(cjson_data, "result");
@@ -213,7 +223,7 @@ static void ifly_vad_recv_cb(u8 *j_str, u32 len, u8 type)
 
     log_info("final res:%s\n", vad_info.param->vad_res);
 
-    if (cjson_status->valueint == STATUS_LAST_FRAME) {
+    if (cjson_status && cjson_status->valueint == STATUS_LAST_FRAME) {
         vad_info.status = IFLY_VAD_STATUS_RECV_END;
         vad_info.recv_finish = 1;
         vad_info.param->event_cb(IFLY_VAD_EVT_RECV_OK, vad_info.param);

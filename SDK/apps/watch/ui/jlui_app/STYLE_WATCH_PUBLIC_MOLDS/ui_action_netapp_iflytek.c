@@ -46,6 +46,7 @@
 
 // ui参数
 struct ifly_ui_t {
+    u8 vad_button;     // 判断vad是否按下，防止多次开启
     u8 net_fail;
     u16 time_id;		// 定时器
     u16 task_create_timer;
@@ -86,6 +87,17 @@ static bool ifly_check_net_connect(void)
     return false;
 }
 
+static void ui_ifly_vad_button_touch(u8 flag)
+{
+    ifly_ui->vad_button = flag;
+}
+
+static u8 ui_ifly_vad_button_get_touch()
+{
+    return ifly_ui->vad_button;
+}
+
+
 static int ui_ifly_ai_event_cb(ifly_ai_event_enum evt, void *param)
 {
     switch (evt) {
@@ -121,6 +133,7 @@ static int ui_ifly_vad_event_cb(ifly_vad_event_enum evt, void *param)
             sys_timeout_del(ifly_ui->vad_recv_timer);
             ifly_ui->vad_recv_timer = 0;
         }
+        ui_ifly_vad_button_touch(0);
         break;
     case IFLY_VAD_EVT_NETWORK_RECV_ERROR:
         UI_MSG_POST("vad_network_recv_error");
@@ -414,33 +427,37 @@ static void vad_recv_timer_handler(void *priv)
         sys_timeout_del(ifly_ui->vad_recv_timer);
         ifly_ui->vad_recv_timer = 0;
     }
+    ui_ifly_vad_button_touch(0);
 }
 
 static int ifly_vad_button_ontouch(void *ctr, struct element_touch_event *e)
 {
     switch (e->event) {
     case ELM_EVENT_TOUCH_DOWN:
-        if (!ifly_vad_is_work()) {
-            // 开始
-            if (ifly_check_net_connect() == false) {
-                UI_MSG_POST("vad_network_no_connect");
-                break;
-            }
-            ui_hide(IFLY_LAYOUT_VAD);
-            ui_show(IFLY_LAYOUT_CONNECTTING);
+        if (!ui_ifly_vad_button_get_touch()) {
+            if (!ifly_vad_is_work()) {
+                // 开始
+                if (ifly_check_net_connect() == false) {
+                    UI_MSG_POST("vad_network_no_connect");
+                    break;
+                }
+                ui_hide(IFLY_LAYOUT_VAD);
+                ui_show(IFLY_LAYOUT_CONNECTTING);
 
-            ifly_vad_stop(1, 10);
-            p_ifly_net->vad_param.vad_res = p_ifly_net->local_text;
-            p_ifly_net->vad_param.vad_res_len = MAX_VAD_LEN;
-            p_ifly_net->vad_param.event_cb = ui_ifly_vad_event_cb;
-            p_ifly_net->vad_param.vad_res[0] = 0;
-            ifly_vad_start(&p_ifly_net->vad_param);
-        } else {
-            // 停止
-            ifly_vad_stop(0, 2000);
-            log_info("stop recording\n");
-            if (!ifly_ui->vad_recv_timer) {
-                ifly_ui->vad_recv_timer = sys_timeout_add(NULL, vad_recv_timer_handler, 3000);
+                ifly_vad_stop(1, 10);
+                p_ifly_net->vad_param.vad_res = p_ifly_net->local_text;
+                p_ifly_net->vad_param.vad_res_len = MAX_VAD_LEN;
+                p_ifly_net->vad_param.event_cb = ui_ifly_vad_event_cb;
+                p_ifly_net->vad_param.vad_res[0] = 0;
+                ifly_vad_start(&p_ifly_net->vad_param);
+            } else {
+                // 停止
+                if (!ifly_ui->vad_recv_timer) {
+                    ifly_ui->vad_recv_timer = sys_timeout_add(NULL, vad_recv_timer_handler, 3000);
+                }
+                ui_ifly_vad_button_touch(1);
+                ifly_vad_stop(0, 2000);
+                log_info("stop recording\n");
             }
         }
         break;
@@ -646,6 +663,7 @@ static int vad_network_fail()
     ifly_ui->cur_layout = IFLY_LAYOUT_CONNECTTING;
     ifly_ui->show_layout = IFLY_LAYOUT_CONNECT_FAIL;
     ifly_no_content(IFLY_VAD_NO_CONN_CNT_MAX);
+    ui_ifly_vad_button_touch(1);
 
     return 0;
 }
@@ -655,6 +673,7 @@ static int vad_network_recv_error()
     ifly_ui->cur_layout = IFLY_LAYOUT_VAD;
     ifly_ui->show_layout = IFLY_LAYOUT_CONNECT_FAIL;
     ifly_no_content(IFLY_VAD_NO_CONN_CNT_MAX);
+    ui_ifly_vad_button_touch(1);
 
     return 0;
 }

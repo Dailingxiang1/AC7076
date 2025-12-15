@@ -692,7 +692,7 @@ REGISTER_UI_EVENT_HANDLER(CAM_CAMERA_TIME_LAYOUT)
 //****************************************************************************************//
 //									相册
 //****************************************************************************************//
-void *animig_open(char *name, int window_id, int arg);
+/* void *animig_open(char *name, int window_id, int arg); */
 /* ------------------------------------------------------------------------------------*/
 /**
  * @brief cam_photo_list_child_onchange 子控件
@@ -1033,14 +1033,17 @@ static int cam_show_layout_onchange1(void *ctrl, enum element_change_event event
     struct ui_grid *grid = (struct ui_grid *)ctrl;
     struct element *elm = (struct element *)ctrl;
     struct draw_context *dc = (struct draw_context *)arg;
+    AVI_PARAM param;
     switch (event) {
     case ON_CHANGE_INIT:
         if (!__this->sel_path) {
             break;
         }
         if (__this->view_video) {
+            param.is_dial = 0;
+            param.is_audio_mute = 0;
             set_avi_play_mode(0);
-            animig_open(__this->sel_path, 0, 3);
+            animig_open(__this->sel_path, param, 3);
         }
         break;
     case ON_CHANGE_SHOW_POST:

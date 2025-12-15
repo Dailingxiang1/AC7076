@@ -97,7 +97,31 @@ static void file_transfer_download_file_check_continue(void)
     msg[2] = 0;
     os_taskq_post_type("app_core", Q_CALLBACK, 3, msg);
 }
-
+/* ------------------------------------------------------------------------------------*/
+/**
+ * @brief file_transfer_verify_heartbeat_packet 心跳包
+ */
+/* ------------------------------------------------------------------------------------*/
+static void file_transfer_verify_heartbeat_packet(void)
+{
+    // 每1M发送一次心跳包，保证不会因为校验时间过长触发超时
+    static u8 heartbeat_cnt = 0;
+    if (ftp_d) {
+        if (ftp_d->start_timerout) {
+            sys_timer_re_run(ftp_d->start_timerout);
+        }
+        u8 cur_cnt = (ftp_d->check.counter * sizeof(ftp_d->win)) / (1 * 1024 * 1024);
+        u16 len = 0;
+        u32 offset = 0;
+        if (heartbeat_cnt != cur_cnt) {
+            ftp_d->win[0] = 0;
+            WRITE_BIG_U16(ftp_d->win + 1, len);
+            WRITE_BIG_U32(ftp_d->win + 3, offset);
+            JL_CMD_send(JL_OPCODE_FILE_TRANSFER, ftp_d->win, 7, 0, 0, NULL);
+            heartbeat_cnt = cur_cnt;
+        }
+    }
+}
 //*----------------------------------------------------------------------------*/
 /**@brief    文件数据块crc校验
    @param
@@ -119,6 +143,7 @@ static void __file_transfer_download_file_check_caculate(void *priv)
         cnt = ftp_d->check.counter;
     }
     log_info("cnt = %d, check.counter = %d, crc_tmp = %x\n", cnt, ftp_d->check.counter, ftp_d->check.crc_tmp);
+    file_transfer_verify_heartbeat_packet();
     for (int i = 0; i < cnt; i++) {
         fread(ftp_d->win, sizeof(ftp_d->win), 1, ftp_d->file);
         ftp_d->check.crc_tmp = CRC16_with_initval(ftp_d->win, sizeof(ftp_d->win), ftp_d->check.crc_tmp);
