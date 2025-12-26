@@ -59,6 +59,7 @@
 #define     CFG_VBG_TRIM                    47	//保存VBG配置参数id
 
 #define     CFG_DIAL_TYPE_SEL                    48	//保存VBG配置参数id
+#define     CFG_DUER_ACCESS_TOKEN                    49	//小度token
 
 //#MAX 50
 //=================================================================================//

@@ -1802,6 +1802,8 @@ int uvc_host_camera_out(const usb_dev usb_id)
     if (!host_dev) {
         return 0;
     }
+    //前移，防止free buf到设置变量期间来中断
+    hdl->open = 0;
     if (uvc->offline) {
         uvc->offline(uvc->priv);
     }
@@ -1829,7 +1831,7 @@ int uvc_host_camera_out(const usb_dev usb_id)
 
     free(uvc);
     uvc_host_inf[usb_id].dev.uvc = NULL;
-    hdl->open = 0;
+    /* hdl->open = 0; */
     atomic_set(&(device->ref), 0);
     device->private_data = NULL;
     return 0;

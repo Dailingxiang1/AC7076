@@ -6,7 +6,7 @@
 #include "pcm_data.h"
 #include "mic_data.h"
 #include "clock_manager/clock_manager.h"
-
+#include "app_task.h"
 #define LOG_TAG_CONST      	VIDEO_REC
 #define LOG_TAG     		"[VIDEO_REC]"
 #define LOG_ERROR_ENABLE
@@ -16,6 +16,8 @@
 #define LOG_CLI_ENABLE
 #include "debug.h"
 #if TCFG_CAMERA_MANAGER_ENABLE
+extern void app_video_mode_switch(void *priv);
+extern u16 app_video_task_switch_flag_get();
 /*
 	是否使用独立pcm线程管理mic数据,
 	会消耗更多的ram(11*4k)，直接获取mic数据仅需要(3*4k+512)
@@ -87,6 +89,27 @@ static void jlcamera_ui_reflush(void)
     if (__this && __this->ui_refresh_cb) {
         __this->ui_refresh_cb(__this->write_error);
     }
+#if 0//刷新间隔测试
+    {
+        static int last_msec = 0;
+        static int frame_count_total_interval = 0;
+        static int frame_count_cnt = 0;
+        int curr_msec = jiffies_msec();
+        int interval  =  curr_msec - last_msec;
+        if (interval < 1000) {
+            frame_count_total_interval += interval;
+            frame_count_cnt ++;
+            int frame_count_avg = frame_count_total_interval / frame_count_cnt;
+            int frame_fps = 0 ;
+            if (frame_count_avg) {
+                frame_fps = 1000 / frame_count_avg;
+            }
+            printf("[camera-ui] avg:%d fps:%d interval%d total:%d cnt:%d\n",
+                   frame_count_avg, frame_fps, interval, frame_count_total_interval, frame_count_cnt);
+        }
+        last_msec  = curr_msec;
+    }
+#endif
 }
 
 /* ------------------------------------------------------------------------------------*/
@@ -397,7 +420,30 @@ static void video_show_task(void *priv)
             }
 #endif
         }
+
         if (camera_manager_data_read(&jpeg_data, &jpeg_data_len) == 0) {
+#if 0		//编码间隔
+            {
+                static int last_msec = 0;
+                static int frame_count_total_interval = 0;
+                static int frame_count_cnt = 0;
+                int curr_msec = jiffies_msec();
+                int interval  =  curr_msec - last_msec;
+                if (interval < 1000)
+                {
+                    frame_count_total_interval += interval;
+                    frame_count_cnt ++;
+                    int frame_count_avg = frame_count_total_interval / frame_count_cnt;
+                    int frame_fps = 0 ;
+                    if (frame_count_avg) {
+                        frame_fps = 1000 / frame_count_avg;
+                    }
+                    printf("[camera] avg:%d fps:%d interval%d total:%d cnt:%d\n",
+                           frame_count_avg, frame_fps, interval, frame_count_total_interval, frame_count_cnt);
+                }
+                last_msec  = curr_msec;
+            }
+#endif
             log_char('M');
             read_data = 1;
             frame_cnt ++;
@@ -409,8 +455,6 @@ static void video_show_task(void *priv)
             }
 #endif
             if (out_fd) {		//录像输出
-
-
                 if (!jljpeg_frame_dropping_judge()) {
                     __this->write_error = AVI_write_frame(out_fd, (char *)jpeg_data, jpeg_data_len, 1);
                     jljpeg_frame_fill_judge(out_fd, 1); //补帧计算
@@ -419,6 +463,10 @@ static void video_show_task(void *priv)
                 }
             }
             camera_manager_read_done(jpeg_data);
+            if (!out_fd) {
+                //不录像的时候，主动延时
+                os_time_dly(6);
+            }
 #if 0
             static int cam_last_msec = 0;
             static int cam_frame_sum = 0;
@@ -505,6 +553,14 @@ int jlcamera_video_rec_init(void)
     if (ret) {
         goto __err;
     }
+#if TCFG_APP_VIDEO_EN
+    if (app_get_current_mode_name() != APP_MODE_VIDEO) {
+        int ret = app_task_switch_to(APP_MODE_VIDEO, NULL_VALUE);
+        if (ret == FALSE) {
+            sys_timeout_add((void *)(long) app_video_task_switch_flag_get(), app_video_mode_switch, 500);
+        }
+    }
+#endif
     int fps;
     camera_manager_get_dev_fps(&fps);
     //视频帧率
@@ -524,6 +580,12 @@ __err:
     log_error("%s err\n", __func__);
     camera_manager_stop();
     camera_manager_deinit();
+#if TCFG_APP_VIDEO_EN
+    if (app_get_current_mode_name() == APP_MODE_VIDEO) {
+        app_mode_stack_clr(APP_MODE_VIDEO);
+        app_task_switch_back();
+    }
+#endif
     if (__this) {
         free(__this);
         __this = NULL;
@@ -556,6 +618,12 @@ int jlcamera_video_rec_deinit(void)
     }
 
     camera_manager_deinit();
+#if TCFG_APP_VIDEO_EN
+    if (app_get_current_mode_name() == APP_MODE_VIDEO) {
+        app_mode_stack_clr(APP_MODE_VIDEO);
+        app_task_switch_back();
+    }
+#endif
     clock_unlock("camera_video");
     __this->busy = 0;
     free(__this);

@@ -45,7 +45,7 @@
 #include "debug.h"
 
 extern u8 is_bredr_close(void);
-
+extern void rcsp_clear_all_buffer(void);
 extern void rcsp_resume(void);
 extern void rcsp_find_device_reset(void);
 extern void sport_data_func_init(void);
@@ -253,6 +253,9 @@ static void rcsp_ble_disconnect(void)
 #endif
     sport_data_func_release();
     rcsp_timer_contrl(0);
+
+    // 防止上一次接收长度太长且未接收完成就中断，影响到下一次连接后的交互
+    rcsp_clear_all_buffer();
 }
 
 static void rcsp_ble_connect(void)

@@ -1027,6 +1027,8 @@ void __attribute__((weak))  app_common_device_event_handler(int *msg)
 */
 /*----------------------------------------------------------------------------*/
 extern void hidden_file(u8 flag);
+extern const int FATFS_BACKUP_ENABLE; //文件系统安全备份功能使能
+extern void fatfs_backup_clear_null_dir();
 static void dev_manager_task(void *p)
 {
 	int res;
@@ -1081,6 +1083,10 @@ static void dev_manager_task(void *p)
 #if TCFG_VIRFAT_FLASH_ENABLE
 	dev_manager_add("virfat_flash");
     dev_manager_set_valid_by_logo("virfat_flash", 0);///将设备设置为无效设备
+    //安全备份删除异常断电存留下来的空文件
+    if (FATFS_BACKUP_ENABLE) {
+        fatfs_backup_clear_null_dir();
+    }
 
 #endif
 #if (TCFG_SDFILE_INSERT_FLASH_ENABLE||TCFG_SDFILE_EXTERN_FLASH_ENABLE)

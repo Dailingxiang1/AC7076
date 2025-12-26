@@ -72,6 +72,7 @@
 #include "audio_config.h"
 #include "gpio.h"
 #include "app_task.h"
+#include "bt.h"
 
 #define LOG_TAG_CONST AVI_VIDEO
 #define LOG_TAG "[AVI_VIDEO]"
@@ -109,6 +110,15 @@ static const char *avi_files[] = {
     // 可以继续添加更多文件
 };
 static u16 task_switch_flag;
+u16 app_video_task_switch_flag_get()
+{
+    return  task_switch_flag;
+}
+u16 app_video_task_switch_flag_set(u16 flag)
+{
+    task_switch_flag = flag;
+    return task_switch_flag;
+}
 /* static u8 __this->param.is_audio_mute = 1; */
 
 #define AVI_FILE_COUNT (sizeof(avi_files) / sizeof(avi_files[0]))
@@ -2044,12 +2054,13 @@ void *get_avi_player_st_handle()
 }
 
 #if TCFG_APP_VIDEO_EN
-static void app_video_mode_switch(void *priv)
+void app_video_mode_switch(void *priv)
 {
+    int ret = FALSE;
     u16 flag = (u16)priv;
+    log_info("%s", __func__);
     if (flag != task_switch_flag) {
-        log_info("\n\n %s, %d \n\n", __func__, __LINE__);
-        log_info("flag:%d, %d \n", flag, task_switch_flag);
+        log_info("%s %d %d--%d", __func__, __LINE__, flag, task_switch_flag);
         return;
     }
 
@@ -2057,7 +2068,15 @@ static void app_video_mode_switch(void *priv)
     if (app_get_current_mode_name() == APP_MODE_VIDEO) {
         return;
     }
-    int ret = app_task_switch_to(APP_MODE_VIDEO, NULL_VALUE);
+
+#if TCFG_APP_BT_EN && TCFG_BT_BACKGROUND_ENABLE
+    if (bt_check_already_initializes()) {
+#else
+    if (1) {
+#endif
+        ret = app_task_switch_to(APP_MODE_VIDEO, NULL_VALUE);
+    }
+
     if (ret == FALSE) {
         sys_timeout_add((void *)(long)task_switch_flag, app_video_mode_switch, 500);
     }
@@ -2070,12 +2089,21 @@ void *animig_open(char *name, AVI_PARAM param, int arg)
     u8 type = 0;
 
 #if TCFG_APP_VIDEO_EN
+#if TCFG_APP_BT_EN && TCFG_BT_BACKGROUND_ENABLE
+    if (app_get_current_mode_name() != APP_MODE_VIDEO && bt_check_already_initializes()) {
+#else
     if (app_get_current_mode_name() != APP_MODE_VIDEO) {
+#endif
         int ret = app_task_switch_to(APP_MODE_VIDEO, NULL_VALUE);
         if (ret == FALSE) {
             sys_timeout_add((void *)(long)task_switch_flag, app_video_mode_switch, 500);
         }
     }
+#if TCFG_APP_BT_EN && TCFG_BT_BACKGROUND_ENABLE
+    else {
+        sys_timeout_add((void *)(long)task_switch_flag, app_video_mode_switch, 500);
+    }
+#endif
 #endif
 
     FILE *f = fopen(name, "r");

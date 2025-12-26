@@ -414,7 +414,7 @@ void rcsp_browser_start(u8 *data, u16 len)
         return ;
     }
     ///解析数据
-    memcpy((u8 *)browser, data, sizeof(struct __browser));
+    memcpy((u8 *)browser, data, len);
     browser->start_num = app_ntohs(browser->start_num);
     browser->dev_handle = app_ntohl(browser->dev_handle);
     browser->path_len = app_ntohs(browser->path_len);

@@ -11,6 +11,7 @@
 #include "rcsp_browser.h"
 #include "rcsp_config.h"
 
+#include "res_config.h"
 #include "rcsp_extra_flash_opt.h"
 #include "JL_rcsp_protocol.h"
 #include "ascii.h"
@@ -634,7 +635,18 @@ void rcsp_file_transfer_file_rename(u8 status, u8 *data, u16 len)
                 if (err) {
                     rcsp_file_transfer_close();
                 }
-                dev_manager_set_valid(ftp_d->dev, 1);
+                char *watch_ptr = (char *)data;
+                /* printf("%s name:%s",__func__,watch_ptr); */
+                if ((!strncmp(watch_ptr, WATCH_RES_NAME, strlen(WATCH_RES_NAME))) ||
+                    (!strncmp(watch_ptr, WATCH_RES_NAME_SMALL, strlen(WATCH_RES_NAME_SMALL))) ||
+                    (!strncmp(watch_ptr, BGP_RES_NAME, strlen(BGP_RES_NAME))) ||
+                    (!strncmp(watch_ptr, BGP_RES_NAME_SMALL, strlen(BGP_RES_NAME_SMALL)))
+                   ) {
+                    //表盘相关操作，不设置active
+                    /* printf("%s %d",__func__,__LINE__); */
+                } else {
+                    dev_manager_set_valid(ftp_d->dev, 1);
+                }
                 file_transfer_watch_opt(2, 0);
             } else {
                 //有重名的， 重新获取新名称, 如:“xxx_n.mp3”,n为数字

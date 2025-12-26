@@ -789,12 +789,12 @@ static int rcsp_extra_flash_opt_dial_backgroud_set(u8 *file_path, u16 *data_len)
 
 //*----------------------------------------------------------------------------*/
 /**@brief    通过路径获取表盘背景
-   @param    file_path:文件路径(也用作出参)，file_path_len:路径长度
+   @param    resp_buf:用作出参; file_path:文件路径; file_path_len:路径长度
    @return   0-成功，其他-失败
    @note
 */
 /*----------------------------------------------------------------------------*/
-static int rcsp_extra_flash_opt_dial_backgroud_get(u8 *data, u8 *file_path, u16 *data_len)
+static int rcsp_extra_flash_opt_dial_backgroud_get(u8 **resp_buf, u8 *file_path, u16 *data_len)
 {
     rcsp_printf("rcsp_extra_flash_opt_dial_backgroud_get, %s\n", file_path);
     int result = 0;
@@ -809,28 +809,41 @@ static int rcsp_extra_flash_opt_dial_backgroud_get(u8 *data, u8 *file_path, u16 
     int watch_item = watch_get_style_by_name(watch);
     if (watch_item < 0) {
         // 找不到
-        memcpy(data, "null", sizeof("null"));
+        *resp_buf = zalloc(sizeof("null"));
+        if (*resp_buf == NULL) {
+            return -1;
+        }
+        memcpy(*resp_buf, "null", sizeof("null"));
     } else {
         char *bgp = watch_bgp_get_related(watch_item);
         if (bgp) {
-            memcpy(data, bgp, strlen((const char *)bgp) + 1);
+            *resp_buf = zalloc(strlen((const char *)bgp) + 1);
+            if (*resp_buf == NULL) {
+                return -1;
+            }
+            memcpy(*resp_buf, bgp, strlen((const char *)bgp) + 1);
         } else {
-            memcpy(data, "null", sizeof("null"));
+            *resp_buf = zalloc(sizeof("null"));
+            if (*resp_buf == NULL) {
+                return -1;
+            }
+            memcpy(*resp_buf, "null", sizeof("null"));
         }
     }
-    *data_len = strlen((const char *)data) + 1;
+
+    *data_len = strlen((const char *)(*resp_buf)) + 1;
 
     return result;
 }
 
 //*----------------------------------------------------------------------------*/
 /**@brief    获取表盘版本号操作
-   @param    file_path:文件路径(也用作出参)，file_path_len:路径长度
+   @param    resp_buf:用作出参; file_path:文件路径; file_path_len:路径长度
    @return   0-成功，其他-失败
    @note
 */
 /*----------------------------------------------------------------------------*/
-static int rcsp_extra_flash_opt_dial_version_get(u8 *data, u8 *file_path, u16 *data_len)
+static int rcsp_extra_flash_opt_dial_version_get(u8 **resp_buf, u8 *file_path, u16 *data_len)
 {
     int ret = 0;
     rcsp_printf("rcsp_extra_flash_opt_dial_version_get, %s\n", file_path);
@@ -853,22 +866,27 @@ static int rcsp_extra_flash_opt_dial_version_get(u8 *data, u8 *file_path, u16 *d
         goto _end;
     }
 
+    *resp_buf = zalloc(DIAL_PRJ_UUDI_LEN + DIAL_VERSION_ID);
+    if (*resp_buf == NULL) {
+        ret = -1;
+        goto _end;
+    }
     // 获取version
-    ret = watch_get_version(watch, (char *)data + offset);
+    ret = watch_get_version(watch, (char *)*resp_buf + offset);
     if (!ret) {
-        offset += strlen((const char *)data + offset) + 1;
+        offset += strlen((const char *)*resp_buf + offset) + 1;
     }
 
     // 获取uuid
-    ret = watch_get_uuid(watch, (char *)data + offset);
+    ret = watch_get_uuid(watch, (char *)*resp_buf + offset);
     if (!ret) {
-        offset += strlen((const char *)data + offset) + 1;
+        offset += strlen((const char *)*resp_buf + offset) + 1;
     }
 
     // 填充分隔符
     for (u8 i = 0; i < offset; i++) {
-        if ((i + 1 != offset) && 0 == data[i]) {
-            data[i] = ',';
+        if ((i + 1 != offset) && 0 == (*resp_buf)[i]) {
+            (*resp_buf)[i] = ',';
         }
     }
 _end:
@@ -999,12 +1017,12 @@ static u16 rcsp_extra_flash_opt_data_fill(u8 *desc, u8 *src, u8 len)
 
 //*----------------------------------------------------------------------------*/
 /**@brief    获取当前表盘操作
-   @param    buffer:获取结果存放的buffer，data_len:获取结果的长度(出参)
+   @param    resp_buf:获取结果存放的buffer，data_len:获取结果的长度(出参)
    @return   0-成功，其他-失败
    @note
 */
 /*----------------------------------------------------------------------------*/
-static int rcsp_extra_flash_opt_dial_get(u8 *buffer, u16 *data_len)
+static int rcsp_extra_flash_opt_dial_get(u8 **resp_buf, u16 *data_len)
 {
     rcsp_printf("rcsp_extra_flash_opt_dial_get\n");
     int result = 0;
@@ -1023,7 +1041,12 @@ static int rcsp_extra_flash_opt_dial_get(u8 *buffer, u16 *data_len)
         if (result) {
             goto __end;
         }
-        memcpy(buffer + offset, file_path, file_path_size);
+        *resp_buf = zalloc(file_path_size);
+        if (*resp_buf == NULL) {
+            result = -1;
+            goto __end;
+        }
+        memcpy(*resp_buf + offset, file_path, file_path_size);
         offset += file_path_size;
     }
 
@@ -1362,12 +1385,12 @@ static u8 rcsp_extra_flash_op_state_get(u8 state)
 
 //*----------------------------------------------------------------------------*/
 /**@brief    读数据操作
-   @param    data:数据, data_len:数据长度(也用作出参)，offset:遍历数据时的偏移量，state:操作类型
+   @param    data:数据, data_len:数据长度(也用作出参)，offset:遍历数据时的偏移量，state:操作类型, resp_buf:用作出参
    @return   0-成功，其他-失败
    @note
 */
 /*----------------------------------------------------------------------------*/
-static int rcsp_extra_flash_read_opt(u8 *data, u16 *data_len, u8 offset, u8 state)
+static int rcsp_extra_flash_read_opt(u8 *data, u16 *data_len, u8 offset, u8 state, u8 **resp_buf)
 {
     int result = 0;
 
@@ -1375,8 +1398,12 @@ static int rcsp_extra_flash_read_opt(u8 *data, u16 *data_len, u8 offset, u8 stat
     *data_len = (data[offset + 4] << (8 * 1)) | data[offset + 5];
 
     state = rcsp_extra_flash_op_state_get(state);
-    result = rcsp_extra_flash_opt_read(data + 1, *data_len, start_addr, state);
-    data[0] = result;
+    *resp_buf = zalloc(*data_len);
+    if (*resp_buf == NULL) {
+        return -1;
+    }
+
+    result = rcsp_extra_flash_opt_read(*resp_buf, *data_len, start_addr, state);
 
     return result;
 }
@@ -1403,7 +1430,6 @@ static int rcsp_extra_flash_write_opt(u8 *data, u16 *data_len, u8 offset, u8 sta
     } else {
         result = rcsp_extra_flash_write_no_resp(data + offset, *data_len, start_addr);
     }
-    data[0] = result;
     return result;
 }
 
@@ -1421,50 +1447,61 @@ static int rcsp_extra_flash_insert_opt(u8 *data, u16 *data_len, u8 offset, u8 st
         u32 start_addr = (data[offset + 0] << (8 * 3)) | (data[offset + 1] << (8 * 2)) | (data[offset + 2] << (8 * 1)) | data[offset + 3];
         offset += 4;
         *data_len -= offset;
-        data[offset + *data_len] = 0;
-        result = rcsp_extra_flash_opt_insert_start(data + offset, *data_len, start_addr);
+        u8 *path = zalloc(*data_len + 1);
+        if (path == NULL) {
+            return -1;
+        }
+        memcpy(path, &data[offset], *data_len);
+        result = rcsp_extra_flash_opt_insert_start(path, *data_len, start_addr);
+        free(path);
     } else {
         result = rcsp_extra_flash_opt_insert_stop();
     }
-    data[0] = result;
     return result;
 }
 
 //*----------------------------------------------------------------------------*/
 /**@brief    表盘操作
-   @param    data:数据, data_len:数据长度(也用作出参)，offset:遍历数据时的偏移量，state:操作类型
+   @param    data:数据, data_len:数据长度(也用作出参)，offset:遍历数据时的偏移量，state:操作类型, resp_buf:用作出参
    @return   0-成功，其他-失败
    @note
 */
 /*----------------------------------------------------------------------------*/
-static int rcsp_extra_flash_dial_opt(u8 *data, u16 *data_len, u8 offset, u8 state)
+static int rcsp_extra_flash_dial_opt(u8 *data, u16 *data_len, u8 offset, u8 state, u8 **resp_buf)
 {
     int result = 0;
+    u8 *path = NULL;
     if (state) {
         *data_len -= offset;
-        data[*data_len + offset] = 0;
+        path = zalloc(*data_len + 1);
+        if (path == NULL) {
+            return -1;
+        }
+        memcpy(path, &data[offset], *data_len);
     } else {
         *data_len = 0;
     }
 
     switch (state) {
     case 0:
-        result = rcsp_extra_flash_opt_dial_get(data + 1, data_len);
+        result = rcsp_extra_flash_opt_dial_get(resp_buf, data_len);
         break;
     case 1:
-        result = rcsp_extra_flash_opt_dial_set(data + offset, data_len);
+        result = rcsp_extra_flash_opt_dial_set(path, data_len);
         break;
     case 3:
-        result = rcsp_extra_flash_opt_dial_version_get(data + 1, data + offset, data_len);
+        result = rcsp_extra_flash_opt_dial_version_get(resp_buf, path, data_len);
         break;
     case 4:
-        result = rcsp_extra_flash_opt_dial_backgroud_set(data + offset, data_len);
+        result = rcsp_extra_flash_opt_dial_backgroud_set(path, data_len);
         break;
     case 5:
-        result = rcsp_extra_flash_opt_dial_backgroud_get(data + 1, data + offset, data_len);
+        result = rcsp_extra_flash_opt_dial_backgroud_get(resp_buf, path, data_len);
         break;
     }
-    data[0] = result;
+    if (path) {
+        free(path);
+    }
     return result;
 }
 
@@ -1481,7 +1518,6 @@ static int rcsp_extra_flash_erase_opt(u8 *data, u16 *data_len, u8 offset, u8 sta
     u32 start_addr = (data[offset + 0] << (8 * 3)) | (data[offset + 1] << (8 * 2)) | (data[offset + 2] << (8 * 1)) | data[offset + 3];
     *data_len = (data[offset + 4] << (8 * 1)) | data[offset + 5];
     result = rcsp_extra_flash_opt_erase(start_addr, (*data_len) * 256);
-    data[0] = result;
     return result;
 }
 
@@ -1497,12 +1533,16 @@ static int rcsp_extra_flash_delete_opt(u8 *data, u16 *data_len, u8 offset, u8 st
     int result = 0;
     if (state) {
         *data_len -= offset;
-        data[offset + *data_len] = 0;
-        result = rcsp_extra_flash_opt_delete_start(data + offset, *data_len);
+        u8 *path = zalloc(*data_len + 1);
+        if (path == NULL) {
+            return -1;
+        }
+        memcpy(path, &data[offset], *data_len);
+        result = rcsp_extra_flash_opt_delete_start(path, *data_len);
+        free(path);
     } else {
         result = rcsp_extra_flash_opt_delete_end();
     }
-    data[0] = result;
     return result;
 }
 
@@ -1524,7 +1564,6 @@ static int rcsp_extra_flash_update_fat_opt(u8 *data, u16 *data_len, u8 offset, u
         result = rcsp_extra_flash_opt_update_fat_begin();
         break;
     }
-    data[0] = result;
     return result;
 }
 
@@ -1539,18 +1578,17 @@ static int rcsp_extra_flash_update_ui_opt(u8 *data, u16 *data_len, u8 offset, u8
 {
     int result = 0;
     result = rcsp_extra_flash_opt_update_ui_opt(state);
-    data[0] = result;
     return result;
 }
 
 //*----------------------------------------------------------------------------*/
 /**@brief    app获取状态指令
-   @param    data:数据, data_len:数据长度(也用作出参)，offset:遍历数据时的偏移量，state:操作类型
+   @param    data:数据, data_len:数据长度(也用作出参)，offset:遍历数据时的偏移量，state:操作类型, resp_buf:用作出参
    @return   0-成功，其他-失败
    @note
 */
 /*----------------------------------------------------------------------------*/
-static int rcsp_extra_flash_update_state_to_app(u8 *data, u16 *data_len, u8 offset, u8 state)
+static int rcsp_extra_flash_update_state_to_app(u8 *data, u16 *data_len, u8 offset, u8 state, u8 **resp_buf)
 {
     rcsp_printf("rcsp_extra_flash_update_state_to_app\n");
     int result = 0;
@@ -1565,12 +1603,15 @@ static int rcsp_extra_flash_update_state_to_app(u8 *data, u16 *data_len, u8 offs
         // 回复buffer剩余大小
         if (state) {
             u16 recieve_max = rcsp_packet_write_alloc_len() - 13;
-            data[1] = ((u8 *)&recieve_max)[1];
-            data[2] = ((u8 *)&recieve_max)[0];
+            *resp_buf = zalloc(sizeof(recieve_max));
+            if (*resp_buf == NULL) {
+                return -1;
+            }
+            (*resp_buf)[0] = ((u8 *)&recieve_max)[1];
+            (*resp_buf)[1] = ((u8 *)&recieve_max)[0];
             *data_len = sizeof(recieve_max);
         }
     }
-    data[0] = result;
     return result;
 }
 
@@ -1600,7 +1641,6 @@ static int rcsp_extra_flash_ota_update_state(u8 *data, u16 *data_len, u8 offset,
     } else {
         result = 1;
     }
-    data[0] = result;
     return result;
 }
 
@@ -1618,12 +1658,12 @@ static int rcsp_extra_flash_restore(u8 *data, u16 *data_len, u8 offset, u8 state
 
 //*----------------------------------------------------------------------------*/
 /**@brief    获取文件信息命令
-   @param    data:数据, data_len:数据长度(也用作出参)，offset:遍历数据时的偏移量，state:操作类型
+   @param    data:数据, data_len:数据长度(也用作出参)，offset:遍历数据时的偏移量，state:操作类型, resp_buf:用作出参
    @return   0-成功，其他-失败
    @note
 */
 /*----------------------------------------------------------------------------*/
-static int rcsp_extra_flash_file_info_get(u8 *data, u16 *data_len, u8 offset, u8 state)
+static int rcsp_extra_flash_file_info_get(u8 *data, u16 *data_len, u8 offset, u8 state, u8 **resp_buf)
 {
     rcsp_printf("rcsp_extra_flash_file_info_get, file_len %d, file_name :", *data_len);
     log_info_hexdump(data + offset, *data_len - offset);
@@ -1633,11 +1673,15 @@ static int rcsp_extra_flash_file_info_get(u8 *data, u16 *data_len, u8 offset, u8
     char *root_path = watch_get_root_path();
     char watch[64] = {0};
 
-    u8 *data_ptr = data + 1;
-
     ASCII_ToUpper(data + offset, *data_len - offset);
     strcpy(watch, root_path);
     strncpy(&watch[strlen((const char *)root_path)], (const char *)data + offset + 1, *data_len - offset - 1);
+
+    u8 *tmp_buf = zalloc(256);
+    if (tmp_buf == NULL) {
+        result = -1;
+        goto __rcsp_extra_flash_file_info_get_err;
+    }
     file = fopen(watch, "r");
     if (NULL == file) {
         result = -1;
@@ -1650,50 +1694,61 @@ static int rcsp_extra_flash_file_info_get(u8 *data, u16 *data_len, u8 offset, u8
         wdt_clear();
         u32 crc_len = (file_len - crc_offset) > 256 ? 256 : (file_len - crc_offset);
         fseek(file, crc_offset, SEEK_SET);
-        if (crc_len != fread(data, crc_len, 1, file)) {
+        if (crc_len != fread(tmp_buf, crc_len, 1, file)) {
             log_error("err : read fail, %s, %d\n", watch, crc_offset);
             result = -1;
             goto __rcsp_extra_flash_file_info_get_err;
         }
-        file_crc = CRC16_with_initval(data, crc_len, file_crc);
+        file_crc = CRC16_with_initval(tmp_buf, crc_len, file_crc);
         crc_offset += crc_len;
     }
 
     *data_len = 0;
 
+    *resp_buf = zalloc(sizeof(file_len) + sizeof(file_crc));
+    if (*resp_buf == NULL) {
+        result = -1;
+        goto __rcsp_extra_flash_file_info_get_err;
+    }
     // 文件长度
-    for (u8 i = 0; i < sizeof(file_len); i++, data_ptr++, (*data_len)++) {
-        *data_ptr = ((u8 *)&file_len)[sizeof(file_len) - i - 1];
+    for (u8 i = 0; i < sizeof(file_len); i++, (*resp_buf)++, (*data_len)++) {
+        *(*resp_buf) = ((u8 *)&file_len)[sizeof(file_len) - i - 1];
     }
 
     // 还需要获取文件crc
-    for (u8 i = 0; i < sizeof(file_crc); i++, data_ptr++, (*data_len)++) {
-        *data_ptr = ((u8 *)&file_crc)[sizeof(file_crc) - i - 1];
+    for (u8 i = 0; i < sizeof(file_crc); i++, (*resp_buf)++, (*data_len)++) {
+        *(*resp_buf)  = ((u8 *)&file_crc)[sizeof(file_crc) - i - 1];
     }
 
 __rcsp_extra_flash_file_info_get_err:
+    if (tmp_buf) {
+        free(tmp_buf);
+    }
     if (file) {
         fclose(file);
     }
-    data[0] = result;
     return result;
 }
 
 //*----------------------------------------------------------------------------*/
 /**@brief    获取FLASH剩余空间命令
-   @param    data:数据, data_len:数据长度(也用作出参)，offset:遍历数据时的偏移量，state:操作类型
+   @param    data:数据, data_len:数据长度(也用作出参)，offset:遍历数据时的偏移量，state:操作类型, resp_buf:用作出参
    @return   0-成功，其他-失败
    @note
 */
 /*----------------------------------------------------------------------------*/
-static int rcsp_extra_flash_remain_space(u8 *data, u16 *data_len, u8 offset, u8 state)
+static int rcsp_extra_flash_remain_space(u8 *data, u16 *data_len, u8 offset, u8 state, u8 **resp_buf)
 {
     rcsp_printf("rcsp_extra_flash_remain_space");
     int result = 0;
     char *root_path = watch_get_root_path();
     u32 space = 0;
     *data_len = 0;
-    u8 *data_ptr = data + 1;
+    *resp_buf = zalloc(sizeof(space));
+    if (*resp_buf == NULL) {
+        return -1;
+    }
+
 #if (CONFIG_REUSABLE_RESERVE)
     result = reusable_area_flash_space(NULL, &space);
 #elif (CONFIG_RESFS_UPDATE_ENABLE)
@@ -1703,38 +1758,39 @@ static int rcsp_extra_flash_remain_space(u8 *data, u16 *data_len, u8 offset, u8 
         printf("err : get flash space fail\n");
         result = -1;
     } else {
-        for (u8 i = 0; i < sizeof(space); i++, data_ptr++, (*data_len)++) {
-            *data_ptr = ((u8 *)&space)[sizeof(space) - i - 1];
+        for (u8 i = 0; i < sizeof(space); i++, (*resp_buf)++, (*data_len)++) {
+            *(*resp_buf) = ((u8 *)&space)[sizeof(space) - i - 1];
         }
         result = 0;
     }
-    data[0] = result;
     return result;
 }
 
 //*----------------------------------------------------------------------------*/
 /**@brief    获取FLASH剩余空间命令
-   @param    data:数据, data_len:数据长度(也用作出参)，offset:遍历数据时的偏移量，state:操作类型
+   @param    data:数据, data_len:数据长度(也用作出参)，offset:遍历数据时的偏移量，state:操作类型, resp_buf:用作出参
    @return   0-成功，其他-失败
    @note
 */
 /*----------------------------------------------------------------------------*/
-static int rcsp_extra_flash_res_space(u8 *data, u16 *data_len, u8 offset, u8 state)
+static int rcsp_extra_flash_res_space(u8 *data, u16 *data_len, u8 offset, u8 state, u8 **resp_buf)
 {
     rcsp_printf("rcsp_extra_flash_res_space");
     int result = 0;
     u32 space = 0;
     *data_len = 0;
-    u8 *data_ptr = data + 1;
+    *resp_buf = zalloc(sizeof(space));
+    if (*resp_buf == NULL) {
+        return -1;
+    }
 #if (CONFIG_REUSABLE_RESERVE)
     space = reusable_area_flash_space(NULL, NULL);
 #elif (CONFIG_RESFS_UPDATE_ENABLE)
     space = resfs_area_flash_space(NULL, NULL);
 #endif
-    for (u8 i = 0; i < sizeof(space); i++, data_ptr++, (*data_len)++) {
-        *data_ptr = ((u8 *)&space)[sizeof(space) - i - 1];
+    for (u8 i = 0; i < sizeof(space); i++, (*resp_buf)++, (*data_len)++) {
+        *(*resp_buf) = ((u8 *)&space)[sizeof(space) - i - 1];
     }
-    data[0] = result;
     return result;
 }
 
@@ -1752,61 +1808,78 @@ int rcsp_extra_flash_opt(u8 *param, u16 len, u8 OpCode, u8 OpCode_SN)
     u8 offset = 0;
     u8 opt_flag = param[offset++];
     u8 state = param[offset++];
-    u8 *resp_buf = zalloc(100);
-    if (!resp_buf) {
-        return -1;
-    }
-    ASSERT(len <= 100);
-    memcpy(resp_buf, param, len);
+    u8 *resp_buf = NULL;
+    u8 *resp_data = NULL;
 
     switch (opt_flag) {
     case CURR_SYSTEM_OPT_READ:
-        result = rcsp_extra_flash_read_opt(resp_buf, &len, offset, state);
+        result = rcsp_extra_flash_read_opt(param, &len, offset, state, &resp_buf);
         break;
     case CURR_SYSTEM_OPT_WRITE:
-        result = rcsp_extra_flash_write_opt(resp_buf, &len, offset, state, OpCode);
+        result = rcsp_extra_flash_write_opt(param, &len, offset, state, OpCode);
         break;
     case CURR_SYSTEM_OPT_INSERT:
-        result = rcsp_extra_flash_insert_opt(resp_buf, &len, offset, state);
+        result = rcsp_extra_flash_insert_opt(param, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_DIAL:
-        result = rcsp_extra_flash_dial_opt(resp_buf, &len, offset, state);
+        result = rcsp_extra_flash_dial_opt(param, &len, offset, state, &resp_buf);
         break;
     case CURR_SYSTEM_OPT_ERASE:
-        result = rcsp_extra_flash_erase_opt(resp_buf, &len, offset, state);
+        result = rcsp_extra_flash_erase_opt(param, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_DELETE:
-        result = rcsp_extra_flash_delete_opt(resp_buf, &len, offset, state);
+        result = rcsp_extra_flash_delete_opt(param, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_UPDATE_FAT:
-        result = rcsp_extra_flash_update_fat_opt(resp_buf, &len, offset, state);
+        result = rcsp_extra_flash_update_fat_opt(param, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_UPDATE_UI:
-        result = rcsp_extra_flash_update_ui_opt(resp_buf, &len, offset, state);
+        result = rcsp_extra_flash_update_ui_opt(param, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_TRAN_REPLY:
-        result = rcsp_extra_flash_update_state_to_app(resp_buf, &len, offset, state);
+        result = rcsp_extra_flash_update_state_to_app(param, &len, offset, state, &resp_buf);
         break;
     case CURR_SYSTEM_OPT_UPDATE_FLAG:
-        result = rcsp_extra_flash_ota_update_state(resp_buf, &len, offset, state);
+        result = rcsp_extra_flash_ota_update_state(param, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_RESTORE:
-        result = rcsp_extra_flash_restore(resp_buf, &len, offset, state);
+        result = rcsp_extra_flash_restore(param, &len, offset, state);
         break;
     case CURR_SYSTEM_OPT_FILE_INFO_GET:
-        result = rcsp_extra_flash_file_info_get(resp_buf, &len, offset, state);
+        result = rcsp_extra_flash_file_info_get(param, &len, offset, state, &resp_buf);
         break;
     case CURR_SYSTEM_OPT_REMAIN_SPACE:
-        result = rcsp_extra_flash_remain_space(resp_buf, &len, offset, state);
+        result = rcsp_extra_flash_remain_space(param, &len, offset, state, &resp_buf);
         break;
     case CURR_SYSTEM_OPT_RES_SPACE:
-        result = rcsp_extra_flash_res_space(resp_buf, &len, offset, state);
+        result = rcsp_extra_flash_res_space(param, &len, offset, state, &resp_buf);
         break;
     }
 
-    u16 resp_len = rcsp_extra_flash_opt_resp_data_get(resp_buf + 1, len, opt_flag, state) + 1;
-    rcsp_extra_flash_opt_resp(0, OpCode, OpCode_SN, resp_buf, resp_len);
-    free(resp_buf);
+    if (result < 0) {
+        goto __end;
+    }
+
+    u16 resp_len = rcsp_extra_flash_opt_resp_data_get(resp_buf, len, opt_flag, state) + 1;
+    resp_data = zalloc(resp_len);
+    if (resp_data == NULL) {
+        result = -1;
+        goto __end;
+    }
+    resp_data[0] = result;
+    if (resp_len > 1) {
+        memcpy(&resp_data[1], resp_buf, len);
+    }
+
+    rcsp_extra_flash_opt_resp(0, OpCode, OpCode_SN, resp_data, resp_len);
+
+__end:
+    if (resp_buf) {
+        free(resp_buf);
+    }
+    if (resp_data) {
+        free(resp_data);
+    }
     return result;
 }
 
@@ -1886,13 +1959,20 @@ void rcsp_extra_flash_opt_dial_backgroud_nodify(void)
     data[offset++] = state;
 
     u16 get_len = 0;
-    rcsp_extra_flash_opt_dial_backgroud_get((u8 *)data + offset, (u8 *)file_path, &get_len);
+    u8 *path_buf = NULL;
+    rcsp_extra_flash_opt_dial_backgroud_get(&path_buf, (u8 *)file_path, &get_len);
+    if (path_buf) {
+        memcpy((u8 *)data + offset, path_buf, get_len);
+    }
     log_info("cur dial_backgroud path:%s", data + offset);
     len = get_len + offset;
 
     rcsp_extra_flash_opt_resp(1, OpCode, 0, (u8 *)data, len);
     if (data) {
         free(data);
+    }
+    if (path_buf) {
+        free(path_buf);
     }
 }
 

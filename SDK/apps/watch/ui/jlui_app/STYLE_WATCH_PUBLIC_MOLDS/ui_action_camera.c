@@ -44,7 +44,7 @@ REGISTER_UI_STYLE(STYLE_NAME)
 
 
 
-
+#define DEV_LOGO	"sd0"
 #define DEV_ROOT	"storage/sd0/C/"
 #define PHOTO_DIR 	"PHOTO/"
 #define VIDEO_DIR	"VIDEO/"
@@ -110,8 +110,9 @@ static void camera_dec_flush(void)
     struct element *elm;
     elm = ui_core_get_element_by_id(CAM_CAMERA_LAYOUT);
     if (elm != NULL) {
-        /* printf(">>>>>>elm != NULL"); */
+        /* printf("CAM_CAMERA_LAYOUT REDRAW_ENTER"); */
         ui_redraw(CAM_CAMERA_LAYOUT);
+        /* printf("CAM_CAMERA_LAYOUT REDRAW_EXIT"); */
     }
 }
 static void camera_rec_err()
@@ -180,7 +181,7 @@ static int cam_ctrl_view_video(int enable)
 }
 static void cam_camera_photo_savc_cb(char *path)
 {
-    if (jljpeg_stream_src_data_get()) {
+    if (!jljpeg_stream_src_data_get()) {
         return;
     }
     jljpeg_stream_src_data_save_to_file(path);
@@ -264,16 +265,20 @@ static int cam_file_handler_open(int show_temp, char *dir, char *ext_name)
 {
     cam_file_handler_close();
     if (!dev_manager_get_total(1)) {// 获取有效可播放设备数量
+        log_error("%s %d", __func__, __LINE__);
         return -1;
     }
-    struct __dev *dev = dev_manager_find_active(1);//在有效设备中获取活跃设备
+    /* struct __dev *dev = dev_manager_find_active(1);//在有效设备中获取活跃设备 */
+    struct __dev *dev = dev_manager_check_by_logo(DEV_LOGO);
     if (!dev) {
+        log_error("%s %d", __func__, __LINE__);
         return -1;
     }
 
     log_debug("dev_root:%s dir:%s ext:%s \n", dev_manager_get_root_path(dev), dir, ext_name);
     //活跃分区 与目标一致
     if (!strstr(dev_manager_get_root_path(dev), DEV_ROOT)) {
+        log_error("%s dev:%s %d", __func__, dev_manager_get_root_path(dev), __LINE__);
         return -1;
     }
     char path[64] = {0};

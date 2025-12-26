@@ -1874,7 +1874,8 @@ static int jlui_close_draw_context(struct draw_context *dc)
     /* 如果 dc->refresh 没有使能，说明是3D特效创建GPU任务链，此时不释放缓存，由特效退出时主动释放 */
     if (dc->refresh && (config_gpu_cache_psram_jpeg_en || config_gpu_cache_psram_file_res_en)) {
         /* gpu_input_stream_cache_reset(); */
-        gpu_input_stream_cache_clr_non_resident();
+        /* gpu_input_stream_cache_clr_non_resident(); */
+        gpu_input_stream_cache_clr_by_index(dc->index);
     }
 
     __this->dc_flag &= ~BIT(dc->index);
@@ -4350,12 +4351,19 @@ void *cache_gpu_input_data(void *head, pJLGPUTaskParam_t task_param, void *fp, i
         task_param->texture.data = (u8 *)((u32)task_param->texture.data - tab_size);
         task_param->image.len += tab_size;
     }
-
+#if 1
+    u32 res_hash = 5383;
+    res_hash = mmu_hash(res_hash, (u8 *)&task_param->image, sizeof(struct image_file));
+    res_hash = mmu_hash(res_hash, (u8 *)&task_param->task_id, 4);
+    res_hash = mmu_hash(res_hash, (u8 *)&task_param->element_id, 4);
+    u32 data_crc = res_hash;
+#else
     u32 tab[3] ALIGNED(4);
     tab[0] = (u32)fp;
     tab[1] = (u32)task_param->texture.data;
     tab[2] = task_param->image.len;
     u16 data_crc = CRC16(&tab[0], sizeof(tab));
+#endif
     /* 检查是否已经有缓存，如果需要缓存的图片没在cache里，释放原来的，缓存新的 */
     void *cache_addr = gpu_input_stream_cache_check(data_crc);
     int vaild_index = index;
@@ -4377,6 +4385,7 @@ void *cache_gpu_input_data(void *head, pJLGPUTaskParam_t task_param, void *fp, i
         }
 #endif
         cache_addr = gpu_input_stream_cache_add(fp, task_param->texture.data, task_param->image.len, data_crc, task_param->texture.mmu_tab_base, (task_param->info.tab_size >> 2));
+        /* printf("[cache]add elm_id:%x task_id:%d  index:%d addr:0x%x", task_param->element_id, task_param->task_id,index, (u32)cache_addr); */
         task_param->texture.data = cache_addr;
         task_param->texture.mmu_tab_base = NULL;
     }

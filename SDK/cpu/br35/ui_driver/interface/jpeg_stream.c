@@ -22,6 +22,8 @@
 #include "jpeg_stream.h"
 #include "video/avi/avilib.h"
 
+#if CONFIG_JL_UI_ENABLE
+
 #define LOG_TAG_CONST       JPEG
 #define LOG_TAG     		"[JPEG_STREAM]"
 #define LOG_ERROR_ENABLE
@@ -719,3 +721,6 @@ int jpeg_image_file_psram(struct draw_context *dc, int left, int top, int width,
     }
     return 0;
 }
+
+#endif /*#if CONFIG_JL_UI_ENABLE*/
+

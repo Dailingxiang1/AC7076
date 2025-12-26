@@ -59,6 +59,13 @@ typedef enum {
     AUTO_CENTER_CUSTOM,//自定义滑动处理
 } AUTO_CENTER_MODE;
 
+// 定义列表动画类型枚举
+typedef enum {
+    UI_ANIM_TYPE_NONE,
+    UI_ANIM_TYPE_ENERGY,   		// 惯性动画
+    UI_ANIM_TYPE_CENTER_AND_FLICK,  // 回弹动画
+} ui_anim_type_t;
+
 
 /* ------------------------------------------------------------------------------------*/
 /**

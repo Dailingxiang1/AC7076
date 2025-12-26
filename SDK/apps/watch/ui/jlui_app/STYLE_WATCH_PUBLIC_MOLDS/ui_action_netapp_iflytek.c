@@ -133,12 +133,19 @@ static int ui_ifly_vad_event_cb(ifly_vad_event_enum evt, void *param)
             sys_timeout_del(ifly_ui->vad_recv_timer);
             ifly_ui->vad_recv_timer = 0;
         }
-        ui_ifly_vad_button_touch(0);
         break;
     case IFLY_VAD_EVT_NETWORK_RECV_ERROR:
+        if (ifly_ui->vad_recv_timer) {
+            sys_timeout_del(ifly_ui->vad_recv_timer);
+            ifly_ui->vad_recv_timer = 0;
+        }
         UI_MSG_POST("vad_network_recv_error");
         break;
     case IFLY_VAD_EVT_NETWORK_FAIL:
+        if (ifly_ui->vad_recv_timer) {
+            sys_timeout_del(ifly_ui->vad_recv_timer);
+            ifly_ui->vad_recv_timer = 0;
+        }
         UI_MSG_POST("vad_network_fail");
         break;
     case IFLY_VAD_EVT_EXIT:
@@ -427,7 +434,6 @@ static void vad_recv_timer_handler(void *priv)
         sys_timeout_del(ifly_ui->vad_recv_timer);
         ifly_ui->vad_recv_timer = 0;
     }
-    ui_ifly_vad_button_touch(0);
 }
 
 static int ifly_vad_button_ontouch(void *ctr, struct element_touch_event *e)
@@ -538,7 +544,11 @@ static int no_connect_ontouch(void *ctr, struct element_touch_event *e)
     case ELM_EVENT_TOUCH_R_MOVE:
         if (ifly_ui && ifly_ui->cur_layout) {
             ui_hide(IFLY_LAYOUT_NO_CONNECT);
-            ui_show(ifly_ui->cur_layout);
+            if (ifly_ui->cur_layout != IFLY_LAYOUT_TTS) {
+                ui_show(IFLY_LAYOUT_VAD);
+            } else {
+                ui_show(IFLY_LAYOUT_TTS);
+            }
             return true;
         }
         break;
@@ -654,6 +664,7 @@ static int vad_no_content()
     ifly_ui->cur_layout = IFLY_LAYOUT_VAD;
     ifly_ui->show_layout = IFLY_LAYOUT_NO_CONTENT;
     ifly_no_content(IFLY_VAD_NO_DATA_CNT_MAX);
+    ui_ifly_vad_button_touch(0);
 
     return 0;
 }
@@ -663,7 +674,7 @@ static int vad_network_fail()
     ifly_ui->cur_layout = IFLY_LAYOUT_CONNECTTING;
     ifly_ui->show_layout = IFLY_LAYOUT_CONNECT_FAIL;
     ifly_no_content(IFLY_VAD_NO_CONN_CNT_MAX);
-    ui_ifly_vad_button_touch(1);
+    ui_ifly_vad_button_touch(0);
 
     return 0;
 }
@@ -673,7 +684,7 @@ static int vad_network_recv_error()
     ifly_ui->cur_layout = IFLY_LAYOUT_VAD;
     ifly_ui->show_layout = IFLY_LAYOUT_CONNECT_FAIL;
     ifly_no_content(IFLY_VAD_NO_CONN_CNT_MAX);
-    ui_ifly_vad_button_touch(1);
+    ui_ifly_vad_button_touch(0);
 
     return 0;
 }
@@ -691,6 +702,7 @@ static int ai_think()
 {
     ui_hide(IFLY_LAYOUT_VAD);
     ui_show(IFLY_LAYOUT_AI);
+    ui_ifly_vad_button_touch(0);
 
     return 0;
 }

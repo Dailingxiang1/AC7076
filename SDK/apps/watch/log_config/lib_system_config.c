@@ -161,6 +161,8 @@ const int FATFS_SUPPORT_DEV_READ_SUCCESSION = 0; //是否保存非对齐读时�
 
 const int SDFILE_STORAGE_ENABLE = 1; //sdfile做设备接入VFS,扫描功能使能
 
+const int FATFS_BACKUP_ENABLE = 0; //文件系统安全备份功能使能
+
 const int VIRFAT_FLASH_ENABLE = 0; //精简jifat代码,不使用。
 
 

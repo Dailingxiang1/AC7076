@@ -112,6 +112,11 @@ static int ui_key_event_prob_handle(void *arg)
     struct key_event *key = (struct key_event *)arg;
     u16 key_event;
     log_debug("[%s] key->event:%d, key->value:%d", __func__, key->event, key->value);
+    if (app_get_current_mode_name() == APP_MODE_UPDATE ||
+        app_get_current_mode_name() == APP_MODE_RCSP) {
+        log_info("%s return", __func__);
+        return 0; // 传输的时候不处理
+    }
     key_event = jlui_key_event_remap(key, jlui_key_watch_event_table);
 
     if (__this->send_event_cb) {

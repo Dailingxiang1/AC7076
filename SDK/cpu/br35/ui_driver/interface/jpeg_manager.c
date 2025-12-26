@@ -10,6 +10,8 @@
 #include <math.h>
 #include "ui/lcd/lcd_drive.h"	// lcd 驱动
 
+#if TCFG_UI_ENABLE
+
 #define LOG_TAG_CONST      	JPEG
 #define LOG_TAG     		"[JPEG]"
 #define LOG_ERROR_ENABLE
@@ -650,18 +652,20 @@ static void jpeg_draw_cb(int id, u8 *dst_buf, struct rect *dst_r, struct rect *s
 
     /* 计算变换后图片的输出区域 */
     struct rect jpeg_draw_src;
-    memcpy(&jpeg_draw_src, src_r, sizeof(struct rect));
     //放大时为中心放大
-    int center_y = src_r->top + src_r->height / 2;
-    jpeg_draw_src.height = opj->height / ratio_h;
-    jpeg_draw_src.top = center_y - jpeg_draw_src.height / 2;
-    int center_x = src_r->left + src_r->width / 2;
-    jpeg_draw_src.width = opj->width / ratio_w;
-    jpeg_draw_src.left = center_x - jpeg_draw_src.width / 2;
+    if (matrix) {
+        int center_y = src_r->top + src_r->height / 2;
+        jpeg_draw_src.height = opj->height / ratio_h;
+        jpeg_draw_src.top = center_y - jpeg_draw_src.height / 2;
+        int center_x = src_r->left + src_r->width / 2;
+        jpeg_draw_src.width = opj->width / ratio_w;
+        jpeg_draw_src.left = center_x - jpeg_draw_src.width / 2;
+    } else {
+        memcpy(&jpeg_draw_src, src_r, sizeof(struct rect));
+    }
     /* DUMP_RECT(__func__, __LINE__, "dst_r", dst_r);						//推屏buf */
     /* DUMP_RECT(__func__, __LINE__, "src_r", src_r);						//jpeg显示区域 */
     /* DUMP_RECT(__func__, __LINE__, "jpeg_draw_src", &jpeg_draw_src);		//jpeg缩放后区域 */
-
     /* 计算图片输出和推屏Buf的重叠区域 */
     struct rect cover_r_t;
     if (!get_rect_cover(dst_r, src_r, &cover_r_t)) {
@@ -707,7 +711,15 @@ static void jpeg_draw_cb(int id, u8 *dst_buf, struct rect *dst_r, struct rect *s
         /* DUMP_RECT(__func__, __LINE__, "jpeg_dec_r", &jpeg_dec_r); */
         u8 *disp_buf = dst_buf + (block_r.top - dst_r->top) * 2 * dst_r->width;
         /*启动解码*/
-        jljpeg_decode_start(opj, &jpeg_draw_src, &jpeg_dec_r, &cover_r, &block_r, disp_buf);
+        int jpg_dec_ret = jljpeg_decode_start(opj, &jpeg_draw_src, &jpeg_dec_r, &cover_r, &block_r, disp_buf);
+#if 0
+        //用于jpeg_stream debug
+        if (jpg_dec_ret != JDEC_OK) {
+            extern int jljpeg_stream_src_data_save_to_file(s8 * filename);
+            jljpeg_stream_src_data_save_to_file("storage/sd0/C/ERROR/err_****.jpg");
+            ASSERT(0);
+        }
+#endif
         sub_top += sub_height;
         sub_height = (sub_top + sub_height + draw_top < draw_btm) ? max_dec_height : draw_btm - draw_top - sub_top;
     }
@@ -981,9 +993,7 @@ void *jpeg_module_opj_create_file(void *path, int path_len, u32 check, u32 index
 
 
 
-
-
-
+#endif /*#if TCFG_UI_ENABLE */
 
 
 

@@ -91,6 +91,13 @@ __check:
         u8 *packet = frame.packet;
 
         seqn = (packet[2] << 8) | packet[3];
+#if  TCFG_APP_VIDEO_EN
+        if (app_in_mode(APP_MODE_VIDEO)) {
+            a2dp_media_free_packet(detect->file, packet);
+            printf("%s curr mode is video\n", __func__);
+            continue;
+        }
+#endif
 
         /*
          * 不检测,一直丢包

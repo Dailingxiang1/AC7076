@@ -70,7 +70,7 @@ const int UI_RES_FLASH_TAB_OFFSET = 0x0;
 const int config_jpeg_isr_delay_us = 50;			//参考值100,最小50
 const int JLJPEG_STREAM_ENABLE  = 1;
 #if TCFG_HOST_UVC_ENABLE
-const int config_jpeg_sync_wait_in_irq = 1;			//在中断同步等待，效率低
+const int config_jpeg_sync_wait_in_irq = 0;			//在中断同步等待，效率低
 const int config_jpeg_ff_rst_enable = 1;			//支持带DRI标志的图片，部分摄像头只输出这种类型的图片
 #else
 const int config_jpeg_sync_wait_in_irq = 0;			//在中断同步等待

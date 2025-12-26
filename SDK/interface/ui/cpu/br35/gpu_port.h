@@ -1445,7 +1445,51 @@ int gpu_input_stream_cache_set_index(u32 cache_addr, u8 index);
 /* ------------------------------------------------------------------------------------*/
 int gpu_input_stream_cache_vaild_sub_by_index(u8 index);
 
-
+/* ------------------------------------------------------------------------------------*/
+/**
+ * @brief gpu_input_stream_cache_clr_by_index 按索引清理资源
+ *
+ * @param index 链表索引（dc->index）
+ *
+ * @return
+ */
+/* ------------------------------------------------------------------------------------*/
+int gpu_input_stream_cache_clr_by_index(u8 index);
+/* ------------------------------------------------------------------------------------*/
+/**
+ * @brief gpu_input_stream_cache_addr_check 检查资源是否存在psram(通过gpu_cache接口管理)
+ *
+ * @param adr
+ * @param len
+ *
+ * @return
+ */
+/* ------------------------------------------------------------------------------------*/
+int gpu_input_stream_cache_addr_check(u32 adr, int len);
+/* ------------------------------------------------------------------------------------*/
+/**
+ * @brief gpu_input_stream_cache_dump 打印gpu_cache信息
+ *
+ * @param index -1:打印所有信息，0~255：按链表索引打印
+ *
+ * @return
+ */
+/* ------------------------------------------------------------------------------------*/
+int gpu_input_stream_cache_dump(int index, const char *func, int line);
+/* ------------------------------------------------------------------------------------*/
+/**
+ * @brief jlgpu_check_res_all_task
+ *
+ * @param head	任务链表头
+ * @param gpu_cache_check
+ 					校验gpu_cache资源(nandflash+psram版本)
+					1:校验不过时打印信息，
+					2:校验不过时打印信息并触发断言
+ * @param func	调用函数
+ * @param line	调用行号
+ */
+/* ------------------------------------------------------------------------------------*/
+void jlgpu_check_res_all_task(pJLGPUTaskHead_t head, int gpu_cache_check, const char *func, int line);
 #endif
 
 

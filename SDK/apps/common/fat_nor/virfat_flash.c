@@ -359,6 +359,245 @@ static int virfat_ioctl(void *fd, u32 cmd, u32 arg)
     return res;
 }
 
+
+//////////////////////////////////////sdfile_fat 备份fat表和目录项/////////////////////////////////////////////////
+#define BACKUPS_SPACE ((virfat_flash.database - virfat_flash.fatbase) * 512)
+#define DIR_ENTRY_DEV_ADDR ((virfat_flash.dirbase - virfat_flash.fatbase) * 512)
+//sdfile_fat的fat表和目录项都是4K对齐的地址和长度
+#define BK_BUF_LEN 4096
+
+//记入VM，序号需要整理成独立的
+/* #define		CFG_FATFS_BACKUP_FLAG		 		145 */
+
+extern const int FATFS_BACKUP_ENABLE; //文件系统安全备份功能使能
+static u8 backup_record_flag = 0;
+
+
+typedef enum {
+    BK_OK = 0,
+    BK_DATA_IS_FF,
+    BK_DATA_LEN_ISNOT_ALIGN,
+    BK_FATFS_DATA_IS_WRONG,
+    BK_ALREADY_RECORD,
+    BK_NOT_RECORD,
+
+    BK_DEV_READ_DATA_ERROR = 8,
+    BK_DEV_ERASE_DATA_ERROR,
+    BK_DEV_WRITE_DATA_ERROR,
+
+    BK_FATFS_NOT_USED = 0xFF,
+} BK_RESULT;
+
+static u8 bk_check_is_FF(u8 *data, u32 len)
+{
+    u8 is_ff_flag = 0;
+    int sub_len = len / 32;
+    if (len % 32) {
+        return BK_DATA_LEN_ISNOT_ALIGN;
+    }
+    for (int j = 0; j < sub_len; j++) {
+        is_ff_flag = 1;
+        for (int i = 0; i < 32; i++) {
+            if (data[i] != 0xFF) {
+                is_ff_flag = 0;
+                break;
+            }
+        }
+        if (is_ff_flag) {
+            break;
+        }
+    }
+    return is_ff_flag;
+}
+
+static int virfat_flash_backups_fat_dir_data()
+{
+    u8 *buf = zalloc(BK_BUF_LEN);
+    ASSERT(buf);
+    int ret = BK_OK;
+    for (int offset = 0; offset < BACKUPS_SPACE; offset += BK_BUF_LEN) {
+        int rw_len;
+        rw_len = virfat_read(fd, buf, BACKUPS_SPACE + offset, BK_BUF_LEN);
+        if (rw_len != BK_BUF_LEN) {
+            ret = BK_DEV_READ_DATA_ERROR;
+            goto __exit;
+        }
+        if (bk_check_is_FF(buf, BK_BUF_LEN)) {
+            ret = BK_DATA_IS_FF;
+            goto __exit;
+        }
+        //check fat table data
+        if (offset == 0) {
+            if (buf[0] != 0xF8 || buf[1] != 0xFF) {
+                ret = BK_FATFS_DATA_IS_WRONG;
+                goto __exit;
+            }
+        }
+        //check dir entry data
+        /* if (offset == DIR_ENTRY_DEV_ADDR) { */
+        /* } */
+        ret = virfat_ioctl(fd, IOCTL_ERASE_SECTOR, offset);
+        if (ret) {
+            ret = BK_DEV_ERASE_DATA_ERROR;
+            goto __exit;
+        }
+        rw_len = virfat_write(fd, buf, offset, BK_BUF_LEN);
+        if (rw_len != BK_BUF_LEN) {
+            ret = BK_DEV_WRITE_DATA_ERROR;
+            goto __exit;
+        }
+    }
+    //VM 标记放在备份后面
+    u8 bk_info = 1;
+    syscfg_write(CFG_FATFS_BACKUP_FLAG, &bk_info, sizeof(u8));
+    y_printf(">>>[test]:write bk_info = 0x%x\n", bk_info);
+__exit:
+    y_printf("\n >>>[test]:func = %s,line= %d, ret = %d\n", __FUNCTION__, __LINE__, ret);
+    if (buf) {
+        free(buf);
+    }
+    return ret;
+}
+
+static int virfat_flash_resume_fat_dir_data()
+{
+    u8 *buf = zalloc(BK_BUF_LEN);
+    ASSERT(buf);
+    int ret = BK_OK;
+    for (int offset = 0; offset < BACKUPS_SPACE; offset += BK_BUF_LEN) {
+        int rw_len;
+        rw_len = virfat_read(fd, buf, offset, BK_BUF_LEN);
+        if (rw_len != BK_BUF_LEN) {
+            ret = BK_DEV_READ_DATA_ERROR;
+            goto __exit;
+        }
+        /* y_printf(">>>[test]:offset = %d, fd = 0x%p, buf = 0x%p\n", offset, fd, buf); */
+        /* put_buf(buf, rw_len); */
+        if (bk_check_is_FF(buf, BK_BUF_LEN)) {
+            ret = BK_DATA_IS_FF;
+            goto __exit;
+        }
+        //check fat table data
+        if (offset == 0) {
+            if (buf[0] != 0xF8 || buf[1] != 0xFF) {
+                ret = BK_FATFS_DATA_IS_WRONG;
+                goto __exit;
+            }
+        }
+        ret = virfat_ioctl(fd, IOCTL_ERASE_SECTOR, BACKUPS_SPACE + offset);
+        if (ret) {
+            ret = BK_DEV_ERASE_DATA_ERROR;
+            goto __exit;
+        }
+        /* y_printf(">>>[test]:offset = %d, fd = 0x%p, buf = 0x%p\n", offset, fd, buf); */
+        rw_len = virfat_write(fd, buf, BACKUPS_SPACE + offset, BK_BUF_LEN);
+        if (rw_len != BK_BUF_LEN) {
+            ret = BK_DEV_WRITE_DATA_ERROR;
+            goto __exit;
+        }
+    }
+    //清VM 标记放在还原后面
+    u8 bk_info = 0;
+    syscfg_write(CFG_FATFS_BACKUP_FLAG, (void *)&bk_info, sizeof(u8));
+    y_printf(">>>[test]:write bk_info = 0x%x\n", bk_info);
+__exit:
+    y_printf("\n >>>[test]:func = %s,line= %d, ret = %d\n", __FUNCTION__, __LINE__, ret);
+    if (buf) {
+        free(buf);
+    }
+    return ret;
+}
+
+int virfat_flash_check_resume_flag()
+{
+    //: fatfs 需要预留区域增加备份还原标志, sdfile_fat不需要,使用VM备份标志处理
+    int ret;
+    u8 *buf = zalloc(BK_BUF_LEN);
+    ASSERT(buf);
+    u8 bk_info;
+    syscfg_read(CFG_FATFS_BACKUP_FLAG, (void *)&bk_info, sizeof(u8));
+    y_printf(">>>[test]:read bk_info = 0x%x\n", bk_info);
+    y_printf(">>>[test]:BACKUPS_SPACE = %d\n", BACKUPS_SPACE);
+    u8 resume_flag = 0;
+    for (int offset = 0; offset < BACKUPS_SPACE; offset += BK_BUF_LEN) {
+        ret = virfat_read(fd, buf, BACKUPS_SPACE + offset, BK_BUF_LEN);
+        if (ret != BK_BUF_LEN) {
+            ret = BK_DEV_READ_DATA_ERROR;
+            goto __exit;
+        }
+        if (bk_check_is_FF(buf, BK_BUF_LEN)) {
+            resume_flag = 1;
+            break;
+        }
+        //check fat table data
+        if (offset == 0) {
+            if (buf[0] != 0xF8 || buf[1] != 0xFF) {
+                resume_flag = 1;
+                break;
+            }
+        }
+    }
+    r_printf(">>>[test]:bk_info, resume_flag = 0x%x, 0x%x\n", bk_info, resume_flag);
+    if (bk_info || resume_flag) {
+        ret = virfat_flash_resume_fat_dir_data();
+    }
+__exit:
+    if (buf) {
+        free(buf);
+    }
+    return ret;
+}
+
+int fatfs_sdfile_fat_backup_fat_dir_data()
+{
+    if (backup_record_flag) {
+        return BK_ALREADY_RECORD;
+    }
+    int ret = virfat_flash_backups_fat_dir_data();
+    if (ret == BK_OK) {
+        backup_record_flag = 1;
+    }
+    return ret;
+}
+
+int fatfs_backup_flag_clear()
+{
+    printf("\n >>>[test]:func = %s,line= %d\n", __FUNCTION__, __LINE__);
+    if (!backup_record_flag) {
+        return BK_NOT_RECORD;
+    }
+    backup_record_flag = 0;
+    u8 bk_info = 0;
+    syscfg_write(CFG_FATFS_BACKUP_FLAG, (void *)&bk_info, sizeof(u8));
+    y_printf(">>>[test]:write bk_info = 0x%x\n", bk_info);
+    return BK_OK;
+}
+
+void fatfs_backup_clear_null_dir()
+{
+    backup_record_flag = 1; //避免此时刻进行备份
+    struct vfscan *fs =  fscan("storage/virfat_flash/C/", "-r -tALL -sn ", 4);
+    r_printf(">>>[test]:all filenum = %d\n", fs->file_number);
+    for (int i = fs->file_number; i >= 1; i--) {
+        FILE *fd = fselect(fs, FSEL_BY_NUMBER, i);
+        if (fd) {
+            struct vfs_attr attr;
+            fget_attrs(fd, &attr);
+            //空文件进行删除
+            if (0 == attr.sclust || 0 == attr.fsize) {
+                fdelete(fd);
+            } else {
+                fclose(fd);
+            }
+            backup_record_flag = 1; //避免此时刻进行备份
+        }
+    }
+    fscan_release(fs);
+    backup_record_flag = 0;
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
 AT_VOLATILE_RAM_CODE
 static u32 virfat_flash_read(void *buf, u32 addr_sec, u32 len)
 {
@@ -425,6 +664,16 @@ static u32 virfat_flash_write(void *buf, u32 addr_sec, u32 len)
         }
         return 0;
     }
+
+    //backup deal
+    if (FATFS_BACKUP_ENABLE && (addr_sec >= virfat_flash.fatbase) && (addr_sec < virfat_flash.database)) {
+        u8 ret = fatfs_sdfile_fat_backup_fat_dir_data();
+        if (ret != BK_OK && ret != BK_ALREADY_RECORD) {
+            wlen = 0;
+            goto __exit;
+        }
+    }
+
     if (addr_sec == 0) {
         wlen = len;
         goto __exit;
@@ -564,6 +813,16 @@ u32 virfat_flash_write_watch(void *buf, u32 addr_sec, u32 len)
 {
     u32 wlen;
     u32 real_addrsec = 0;
+
+
+    //backup deal
+    if (FATFS_BACKUP_ENABLE && (addr_sec >= virfat_flash.fatbase) && (addr_sec < virfat_flash.database)) {
+        u8 ret = fatfs_sdfile_fat_backup_fat_dir_data();
+        if (ret != BK_OK && ret != BK_ALREADY_RECORD) {
+            return 0;
+        }
+    }
+
     if (addr_sec == 0) {
         return len;
     } else if (addr_sec < 4096) {
@@ -640,35 +899,6 @@ u32 virfat_flash_get_real_capacity() //获取实际flash容量
         jlfat_capacity = CONFIG_FAT_FLASH_SIZE;
     }
     return jlfat_capacity;
-}
-
-#define BACKUPS_SPACE 8192
-void virfat_flash_backups_fat_dir_data()
-{
-    u8 *buf = zalloc(4096);
-    ASSERT(buf);
-    for (int offset = 0; offset < BACKUPS_SPACE; offset += 4096) {
-        virfat_flash_read_watch(buf, 4096 + BACKUPS_SPACE + offset, 4096);
-        virfat_flash_erase_watch(IOCTL_ERASE_SECTOR, 4096 + offset);
-        virfat_flash_write_watch(buf, 4096 + offset, 4096);
-    }
-    if (buf) {
-        free(buf);
-    }
-}
-
-void virfat_flash_resume_fat_dir_data()
-{
-    u8 *buf = zalloc(4096);
-    ASSERT(buf);
-    for (int offset = 0; offset < BACKUPS_SPACE; offset += 4096) {
-        virfat_flash_read_watch(buf, 4096 + offset, 4096);
-        virfat_flash_erase_watch(IOCTL_ERASE_SECTOR, 4096 + BACKUPS_SPACE + offset);
-        virfat_flash_write_watch(buf, 4096 + BACKUPS_SPACE + offset, 4096);
-    }
-    if (buf) {
-        free(buf);
-    }
 }
 
 /*----------------------------------------------------------------------------*/
@@ -841,6 +1071,10 @@ static int flash_virfat_open(const char *name, struct device **device, void *arg
     ASSERT(fd);
     virfat_flash_init();
 
+    if (FATFS_BACKUP_ENABLE) {
+        virfat_flash_check_resume_flag();
+    }
+
     return 0;
 }
 #if 0
@@ -961,6 +1195,9 @@ static int flash_virfat_ioctrl(struct device *device, u32 cmd, u32 arg)
         /* y_printf("\n >>>[test]:func = %s,line= %d\n",__FUNCTION__, __LINE__); */
         virfat_flash_flush();
         virfat_ioctl(fd, IOCTL_FLUSH, arg);
+        if (FATFS_BACKUP_ENABLE) {
+            fatfs_backup_flag_clear();
+        }
         break;
     case IOCTL_CMD_RESUME:
         break;
@@ -1137,6 +1374,7 @@ const struct device_operations private_sfc_dev_ops = {
     .ioctl = private_sfc_ioctrl,
     .close = private_sfc_close,
 };
+
 #else
 void virfat_flash_get_dirinfo(void *file_buf, u32 *file_num)
 {

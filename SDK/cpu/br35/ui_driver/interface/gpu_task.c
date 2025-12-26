@@ -123,6 +123,7 @@ extern void gpu_free_frame_buf(void *p);
 extern void jpeg_module_free_res_cb(void *p);
 extern struct element *ui_core_get_root();
 extern u8	buf_is_heap_addr(void *p);
+extern int ui_buf_is_psram(void *buf);
 extern const int JLUI_GPU_DMA_TO_PSRAM;
 extern void *jlgpu_unit_to_instruction(pJLGPUTaskUnit_t taskp);
 extern const int config_gpu_cache_psram_jpeg_en ;
@@ -182,7 +183,7 @@ static int jlgpu_lcd_buf_line_get(int left_space, int stride, int buf_num, int m
 /* ------------------------------------------------------------------------------------*/
 static void jlgpu_scheduler_aysnc_free_buf_cb(void *p)
 {
-    if (buf_is_heap_addr(p)) {
+    if (buf_is_heap_addr(p) || ui_buf_is_psram(p)) {
         gpu_free_frame_buf(p);
     } else {
         ASSERT(0, "p:%x", (int)p);

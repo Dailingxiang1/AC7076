@@ -145,6 +145,7 @@ int syscfg_early_read(u16 item_id, void *buf, u16 len);
 //=================================================================================//
 #define 	CFG_STORE_VM_ONLY_BEGIN		50
 #define     AT_CHAR_DEV_NAME            51
+#define     CFG_FATFS_BACKUP_FLAG       60
 #define 	CFG_STORE_VM_ONLY_END		99
 
 //=================================================================================//

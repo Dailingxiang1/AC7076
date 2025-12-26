@@ -693,6 +693,7 @@ static void music_status_check(void *p)
                 ui_pic_show_image_by_id(SPORTING_MUSIC_PAUSE_START_PIC, 0);
             }
         }
+        return;
     }
 #endif
 #if TCFG_APP_MUSIC_EN

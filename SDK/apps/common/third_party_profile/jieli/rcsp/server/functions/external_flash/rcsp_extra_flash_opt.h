@@ -3,6 +3,10 @@
 #include "typedef.h"
 #include "system/event.h"
 
+#define DIAL_PRJ_UUDI_LEN   (36+1)  //Example: "c0f95f48-14fd-4344-9fbf-effbb701473c"
+#define DIAL_VERSION_ID     (4+1)   //Example: "W003"
+
+
 //*----------------------------------------------------------------------------*/
 /**@brief    外部flash操作函数
    @param    param:数据, len:数据长度，OpCode:命令号，OpCode_SN:数据包序列号
