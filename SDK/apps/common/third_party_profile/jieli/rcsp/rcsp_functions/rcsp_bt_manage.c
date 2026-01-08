@@ -503,10 +503,6 @@ int rcsp_user_spp_state_specific(u8 packet_type, u8 *spp_remote_addr)
 #endif
     switch (packet_type) {
     case SPP_USER_ST_CONNECT:
-#if TCFG_EDR_SCAN_CONN_CTRL
-        void rcsp_set_ble_disconnect_by_app_flag(u8 flag);
-        rcsp_set_ble_disconnect_by_app_flag(0);
-#endif
         // spp 连接后会走这里
         extern void clock_refurbish(void);
         clock_refurbish();

@@ -123,9 +123,9 @@ u16 app_video_task_switch_flag_set(u16 flag)
 
 #define AVI_FILE_COUNT (sizeof(avi_files) / sizeof(avi_files[0]))
 
-static void parse_list_chunk(FILE *file, long list_end, ChunkCallback callback,
-                             void *user_param, long file_size, const char **parent_hierarchy,
-                             int parent_level);
+static int parse_list_chunk(FILE *file, long list_end, ChunkCallback callback,
+                            void *user_param, long file_size, const char **parent_hierarchy,
+                            int parent_level);
 typedef void (*DisplayMJpegFunc)(void *player, FILE *file, int data, int chunk_size, int width, int height);
 typedef void (*PlayPCMFunc)(void *player, FILE *file, int data, int chunk_size);
 
@@ -479,6 +479,7 @@ char  parse_riff_file(FILE *file, ChunkCallback callback, void *user_param, int 
     log_info("\n\n\n\n\nRIFF chunk_size: %d\n\n\n\n\n", chunk_size);
     /* 校验块大小合法性 */
     long current_pos = ftell(file) - __this->file_offset;
+    /* printf("%s 111 chunk:%s current_pos: %d, chunk_size: %d, file_size: %d", __func__, chunk_id, (int)current_pos, chunk_size, (int)file_size); */
     log_info("\n\n\n\n[%s]current_pos: %d, chunk_size: %d, file_size: %d\n\n\n\n", __func__, (int)current_pos, chunk_size, (int)file_size);
     if (current_pos + chunk_size > file_size) {
         log_info("校验块大小合法性 %d %d %d", (int)current_pos, chunk_size, (int)file_size);
@@ -507,9 +508,9 @@ char  parse_riff_file(FILE *file, ChunkCallback callback, void *user_param, int 
             log_error("Failed to read sub chunk size");
             return -AVI_READ_SUB_CHUNK_ID_FAIL;
         }
-
         /* 校验子块大小 */
         current_pos = ftell(file) - __this->file_offset;
+        /* printf("%s 222 chunk:%s current_pos: %d, chunk_size: %d, file_size: %d", __func__, sub_chunk_id, (int)current_pos, sub_chunk_size, (int)file_size); */
         if (current_pos + sub_chunk_size > file_size) {
             log_info("校验子块大小 %d %d %d", (int)current_pos, sub_chunk_size, (int)file_size);
             log_error("Sub chunk exceeds file size");
@@ -541,9 +542,9 @@ char  parse_riff_file(FILE *file, ChunkCallback callback, void *user_param, int 
                 fseek(file, current_pos + sub_chunk_size, SEEK_SET);
             } else {
                 long list_end = ftell(file) - __this->file_offset + sub_chunk_size - 4;
-                parse_list_chunk(file, list_end, callback, user_param, file_size,
-                                 list_hierarchy, 4);
-
+                int ret = parse_list_chunk(file, list_end, callback, user_param, file_size,
+                                           list_hierarchy, 4);
+                return ret;
                 fseek(file, current_pos + sub_chunk_size, SEEK_SET); // add
             }
         } else {
@@ -567,9 +568,9 @@ char  parse_riff_file(FILE *file, ChunkCallback callback, void *user_param, int 
     return 0;
 }
 /* LIST块解析实现 */
-static void parse_list_chunk(FILE *file, long list_end, ChunkCallback callback,
-                             void *user_param, long file_size, const char **parent_hierarchy,
-                             int parent_level)
+static int parse_list_chunk(FILE *file, long list_end, ChunkCallback callback,
+                            void *user_param, long file_size, const char **parent_hierarchy,
+                            int parent_level)
 {
     while (ftell(file) - __this->file_offset < list_end) {
         wdt_clear();
@@ -580,20 +581,21 @@ static void parse_list_chunk(FILE *file, long list_end, ChunkCallback callback,
         /* 读取子块头 */
         if (avi_fread(sub_chunk_id, 1, 4, file) != 4) {
             log_error("Failed to read sub chunk ID");
-            return;
+            return -AVI_READ_SUB_CHUNK_ID_FAIL;
         }
         sub_chunk_id[4] = '\0';
 
         if (avi_fread(&sub_chunk_size, 4, 1, file) != 1) {
             log_error("Failed to read sub chunk size");
-            return;
+            return -AVI_READ_SUB_CHUNK_SIZE_FAIL;
         }
-
         /* 校验子块大小 */
         long current_pos = ftell(file) - __this->file_offset;
+
+        /* printf("%s 333 chunk:%s current_pos: %d, chunk_size: %d, file_size: %d", __func__, sub_chunk_id, (int)current_pos, sub_chunk_size, (int)file_size); */
         if (current_pos + sub_chunk_size > file_size) {
             log_error("Sub chunk exceeds file size");
-            return;
+            return -AVI_SUB_CHUNK_LEN_ERR;
         }
 
         /* 构建层级信息 */
@@ -608,7 +610,7 @@ static void parse_list_chunk(FILE *file, long list_end, ChunkCallback callback,
             if (avi_fread(list_type, 1, 4, file) != 4) {
                 log_error("Failed to read nested LIST type");
                 avi_free(current_hierarchy);
-                return;
+                return -AVI_LIST_TYPE_ERR;
             }
             list_type[4] = '\0';
 
@@ -654,6 +656,7 @@ static void parse_list_chunk(FILE *file, long list_end, ChunkCallback callback,
 
         avi_free(current_hierarchy);
     }
+    return 0;
 }
 
 // 打印流头信息（增强版）

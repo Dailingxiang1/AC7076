@@ -56,33 +56,35 @@ REGISTER_UI_STYLE(STYLE_NAME)
 #define VIDEO_PATH  DEV_ROOT VIDEO_DIR VIDEO_NAME "." VIDEO_EXT 			//视频路径
 
 #define VIEW_ITEM_NUM	6
+#define PHOTO_CONTINUE_SAVE					3
+
 struct brower_set_info {
-int flist_index;  							//文件列表首项所指的索引
-int cur_total;								//文件数
-FILE *file;									//文件句柄
-struct vfscan *fs;							//文件系统句柄
-FS_DIR_INFO *dir_buf;						//文件(夹)信息
-int show_temp;								//显示项
+    int flist_index;  							//文件列表首项所指的索引
+    int cur_total;								//文件数
+    FILE *file;									//文件句柄
+    struct vfscan *fs;							//文件系统句柄
+    FS_DIR_INFO *dir_buf;						//文件(夹)信息
+    int show_temp;								//显示项
 #if (TCFG_LFN_EN)
 u8  lfn_buf[512];							//长文件名
 #endif//TCFG_LFN_EN
 
 };
-#define PHOTO_CONTINUE_SAVE					3
+
 struct camera_ctrl {
-u32 layout_curr;								//当前布局id
-u32 video_rec_time;								//录像开始时间戳，用于计时
-u8 view_video;									//1 查看录像 0 查看照片
-u8 video_doing;									//录像中状态
-u16 view_remap[VIEW_ITEM_NUM];
-u8 view_vaild[VIEW_ITEM_NUM];
-volatile s8 photo_save_cnt;						//
-struct brower_set_info brower_info;				//文件浏览
-char *sel_path;
+    u32 layout_curr;								//当前布局id
+    u32 video_rec_time;								//录像开始时间戳，用于计时
+    u8 view_video;									//1 查看录像 0 查看照片
+    u8 video_doing;									//录像中状态
+    u16 view_remap[VIEW_ITEM_NUM];
+    u8 view_vaild[VIEW_ITEM_NUM];
+    s8 error_status;								//
+    volatile s8 photo_save_cnt;						//
+    struct brower_set_info brower_info;				//文件浏览
+    char *sel_path;
 } __camera_ctrl;
+
 #define __this (&__camera_ctrl)						//相机句柄
-
-
 
 static int cam_camera_video_sw();
 //****************************************************************************************//
@@ -93,6 +95,7 @@ static int cam_ctrl_init()
     __this->layout_curr = CAM_MAIN_LAYOUT;
     __this->video_rec_time = 0;
     __this->video_doing = 0;
+    __this->error_status = 0;
     /* __this->view_video = 1; */
     return 0;
 }
@@ -105,7 +108,7 @@ static int cam_ctrl_deinit()
  * @brief  camera_dec_reflush_sync相机画面刷新 (外部调用,线程同步)
  */
 /* ------------------------------------------------------------------------------------*/
-static void camera_dec_flush(void)
+static void camera_dec_flush(void *p)
 {
     struct element *elm;
     elm = ui_core_get_element_by_id(CAM_CAMERA_LAYOUT);
@@ -115,8 +118,13 @@ static void camera_dec_flush(void)
         /* printf("CAM_CAMERA_LAYOUT REDRAW_EXIT"); */
     }
 }
-static void camera_rec_err()
+static void camera_rec_err(int status)
 {
+    if (__this) {
+        __this->error_status = status;
+    }
+
+    /* printf("%s status:%d !!\n", __func__, status); */
     cam_camera_video_sw();
     ui_show(CAM_WARNING_LAYOUT);
 }
@@ -136,7 +144,8 @@ void camera_dec_reflush_sync(int status)
         msg[0] = (int) camera_rec_err;
     }
     msg[1] = 1;
-    msg[2] = 0;
+    msg[2] = status;
+
     int ret = os_taskq_post_type("ui", Q_CALLBACK, 3, msg);
 
 
@@ -410,6 +419,29 @@ REGISTER_UI_EVENT_HANDLER(CAM_WARNING_LAYOUT)
 .onchange =  NULL,
  .onkey = NULL,
   .ontouch =  cam_warning_layout_ontouch,
+};
+static int cam_warning_text_onchange(void *ctrl, enum element_change_event event, void *arg)
+{
+    switch (event) {
+    case ON_CHANGE_SHOW_PROBE:
+        int index = 0;
+        if (__this) {
+            index = (__this->error_status < 0) ? -1 * __this->error_status : __this->error_status;
+            index -= 1;
+        }
+        /* printf("%s index:%d err:%d", __func__, index, __this->error_status); */
+        ui_text_set_index((struct ui_text *)ctrl, index);
+        break;
+    default:
+        break;
+    }
+    return false;
+}
+
+REGISTER_UI_EVENT_HANDLER(CAM_WARNING_TEXT)
+.onchange =   cam_warning_text_onchange,
+ .onkey = NULL,
+  .ontouch = NULL,
 };
 //****************************************************************************************//
 //								主页面
@@ -966,7 +998,7 @@ void video_dec_reflush_sync(int status)
 {
     void jlui_malloc_ram_info_dump();
     /* jlui_malloc_ram_info_dump(); */
-    log_debug("%s status:%d !!\n", __func__, status);
+    /* log_debug("%s status:%d !!\n", __func__, status); */
 
     int msg[3] = {0};
 

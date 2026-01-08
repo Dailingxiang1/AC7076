@@ -118,6 +118,7 @@ int ui_ram_image_attrs_set(struct ui_image_attrs *img, u8 *data, int data_len, i
     return 0;
 }
 
+
 static void (*jlgpu_create_task_list_by_image_cb_func)(JLGPUTaskParam_t *param);
 pJLGPUTaskHead_t jlgpu_create_task_list_by_image(pJLGPUTaskHead_t head, struct ui_image_attrs *image_attr, int xoffset, int yoffset)
 {
@@ -382,7 +383,7 @@ int page_mode_mode_cube_filp_effect_draw(pJLGPUMultTaskList_t mult_list, struct 
         if (map_head) {
             jlgpu_set_task_list_out_format(map_head, out_format);
             new_head = jlgpu_task_list_copy_create(NULL, map_head, &matrix, 0);
-            jlgpu_task_list_copy_destroy(map_head);
+            jlgpu_delete_task_list_head(map_head);
         } else {
             new_head = jlgpu_task_list_copy_create(NULL, jlgpu_mult_task_head_by_index(mult_list, idx), &matrix, 0);
         }
@@ -394,7 +395,7 @@ int page_mode_mode_cube_filp_effect_draw(pJLGPUMultTaskList_t mult_list, struct 
         pJLGPUTaskHead_t map_head = jlgpu_task_list_map_window_id(other_win);
         if (map_head) {
             jlgpu_task_list_copy_create(new_head, map_head, &matrix, 1);
-            jlgpu_task_list_copy_destroy(map_head);
+            jlgpu_delete_task_list_head(map_head);
         } else {
             jlgpu_task_list_copy_create(new_head, jlgpu_mult_task_head_by_index(mult_list, idx_other), &matrix, 1);
         }
@@ -419,6 +420,7 @@ int page_mode_mode_cube_filp_effect_draw(pJLGPUMultTaskList_t mult_list, struct 
         if (tmp_head) {
             jlgpu_set_task_list_out_format(tmp_head, out_format);
             draw->new_list_create |= BIT(set_idx);
+            draw->normal_list_flag |=  BIT(set_idx);
         } else {
             tmp_head = jlgpu_mult_task_head_by_index(mult_list, idx);
             if (/*curr_win != DIAL_PAGE_0*/0) {
@@ -442,6 +444,7 @@ int page_mode_mode_cube_filp_effect_draw(pJLGPUMultTaskList_t mult_list, struct 
         if (tmp_head) {
             jlgpu_set_task_list_out_format(tmp_head, out_format);
             draw->new_list_create |= BIT(set_idx);
+            draw->normal_list_flag |=  BIT(set_idx);
         } else {
             tmp_head = jlgpu_mult_task_head_by_index(mult_list, idx_other);
             if (/*other_win != DIAL_PAGE_0*/0) {
@@ -531,7 +534,7 @@ int page_mode_mode_drift_filp_effect_draw(pJLGPUMultTaskList_t mult_list, struct
             if (map_head) {
                 jlgpu_set_task_list_out_format(map_head, out_format);
                 new_head = jlgpu_task_list_copy_create(NULL, map_head, &matrix, 0);
-                jlgpu_task_list_copy_destroy(map_head);
+                jlgpu_delete_task_list_head(map_head);
             } else {
                 new_head = jlgpu_task_list_copy_create(NULL, jlgpu_mult_task_head_by_index(mult_list, idx), &matrix, 0);
             }
@@ -552,7 +555,7 @@ int page_mode_mode_drift_filp_effect_draw(pJLGPUMultTaskList_t mult_list, struct
             if (map_head) {
                 jlgpu_set_task_list_out_format(map_head, out_format);
                 new_head = jlgpu_task_list_copy_create(NULL, map_head, &matrix, 0);
-                jlgpu_task_list_copy_destroy(map_head);
+                jlgpu_delete_task_list_head(map_head);
             } else {
                 new_head = jlgpu_task_list_copy_create(NULL, jlgpu_mult_task_head_by_index(mult_list, idx_other), &matrix, 0);
             }
@@ -574,6 +577,7 @@ int page_mode_mode_drift_filp_effect_draw(pJLGPUMultTaskList_t mult_list, struct
             if (tmp_head) {
                 jlgpu_set_task_list_out_format(tmp_head, out_format);
                 draw->new_list_create |= BIT(set_idx);
+                draw->normal_list_flag |=  BIT(set_idx);
             } else {
                 tmp_head = jlgpu_mult_task_head_by_index(mult_list, idx);
                 if (/*curr_win != DIAL_PAGE_0*/0) {
@@ -596,6 +600,7 @@ int page_mode_mode_drift_filp_effect_draw(pJLGPUMultTaskList_t mult_list, struct
             if (tmp_head) {
                 jlgpu_set_task_list_out_format(tmp_head, out_format);
                 draw->new_list_create |= BIT(set_idx);
+                draw->normal_list_flag |=  BIT(set_idx);
             } else {
                 tmp_head = jlgpu_mult_task_head_by_index(mult_list, idx_other);
                 if (/*other_win != DIAL_PAGE_0*/0) {
@@ -623,7 +628,7 @@ int page_mode_mode_drift_filp_effect_draw(pJLGPUMultTaskList_t mult_list, struct
             if (map_head) {
                 jlgpu_set_task_list_out_format(map_head, out_format);
                 new_head = jlgpu_task_list_copy_create(NULL, map_head, &matrix, 0);
-                jlgpu_task_list_copy_destroy(map_head);
+                jlgpu_delete_task_list_head(map_head);
             } else {
                 new_head = jlgpu_task_list_copy_create(NULL, jlgpu_mult_task_head_by_index(mult_list, idx_other), &matrix, 0);
             }
@@ -645,7 +650,7 @@ int page_mode_mode_drift_filp_effect_draw(pJLGPUMultTaskList_t mult_list, struct
             if (map_head) {
                 jlgpu_set_task_list_out_format(map_head, out_format);
                 new_head = jlgpu_task_list_copy_create(NULL, map_head, &matrix, 0);
-                jlgpu_task_list_copy_destroy(map_head);
+                jlgpu_delete_task_list_head(map_head);
             } else {
                 new_head = jlgpu_task_list_copy_create(NULL, jlgpu_mult_task_head_by_index(mult_list, idx), &matrix, 0);
             }
@@ -666,6 +671,7 @@ int page_mode_mode_drift_filp_effect_draw(pJLGPUMultTaskList_t mult_list, struct
             if (tmp_head) {
                 jlgpu_set_task_list_out_format(tmp_head, out_format);
                 draw->new_list_create |= BIT(set_idx);
+                draw->normal_list_flag |=  BIT(set_idx);
             } else {
                 tmp_head = jlgpu_mult_task_head_by_index(mult_list, idx_other);
                 if (/*other_win != DIAL_PAGE_0*/0) {
@@ -690,6 +696,7 @@ int page_mode_mode_drift_filp_effect_draw(pJLGPUMultTaskList_t mult_list, struct
             if (tmp_head) {
                 jlgpu_set_task_list_out_format(tmp_head, out_format);
                 draw->new_list_create |= BIT(set_idx);
+                draw->normal_list_flag |=  BIT(set_idx);
             } else {
                 tmp_head = jlgpu_mult_task_head_by_index(mult_list, idx);
                 if (/*curr_win != DIAL_PAGE_0*/0) {
@@ -1637,4 +1644,5 @@ int ui_page_switch_effect_stop()
 
 #endif
 #endif
+
 

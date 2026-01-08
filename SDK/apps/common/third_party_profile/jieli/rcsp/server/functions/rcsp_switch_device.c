@@ -50,21 +50,6 @@ static bool g_is_switching = false;
 static u8 g_is_switch_to_spp = 0;		// 0:BLE; 1:SPP
 
 
-#if TCFG_EDR_SCAN_CONN_CTRL
-/* 用于区分一键连接时候，ble断连原因 */
-static u8 ble_disconnect_by_app_flag = 0; /* 1:一键连接时候，app发命令断连ble */
-
-u8 rcsp_get_ble_disconnect_by_app_flag(void)
-{
-    return ble_disconnect_by_app_flag;
-}
-
-void rcsp_set_ble_disconnect_by_app_flag(u8 flag)
-{
-    printf("%s flag:%d", __func__, flag);
-    ble_disconnect_by_app_flag = flag;
-}
-#endif
 
 extern void ble_app_disconnect(void);
 extern u8 check_le_pakcet_sent_finish_flag(void);
@@ -80,9 +65,6 @@ static void wait_response_and_disconn_ble(void *priv)
                 wait_response_timeout = 0;
             }
             wait_cnt = 0;
-#if TCFG_EDR_SCAN_CONN_CTRL
-            rcsp_set_ble_disconnect_by_app_flag(1);
-#endif
             ble_app_disconnect();
             /*             u16 ble_con_handle = app_ble_get_hdl_con_handle(rcsp_server_ble_hdl); */
             /*             if (g_ble_con_handle == ble_con_handle) { */

@@ -10,6 +10,7 @@ struct ui_page_draw {
     struct rect *rec_gpu_rect;
     struct rect *rec_lcd_rect;
     u32 new_list_create;
+    u32 normal_list_flag;
     u32 list_total;
 };
 struct ui_effect_module {

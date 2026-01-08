@@ -478,10 +478,12 @@ static int jlstream_get_cvp_mode(void)
 {
 #if TCFG_SIRI_MODE_AEC_BYPASS /*SIRI模式省ram方式*/
     if (call_ctrl_get_status() != BT_SIRI_STATE) {
-        return 1;
+        return 0;
     }
-#endif
+    return 1;
+#else
     return 0;
+#endif
 }
 
 int jlstream_event_notify(enum stream_event event, int arg)

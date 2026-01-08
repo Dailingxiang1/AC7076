@@ -61,7 +61,11 @@ struct ui_load_info ui_load_info_table[] = {
 #endif
     {2,  0, UI_MODE_PHY_FLASH, UI_MODE_PHY_BASE, SIDEBAR_PATH"sidebar.sty", NULL},
     {3,  0, UI_MODE_PHY_FLASH, UI_MODE_PHY_BASE, NULL, NULL},
-    {4,  0, PHY_JL_INSERT_FLASH, 0, UPGRADE_PATH"upgrade.sty", NULL},
+#if TCFG_NANDFLASH_DEV_ENABLE&&(!TCFG_SDFILE_INSERT_FLASH_ENABLE)
+    {4,  0,  PHY_JL_NAND_FLASH, 0, UPGRADE_PATH"upgrade.sty", NULL},
+#else
+    {4,  0,  PHY_JL_INSERT_FLASH, 0, UPGRADE_PATH"upgrade.sty", NULL},
+#endif
     {-1, 0, PHY_JL_EXTERN_FLASH, 0, NULL, NULL},
 };
 

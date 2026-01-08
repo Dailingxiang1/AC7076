@@ -991,7 +991,7 @@ void rcsp_file_transfer_init(void (*end_callback)(void))
 
     ftp_d->end_callback = end_callback;
     //如果在超时时间内都没有发文件传输开始命令， 退出文件传输流程
-    ftp_d->start_timerout = sys_timeout_add(NULL, file_transfer_start_timeout, 2000);
+    ftp_d->start_timerout = sys_timeout_add(NULL, file_transfer_start_timeout, FTP_FILE_DATA_RECIEVE_TIMEOUT * 2);
 }
 
 

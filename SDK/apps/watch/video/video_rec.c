@@ -28,7 +28,10 @@ extern u16 app_video_task_switch_flag_get();
 #define MIC_FREMA_SIZE						(4*1024)
 #define MIC_BUFFER_SIZE						(MIC_FREMA_SIZE*2+512)
 #define MIC_SIMPLE_RATE						(8000)
-
+#define VIDEO_REC_START_MIN_SIZE			(100)//单位是k
+#define VIDEO_REC_FILE_MIN_SIZE				(20)//单位是k
+#define AVI_IDX_LEN							(16)
+#define AVI_FRAME_HEAD						(8)
 enum {
     Q_AVI_TASK_KILL   = (Q_USER + 100),
     Q_AVI_TASK_REC_START,
@@ -53,11 +56,13 @@ struct video_rec_handle {
     void *mic;
     u8 *mic_frame;
     char avi_task_name[32];
-    u8 write_error;				//写文件异常
+    s8 write_error;				//写文件异常 :-1 avilib返回异常,-2 空间不足
     u8 busy;
     int aframe_size;
     int video_rate;
     int sample_rate;
+    int avi_file_size;			//预估文件大小
+    /* int real_file_size;			//真实文件大小 */
     void (*ui_refresh_cb)(int status);
     int bytes_per_sample;
     struct fill_frame fill;
@@ -228,13 +233,18 @@ static void jljpeg_frame_fill_judge(avi_t *out_fd, u32 frame_cnt)
         /* printf("avi dup video fps :%d  act fps:%d ,ext fps: %d %d\n", __this->fill.cnt_fnum / __this->fill.secs, __this->fill.one_sec_fps, __this->fill.fps,__this->fill.fnum); */
         __this->fill.one_sec_fps = 0;
     }
-
+__again:
     if (__this->fill.fnum && __this->fill.fill_frame_en) {
         int  ret = AVI_dup_frame(out_fd);
         if (!ret) {
+            __this->avi_file_size += AVI_IDX_LEN * 2;
+            /* __this->real_file_size += AVI_IDX_LEN; */
+            /* printf("real1 dt:%d", AVI_IDX_LEN); */
             __this->fill.cnt_fnum++;
             __this->fill.fnum--;
-
+            if (__this->fill.fnum > __this->fill.fps / 3) {
+                goto __again;
+            }
         }
     }
 }
@@ -254,7 +264,7 @@ static int jljpeg_frame_dropping_judge()
     u32 msecs = jiffies_msec2offset(__this->fill.msecs, jiffies_msec());
     /* printf("%d %d %d\n",(__this->fill.one_sec_fps+1) , (msecs*__this->fill.fps/1000),msecs); */
     if ((__this->fill.one_sec_fps) > (msecs * __this->fill.fps / 1000) + 1) {
-        /* printf("fps > %d ,need droping\n",__this->fill.fps); */
+        printf("fps > %d ,need droping\n", __this->fill.fps);
         if (__this->fill.fnum) {
             __this->fill.fnum--;
             return 0;
@@ -283,7 +293,7 @@ static void video_show_task(void *priv)
 
     char *filename = NULL;
     avi_t *out_fd = NULL;
-
+    u32 free_space  = 0;
     camera_manager_get_dev_width_height(&frame_width, &frame_height);
     log_info("%s frame[%d x %d] \n", __func__, frame_width, frame_height);
 
@@ -325,8 +335,19 @@ static void video_show_task(void *priv)
                 break;
             } else if (msg[0] == Q_AVI_TASK_REC_START) {
                 filename = (char *)msg[1];
+
+                fget_free_space(filename, &free_space);
+
+                printf("[VDO_DEBUG]free_space:%d \n", free_space);
+                if (free_space <= VIDEO_REC_START_MIN_SIZE) {
+                    log_error("avi task rec start not enough space:%dk\n", free_space);
+                    __this->write_error  = -2;
+                    continue;
+                }
                 cyc_time = msg[2];
                 __this->write_error = 0;
+                __this-> avi_file_size = 0;
+                /* __this->real_file_size = 0; */
                 log_debug("avi task rec start <%s> cyc_time:%d !\n", filename, cyc_time);
 #if MIC_DATA_FORM_PCM_TASK_ENABLE
                 __this->pcm_hdl = pcm_data_init(__this->sample_rate, __this->aframe_size, __this->aframe_size * 10);
@@ -373,10 +394,11 @@ static void video_show_task(void *priv)
                     ret = AVI_close(out_fd);
                     if (ret) {
                         log_error("camera devide avi close err :%d \n", ret);
-                        __this->write_error = 1;
+                        __this->write_error = -1;
                         /* ASSERT(0); */
                     } else {
                         log_debug("avi write success \n");
+                        /* printf("real_file_size:%d", __this->real_file_size); */
                     }
                     out_fd = NULL;
                 }
@@ -408,14 +430,29 @@ static void video_show_task(void *priv)
 #if MIC_DATA_FORM_PCM_TASK_ENABLE
             if (pcm_data_read(__this->pcm_hdl, &pcm_data, &pcm_data_len) == 0) {
                 read_data = 1;
-                __this->write_error = AVI_write_audio(out_fd, (char *)pcm_data, pcm_data_len);
+                ret = AVI_write_audio(out_fd, (char *)pcm_data, pcm_data_len);
+                if (!ret) {
+                    __this->avi_file_size += (AVI_IDX_LEN * 2 + AVI_FRAME_HEAD +  pcm_data_len);
+                    /* __this->real_file_size += (AVI_IDX_LEN  + AVI_FRAME_HEAD +  pcm_data_len); */
+                    /* printf("real2 dt:%d", (AVI_IDX_LEN  + AVI_FRAME_HEAD +  pcm_data_len)); */
+                } else {
+                    __this->write_error = -1;
+                }
                 pcm_data_read_done(__this->pcm_hdl, pcm_data);
             }
 #else
             if (__this->mic && __this->mic_frame) {
                 if (mic_data_read(__this->mic, __this->mic_frame, MIC_FREMA_SIZE)) {
                     read_data = 1;
-                    __this->write_error = AVI_write_audio(out_fd, (char *)__this->mic_frame, MIC_FREMA_SIZE);
+                    ret = AVI_write_audio(out_fd, (char *)__this->mic_frame, MIC_FREMA_SIZE);
+                    if (!ret) {
+                        __this->avi_file_size += (AVI_IDX_LEN * 2 + AVI_FRAME_HEAD + MIC_FREMA_SIZE);
+                        /* __this->real_file_size += (AVI_IDX_LEN  + AVI_FRAME_HEAD + MIC_FREMA_SIZE); */
+
+                        /* printf("real3 dt:%d", (AVI_IDX_LEN  + AVI_FRAME_HEAD +  MIC_FREMA_SIZE)); */
+                    } else {
+                        __this->write_error = -1;
+                    }
                 }
             }
 #endif
@@ -456,7 +493,15 @@ static void video_show_task(void *priv)
 #endif
             if (out_fd) {		//录像输出
                 if (!jljpeg_frame_dropping_judge()) {
-                    __this->write_error = AVI_write_frame(out_fd, (char *)jpeg_data, jpeg_data_len, 1);
+                    ret = AVI_write_frame(out_fd, (char *)jpeg_data, jpeg_data_len, 1);
+                    if (!ret) {
+                        __this->avi_file_size += (AVI_IDX_LEN * 2 + AVI_FRAME_HEAD + (jpeg_data_len + 1) / 2 * 2);
+                        /* __this->real_file_size += (AVI_IDX_LEN  + AVI_FRAME_HEAD + (jpeg_data_len + 1) / 2 * 2); */
+
+                        /* printf("real4 dt:%d", (AVI_IDX_LEN  + AVI_FRAME_HEAD +  jpeg_data_len)); */
+                    } else {
+                        __this->write_error  = -1;
+                    }
                     jljpeg_frame_fill_judge(out_fd, 1); //补帧计算
                 } else {
                     jljpeg_frame_fill_judge(out_fd, 0); //补帧计算
@@ -504,6 +549,38 @@ static void video_show_task(void *priv)
                 AVI_set_video(out_fd, frame_width, frame_height, __this->video_rate, "MJPG");
                 AVI_set_audio(out_fd, 1, __this->sample_rate, 16, WAVE_FORMAT_PCM, 0);//默认单声道s16格式
                 frame_cnt = 0;
+            }
+        }
+        if (out_fd) {
+            /* printf("[video_rec]fsize:%d left:%d dt:%d \n",__this->avi_file_size,free_space*1024,free_space*1024 -__this->avi_file_size); */
+            if ((__this->avi_file_size + VIDEO_REC_FILE_MIN_SIZE * 1024) >= (free_space * 1024)) {
+                ret = AVI_close(out_fd);
+                if (ret) {
+                    log_error("camera devide avi close err :%d \n", ret);
+                    __this->write_error = -1;
+                    /* ASSERT(0); */
+                } else {
+                    log_debug("avi write success \n");
+                    /* printf(">>>real_file_size:%d", __this->real_file_size); */
+                }
+                out_fd = NULL;
+#if MIC_DATA_FORM_PCM_TASK_ENABLE
+                if (__this->pcm_hdl) {
+                    pcm_data_exit(__this->pcm_hdl);
+                    __this->pcm_hdl = NULL;
+                }
+#else
+                if (__this->mic) {
+                    mic_data_close(__this->mic);
+                    __this->mic = NULL;
+                }
+                if (__this->mic_frame) {
+                    free(__this->mic_frame);
+                    __this->mic_frame = NULL;
+                }
+#endif
+                __this->write_error = -2;
+                /* break; */
             }
         }
 

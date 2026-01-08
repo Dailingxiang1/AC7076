@@ -577,6 +577,9 @@ void fatfs_backup_clear_null_dir()
 {
     backup_record_flag = 1; //避免此时刻进行备份
     struct vfscan *fs =  fscan("storage/virfat_flash/C/", "-r -tALL -sn ", 4);
+    if (!fs) {
+        return;
+    }
     r_printf(">>>[test]:all filenum = %d\n", fs->file_number);
     for (int i = fs->file_number; i >= 1; i--) {
         FILE *fd = fselect(fs, FSEL_BY_NUMBER, i);

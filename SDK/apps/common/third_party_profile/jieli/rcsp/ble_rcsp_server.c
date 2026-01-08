@@ -359,19 +359,19 @@ void notify_update_connect_parameter(u8 table_index)
 }
 
 
-/* static void connection_update_complete_success(u8 *packet) */
-/* { */
-/*     int con_handle, conn_interval, conn_latency, conn_timeout; */
-/*  */
-/*     con_handle = hci_subevent_le_connection_update_complete_get_connection_handle(packet); */
-/*     conn_interval = hci_subevent_le_connection_update_complete_get_conn_interval(packet); */
-/*     conn_latency = hci_subevent_le_connection_update_complete_get_conn_latency(packet); */
-/*     conn_timeout = hci_subevent_le_connection_update_complete_get_supervision_timeout(packet); */
-/*  */
-/*     log_info("conn_interval = %d\n", conn_interval); */
-/*     log_info("conn_latency = %d\n", conn_latency); */
-/*     log_info("conn_timeout = %d\n", conn_timeout); */
-/* } */
+static void connection_update_complete_success(u8 *packet)
+{
+    int con_handle, conn_interval, conn_latency, conn_timeout;
+
+    con_handle = hci_subevent_le_connection_update_complete_get_connection_handle(packet);
+    conn_interval = hci_subevent_le_connection_update_complete_get_conn_interval(packet);
+    conn_latency = hci_subevent_le_connection_update_complete_get_conn_latency(packet);
+    conn_timeout = hci_subevent_le_connection_update_complete_get_supervision_timeout(packet);
+
+    log_info("conn_interval = %d\n", conn_interval);
+    log_info("conn_latency = %d\n", conn_latency);
+    log_info("conn_timeout = %d\n", conn_timeout);
+}
 
 extern void rcsp_user_event_ble_handler(ble_state_e ble_status, u8 flag);
 static void set_ble_work_state(ble_state_e state)
@@ -583,6 +583,7 @@ static void cbk_packet_handler(uint8_t packet_type, uint16_t channel, uint8_t *p
                 }
                 hci_con_handle_t con_handle = little_endian_read_16(packet, 4);
                 log_info("HCI_SUBEVENT_LE_CONNECTION_COMPLETE: %0x\n", con_handle);
+                connection_update_complete_success(packet + 8);
                 bt_rcsp_set_conn_info(con_handle, NULL, true);
                 log_info_hexdump(packet + 7, 7);
                 memcpy(cur_peer_addr_info, packet + 7, 7);
@@ -604,6 +605,10 @@ static void cbk_packet_handler(uint8_t packet_type, uint16_t channel, uint8_t *p
 #endif
             }
             break;
+            case HCI_SUBEVENT_LE_CONNECTION_UPDATE_COMPLETE:
+                log_info("HCI_SUBEVENT_LE_CONNECTION_UPDATE_COMPLETE\n");
+                connection_update_complete_success(packet);
+                break;
             }
             break;
 
@@ -1108,6 +1113,7 @@ void rcsp_bt_ble_adv_enable(u8 enable)
 #endif
     log_info("%s, enable:%d, rets=0x%x\n", __FUNCTION__, enable, rets_addr);
     adv_enable = enable;
+    UI_MSG_POST("ble_button:button=%4", adv_enable);
     set_adv_enable(0, enable);
 }
 

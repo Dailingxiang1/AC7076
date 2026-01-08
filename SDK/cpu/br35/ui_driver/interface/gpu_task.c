@@ -1358,7 +1358,11 @@ static int jlgpu_scheduler_kick_start(pJLGPUMultTaskList_t mult_list, struct dra
 
     for (int i = 0; i < page_draw.list_total; i++) {
         if (page_draw.new_list_create & BIT(i)) {
-            jlgpu_task_list_copy_destroy(page_draw.new_task_list[i]);
+            if (page_draw.normal_list_flag & BIT(i)) {
+                jlgpu_delete_task_list_head(page_draw.new_task_list[i]);
+            } else {
+                jlgpu_task_list_copy_destroy(page_draw.new_task_list[i]);
+            }
         }
     }
 

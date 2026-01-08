@@ -30,7 +30,7 @@
 
 //创建另外的文件存储AVI索引, 节约ram内存。在结束录像时合并索引到AVI文件中
 #define AVI_INDXE_FILE_ENABLE  1
-
+#define AVI_INDXE_FILE_SAME_NAME	1//使用相同文件名
 //#include <time.h>
 #if TCFG_PSRAM_DEV_ENABLE
 #define malloc(size)       malloc_psram(size)
@@ -78,6 +78,9 @@ static size_t avi_read(void *fd, char *buf, size_t len)
 
 static size_t avi_write(void *fd, char *buf, size_t len)
 {
+    /* u32 rets; */
+    /* __asm__ volatile("%0 = rets":"=r"(rets)); */
+    /* printf("[avi_w]len:%d rets:%x", (u32)len, rets); */
     size_t n = 0;
     size_t r = 0;
 
@@ -353,10 +356,25 @@ avi_t *AVI_open_output_file(char *filename)
     strcpy(index_filename, filename);
     if (dir_path) {
         dir_path++;
+#if AVI_INDXE_FILE_SAME_NAME
+        sprintf(index_filename + (dir_path - filename), "IDX.idx");
+#else
         sprintf(index_filename + (dir_path - filename), "IDX_****.idx");
+#endif
     } else {
+#if AVI_INDXE_FILE_SAME_NAME
+        sprintf(index_filename, "IDX.idx");
+#else
         sprintf(index_filename, "%s.idx", filename);
+#endif
     }
+#if AVI_INDXE_FILE_SAME_NAME
+    FILE *fp_tmp = fopen(index_filename, "r");
+    if (fp_tmp) {
+        fdelete(fp_tmp);
+        fp_tmp = NULL;
+    }
+#endif
     /* printf("index :%s \n", index_filename); */
     AVI->index_fdes = fopen(index_filename, "w+");
     if (AVI->index_fdes == NULL) {

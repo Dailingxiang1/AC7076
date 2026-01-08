@@ -6594,6 +6594,40 @@ REGISTER_UI_EVENT_HANDLER(SETTING_ANIMATION_PIC11)//通用-垂直列表
 
 //-----------------------蓝牙设置---------------------------------//
 #if TCFG_USER_BT_CLASSIC_ENABLE
+static int ui_edr_button_handler(const char *type, u32 arg)
+{
+    log_info("%s arg:%d", __func__, arg);
+    ui_pic_show_image_by_id(SETTING_EDR_BUTTON, arg);
+    return true;
+}
+
+static int ui_ble_button_handler(const char *type, u32 arg)
+{
+    log_info("%s arg:%d", __func__, arg);
+    ui_pic_show_image_by_id(SETTING_BLE_BUTTON, arg);
+    return true;
+}
+
+static const struct uimsg_handl bt_button_msg_handler[] = {
+    { "edr_button",          ui_edr_button_handler         },
+    { "ble_button",          ui_ble_button_handler         },
+    { NULL, NULL},      /* 必须以此结尾！ */
+};
+
+static int set_edr_layout_onchange(void *ctr, enum element_change_event e, void *arg)
+{
+    switch (e) {
+    case ON_CHANGE_INIT:
+        ui_register_msg_handler(ID_WINDOW_SETTING, bt_button_msg_handler);
+        break;
+    case ON_CHANGE_RELEASE:
+        ui_register_msg_handler(ID_WINDOW_SETTING, NULL);
+        break;
+    default:
+        break;
+    }
+    return false;
+}
 static int set_edr_layout_ontouch(void *ctr, struct element_touch_event *e)
 {
     struct layout *layout = (struct layout *)ctr;
@@ -6612,7 +6646,7 @@ static int set_edr_layout_ontouch(void *ctr, struct element_touch_event *e)
 }
 
 REGISTER_UI_EVENT_HANDLER(SETTING_EDR_LAYOUT)//通用-垂直列表
-.onchange = NULL,
+.onchange = set_edr_layout_onchange,
  .onkey = NULL,
   .ontouch = set_edr_layout_ontouch,
 };

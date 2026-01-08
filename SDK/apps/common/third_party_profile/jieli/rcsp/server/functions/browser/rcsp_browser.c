@@ -49,7 +49,7 @@ static const char *dev_logo[] = {
     [RCSPDevMapUDISK] = "udisk0",
     [RCSPDevMapSD0] = "sd0",
     [RCSPDevMapSD1] = "sd1",
-#if  TCFG_NANDFLASH_UI_FAT_ENABLE
+#if  (TCFG_NANDFLASH_UI_FAT_ENABLE&&(!TCFG_VIRFAT_INSERT_FLASH_ENABLE))
     [RCSPDevMapFLASH] = TCFG_NANDFLASH_UI_FAT_LOGO,
 #else
     [RCSPDevMapFLASH] = "virfat_flash",

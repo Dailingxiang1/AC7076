@@ -209,20 +209,11 @@ static void dual_conn_state_handler()
     }
     if (connect_device == 0) {
 #if TCFG_EDR_SCAN_CONN_CTRL
-        u8 rcsp_get_ble_disconnect_by_app_flag(void);
-        void rcsp_set_ble_disconnect_by_app_flag(u8 flag);
-        u8 ble_disconnect = rcsp_get_ble_disconnect_by_app_flag();
         u8 bredr_state = is_bredr_close();
-        printf("%s ble_disconnect:%d is_bredr_close:%d", __func__, ble_disconnect, is_bredr_close());
+        printf("%s is_bredr_close:%d", __func__, is_bredr_close());
         if (is_bredr_close() == 0) {
-            if (ble_disconnect == 1) {
-                /*一键连接时候, 由app发指令断连*/
-                write_scan_conn_enable(0, 1);
-            } else {
-                write_scan_conn_enable(0, 0);
-            }
+            write_scan_conn_enable(0, 1);
         }
-        rcsp_set_ble_disconnect_by_app_flag(0);
 #else
         write_scan_conn_enable(1, 1);
 #endif

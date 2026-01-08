@@ -112,6 +112,10 @@ extern u8 __bt_movable_region_end[];
 extern const int support_reusable_special_update;
 extern void bt_set_support_3M_size(u8 en);
 
+#if defined USER_SUPPORT_PROFILE_PAN && USER_SUPPORT_PROFILE_PAN
+static u16 pan_conn_id = 0;
+#endif
+
 u8 lmp_get_conn_num(void);
 void bt_close_bredr();
 void bt_close_bredr_timeout_start();
@@ -413,6 +417,18 @@ static void bt_disconn_func(void(*func)(void))
 }
 #endif
 
+#if defined USER_SUPPORT_PROFILE_PAN && USER_SUPPORT_PROFILE_PAN
+static void pan_conn_handler(void *priv)
+{
+    extern int user_pan_send_cmd(u8 * addr, u32 cmd, u32 value, u8 * data);
+    user_pan_send_cmd(NULL, 2, 0, NULL);
+    if (pan_conn_id) {
+        sys_timeout_del(pan_conn_id);
+        pan_conn_id = 0;
+    }
+}
+#endif
+
 /*
  * 对应原来的状态处理函数，连接，电话状态等
  */
@@ -461,6 +477,12 @@ static int bt_connction_status_event_handler(struct bt_event *bt)
         chargestore_set_phone_disconnect();
 #endif
         bt_close_bredr_timeout_start();
+#if defined USER_SUPPORT_PROFILE_PAN && USER_SUPPORT_PROFILE_PAN
+        if (pan_conn_id) {
+            sys_timeout_del(pan_conn_id);
+            pan_conn_id = 0;
+        }
+#endif
         break;
 
     case BT_STATUS_CONN_A2DP_CH:
@@ -489,8 +511,9 @@ static int bt_connction_status_event_handler(struct bt_event *bt)
         bt_cmd_prepare(USER_CTRL_MAP_READ_TIME, 0, NULL);
 #endif
 #if defined USER_SUPPORT_PROFILE_PAN && USER_SUPPORT_PROFILE_PAN
-        extern int user_pan_send_cmd(u8 * addr, u32 cmd, u32 value, u8 * data);
-        user_pan_send_cmd(NULL, 2, 0, NULL);
+        if (!pan_conn_id) {    // 延迟500ms再连接pan，避免连接失败
+            pan_conn_id = sys_timeout_add(NULL, pan_conn_handler, 500);
+        }
 #endif
         break;
     default:
@@ -1065,6 +1088,7 @@ static int bt_close_bredr_do(int priv)
     }
     /* printf("%s",__func__); */
     g_bt_hdl.bt_close_bredr = 1;
+    UI_MSG_POST("edr_button:button=%4", 0);
     if (g_bt_hdl.auto_connection_timer) {
         sys_timeout_del(g_bt_hdl.auto_connection_timer);
         g_bt_hdl.auto_connection_timer = 0;
@@ -1163,6 +1187,7 @@ static int bt_init_bredr_do(int priv)
         return 0;
     }
     g_bt_hdl.bt_close_bredr = 0;
+    UI_MSG_POST("edr_button:button=%4", 1);
     bt_set_stack_exiting(0);
     btctrler_task_init_bredr();
 #if TCFG_EDR_SCAN_CONN_CTRL
@@ -1173,7 +1198,7 @@ static int bt_init_bredr_do(int priv)
         bt_discovery_and_connectable_using_loca_mac_addr(0, 1);
     } else {
         if (ble_num > 0) {
-            /*一键连接，ble已经连接了时候，edr状态为可连接可发现*/
+            /*一键连接，ble已经连接了时候，edr状态为可连接*/
             bt_discovery_and_connectable_using_loca_mac_addr(0, 1);
         } else {
             bt_discovery_and_connectable_using_loca_mac_addr(1, 1);
