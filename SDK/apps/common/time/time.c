@@ -85,6 +85,7 @@ time_t rtc_time_change_to_unix_timestamp(struct sys_time *rtc_time)
     return mktime(&t) - local_timezone * 3600;
 }
 
+__attribute__((weak))
 time_t time(time_t *timer)
 {
 

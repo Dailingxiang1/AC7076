@@ -46,6 +46,7 @@ struct watch_css_info {
     s16 top;
     s16 width;
     s16 height;
+    s16 img_list_index;		//指定子控件(时、分、秒)使用图片列表中哪个图片
 };
 
 
@@ -133,6 +134,19 @@ int ui_watch_set_time(struct ui_watch *watch, int hour, int min, int sec, int ms
  */
 /* ------------------------------------------------------------------------------------*/
 void ui_watch_update(struct ui_watch *watch, u8 refresh);
+
+/* ------------------------------------------------------------------------------------*/
+/**
+ * @brief ui_watch_child_set_bg_img_by_index 设置表盘子控件（时、分、秒）显示图片列表中哪张图
+ *
+ * @param watch 表盘控件句柄
+ * @param child_type CTRL_WATCH_CHILD_HOUR、CTRL_WATCH_CHILD_MIN、CTRL_WATCH_CHILD_SEC
+ * @param index 图片在“图片列表”的索引
+ * @note  在表盘控件的show事件中调用
+ */
+/* ------------------------------------------------------------------------------------*/
+void ui_watch_child_set_bg_img_by_index(struct ui_watch *watch, int child_type, int index);
+
 
 
 

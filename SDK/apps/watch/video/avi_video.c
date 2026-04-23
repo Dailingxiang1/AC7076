@@ -1120,7 +1120,7 @@ void avi_pcm_open(void *avip)
     // 创建AI voice播放参数
     struct avi_audio_player_param param = {0};
     param.coding_type = AUDIO_CODING_PCM;
-    param.channel_mode = (p->audio_format.nChannels == 1) ? AUDIO_CH_L : AUDIO_CH_MIX;
+    param.channel_mode = (p->audio_format.nChannels == 1) ? AUDIO_CH_L : AUDIO_CH_LR;
     param.sample_rate = p->audio_format.nSamplesPerSec;
     param.bit_rate = p->audio_format.nSamplesPerSec * p->audio_format.nChannels * p->audio_format.wBitsPerSample;
     param.type = AVI_SERVICE_VOICE;

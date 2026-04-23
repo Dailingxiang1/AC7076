@@ -28,8 +28,8 @@
 #define  FMY_MAC_CHANGE_LOCK                          0 // 0--unpair后修改mac，1--unpair后不修改mac
 
 // fmy authentication information
-static const uint8_t fmy_serial_number[16] = "d12599062d934e86";
-static const uint8_t fmy_product_data[8] = {0xBD, 0x56, 0xA0, 0x84, 0x60, 0x84, 0x35, 0xA9};//JL
+static const uint8_t fmy_serial_number[16] = "86f9c81176d140f3";
+static const uint8_t fmy_product_data[8] = {0xF8, 0x6A, 0xE4, 0x3A, 0xC6, 0x7A, 0xCC, 0x6A};//JL
 static const char fmy_Server_Encryption_Key[] = "BJzFrd3QKbdTXTDm5dFtt6jSGxtItVsZ1bEQ6VvzFUXndM9Rjeu+PHFoM+RD8RRHblpLBU42dQcFbjmVzGuWkJY=";
 static const char fmy_Signature_Verification_Key[] = "BDNMWnP9Yd82Qz+8aZI245jklBLzwP3E5doLQRh3lRcIcSCIjpeSN3a6SNxRfA+oe5xiqf7paw84QD9mnh5nVWA=";
 
@@ -40,7 +40,7 @@ static const char fmy_token_auth_char[] = "MYG/ME8CAQECAQEERzBFAiEA3hgTtFg2nTHkX
 #else
 
 static const uint8_t fmy_token_uuid_hex[16] = {
-    0x50, 0xDB, 0x3E, 0xC0, 0xE5, 0xE6, 0x4A, 0xDD, 0xBF, 0x4C, 0x22, 0x27, 0x59, 0xDA, 0xAA, 0x69,
+    0x77, 0x38, 0xEF, 0xD3, 0x1D, 0xBA, 0x4D, 0x26, 0xAE, 0x3F, 0xAF, 0x09, 0x32, 0x6D, 0x94, 0x43,
 };
 
 static const uint8_t fmy_token_auth_hex[] = {

@@ -587,6 +587,7 @@ objs += \
 	  $(ROOT)/audio/cpu/br35/audio_setup.o \
 	  $(ROOT)/audio/cpu/br35/audio_config.o \
 	  $(ROOT)/audio/cpu/br35/media_memory_manager.o \
+	  $(ROOT)/audio/cpu/br35/audio_dai/audio_pdm.o \
 
 /* #if TCFG_AUDIO_ANC_ENABLE */
 /* objs += \ */

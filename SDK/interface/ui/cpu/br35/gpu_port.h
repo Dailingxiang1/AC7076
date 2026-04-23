@@ -1447,7 +1447,7 @@ int gpu_input_stream_cache_vaild_sub_by_index(u8 index);
 
 /* ------------------------------------------------------------------------------------*/
 /**
- * @brief gpu_input_stream_cache_clr_by_index 按索引清理资源
+ * @brief gpu_input_stream_cache_clr_by_index 按索引清理所有资源
  *
  * @param index 链表索引（dc->index）
  *
@@ -1455,6 +1455,16 @@ int gpu_input_stream_cache_vaild_sub_by_index(u8 index);
  */
 /* ------------------------------------------------------------------------------------*/
 int gpu_input_stream_cache_clr_by_index(u8 index);
+/* ------------------------------------------------------------------------------------*/
+/**
+ * @brief gpu_input_stream_cache_clr_invaild_by_index 按索引清理无效资源
+ *
+ * @param index
+ *
+ * @return
+ */
+/* ------------------------------------------------------------------------------------*/
+int gpu_input_stream_cache_clr_invaild_by_index(u8 index);
 /* ------------------------------------------------------------------------------------*/
 /**
  * @brief gpu_input_stream_cache_addr_check 检查资源是否存在psram(通过gpu_cache接口管理)

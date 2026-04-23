@@ -2519,7 +2519,7 @@ static int jlui_draw_image(struct draw_context *dc, u32 src, u8 quadrant, u8 *ma
                     gif_task_delete(dc->gpu_task_head, invalid_timer->element_id, invalid_timer->task_id);
                     gif_timer_delete(invalid_timer);
                 }
-                gif_timer->page = dc->page;
+                gif_timer->page = dc->elm->dc->page;
                 list_add_tail(&gif_timer->head, &gif_timer_list.head);
             }
         }
@@ -3658,7 +3658,7 @@ static int jlui_show_text(struct draw_context *dc, struct ui_text_attrs *text)
     u8 strpic_flag = 0;
     u8 *strpic_idbuf = NULL;
     u8 *strpic_tbuf = NULL;
-
+    u8 text_clean_task_flag = 0;
     /* DUMP_RECT(__func__, __LINE__, "dc rect", &dc->rect); */
     /* DUMP_RECT(__func__, __LINE__, "dc draw", &dc->draw); */
 
@@ -3668,9 +3668,12 @@ static int jlui_show_text(struct draw_context *dc, struct ui_text_attrs *text)
 
     if (text->format == UI_TEXT_ENCODE_TEXT) {
 __strpic_with_text:	// 如果多国语言用编码模式，则在这里用字库显示
-
+        int crc_last = text->last_crc;
         ret = jlui_show_text_text(dc, text, &img_list);
-
+        int crc_curr = text->last_crc;
+        if (crc_last != crc_curr) { //更新文本
+            text_clean_task_flag = 1;
+        }
     } else if (text->format == UI_TEXT_ENCODE_ASCII) {
         ret = jlui_show_ascii_text(dc, text, &img_list);
     } else if (text->format == UI_TEXT_ENCODE_STRPIC) {
@@ -3843,7 +3846,7 @@ __strpic_with_text:	// 如果多国语言用编码模式，则在这里用字库
             task_param.texture.tran.rotate_cx = task_param.texture.tran.rotate_cx + dc->rect.left - task_param.draw.left;
             task_param.texture.tran.rotate_cy = task_param.texture.tran.rotate_cy + dc->rect.top - task_param.draw.top;
         }
-        if ((task_param.format == GPU_FORMAT_A1) || (task_param.format == GPU_FORMAT_A2)) {
+        if (((task_param.format == GPU_FORMAT_A1) || (task_param.format == GPU_FORMAT_A2)) && (text->format != UI_TEXT_ENCODE_IMAGE)) {
             jlgpu_task_param_3x3_gaussian_low_level(&task_param, &task_param.texture.tran);
             // jlgpu_task_param_3x3_gaussian_middle_level(&task_param, &task_param.texture.tran);
             // jlgpu_task_param_3x3_gaussian_high_level(&task_param, &task_param.texture.tran);
@@ -3871,7 +3874,7 @@ __strpic_with_text:	// 如果多国语言用编码模式，则在这里用字库
             task_param.task_type = GPU_TASK_TRANS | GPU_TEXTURE_PERSPECTIVE;
         }
 
-        jlgpu_update_task_by_id(dc->gpu_task_head, task_param.task_id, task_param.element_id, &task_param);
+        pJLGPUTaskUnit_t taskp = jlgpu_update_task_by_id(dc->gpu_task_head, task_param.task_id, task_param.element_id, &task_param);
 
         elm_index++;
         void *curr_img = img;
@@ -3884,7 +3887,9 @@ __strpic_with_text:	// 如果多国语言用编码模式，则在这里用字库
     u8 strpic_mode = ((text->format == UI_TEXT_ENCODE_STRPIC) || (text->format == UI_TEXT_ENCODE_MULSTR)) ?  read_string_type(dc->prj, id) : -1;
     if (text->format == UI_TEXT_ENCODE_IMAGE || \
         ((text->format == UI_TEXT_ENCODE_MULSTR) && ((strpic_mode == UI_TEXT_STRPIC_MODE_IMAGE) || (strpic_mode == UI_TEXT_STRPIC_MODE_INDEX))) || \
-        ((text->format == UI_TEXT_ENCODE_STRPIC) && (strpic_mode == UI_TEXT_STRPIC_MODE_INDEX))) {
+        ((text->format == UI_TEXT_ENCODE_STRPIC) && (strpic_mode == UI_TEXT_STRPIC_MODE_INDEX)) || \
+        ((text->format == UI_TEXT_ENCODE_STRPIC) && (strpic_scroll_circular_deafult_enable)) || \
+        (text_clean_task_flag)) {
         jlgpu_task_clean_up_sync_by_id(dc->gpu_task_head, dc->elm->id, elm_index, jlgpu_scheduler_wait_sync);
     }
 
@@ -4353,7 +4358,16 @@ void *cache_gpu_input_data(void *head, pJLGPUTaskParam_t task_param, void *fp, i
     }
 #if 1
     u32 res_hash = 5383;
-    res_hash = mmu_hash(res_hash, (u8 *)&task_param->image, sizeof(struct image_file));
+    struct image_file image_file_info;
+    memcpy((u8 *)&image_file_info, (u8 *)&task_param->image, sizeof(struct image_file));
+    if (image_file_info.format == PIXEL_FMT_GIF) { //与gif库hash信息一致
+        image_file_info.format = PIXEL_FMT_L8;
+        image_file_info.has_clut = CLUT_TAB_FROM_RAM;
+        image_file_info.data_crc = 0;
+        image_file_info.offset = 0;
+    }
+    res_hash = mmu_hash(res_hash, (u8 *)&task_param->texture.data, 4);
+    res_hash = mmu_hash(res_hash, (u8 *)&image_file_info, sizeof(struct image_file));
     res_hash = mmu_hash(res_hash, (u8 *)&task_param->task_id, 4);
     res_hash = mmu_hash(res_hash, (u8 *)&task_param->element_id, 4);
     u32 data_crc = res_hash;

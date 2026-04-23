@@ -68,6 +68,7 @@ u16 TextOutW_UnicBengali(struct font_info *info, u8 *str, u16 len, u16 x, u16 y)
 
 //高棉语
 u16 font_khmer_get_mark_type(u16 *curr, u16 *prev, u16 *next);
+u16 font_khmer_pre_update(struct font_info *info, u16 *unicbuf, u16 len);
 u16 font_khmer_replace(struct font_info *info, u16 *unicbuf, u16 len);
 u16 font_khmer_reorder(struct font_info *info, u16 *unicbuf, u16 len);
 u16 font_khmer_drawbuf(struct font_info *info, u16(*buffer)[2], u16 len, int x, int y, int *offset_xy);

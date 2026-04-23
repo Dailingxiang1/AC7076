@@ -226,13 +226,14 @@ __try_again:
     return ret;
 }
 
-int jlgpu_scheduler_async_gpu_cache_free()
+int jlgpu_scheduler_async_gpu_cache_free(int index)
 {
     int ret = 0;
     int argv[3] = {0};
     int retry = 3;
-    argv[0] = (int)gpu_input_stream_cache_clr_all_invaild;
-    argv[1] = 0;
+    argv[0] = (int) gpu_input_stream_cache_clr_invaild_by_index;
+    argv[1] = 1;
+    argv[2] = index;
 
 __try_again:
     ret = os_taskq_post_type(GPU_TASK_NAME, Q_CALLBACK, 2, argv);
@@ -952,7 +953,7 @@ void psram_double_buffer_init()
 static int jlgpu_scheduler_kick_start(pJLGPUMultTaskList_t mult_list, struct draw_context *dc)
 {
     //释放无效的gpu_cache_ram
-    jlgpu_scheduler_async_gpu_cache_free();
+    jlgpu_scheduler_async_gpu_cache_free(dc->index);
     /* gpu_input_stream_cache_clr_all_invaild(); */
     //合成前需要重置jpeg
     jpeg_module_opj_invaild_clr();

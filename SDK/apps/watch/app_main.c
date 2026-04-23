@@ -185,6 +185,9 @@ const struct task_info task_info_table[] = {
 #if TCFG_VIDEO_DIAL_ENABLE
     {"avi_task",       4 + TASK_PRIO_BASE,     0,  1408,  256 },
 #endif
+#if TCFG_UI_AVRCP_MUSIC_BG_ENABLE
+    {"bip_deal",           		2 + TASK_PRIO_BASE,      0,  512,   512},
+#endif
     {0, 0},
 };
 

@@ -848,6 +848,20 @@ int ui_grid_update_by_id_dynamic(int id, int item_sel, int redraw);
 /* ------------------------------------------------------------------------------------*/
 void ui_grid_anim_set_cb(struct ui_grid *grid, ui_anim_ready_cb_t ready_cb, ui_anim_deleted_cb_t deleted_cb);
 
+/* ------------------------------------------------------------------------------------*/
+/**
+ * @brief ui_grid_get_energy_dir_and_dist 获取惯性移动的方向和距离
+ *
+ * @param dir  惯性移动的方向（-1：上/左，1：下/右）
+ * @param dist 惯性能够移动的距离。
+ *
+ * @note 惯性能够移动的距离（并非最终实际移动的距离，因为实际移动距离还受target_line及居中效果影响）。接口不影响原列表中的滑动效果，仅用于增加应用层效果设计的灵活性。
+ *
+ */
+/* ------------------------------------------------------------------------------------*/
+void ui_grid_get_energy_dir_and_dist(struct ui_grid *grid, struct element_touch_event *e, int *dir, int *dist);
+
+
 #endif
 
 

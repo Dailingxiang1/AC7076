@@ -450,9 +450,9 @@ enum gpio_function {
     PORT_FUNC_PWM_LED,
 
 //plnk
-    // PORT_FUNC_PLNK_SCLK,//out
-    // PORT_FUNC_PLNK_DAT0,//in
-    // PORT_FUNC_PLNK_DAT1,//in
+    PORT_FUNC_PLNK_SCLK,//out
+    PORT_FUNC_PLNK_DAT0,//in
+    PORT_FUNC_PLNK_DAT1,//in
 
 //ledc
     // PORT_FUNC_LEDC0_OUT,

@@ -172,6 +172,7 @@ extern void jpeg_draw_cb_gpu(int id, u8 *dst_buf, struct rect *dst_r, struct rec
 extern void jlui_free(void *buf, u32 ram_type, u32 module_type);
 extern int jpeg_module_opj_init(void *priv);
 extern int jljpeg_decode_release(jdec_opj *opj, int global_hd_clr);
+extern int jpeg_module_opj_release_async(void *opj);
 
 /* ------------------------------------------------------------------------------------*/
 /**
@@ -370,7 +371,7 @@ static void jpeg_task_cb_exit(void *draw_info, void *priv)
  * @param len
  */
 /* ------------------------------------------------------------------------------------*/
-void jpeg_image_ram(struct draw_context *dc, int left, int top, int width, int height, u8 *addr, int len)
+void jpeg_image_ram(struct draw_context *dc, int left, int top, int width, int height, u8 *addr, int len, int scale_en, float scale_f)
 {
     jljpeg_stream_src_data_lock();
     int elm_id = dc->elm->id;
@@ -420,6 +421,16 @@ void jpeg_image_ram(struct draw_context *dc, int left, int top, int width, int h
     task_param.has_clut = task_param.image.has_clut;
     task_param.texture.data = (u8 *)task_param.info.offset;
     task_param.texture.mmu_tab_base = (u8 *)task_param.info.tab;
+#if 1
+    //缩放
+    task_param.scale_en = scale_en;
+    task_param.fill.tran.ratio_w = scale_f;
+    task_param.fill.tran.ratio_h = scale_f;
+
+    /* 继承父控件变换 */
+    JLGPU_TASK_INHERIT_PARENT(&task_param.fill.tran);
+#endif
+
 
     jlgpu_update_task_by_id(dc->gpu_task_head, task_param.task_id, task_param.element_id, &task_param);
 
@@ -437,7 +448,7 @@ void jpeg_image_ram(struct draw_context *dc, int left, int top, int width, int h
  * @param path_len
  */
 /* ------------------------------------------------------------------------------------*/
-void jpeg_image_file(struct draw_context *dc, int left, int top, int width, int height, u8 *path, int path_len)
+void jpeg_image_file(struct draw_context *dc, int left, int top, int width, int height, u8 *path, int path_len, int scale_en, float scale_f)
 {
     int elm_id = dc->elm->id;
     u8 elm_index = 1;
@@ -481,11 +492,22 @@ void jpeg_image_file(struct draw_context *dc, int left, int top, int width, int 
         task_param.priv = jpeg_hd_create_priv(task_param.task_id, task_param.element_id);
         task_param.priv_len = jpeg_hd_get_priv_len();
         task_param.draw_en = 1;
+    } else {
+        return ;
     }
     task_param.clut_format = task_param.image.clut_format;
     task_param.has_clut = task_param.image.has_clut;
     task_param.texture.data = (u8 *)task_param.info.offset;
     task_param.texture.mmu_tab_base = (u8 *)task_param.info.tab;
+#if 1
+    //缩放
+    task_param.scale_en = scale_en;
+    task_param.fill.tran.ratio_w = scale_f;
+    task_param.fill.tran.ratio_h = scale_f;
+
+    /* 继承父控件变换 */
+    JLGPU_TASK_INHERIT_PARENT(&task_param.fill.tran);
+#endif
 
     jlgpu_update_task_by_id(dc->gpu_task_head, task_param.task_id, task_param.element_id, &task_param);
 
@@ -604,9 +626,13 @@ void *cache_gpu_input_jpeg_data_file(void *head, pJLGPUTaskParam_t task_param, u
         p_info->last_tab_data_len = jpeg_src_data_len;
         if (jpeg_module_opj_init(jpg_hd)) {//初始化jpeg头
             //异常释放资源
+#if 0
             jpeg_free(jpg_hd->device);
             jljpeg_decode_release(jpg_hd, 0);
             jpeg_free(jpg_hd);
+#else
+            jpeg_module_opj_release_async((void *)jpg_hd);
+#endif
             if (jpeg_src_data) {
                 jpeg_free(jpeg_src_data);
             }

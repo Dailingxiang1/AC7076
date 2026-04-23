@@ -269,6 +269,8 @@ struct dbi_param {
         u8 ramwrc_cmd;//Memory Write Continue, default valus 0x3c
 
         CLOCK_POLARITY clk_pol; // 时钟极性
+
+        void (*custom_set_draw_area)(void (*lcd_write_cmd_cb)(u32, u8 *, u32), int, int, int, int);
     } spi;
 
     struct pap_param {

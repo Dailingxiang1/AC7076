@@ -613,6 +613,15 @@ static int music_bt_lyrics_change(const char *type, u32 arg)
     return 0;
 }
 
+u16 music_get_bt_lyrics_change()
+{
+    if (__this != NULL) {
+
+        return (strlen(__this->bt_lyrics));
+    }
+    return 0;
+}
+
 int music_is_play(void)
 {
     if (app_get_current_mode_name() == APP_MODE_BT) {
@@ -670,6 +679,8 @@ static void music_ui_set_volume(int precent)
 static void music_status_check(void *p)
 {
     struct app_mode *cur_mode;
+    static u8 start_pic_mode_last = 0;
+    u8 start_pic_mode = 0;
     if (!__this) {
         return;
     }
@@ -682,16 +693,24 @@ static void music_status_check(void *p)
         log_debug("a2dp_state :%d \n", a2dp_state);
         if (a2dp_state == BT_MUSIC_STATUS_STARTING) {
             if (cur_window_id == ID_WINDOW_MUSIC_PLAYER) {
-                ui_pic_show_image_by_id(MUSIC_PAUSE_START_PIC, 1);
+                start_pic_mode = 1;
+                /* ui_pic_show_image_by_id(MUSIC_PAUSE_START_PIC, 1); */
             } else if (cur_window_id == ID_WINDOW_SPORTING) {
-                ui_pic_show_image_by_id(SPORTING_MUSIC_PAUSE_START_PIC, 1);
+                start_pic_mode = 1;
+                /* ui_pic_show_image_by_id(SPORTING_MUSIC_PAUSE_START_PIC, 1); */
             }
         } else {
             if (cur_window_id == ID_WINDOW_MUSIC_PLAYER) {
-                ui_pic_show_image_by_id(MUSIC_PAUSE_START_PIC, 0);
+                start_pic_mode = 0;
+                /* ui_pic_show_image_by_id(MUSIC_PAUSE_START_PIC, 0); */
             } else if (cur_window_id == ID_WINDOW_SPORTING) {
-                ui_pic_show_image_by_id(SPORTING_MUSIC_PAUSE_START_PIC, 0);
+                start_pic_mode = 0;
+                /* ui_pic_show_image_by_id(SPORTING_MUSIC_PAUSE_START_PIC, 0); */
             }
+        }
+        if (start_pic_mode_last != start_pic_mode) {
+            start_pic_mode_last = start_pic_mode;
+            ui_pic_show_image_by_id(MUSIC_PAUSE_START_PIC, start_pic_mode);
         }
         return;
     }
@@ -702,9 +721,15 @@ static void music_status_check(void *p)
     void *bt_addr = get_cur_connect_emitter_mac_addr();
     if (bt_addr) {     // 若蓝牙发射正在开启
         if (app_var.a2dp_source_open_flag && cur_mode->name == APP_MODE_MUSIC) {
-            ui_pic_show_image_by_id(MUSIC_PAUSE_START_PIC, 1);
+            start_pic_mode = 1;
+            /* ui_pic_show_image_by_id(MUSIC_PAUSE_START_PIC, 1); */
         } else if (!app_var.a2dp_source_open_flag) {
-            ui_pic_show_image_by_id(MUSIC_PAUSE_START_PIC, 0);
+            start_pic_mode = 0;
+            /* ui_pic_show_image_by_id(MUSIC_PAUSE_START_PIC, 0); */
+        }
+        if (start_pic_mode_last != start_pic_mode) {
+            start_pic_mode_last = start_pic_mode;
+            ui_pic_show_image_by_id(MUSIC_PAUSE_START_PIC, start_pic_mode);
         }
         return;
     }
@@ -712,19 +737,27 @@ static void music_status_check(void *p)
     if (cur_mode->name == APP_MODE_MUSIC) {
         if (music_player_get_play_status()) {
             if (cur_window_id == ID_WINDOW_MUSIC_PLAYER) {
-                ui_pic_show_image_by_id(MUSIC_PAUSE_START_PIC, 1);
+                start_pic_mode = 1;
+                /* ui_pic_show_image_by_id(MUSIC_PAUSE_START_PIC, 1); */
             } else if (cur_window_id == ID_WINDOW_SPORTING) {
-                ui_pic_show_image_by_id(SPORTING_MUSIC_PAUSE_START_PIC, 1);
+                start_pic_mode = 1;
+                /* ui_pic_show_image_by_id(SPORTING_MUSIC_PAUSE_START_PIC, 1); */
             }
         } else {
             if (cur_window_id == ID_WINDOW_MUSIC_PLAYER) {
-                ui_pic_show_image_by_id(MUSIC_PAUSE_START_PIC, 0);
+                start_pic_mode = 0;
+                /* ui_pic_show_image_by_id(MUSIC_PAUSE_START_PIC, 0); */
             } else if (cur_window_id == ID_WINDOW_SPORTING) {
-                ui_pic_show_image_by_id(SPORTING_MUSIC_PAUSE_START_PIC, 0);
+                start_pic_mode = 0;
+                /* ui_pic_show_image_by_id(SPORTING_MUSIC_PAUSE_START_PIC, 0); */
             }
         }
     }
 #endif
+    if (start_pic_mode_last != start_pic_mode) {
+        start_pic_mode_last = start_pic_mode;
+        ui_pic_show_image_by_id(MUSIC_PAUSE_START_PIC, start_pic_mode);
+    }
 }
 
 static void ui_bt_lyric_cb(u8 type, u32 time, u8 *info, u16 len)

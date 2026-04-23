@@ -24,6 +24,7 @@ typedef struct {
 #define FONT_HIGHLIGHT_SCROLL 	0x10 /* 高亮滚动显示*/
 #define FONT_VERTICAL_SCROLL 	0x20 /* 垂直滚动显示*/
 #define FONT_SCROLL_CIRCULAR	0x40 /* 首尾相接的环形滚动*/
+#define FONT_SHOW_END_ELLIPSIS  0x80 /* 末尾省略号 */
 #define FONT_DEFAULT			(FONT_SHOW_PIXEL)
 
 #define FONT_ENCODE_ANSI		0x00 /* 内码格式 */

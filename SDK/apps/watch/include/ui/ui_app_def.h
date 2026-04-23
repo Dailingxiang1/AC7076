@@ -148,6 +148,7 @@
 #define TCFG_UI_EFFECT_USED_DEMO			DISABLE	//用户自定义特效demo
 
 #define TCFG_UI_ENABLE_SMARTWIN				ENABLE // 灵动岛
+#define TCFG_UI_AVRCP_MUSIC_BG_ENABLE		DISABLE//avrcp传图（需使能USER_SUPPORT_PROFILE_BIP）
 
 #if (!TCFG_APP_BT_EN) //关闭蓝牙相关UI
 #undef TCFG_UI_ENABLE_BT_PAGE_ACTION
@@ -229,6 +230,7 @@
 #define	TCFG_UI_DIAL_SEL_ENABLE			              ENABLE	//表盘选择
 #define TCFG_UI_MENU_LIST_ENABLE			          DISABLE   //列表菜单
 #define TCFG_UI_ENABLE_SMARTWIN				          DISABLE   // 灵动岛
+#define TCFG_UI_AVRCP_MUSIC_BG_ENABLE				  DISABLE//avrcp传图（需使能USER_SUPPORT_PROFILE_BIP）
 
 #else
 //这里主要为了没有ui时候，避免编译错误

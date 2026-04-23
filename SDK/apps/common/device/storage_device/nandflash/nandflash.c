@@ -97,6 +97,8 @@ int nand_flash_erase(u32 addr);
 static void nandflash_power_check();
 void nandflash_power_set(int enable);
 void nandflash_poweron(int priv);
+int _nandflash_close(void);
+int _nandflash_open(void *arg);
 #define spi_cs_init() \
     do { \
 		gpio_hw_set_pull_up(IO_PORT_SPILT(_nandflash.spi_cs_io), GPIO_PULLUP_10K); \
@@ -305,6 +307,36 @@ void nand_flash_set_quad(u8 en)
     nand_set_features(GD_FEATURES, cfg_reg);
 }
 
+void udelay(u32 us);
+static void nand_flash_reset_config()
+{
+    nand_flash_reset();
+
+    u32 timeout = 10000;
+    u8  status;
+    while (timeout > 0) {
+        timeout--;
+
+        status = nand_get_features(GD_GET_STATUS);
+        if (status) {
+            udelay(100);
+            continue;
+        }
+
+        break;
+    }
+
+    if (!timeout) {
+        log_error("reset config timeout C0_status %x", status);
+    }
+
+    nand_set_features(0xA0, 0x00);
+    if ((nand_flash.quad_mode_qe) && (_nandflash.spi_r_width == SPI_MODE_UNIDIR_4BIT)) {
+        nand_flash_set_quad(1);
+    }
+    nand_flash_set_ecc(true);
+}
+
 enum {
     NANDFLASH_ECC_FAIL = 1,//ecc已纠正
     NANDFLASH_BAD_BLOCK,  //ecc 无法纠正
@@ -312,7 +344,6 @@ enum {
     NANDFLASH_E_FAIL,     //擦除错
     NANDFLASH_P_FAIL,     //写错误
 };
-void udelay(u32 us);
 static u8 nand_flash_wait_ok(u32 timeout)
 {
     u8 sta;
@@ -347,7 +378,12 @@ static u8 nand_flash_wait_ok(u32 timeout)
             break;
         } else if (sta & nand_flash.ecc_mask) {
             log_error("nand_flash block data should be refreshed![status:0x%x,timeout:%d]\r\n", sta, timeout);
+
             sta = 0;
+            if (_nandflash.flash_id == 0xe571) {
+                nand_flash_reset_config();
+            }
+
             break;
         } else {
             sta = 0;
@@ -362,12 +398,18 @@ static u8 nand_flash_wait_ok(u32 timeout)
 _exit:
     if (sta) {
 #if (TCFG_EX_FLASH_POWER_IO != NO_CONFIG_PORT)
+        printf("nandflash_power_reset");
+        _nandflash_close();
         nandflash_power_set(0);
         udelay(200);
         nandflash_power_set(1);
+        _nandflash_open(NULL);
 #else
         /*flash异常时软件复位不一定有效*/
+        printf("nandflash_soft_reset");
         nand_flash_reset();
+        _nandflash_close();
+        _nandflash_open(NULL);
 #endif
     }
     return sta;
@@ -519,6 +561,28 @@ int nand_flash_erase(u32 address)
     return sta;
 }
 
+static u32 get_nand_flash_bad_block_info(block)
+{
+    u8 oob_size_buf[64] = {0};
+    u32 column_address = nand_flash.page_size + nand_flash.oob_user_offset[0];
+    u32 data_size = sizeof(oob_size_buf);
+    u32 bad_block_count = 0;
+
+    for (u32 page = 0; page < 2; page++) {
+        nand_flash_read_page(block, page, column_address, oob_size_buf, data_size);
+        if (oob_size_buf[0] != 0xff) {
+            bad_block_count++;
+        }
+    }
+
+    if (bad_block_count) {
+        log_error("bad_block_count %x\n", bad_block_count);
+        return 1;
+    }
+
+    return 0;
+}
+
 void wdt_clear(void);
 static void nand_flash_erase_all()
 {
@@ -526,6 +590,11 @@ static void nand_flash_erase_all()
     nand_set_features(0xA0, 0x00);
     block_num = nand_flash.block_number;
     for (int i = 0; i < block_num; i++) {
+
+        if (get_nand_flash_bad_block_info(i)) {
+            continue;
+        }
+
         nand_flash_erase(NAND_BLOCK_SIZE * i);
         wdt_clear();
     }

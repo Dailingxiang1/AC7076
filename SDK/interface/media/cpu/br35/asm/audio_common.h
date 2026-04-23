@@ -52,5 +52,7 @@ int audio_dac_digital_status_add_check(int add);
 int audio_dac_analog_status_add_check(int add);
 
 int audio_common_power_trim(audio_vbg_trim_t *vbg_trim, u8 vcm_level);
+
+void audio_adc_dmic_clock_open(u8 dmic_cken, u8 dmic_div);
 #endif // _AUDIO_COMMON_H_
 

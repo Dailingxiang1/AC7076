@@ -16,7 +16,7 @@ extern "C" {
 
 #include "./gui_scr.h"
 #include "./gui_scr_manager.h"
-#include "../../../misc/lv_anim_timeline.h"
+#include "./../../../misc/lv_anim_timeline.h"
 #if LV_USE_GUI_SCR_SWITCH != 0
 
 /*********************
@@ -24,11 +24,11 @@ extern "C" {
  *********************/
 
 typedef enum {
-    MOVE_MODE_FLIP = 0, /* 平移 */
-    MOVE_MODE_EDGE,     /* 边沿翻转 */
-    MOVE_MODE_FLIP_ZOOM, /*缩放*/
-
-    MOVE_MODE_USER = 0xFF
+    GUI_SCR_MOVE_MODE_SLIDE = 0,    /* 滑动平移效果 */
+    GUI_SCR_MOVE_MODE_EDGE_ROTATE,  /* 边缘旋转效果 */
+    GUI_SCR_MOVE_MODE_SLIDE_SCALE,  /* 滑动缩放效果 */
+    GUI_SCR_MOVE_MODE_SCALE_FADE,   /* 缩放淡入淡出效果 */
+    GUI_SCR_MOVE_MODE_CUSTOM = 0xFF /* 自定义模式 */
 } gui_scr_move_mode_t;
 
 #define DIR_THRESHOLD 30 /* 滑动方向距离阈值 */
@@ -48,6 +48,12 @@ typedef enum {
  * @return 页面指针
  */
 typedef gui_scr_t *(*gui_scr_switch_get_scr_cb_t)(int32_t scr_id);
+
+/**
+ * @brief 释放页面ID对应的页面
+ * @param scr_id 页面ID
+ */
+typedef void (*gui_scr_switch_release_scr_cb_t)(int32_t scr_id);
 
 typedef struct {
     uint16_t move_en: 1;
@@ -112,6 +118,12 @@ bool gui_scr_switch_is_enable(void);
 void gui_scr_switch_set_get_scr_cb(gui_scr_switch_get_scr_cb_t get_scr_cb);
 
 /**
+ * 设置释放页面回调
+ * @param release_scr_cb 释放页面回调，用于释放未命中的预加载页面
+ */
+void gui_scr_switch_set_release_scr_cb(gui_scr_switch_release_scr_cb_t release_scr_cb);
+
+/**
  * 设置需要进行页面切换的页面管理器
  * @param manager 页面管理器
  */
@@ -125,6 +137,12 @@ void gui_scr_switch_set_manager(gui_scr_manager_t *manager);
  */
 lv_dir_t gui_scr_switch_get_dir(lv_point_t *start_pos, lv_point_t *end_pos);
 
+/**
+ * 获取背景页面
+ * @return 背景页面
+ */
+lv_obj_t *gui_scr_switch_get_bg_scr(void);
+
 #endif /*LV_USE_GUI_SCR_SWITCH*/
 
 #ifdef __cplusplus
@@ -132,4 +150,5 @@ lv_dir_t gui_scr_switch_get_dir(lv_point_t *start_pos, lv_point_t *end_pos);
 #endif
 
 #endif // GUI_SCR_SWITCH_H
+
 

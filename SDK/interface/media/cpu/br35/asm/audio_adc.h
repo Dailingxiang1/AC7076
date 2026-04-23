@@ -22,7 +22,7 @@
 
 /* ADC 最大通道数 */
 #define AUDIO_ADC_MAX_NUM           (1)
-#define AUDIO_ADC_MIC_MAX_NUM       (1)
+#define AUDIO_ADC_MIC_MAX_NUM       (5)
 #define AUDIO_ADC_LINEIN_MAX_NUM    (1)
 
 /* 通道选择 */
@@ -31,13 +31,15 @@
 #define AUDIO_ADC_MIC_1					    BIT(1)
 #define AUDIO_ADC_MIC_2					    BIT(2)
 #define AUDIO_ADC_MIC_3					    BIT(3)
+#define AUDIO_ADC_DMIC_0	    		    BIT(4)
+#define AUDIO_ADC_DMIC_1	    		    BIT(5)
+#define AUDIO_ADC_DMIC_2	    		    BIT(6)
+#define AUDIO_ADC_DMIC_3	    		    BIT(7)
 #define AUDIO_ADC_LINE(x) 					BIT(x)
 #define AUDIO_ADC_LINE0 					BIT(0)
 #define AUDIO_ADC_LINE1  					BIT(1)
 #define AUDIO_ADC_LINE2  					BIT(2)
 #define AUDIO_ADC_LINE3  					BIT(3)
-#define PLNK_MIC		            		BIT(6)
-#define ALNK_MIC				            BIT(7)
 
 
 /*******************************应用层**********************************/
@@ -153,7 +155,7 @@ struct audio_adc_hdl {
 #endif
     u8 adc_sel[AUDIO_ADC_MAX_NUM];
     u8 adc_dcc[AUDIO_ADC_MAX_NUM];
-    struct mic_open_param mic_param[AUDIO_ADC_MAX_NUM];
+    struct mic_open_param mic_param[AUDIO_ADC_MIC_MAX_NUM];
     struct linein_open_param linein_param[AUDIO_ADC_MAX_NUM];
     u8 mic_ldo_state;
     u8 state;

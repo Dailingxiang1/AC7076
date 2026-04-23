@@ -85,7 +85,7 @@
 <Add option="-DCONFIG_UPDATA_ENABLE" />
 <Add option="-DCONFIG_OTA_UPDATA_ENABLE" />
 <Add option="-DEXPORT_PLATFORM_AUDIO_SMART_VOICE_ENABLE=1" />
-<Add option="-DEXPORT_PLATFORM_AUDIO_PDM_ENABLE=0" />
+<Add option="-DEXPORT_PLATFORM_AUDIO_PDM_ENABLE=1" />
 <Add option="-DEXPORT_PLATFORM_AUDIO_ALINK_ENABLE=0" />
 <Add option="-DEXPORT_PLATFORM_AUDIO_TDM_ENABLE=0" />
 <Add option="-DEXPORT_PLATFORM_AUDIO_SPDIF_ENABLE=0" />
@@ -2029,6 +2029,7 @@
 <Unit filename="apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_menu_waterfalls.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_momentum.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_music.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_music_bg.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_netapp_iflytek.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_notice.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_outdoor_sports.c"><Option compilerVer="CC"/></Unit>
@@ -2147,6 +2148,8 @@
 <Unit filename="audio/cpu/br35/audio_config.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="audio/cpu/br35/audio_config.h" />
 <Unit filename="audio/cpu/br35/audio_config_def.h" />
+<Unit filename="audio/cpu/br35/audio_dai/audio_pdm.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="audio/cpu/br35/audio_dai/audio_pdm.h" />
 <Unit filename="audio/cpu/br35/audio_demo/audio_adc_demo.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="audio/cpu/br35/audio_demo/audio_dac_demo.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="audio/cpu/br35/audio_demo/audio_demo.h" />
@@ -2205,6 +2208,7 @@
 <Unit filename="audio/framework/plugs/source/linein_file.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="audio/framework/plugs/source/pc_spk_file.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="audio/framework/plugs/source/pc_spk_file.h" />
+<Unit filename="audio/framework/plugs/source/pdm_mic_file.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="audio/framework/plugs/source/source_dev0_file.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="audio/framework/plugs/source/source_dev1_file.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="audio/interface/include/a2dp_player.h" />

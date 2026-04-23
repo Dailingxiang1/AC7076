@@ -74,7 +74,6 @@ void alipay_task_sleep(uint32_t ms)
 
 
 
-__attribute__((weak))
 time_t time(time_t *timer)
 {
 

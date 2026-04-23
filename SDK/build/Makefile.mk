@@ -759,6 +759,7 @@ c_SRC_FILES := \
 	apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_menu_waterfalls.c \
 	apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_momentum.c \
 	apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_music.c \
+	apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_music_bg.c \
 	apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_netapp_iflytek.c \
 	apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_notice.c \
 	apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_outdoor_sports.c \

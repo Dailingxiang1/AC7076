@@ -209,6 +209,11 @@ static void ms_to_time(u8 *info, u16 len)
     }
     printf("music_time: %02d : %02d", time / 1000 / 60, (time % 60000) / 1000);
 }
+__attribute__((weak))
+void bip_update_pic_file()
+{
+
+}
 void user_get_bt_music_info(u8 type, u32 time, u8 *info, u16 len)
 {
     //profile define type:
@@ -224,6 +229,18 @@ void user_get_bt_music_info(u8 type, u32 time, u8 *info, u16 len)
     if (type == 7) {
         ms_to_time(info, len);
     }
+#if TCFG_BT_SUPPORT_BIP == 1
+    if (type == 3) {
+        static u8 music_id_3[255] = {0};
+        if (memcmp(music_id_3, info, len) != 0) {
+            printf("get image");
+            /* bt_cmd_prepare(USER_CTRL_BIP_GET_IMAGE, 0, NULL); */
+            bip_update_pic_file();
+        }
+        memcpy(music_id_3, info, len);
+    }
+#endif
+
     if (time != 0) {
         min = time / 1000 / 60;
         sec = time / 1000 - (min * 60);
@@ -567,4 +584,119 @@ void bt_phonebook_packet_handler(u8 type, const u8 *name, const u8 *number, cons
         printf("date:%s ", date);
     }
 }
+
+#if TCFG_BT_SUPPORT_BIP == 1&&0//屏蔽掉功能转到ui_action_music_bg.c
+/*************************************************************************/
+//			avrcp传输音乐图片
+/*************************************************************************/
+//配置
+/* #define BIP_FILE_PATH  	"storage/sd0/C/musicbgp.jpg"//存储到sd卡 */
+/* #define BIP_FILE_PATH  			"storage/virfat_flash/C/musicbgp.jpg"//存储到flash的ui资源区 */
+/* #define BIP_FILE_PATH_TMP		"storage/virfat_flash/C/mbgtmp.jpg" */
+#define BIP_FILE_PATH  			"storage/UI_FAT/C/musicbgp.jpg"//存储到flash的ui资源区
+#define BIP_FILE_PATH_TMP		"storage/UI_FAT/C/mbgtmp.jpg"
+
+#define BIP_FILE_NAME			"musicbgp.jpg"
+enum {
+    BIP_DATA_STATUS_START = 0X01,	//开始包
+    BIP_DATA_STATUS_CONTINUE,		//继续包(中间包)
+    BIP_DATA_STATUS_STOP,			//结束包
+    BIP_DATA_STATUS_ERR,			//错误包，可能是不支持，或者音乐软件未打开
+    BIP_DATA_STATUS_ERR_GET,			//重复获取
+    BIP_DATA_STATUS_GET_NULL,			//上一个获取中，获取无图片歌曲
+};
+enum {
+    BIP_FILE_STATUS_ERR,			//文件不存在
+    BIP_FILE_STATUS_OK,				//文件存在
+    BIP_FILE_STATUS_UPDATE,			//文件更新中
+};
+struct bip_file_info {
+    FILE *fp; 						//文件句柄
+    /* u8 en;							//是否使能 */
+    volatile s8 file_status;		//文件状态
+    void(*callback)(void);			//回调
+};
+volatile struct bip_file_info bip_file;
+#define __bip_info (&bip_file)
+u8 *bip_file_path_get()
+{
+    return (u8 *)BIP_FILE_PATH;
+}
+u8 *bip_file_tmp_path_get()
+{
+    return (u8 *)BIP_FILE_PATH_TMP;
+}
+u8 *bip_file_name_get()
+{
+    return (u8 *)BIP_FILE_NAME;
+}
+u8 bip_file_status_get()
+{
+    return __bip_info->file_status;
+}
+void bip_file_set_callback(void (*callback)(void))
+{
+    __bip_info->callback = callback;
+}
+
+/* ------------------------------------------------------------------------------------*/
+/**
+ * @brief bip_rx_data_handle	音乐图片数据回调
+ *
+ * @param packet	数据包内容
+ * @param body_len	数据包长度
+ * @param length	整个图片大小,只有ios支持在第一包返回
+ * @param bip_data_status	数据状态
+ */
+/* ------------------------------------------------------------------------------------*/
+void bip_rx_data_handle(u8 *packet, u16 body_len, u32 length, u8 bip_data_status)
+{
+    printf("<%s>status:%d\n", __func__, bip_data_status);
+    switch (bip_data_status) {
+    case BIP_DATA_STATUS_START: //收到第一包数据
+        u8 *bit_file_path  = bip_file_tmp_path_get();
+        printf("bip_file_path: %s\n", bit_file_path);
+        //删除旧文件
+        __bip_info->fp = fopen((const char *)bit_file_path, "r");
+        if (__bip_info->fp) {
+            __bip_info->file_status = BIP_FILE_STATUS_ERR;
+            fdelete(__bip_info->fp);
+            __bip_info->fp = NULL;
+        }
+        //新增文件
+        __bip_info->fp = fopen((const char *)bit_file_path, "w+");
+        if (__bip_info->fp) {
+            __bip_info->file_status = BIP_FILE_STATUS_UPDATE;
+            fwrite(packet, body_len, 1, __bip_info->fp);
+        } else {
+            printf("bip file open err\n");
+        }
+        break;
+    case BIP_DATA_STATUS_CONTINUE: //收到文件数据
+        if (__bip_info->fp) {
+            fwrite(packet, body_len, 1, __bip_info->fp);
+        } else {
+            printf("bip file open err\n");
+        }
+        break;
+    case BIP_DATA_STATUS_STOP: //收到结束命令
+        if (__bip_info->fp) {
+            fwrite(packet, body_len, 1, __bip_info->fp);
+            fclose(__bip_info->fp);
+            __bip_info->fp = NULL;
+            __bip_info->file_status = BIP_FILE_STATUS_OK;
+        } else {
+            printf("bip file open err\n");
+        }
+        if (__bip_info->callback) {
+            __bip_info->callback();
+        }
+        break;
+    case BIP_DATA_STATUS_ERR:
+        printf("BIP_DATA_STATUS_ERR");
+        break;
+    }
+}
+#endif
+
 #endif /* #if TCFG_APP_BT_EN */

@@ -17,35 +17,40 @@
 #define  PAGE2_b30d_IMG_POWER_OFF                             0x020002 //  config\image_resources\sys_menu\power_on_off\img_power_off.png
 
 //PAGE 3
-#define  PAGE3_7e4a_PAGE_BG                                   0x030001 //  config\image_resources\common\mask\page_bg.png
-#define  PAGE3_c9a3_MENU_29SET                                0x030002 //  config\image_resources\common\apps_preview\menu_icon\Menu_29set.png
-#define  PAGE3_ec53_MENU_1CLOCK                               0x030003 //  config\image_resources\common\apps_preview\menu_icon\Menu_1Clock.png
-#define  PAGE3_1252_MENU_38CUBE                               0x030004 //  config\image_resources\common\apps_preview\menu_icon\Menu_38cube.png
-#define  PAGE3_16e3_MENU_4MUSIC                               0x030005 //  config\image_resources\common\apps_preview\menu_icon\Menu_4music.png
-#define  PAGE3_330e_MENU_14SLEEP                              0x030006 //  config\image_resources\common\apps_preview\menu_icon\Menu_14Sleep.png
-#define  PAGE3_f61d_MENU_26TIMER                              0x030007 //  config\image_resources\common\apps_preview\menu_icon\Menu_26timer.png
-#define  PAGE3_1cc7_MENU_33PRUNE                              0x030008 //  config\image_resources\common\apps_preview\menu_icon\Menu_33Prune.png
-#define  PAGE3_5997_MENU_24ALIPAY                             0x030009 //  config\image_resources\common\apps_preview\menu_icon\Menu_24Alipay.png
-#define  PAGE3_d68f_MENU_6WEATHER                             0x03000a //  config\image_resources\common\apps_preview\menu_icon\Menu_6weather.png
-#define  PAGE3_5ddc_MENU_22COMPASS                            0x03000b //  config\image_resources\common\apps_preview\menu_icon\Menu_22Compass.png
-#define  PAGE3_50f5_MENU_18CALENDAR                           0x03000c //  config\image_resources\common\apps_preview\menu_icon\Menu_18calendar.png
-#define  PAGE3_7bc1_MENU_20PRESSURE                           0x03000d //  config\image_resources\common\apps_preview\menu_icon\Menu_20pressure.png
-#define  PAGE3_bd70_MENU_2TELEPHONE                           0x03000e //  config\image_resources\common\apps_preview\menu_icon\Menu_2Telephone.png
-#define  PAGE3_e9f7_MENU_13BREATHING                          0x03000f //  config\image_resources\common\apps_preview\menu_icon\Menu_13breathing.png
-#define  PAGE3_5dc3_MENU_27STOPWATCH                          0x030010 //  config\image_resources\common\apps_preview\menu_icon\Menu_27Stopwatch.png
-#define  PAGE3_35f5_MENU_10HEART_RATE                         0x030011 //  config\image_resources\common\apps_preview\menu_icon\Menu_10heart_rate.png
-#define  PAGE3_9b61_MENU_17CALCULATOR                         0x030012 //  config\image_resources\common\apps_preview\menu_icon\Menu_17Calculator.png
-#define  PAGE3_5813_MENU_28PHOTOGRAPH                         0x030013 //  config\image_resources\common\apps_preview\menu_icon\Menu_28photograph.png
-#define  PAGE3_f9e4_MENU_3INFORMATION                         0x030014 //  config\image_resources\common\apps_preview\menu_icon\Menu_3information.png
-#define  PAGE3_7058_MENU_5ALARM_CLOCK                         0x030015 //  config\image_resources\common\apps_preview\menu_icon\Menu_5alarm_clock.png
-#define  PAGE3_68d3_MENU_11BLOOD_OXYGEN                       0x030016 //  config\image_resources\common\apps_preview\menu_icon\Menu_11Blood_oxygen.png
-#define  PAGE3_fd1a_MENU_9INDOOR_SPORTS                       0x030017 //  config\image_resources\common\apps_preview\menu_icon\Menu_9Indoor_sports.png
-#define  PAGE3_7ecb_MENU_32AMBIENT_NOISE                      0x030018 //  config\image_resources\common\apps_preview\menu_icon\Menu_32ambient_noise.png
-#define  PAGE3_5919_MENU_8OUTDOOR_SPORTS                      0x030019 //  config\image_resources\common\apps_preview\menu_icon\Menu_8Outdoor_sports.png
-#define  PAGE3_ebf6_MENU_12BLOOD_PRESSURE                     0x03001a //  config\image_resources\common\apps_preview\menu_icon\Menu_12blood_pressure.png
-#define  PAGE3_b775_MENU_16VOICE_ASSISTANT                    0x03001b //  config\image_resources\common\apps_preview\menu_icon\Menu_16Voice_assistant.png
-#define  PAGE3_a79b_MENU_19FEMALE_ASSISTANT                   0x03001c //  config\image_resources\common\apps_preview\menu_icon\Menu_19Female_assistant.png
-#define  PAGE3_0356_MENU_36NIGHT_RUNNINGLAMP                  0x03001d //  config\image_resources\common\apps_preview\menu_icon\Menu_36Night_runninglamp.png
+#define  PAGE3_03a0_DUER                                      0x030001 //  config\image_resources\ai\duer.png
+#define  PAGE3_2546_ICON_AIWATCH                              0x030002 //  config\image_resources\ai\icon_aiwatch.png
+#define  PAGE3_7e4a_PAGE_BG                                   0x030003 //  config\image_resources\common\mask\page_bg.png
+#define  PAGE3_c9a3_MENU_29SET                                0x030004 //  config\image_resources\common\apps_preview\menu_icon\Menu_29set.png
+#define  PAGE3_5f07_ICON_AI_76                                0x030005 //  config\image_resources\common\apps_preview\menu_icon\icon_ai_76.png
+#define  PAGE3_ec53_MENU_1CLOCK                               0x030006 //  config\image_resources\common\apps_preview\menu_icon\Menu_1Clock.png
+#define  PAGE3_1252_MENU_38CUBE                               0x030007 //  config\image_resources\common\apps_preview\menu_icon\Menu_38cube.png
+#define  PAGE3_16e3_MENU_4MUSIC                               0x030008 //  config\image_resources\common\apps_preview\menu_icon\Menu_4music.png
+#define  PAGE3_207e_ICON_AI_NET                               0x030009 //  config\image_resources\common\apps_preview\menu_icon\icon_ai_net.png
+#define  PAGE3_723f_MENU_CAMERA                               0x03000a //  config\image_resources\common\apps_preview\menu_icon\menu_camera.png
+#define  PAGE3_330e_MENU_14SLEEP                              0x03000b //  config\image_resources\common\apps_preview\menu_icon\Menu_14Sleep.png
+#define  PAGE3_f61d_MENU_26TIMER                              0x03000c //  config\image_resources\common\apps_preview\menu_icon\Menu_26timer.png
+#define  PAGE3_1cc7_MENU_33PRUNE                              0x03000d //  config\image_resources\common\apps_preview\menu_icon\Menu_33Prune.png
+#define  PAGE3_5997_MENU_24ALIPAY                             0x03000e //  config\image_resources\common\apps_preview\menu_icon\Menu_24Alipay.png
+#define  PAGE3_d68f_MENU_6WEATHER                             0x03000f //  config\image_resources\common\apps_preview\menu_icon\Menu_6weather.png
+#define  PAGE3_5ddc_MENU_22COMPASS                            0x030010 //  config\image_resources\common\apps_preview\menu_icon\Menu_22Compass.png
+#define  PAGE3_50f5_MENU_18CALENDAR                           0x030011 //  config\image_resources\common\apps_preview\menu_icon\Menu_18calendar.png
+#define  PAGE3_7bc1_MENU_20PRESSURE                           0x030012 //  config\image_resources\common\apps_preview\menu_icon\Menu_20pressure.png
+#define  PAGE3_bd70_MENU_2TELEPHONE                           0x030013 //  config\image_resources\common\apps_preview\menu_icon\Menu_2Telephone.png
+#define  PAGE3_e9f7_MENU_13BREATHING                          0x030014 //  config\image_resources\common\apps_preview\menu_icon\Menu_13breathing.png
+#define  PAGE3_5dc3_MENU_27STOPWATCH                          0x030015 //  config\image_resources\common\apps_preview\menu_icon\Menu_27Stopwatch.png
+#define  PAGE3_35f5_MENU_10HEART_RATE                         0x030016 //  config\image_resources\common\apps_preview\menu_icon\Menu_10heart_rate.png
+#define  PAGE3_9b61_MENU_17CALCULATOR                         0x030017 //  config\image_resources\common\apps_preview\menu_icon\Menu_17Calculator.png
+#define  PAGE3_5813_MENU_28PHOTOGRAPH                         0x030018 //  config\image_resources\common\apps_preview\menu_icon\Menu_28photograph.png
+#define  PAGE3_f9e4_MENU_3INFORMATION                         0x030019 //  config\image_resources\common\apps_preview\menu_icon\Menu_3information.png
+#define  PAGE3_7058_MENU_5ALARM_CLOCK                         0x03001a //  config\image_resources\common\apps_preview\menu_icon\Menu_5alarm_clock.png
+#define  PAGE3_68d3_MENU_11BLOOD_OXYGEN                       0x03001b //  config\image_resources\common\apps_preview\menu_icon\Menu_11Blood_oxygen.png
+#define  PAGE3_fd1a_MENU_9INDOOR_SPORTS                       0x03001c //  config\image_resources\common\apps_preview\menu_icon\Menu_9Indoor_sports.png
+#define  PAGE3_7ecb_MENU_32AMBIENT_NOISE                      0x03001d //  config\image_resources\common\apps_preview\menu_icon\Menu_32ambient_noise.png
+#define  PAGE3_5919_MENU_8OUTDOOR_SPORTS                      0x03001e //  config\image_resources\common\apps_preview\menu_icon\Menu_8Outdoor_sports.png
+#define  PAGE3_ebf6_MENU_12BLOOD_PRESSURE                     0x03001f //  config\image_resources\common\apps_preview\menu_icon\Menu_12blood_pressure.png
+#define  PAGE3_b775_MENU_16VOICE_ASSISTANT                    0x030020 //  config\image_resources\common\apps_preview\menu_icon\Menu_16Voice_assistant.png
+#define  PAGE3_a79b_MENU_19FEMALE_ASSISTANT                   0x030021 //  config\image_resources\common\apps_preview\menu_icon\Menu_19Female_assistant.png
+#define  PAGE3_0356_MENU_36NIGHT_RUNNINGLAMP                  0x030022 //  config\image_resources\common\apps_preview\menu_icon\Menu_36Night_runninglamp.png
 
 //PAGE 4
 #define  PAGE4_7e4a_PAGE_BG                                   0x040001 //  config\image_resources\common\mask\page_bg.png
@@ -470,8 +475,8 @@
 #define  PAGE17_9d52_ICON_NO_64                               0x110002 //  config\image_resources\alipay\icon_no_64.png
 #define  PAGE17_94a6_ICON_SETTLE                              0x110003 //  config\image_resources\alipay\icon_settle.png
 #define  PAGE17_af7a_ICON_YES_64                              0x110004 //  config\image_resources\alipay\icon_yes_64.png
-#define  PAGE17_5758_IMG_LOGO_90                              0x110005 //  config\image_resources\alipay\img_logo_90.png
-#define  PAGE17_cf6a_IMG_LOGO_90                              0x110006 //  config\image_resources\alipay\img_logo_90.png
+#define  PAGE17_cf6a_IMG_LOGO_90                              0x110005 //  config\image_resources\alipay\img_logo_90.png
+#define  PAGE17_5758_IMG_LOGO_90                              0x110006 //  config\image_resources\alipay\img_logo_90.png
 #define  PAGE17_bbe1_ICON_FAIL_80                             0x110007 //  config\image_resources\alipay\icon_fail_80.png
 #define  PAGE17_7e4a_PAGE_BG                                  0x110008 //  config\image_resources\common\mask\page_bg.png
 #define  PAGE17_bae2_ICON_FAIL_120                            0x110009 //  config\image_resources\alipay\icon_fail_120.png
@@ -2068,5 +2073,112 @@
 #define  PAGE76_793e_MENU_35POWER_SAVINGMODE_1_               0x4c0006 //  config\image_resources\smartwin\Menu_35Power_savingmode(1).png
 
 //PAGE 77
+
+//PAGE 78
+#define  PAGE78_b207_0__1_                                    0x4e0001 //  config\image_resources\ai\0 (1).png
+#define  PAGE78_bfd3_0__5_                                    0x4e0002 //  config\image_resources\ai\0 (5).png
+#define  PAGE78_aada_0__8_                                    0x4e0003 //  config\image_resources\ai\0 (8).png
+#define  PAGE78_90f8_0__13_                                   0x4e0004 //  config\image_resources\ai\0 (13).png
+#define  PAGE78_9e59_0__16_                                   0x4e0005 //  config\image_resources\ai\0 (16).png
+#define  PAGE78_18c4_0__20_                                   0x4e0006 //  config\image_resources\ai\0 (20).png
+#define  PAGE78_1510_0__24_                                   0x4e0007 //  config\image_resources\ai\0 (24).png
+#define  PAGE78_0019_0__29_                                   0x4e0008 //  config\image_resources\ai\0 (29).png
+#define  PAGE78_663a_0__33_                                   0x4e0009 //  config\image_resources\ai\0 (33).png
+#define  PAGE78_163c_0__43_                                   0x4e000a //  config\image_resources\ai\0 (43).png
+#define  PAGE78_b9bc_THINKING__1_                             0x4e000b //  config\image_resources\ai\thinking (1).png
+#define  PAGE78_660d_H42_0                                    0x4e000c //  config\image_resources\common\num\data\size36\h42_0.png
+#define  PAGE78_0948_H42_1                                    0x4e000d //  config\image_resources\common\num\data\size36\h42_1.png
+#define  PAGE78_b887_H42_2                                    0x4e000e //  config\image_resources\common\num\data\size36\h42_2.png
+#define  PAGE78_d7c2_H42_3                                    0x4e000f //  config\image_resources\common\num\data\size36\h42_3.png
+#define  PAGE78_cb38_H42_4                                    0x4e0010 //  config\image_resources\common\num\data\size36\h42_4.png
+#define  PAGE78_a47d_H42_5                                    0x4e0011 //  config\image_resources\common\num\data\size36\h42_5.png
+#define  PAGE78_15b2_H42_6                                    0x4e0012 //  config\image_resources\common\num\data\size36\h42_6.png
+#define  PAGE78_7af7_H42_7                                    0x4e0013 //  config\image_resources\common\num\data\size36\h42_7.png
+#define  PAGE78_2c46_H42_8                                    0x4e0014 //  config\image_resources\common\num\data\size36\h42_8.png
+#define  PAGE78_4303_H42_9                                    0x4e0015 //  config\image_resources\common\num\data\size36\h42_9.png
+
+//PAGE 79
+#define  PAGE79_b207_0__1_                                    0x4f0001 //  config\image_resources\ai\0 (1).png
+#define  PAGE79_bfd3_0__5_                                    0x4f0002 //  config\image_resources\ai\0 (5).png
+#define  PAGE79_aada_0__8_                                    0x4f0003 //  config\image_resources\ai\0 (8).png
+#define  PAGE79_90f8_0__13_                                   0x4f0004 //  config\image_resources\ai\0 (13).png
+#define  PAGE79_9e59_0__16_                                   0x4f0005 //  config\image_resources\ai\0 (16).png
+#define  PAGE79_18c4_0__20_                                   0x4f0006 //  config\image_resources\ai\0 (20).png
+#define  PAGE79_1510_0__24_                                   0x4f0007 //  config\image_resources\ai\0 (24).png
+#define  PAGE79_0019_0__29_                                   0x4f0008 //  config\image_resources\ai\0 (29).png
+#define  PAGE79_663a_0__33_                                   0x4f0009 //  config\image_resources\ai\0 (33).png
+#define  PAGE79_163c_0__43_                                   0x4f000a //  config\image_resources\ai\0 (43).png
+#define  PAGE79_2546_ICON_AIWATCH                             0x4f000b //  config\image_resources\ai\icon_aiwatch.png
+#define  PAGE79_b9bc_THINKING__1_                             0x4f000c //  config\image_resources\ai\thinking (1).png
+#define  PAGE79_660d_H42_0                                    0x4f000d //  config\image_resources\common\num\data\size36\h42_0.png
+#define  PAGE79_0948_H42_1                                    0x4f000e //  config\image_resources\common\num\data\size36\h42_1.png
+#define  PAGE79_b887_H42_2                                    0x4f000f //  config\image_resources\common\num\data\size36\h42_2.png
+#define  PAGE79_d7c2_H42_3                                    0x4f0010 //  config\image_resources\common\num\data\size36\h42_3.png
+#define  PAGE79_cb38_H42_4                                    0x4f0011 //  config\image_resources\common\num\data\size36\h42_4.png
+#define  PAGE79_a47d_H42_5                                    0x4f0012 //  config\image_resources\common\num\data\size36\h42_5.png
+#define  PAGE79_15b2_H42_6                                    0x4f0013 //  config\image_resources\common\num\data\size36\h42_6.png
+#define  PAGE79_7af7_H42_7                                    0x4f0014 //  config\image_resources\common\num\data\size36\h42_7.png
+#define  PAGE79_2c46_H42_8                                    0x4f0015 //  config\image_resources\common\num\data\size36\h42_8.png
+#define  PAGE79_4303_H42_9                                    0x4f0016 //  config\image_resources\common\num\data\size36\h42_9.png
+#define  PAGE79_e6b9_ALIPAY_178X64                            0x4f0017 //  config\image_resources\common\more\rect_background\alipay_178x64.png
+
+//PAGE 80
+#define  PAGE80_b207_0__1_                                    0x500001 //  config\image_resources\ai\0 (1).png
+#define  PAGE80_bfd3_0__5_                                    0x500002 //  config\image_resources\ai\0 (5).png
+#define  PAGE80_aada_0__8_                                    0x500003 //  config\image_resources\ai\0 (8).png
+#define  PAGE80_90f8_0__13_                                   0x500004 //  config\image_resources\ai\0 (13).png
+#define  PAGE80_9e59_0__16_                                   0x500005 //  config\image_resources\ai\0 (16).png
+#define  PAGE80_18c4_0__20_                                   0x500006 //  config\image_resources\ai\0 (20).png
+#define  PAGE80_1510_0__24_                                   0x500007 //  config\image_resources\ai\0 (24).png
+#define  PAGE80_0019_0__29_                                   0x500008 //  config\image_resources\ai\0 (29).png
+#define  PAGE80_663a_0__33_                                   0x500009 //  config\image_resources\ai\0 (33).png
+#define  PAGE80_163c_0__43_                                   0x50000a //  config\image_resources\ai\0 (43).png
+#define  PAGE80_b9bc_THINKING__1_                             0x50000b //  config\image_resources\ai\thinking (1).png
+#define  PAGE80_660d_H42_0                                    0x50000c //  config\image_resources\common\num\data\size36\h42_0.png
+#define  PAGE80_0948_H42_1                                    0x50000d //  config\image_resources\common\num\data\size36\h42_1.png
+#define  PAGE80_b887_H42_2                                    0x50000e //  config\image_resources\common\num\data\size36\h42_2.png
+#define  PAGE80_d7c2_H42_3                                    0x50000f //  config\image_resources\common\num\data\size36\h42_3.png
+#define  PAGE80_cb38_H42_4                                    0x500010 //  config\image_resources\common\num\data\size36\h42_4.png
+#define  PAGE80_a47d_H42_5                                    0x500011 //  config\image_resources\common\num\data\size36\h42_5.png
+#define  PAGE80_15b2_H42_6                                    0x500012 //  config\image_resources\common\num\data\size36\h42_6.png
+#define  PAGE80_7af7_H42_7                                    0x500013 //  config\image_resources\common\num\data\size36\h42_7.png
+#define  PAGE80_2c46_H42_8                                    0x500014 //  config\image_resources\common\num\data\size36\h42_8.png
+#define  PAGE80_4303_H42_9                                    0x500015 //  config\image_resources\common\num\data\size36\h42_9.png
+#define  PAGE80_e6b9_ALIPAY_178X64                            0x500016 //  config\image_resources\common\more\rect_background\alipay_178x64.png
+
+//PAGE 81
+
+//PAGE 82
+#define  PAGE82_c347_PHOTO                                    0x520001 //  config\image_resources\camera\photo.png
+#define  PAGE82_396a_VIDEO                                    0x520002 //  config\image_resources\camera\video.png
+#define  PAGE82_1a69_CAMERA                                   0x520003 //  config\image_resources\camera\camera.png
+#define  PAGE82_e08d_H33_0                                    0x520004 //  config\image_resources\common\num\normal\size24\h33_0.png
+#define  PAGE82_8fc8_H33_1                                    0x520005 //  config\image_resources\common\num\normal\size24\h33_1.png
+#define  PAGE82_3e07_H33_2                                    0x520006 //  config\image_resources\common\num\normal\size24\h33_2.png
+#define  PAGE82_5142_H33_3                                    0x520007 //  config\image_resources\common\num\normal\size24\h33_3.png
+#define  PAGE82_4db8_H33_4                                    0x520008 //  config\image_resources\common\num\normal\size24\h33_4.png
+#define  PAGE82_22fd_H33_5                                    0x520009 //  config\image_resources\common\num\normal\size24\h33_5.png
+#define  PAGE82_9332_H33_6                                    0x52000a //  config\image_resources\common\num\normal\size24\h33_6.png
+#define  PAGE82_fc77_H33_7                                    0x52000b //  config\image_resources\common\num\normal\size24\h33_7.png
+#define  PAGE82_aac6_H33_8                                    0x52000c //  config\image_resources\common\num\normal\size24\h33_8.png
+#define  PAGE82_c583_H33_9                                    0x52000d //  config\image_resources\common\num\normal\size24\h33_9.png
+#define  PAGE82_8e92_H33_12                                   0x52000e //  config\image_resources\common\num\normal\size24\h33_12.png
+#define  PAGE82_be81_H33_12_1                                 0x52000f //  config\image_resources\common\num\normal\size24\h33_12_1.png
+
+//PAGE 83
+
+//PAGE 84
+#define  PAGE84_b9bc_THINKING__1_                             0x540001 //  config\image_resources\ai\thinking (1).png
+#define  PAGE84_84fa_H67_0                                    0x540002 //  config\image_resources\batcharge\h67_0.png
+#define  PAGE84_ebbf_H67_1                                    0x540003 //  config\image_resources\batcharge\h67_1.png
+#define  PAGE84_5a70_H67_2                                    0x540004 //  config\image_resources\batcharge\h67_2.png
+#define  PAGE84_3535_H67_3                                    0x540005 //  config\image_resources\batcharge\h67_3.png
+#define  PAGE84_29cf_H67_4                                    0x540006 //  config\image_resources\batcharge\h67_4.png
+#define  PAGE84_468a_H67_5                                    0x540007 //  config\image_resources\batcharge\h67_5.png
+#define  PAGE84_f745_H67_6                                    0x540008 //  config\image_resources\batcharge\h67_6.png
+#define  PAGE84_9800_H67_7                                    0x540009 //  config\image_resources\batcharge\h67_7.png
+#define  PAGE84_ceb1_H67_8                                    0x54000a //  config\image_resources\batcharge\h67_8.png
+#define  PAGE84_a1f4_H67_9                                    0x54000b //  config\image_resources\batcharge\h67_9.png
+#define  PAGE84_e6b9_ALIPAY_178X64                            0x54000c //  config\image_resources\common\more\rect_background\alipay_178x64.png
 
 #endif

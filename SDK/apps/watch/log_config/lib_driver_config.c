@@ -85,6 +85,13 @@ const u8 sfc0_continue_mode_en = 1;
 #else
 const u8 sfc0_continue_mode_en = 0;
 #endif
+
+#if (CONFIG_FLASH_SIZE == (64*1024*1024))
+const u8 sfc_flash_spi_read_mode_en = 1; // spi0 read
+#else
+const u8 sfc_flash_spi_read_mode_en = 0; // cpu copy
+#endif
+
 /* 是否开启把vm配置项暂存到ram的功能 */
 /* 具体使用方法和功能特性参考《项目帮助文档》的“11.4. 配置项管理 -VM配置项暂存RAM功能描述” */
 const char vm_ram_storage_enable = FALSE;  // vm_ram_storage_enable会与在中断里面写到ram的功能冲突

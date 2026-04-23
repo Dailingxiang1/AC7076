@@ -373,7 +373,12 @@ static int a2dp_tx_ioc_fmt_nego(struct stream_iport *iport)
     /* printf("a2dp_tx frequency %d, sr %d, bitpool %d, mode %d, channle_mode %x,allocation %d, blocks %d, subbands %d, endian %d\n", sbc_param->frequency, sample_rate, sbc_param->bitpool, sbc_param->mode, channel_mode, sbc_param->allocation, sbc_param->blocks, sbc_param->subbands, sbc_param->endian); */
 
     // 调整sbc编码参数与耳机sbc参数一致
-    stream_node_ioctl(iport->prev->node, NODE_UUID_ENCODER, NODE_IOC_SET_PARAM, (int)sbc_param);
+    stream_node_ioctl(iport->prev->node, NODE_UUID_ENCODER, NODE_IOC_SET_FMT_EX, (int)sbc_param);
+    // 调整encoder编码参数
+    struct stream_enc_fmt enc_fmt = {0};
+    stream_node_ioctl(iport->prev->node, NODE_UUID_ENCODER, NODE_IOC_GET_ENC_FMT, (int)&enc_fmt);
+    enc_fmt.sample_rate = in_fmt->sample_rate;
+    stream_node_ioctl(iport->prev->node, NODE_UUID_ENCODER, NODE_IOC_SET_ENC_FMT, (int)&enc_fmt);
 
     if (sbc_need_free) {
         free(sbc_param);

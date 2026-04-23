@@ -89,6 +89,7 @@ struct jlstream;
 #define NODE_IOC_GET_ENC_TIME       0x00020032		//获取编码时间
 #define NODE_IOC_SET_SYNC_NETWORK   0x0002003b
 #define NODE_IOC_GET_PRIV_FMT       0x0002003c
+#define NODE_IOC_SET_FMT_EX         0x00020034
 
 #define NODE_IOC_START              (0x00040000 | NODE_STA_RUN)
 #define NODE_IOC_PAUSE              (0x00040000 | NODE_STA_PAUSE)

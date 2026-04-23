@@ -86,7 +86,8 @@ struct gif_info {
     void *fp;
     int index;
     GIF_CACHE_CB cache_data_cb;
-
+    u8 *frame_cache_addr1;
+    u8 *frame_cache_addr2;
 
     //scale、rotate
     u8 ratio_en;

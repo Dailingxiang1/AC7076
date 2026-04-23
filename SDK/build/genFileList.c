@@ -736,6 +736,7 @@ c_SRC_FILES += \
 	  audio/cpu/br35/audio_setup.c \
 	  audio/cpu/br35/audio_config.c \
 	  audio/cpu/br35/media_memory_manager.c \
+	  audio/cpu/br35/audio_dai/audio_pdm.c \
 
 /* #if TCFG_AUDIO_ANC_ENABLE */
 /* objs += \ */

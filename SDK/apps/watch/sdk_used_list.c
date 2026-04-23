@@ -59,6 +59,10 @@ lhdc_dec_plug
 ldac_dec_plug
 #endif
 
+#if TCFG_PDM_NODE_ENABLE
+pdm_mic_file_plug
+#endif
+
 #if TCFG_ENC_MSBC_ENABLE
 #if (defined CONFIG_CPU_BR35)
 msbc_encoder_soft_plug

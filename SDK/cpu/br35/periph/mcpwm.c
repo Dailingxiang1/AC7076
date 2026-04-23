@@ -283,7 +283,7 @@ void mcpwm_deinit(int mcpwm_cfg_id)
         spin_unlock(&mcpwm_lock);
     }
     free(mcpwm_info[mcpwm_cfg_id]);
-    memset(mcpwm_info[mcpwm_cfg_id], 0, sizeof(struct mcpwm_info_t));
+    mcpwm_info[mcpwm_cfg_id] = 0;
 }
 
 void mcpwm_start(int mcpwm_cfg_id)

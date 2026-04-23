@@ -304,6 +304,7 @@ const int config_mp3_dec_speed_mode 	=  0;//FAST_FREQ_restrict | FAST_FILTER_res
 /* #endif // (TCFG_APP_MUSIC_EN && !TCFG_DEC2TWS_ENABLE) */
 const int config_mp3_enc_use_layer_3	=  TCFG_ENC_MP3_TYPE;
 
+const int mp3encode_input_mode = 0x01;//0x01--short输入 0x02--float输入
 
 //解码读文件缓存buf大小,如果遇到卡速较慢,播放高码率文件有卡顿情况，可增加此缓存大小
 const int CONFIG_MUSIC_FILE_BUF_SIZE = 4 * 1024;

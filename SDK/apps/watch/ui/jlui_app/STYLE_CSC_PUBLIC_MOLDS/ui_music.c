@@ -985,10 +985,16 @@ void check_emitter_connect_status()
         /* app_send_message(APP_MSG_GOTO_MODE, APP_MODE_MUSIC); */
         custom_client_send_ctrl_edr_info();
         bt_emitter_connecting_flag = 0;
-        __this->mode = LOCAL_MODE;
-        __this->play_sel = EARPHONE_PLAY;
-        music_play_sel = __this->play_sel;
-        music_mode = __this->mode;
+        if (__this != NULL) {
+            __this->mode = LOCAL_MODE;
+            __this->play_sel = EARPHONE_PLAY;
+            music_play_sel = __this->play_sel;
+            music_mode = __this->mode;
+        } else {
+            music_play_sel = EARPHONE_PLAY;
+            music_mode = LOCAL_MODE;
+
+        }
         /* app_send_message(APP_MSG_GOTO_MODE, APP_MODE_MUSIC); */
         sys_timeout_add(NULL, cut_in_music_mode, 1500);
     } else if (++cnt >= 100) {
@@ -1045,6 +1051,9 @@ static int music_mode_list_ontouch(void *ctr, struct element_touch_event *e)
                 break;
             }
 
+            if (get_cur_connect_emitter_mac_addr() != NULL) {
+                break;
+            }
             if (is_bredr_close() == 0) {
                 /* bt_cmd_prepare(USER_CTRL_AVCTP_PAUSE_MUSIC, 0, NULL); */
                 bt_close_bredr();

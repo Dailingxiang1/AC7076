@@ -23,7 +23,7 @@ const int CONFIG_EDR_INIT_TIMEOUT = 0xea60; // 超时时间
 // ------------升级配置.json------------
 #if TCFG_UPDATE_ENABLE
 const int CONFIG_UPDATE_STORAGE_DEV_EN = 0x1; // 设备升级
-const int CONFIG_UPDATE_BLE_TEST_EN = 0x0; // ble蓝牙升级
+const int CONFIG_UPDATE_BLE_TEST_EN = 0x1; // ble蓝牙升级
 const int CONFIG_UPDATE_BT_LMP_EN = 0x1; // edr蓝牙升级
 #endif // TCFG_UPDATE_ENABLE
 // ------------升级配置.json------------

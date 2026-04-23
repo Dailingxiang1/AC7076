@@ -213,7 +213,7 @@ static int jpeg_hd_manager_del(void *opj)
                 FILE *fp = (FILE *)(((int *)p->opj->device)[0]);
                 jpeg_module_opj_free_file_hd(fp);
             }
-            jpeg_module_opj_release_async((void *)p->opj);
+            /* jpeg_module_opj_release_async((void *)p->opj); */
             jpeg_free(p);
             break;
         }
@@ -317,10 +317,10 @@ void jpeg_module_free_res_cb(void *p)
     jdec_opj *opj = (jdec_opj *)p;
     if (opj) {
         /*释放图片资源*/
-        jpeg_free(opj->device);
-        /*释放底层*/
         jljpeg_decode_release(opj, 0);
         jpeg_hd_manager_del(p);
+        jpeg_free(opj->device);
+        /*释放底层*/
         /*释放句柄*/
         jpeg_free(opj);
         /*如果全局句柄与当前一致，释放，如果不一致说明已经切换为新的句柄，就不需再清*/
@@ -853,9 +853,14 @@ void *cache_gpu_input_jpeg_data(void *head, pJLGPUTaskParam_t task_param, void *
         UI_IO_DEBUG_1(B, 4);
         if (jpeg_module_opj_init(jpg_hd)) {//初始化jpeg头
             //异常释放资源
+#if 0
             jpeg_free(jpg_hd->device);
             jljpeg_decode_release(jpg_hd, 0);
             jpeg_free(jpg_hd);
+#else
+
+            jpeg_module_opj_release_async((void *)jpg_hd);
+#endif
             if (jpeg_src_data) {
                 jpeg_free(jpeg_src_data);
             }
@@ -942,7 +947,7 @@ int jpeg_module_opj_init_file(void *priv)
     int ret = jljpeg_decode_init(opj);
     if (!ret) {
         ret = jljpeg_img_info_get(opj,  jlui_jpeg_infunc, dev);
-        ASSERT(!ret, "jpeg file notsupport err:%x", ret);
+        log_error("jpeg file notsupport err:%x", ret);
     }
     log_debug("%s %d", __func__, ret);
     return ret;

@@ -19,7 +19,7 @@
 
 
 #if (RCSP_MODE && TCFG_DEV_MANAGER_ENABLE && JL_RCSP_SIMPLE_TRANSFER)
-
+#define HUAWEI_MUSIC_NOTIC_FILT 1
 
 
 //*----------------------------------------------------------------------------*/
@@ -78,7 +78,11 @@ static int simple_trans_insert_file_by_id(u8 file_type, u16 *id, u32 data_offset
 {
     log_info("<%s> file_type:%d, id:%x, data_offset:%x, data_len:%x, file_total_size:%x\n", __func__, file_type, *id, data_offset, data_len, file_total_size);
     log_info_hexdump(data, data_len);
-
+#if HUAWEI_MUSIC_NOTIC_FILT
+    if (strstr((char *)data + 10, "com.huawei.mediacontroller") != NULL) {
+        return 0;
+    }
+#endif
 #if TCFG_DATA_STORAGE_ENABLE
     //TODO 判断这个文件剩余空间是否足够
     //
