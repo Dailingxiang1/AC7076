@@ -1,0 +1,1272 @@
+{
+ "enable": true,
+ "name": "pipeline-recoder",
+ "uuid": "0x49EC",
+ "childrenGroup": [
+  {
+   "id": 1731488205332,
+   "title": "单声道录音",
+   "select": true,
+   "tabs": [
+    {
+     "id": "id_1731490858522_0",
+     "title": "参数组1",
+     "disable": false,
+     "selected": "A",
+     "preset": ""
+    }
+   ],
+   "curTab": "id_1731490858522_0"
+  },
+  {
+   "id": "id_1731582257627_0",
+   "title": "双声道录音",
+   "select": false,
+   "tabs": [
+    {
+     "id": "id_1731582257627_1",
+     "title": "参数组1",
+     "disable": false,
+     "selected": "A",
+     "preset": ""
+    }
+   ],
+   "curTab": "id_1731582257627_1"
+  }
+ ],
+ "nodeData": {
+  "cells": [
+   {
+    "position": {
+     "x": -40,
+     "y": -40
+    },
+    "size": {
+     "width": 80,
+     "height": 80
+    },
+    "view": "vue-shape-view",
+    "shape": "vue-shape",
+    "id": "4f39be3f-e8c8-4c3c-b53c-ec827c787669",
+    "component": "node-cust",
+    "group": "hardware",
+    "data": {
+     "num": 1,
+     "name": "ADC",
+     "group": "输入输出",
+     "type": 0,
+     "fun": 1,
+     "formFile": "../../.ADC配置.json",
+     "uuid": "0XD06D",
+     "outBit": 2,
+     "inBit": 0,
+     "bitConsistency": false,
+     "sAlias": "",
+     "dynamicPort": {
+      "iMax": 0,
+      "iMin": 0,
+      "oMax": 0,
+      "oMin": 0
+     },
+     "marco": "TCFG_ADC_NODE_ENABLE",
+     "subId": 2,
+     "itemId": 1731488205332,
+     "configs": {
+      "name": "ADC1",
+      "list": [
+       {
+        "modeId": "id_1731490858522_0",
+        "name": "ADC1",
+        "current": "arg0",
+        "bypass": false,
+        "list": [
+         {
+          "name": "arg0",
+          "data": [
+           {
+            "id": "id_1671070268689_0",
+            "list": [
+             {
+              "id": "id_1671070296872_1",
+              "value": [
+               1
+              ]
+             }
+            ]
+           },
+           {
+            "id": "id_1675824280474_161",
+            "list": [
+             {
+              "id": "id_1671073072823_3",
+              "value": 0
+             },
+             {
+              "id": "id_1727164994754_0",
+              "value": 0
+             }
+            ]
+           }
+          ],
+          "enable": true,
+          "bypass": false
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "ports": {
+     "groups": {
+      "in": {
+       "position": "left"
+      },
+      "out": {
+       "position": "right",
+       "attrs": {
+        "text": {
+         "fill": "#2b3f57",
+         "font-size": "12",
+         "visibility": "visible",
+         "text": ""
+        },
+        "circle": {
+         "r": 6,
+         "magnet": true,
+         "stroke": "#7DC06E",
+         "strokeWidth": 2,
+         "fill": "#f2f2f2",
+         "event": "port:click",
+         "style": {
+          "visibility": "visible"
+         }
+        }
+       }
+      }
+     },
+     "items": [
+      {
+       "group": "out",
+       "id": "5114f0b1-23ea-4659-844f-a8bd9b1e634d",
+       "index": 0
+      }
+     ]
+    }
+   },
+   {
+    "shape": "edge",
+    "attrs": {
+     "line": {
+      "stroke": "#A4A5A9",
+      "strokeWidth": "2px",
+      "targetMarker": {
+       "tagName": "path",
+       "d": "M 12 -5 0 0 12 5 Z",
+       "strokeWidth": 2,
+       "fill": "#A4A5A9",
+       "stroke": "#A4A5A9"
+      },
+      "distance": 40
+     }
+    },
+    "id": "c2a3049d-80de-4a58-86b4-4b7fa691cfaa",
+    "data": {
+     "itemId": 1731488205332
+    },
+    "source": {
+     "cell": "4f39be3f-e8c8-4c3c-b53c-ec827c787669",
+     "port": "5114f0b1-23ea-4659-844f-a8bd9b1e634d"
+    },
+    "target": {
+     "cell": "7a3d4b9c-4ede-40af-a56e-9418de0e4c7e",
+     "port": "25ac1764-1e03-461d-8a28-4d109b881a7f"
+    }
+   },
+   {
+    "position": {
+     "x": 120,
+     "y": -40
+    },
+    "size": {
+     "width": 80,
+     "height": 80
+    },
+    "view": "vue-shape-view",
+    "shape": "vue-shape",
+    "id": "7a3d4b9c-4ede-40af-a56e-9418de0e4c7e",
+    "component": "node-cust",
+    "group": "hardware",
+    "data": {
+     "num": 2,
+     "name": "编码器",
+     "group": "编解码",
+     "type": 1,
+     "fun": 1,
+     "formFile": "../../.encoder_fmt.json",
+     "uuid": "0XA2C",
+     "itemId": 1731488205332,
+     "sAlias": "",
+     "dynamicPort": {
+      "iMax": 0,
+      "iMin": 0,
+      "oMax": 0,
+      "oMin": 0
+     },
+     "subId": 3,
+     "configs": {
+      "name": "A2C1",
+      "list": [
+       {
+        "modeId": "id_1731490858522_0",
+        "name": "A2C1",
+        "current": "arg0",
+        "bypass": false,
+        "list": [
+         {
+          "name": "arg0",
+          "data": [
+           {
+            "id": "id_1682580902370_0",
+            "list": [
+             {
+              "id": "id_1682666755532_2",
+              "value": 1
+             },
+             {
+              "id": "id_1713834265905_0",
+              "value": 0
+             },
+             {
+              "id": "id_1682666801718_3",
+              "value": 44100
+             },
+             {
+              "id": "id_1682667012781_7",
+              "value": 64000
+             },
+             {
+              "id": "id_1682580918689_1",
+              "value": 1
+             }
+            ]
+           }
+          ],
+          "enable": true,
+          "bypass": false
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "ports": {
+     "groups": {
+      "in": {
+       "position": "left"
+      },
+      "out": {
+       "position": "right",
+       "attrs": {
+        "text": {
+         "fill": "#2b3f57",
+         "font-size": "12",
+         "visibility": "visible",
+         "text": ""
+        },
+        "circle": {
+         "r": 6,
+         "magnet": true,
+         "stroke": "#7DC06E",
+         "strokeWidth": 2,
+         "fill": "#f2f2f2",
+         "event": "port:click",
+         "style": {
+          "visibility": "visible"
+         }
+        }
+       }
+      }
+     },
+     "items": [
+      {
+       "group": "in",
+       "id": "25ac1764-1e03-461d-8a28-4d109b881a7f",
+       "index": 0
+      },
+      {
+       "group": "out",
+       "id": "5114f0b1-23ea-4659-844f-a8bd9b1e634d",
+       "index": 0
+      }
+     ]
+    }
+   },
+   {
+    "shape": "edge",
+    "attrs": {
+     "line": {
+      "stroke": "#A4A5A9",
+      "strokeWidth": "2px",
+      "targetMarker": {
+       "tagName": "path",
+       "d": "M 12 -5 0 0 12 5 Z",
+       "strokeWidth": 2,
+       "fill": "#A4A5A9",
+       "stroke": "#A4A5A9"
+      },
+      "distance": 40
+     }
+    },
+    "id": "b0820f86-cf0c-4a27-a9f2-b02522ea9ec2",
+    "data": {
+     "itemId": 1731488205332
+    },
+    "source": {
+     "cell": "7a3d4b9c-4ede-40af-a56e-9418de0e4c7e",
+     "port": "5114f0b1-23ea-4659-844f-a8bd9b1e634d"
+    },
+    "target": {
+     "cell": "b85523dc-a0cf-4738-9977-e8574194589f",
+     "port": "30139dee-4daf-449f-a0fa-a01e295cf63c"
+    }
+   },
+   {
+    "position": {
+     "x": 280,
+     "y": -40
+    },
+    "size": {
+     "width": 80,
+     "height": 80
+    },
+    "view": "vue-shape-view",
+    "shape": "vue-shape",
+    "id": "b85523dc-a0cf-4738-9977-e8574194589f",
+    "component": "node-cust",
+    "group": "hardware",
+    "data": {
+     "name": "封装",
+     "group": "编解码",
+     "uuid": "0XE2CB",
+     "type": 1,
+     "fun": 1,
+     "formFile": "../../.package_fmt.json",
+     "sAlias": "",
+     "dynamicPort": {
+      "iMax": 0,
+      "iMin": 0,
+      "oMax": 0,
+      "oMin": 0
+     },
+     "marco": "TCFG_FILE_PACKAGE_NODE_ENABLE",
+     "subId": 2,
+     "itemId": 1731488205332,
+     "configs": {
+      "name": "E2CB2",
+      "list": [
+       {
+        "modeId": "id_1731490858522_0",
+        "name": "E2CB2",
+        "current": "arg0",
+        "bypass": false,
+        "list": [
+         {
+          "name": "arg0",
+          "data": [
+           {
+            "id": "id_1682646307477_1",
+            "list": [
+             {
+              "id": "id_1682646315278_2",
+              "value": 0
+             }
+            ]
+           }
+          ],
+          "enable": true,
+          "bypass": false
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "ports": {
+     "groups": {
+      "in": {
+       "position": "left"
+      },
+      "out": {
+       "position": "right",
+       "attrs": {
+        "text": {
+         "fill": "#2b3f57",
+         "font-size": "12",
+         "visibility": "visible",
+         "text": ""
+        },
+        "circle": {
+         "r": 6,
+         "magnet": true,
+         "stroke": "#7DC06E",
+         "strokeWidth": 2,
+         "fill": "#f2f2f2",
+         "event": "port:click",
+         "style": {
+          "visibility": "visible"
+         }
+        }
+       }
+      }
+     },
+     "items": [
+      {
+       "group": "in",
+       "index": 0,
+       "id": "30139dee-4daf-449f-a0fa-a01e295cf63c"
+      },
+      {
+       "group": "out",
+       "index": 1,
+       "id": "a5629dbf-0979-4975-aefc-34460eee3f1c"
+      }
+     ]
+    }
+   },
+   {
+    "shape": "edge",
+    "attrs": {
+     "line": {
+      "stroke": "#A4A5A9",
+      "strokeWidth": "2px",
+      "targetMarker": {
+       "tagName": "path",
+       "d": "M 12 -5 0 0 12 5 Z",
+       "strokeWidth": 2,
+       "fill": "#A4A5A9",
+       "stroke": "#A4A5A9"
+      },
+      "distance": 40
+     }
+    },
+    "id": "b77888b0-5b0b-4aa8-ac49-e6f90101f072",
+    "data": {
+     "itemId": 1731488205332
+    },
+    "source": {
+     "cell": "b85523dc-a0cf-4738-9977-e8574194589f",
+     "port": "a5629dbf-0979-4975-aefc-34460eee3f1c"
+    },
+    "target": {
+     "cell": "8aea24a3-1b93-49a7-923b-746e0237bad0",
+     "port": "7790b1af-d350-4108-a6c9-cf743b81c5cf"
+    }
+   },
+   {
+    "position": {
+     "x": 440,
+     "y": -40
+    },
+    "size": {
+     "width": 80,
+     "height": 80
+    },
+    "view": "vue-shape-view",
+    "shape": "vue-shape",
+    "id": "8aea24a3-1b93-49a7-923b-746e0237bad0",
+    "component": "node-cust",
+    "group": "hardware",
+    "data": {
+     "name": "写文件",
+     "group": "输入输出",
+     "uuid": "0X23C1",
+     "type": 2,
+     "fun": 9,
+     "sAlias": "",
+     "marco": "TCFG_WRITE_FILE_NODE_ENABLE",
+     "subId": 2,
+     "itemId": 1731488205332,
+     "nodeName": "23C11",
+     "configs": {
+      "name": "",
+      "list": []
+     },
+     "dynamicPort": {
+      "iMax": 0,
+      "iMin": 0,
+      "oMax": 0,
+      "oMin": 0
+     }
+    },
+    "ports": {
+     "groups": {
+      "in": {
+       "position": "left"
+      },
+      "out": {
+       "position": "right",
+       "attrs": {
+        "text": {
+         "fill": "#2b3f57",
+         "font-size": "12",
+         "visibility": "visible",
+         "text": ""
+        },
+        "circle": {
+         "r": 6,
+         "magnet": true,
+         "stroke": "#7DC06E",
+         "strokeWidth": 2,
+         "fill": "#f2f2f2",
+         "event": "port:click",
+         "style": {
+          "visibility": "visible"
+         }
+        }
+       }
+      }
+     },
+     "items": [
+      {
+       "group": "in",
+       "index": 0,
+       "id": "7790b1af-d350-4108-a6c9-cf743b81c5cf"
+      }
+     ]
+    }
+   },
+   {
+    "position": {
+     "x": -360,
+     "y": -40
+    },
+    "size": {
+     "width": 80,
+     "height": 80
+    },
+    "view": "vue-shape-view",
+    "shape": "vue-shape",
+    "id": "26835d63-646e-4ad0-9330-801693b17d9d",
+    "component": "node-cust",
+    "group": "hardware",
+    "data": {
+     "num": 1,
+     "name": "ADC",
+     "group": "输入输出",
+     "type": 0,
+     "fun": 1,
+     "formFile": "../../.ADC配置.json",
+     "uuid": "0XD06D",
+     "outBit": 2,
+     "inBit": 0,
+     "bitConsistency": false,
+     "sAlias": "",
+     "dynamicPort": {
+      "iMax": 0,
+      "iMin": 0,
+      "oMax": 0,
+      "oMin": 0
+     },
+     "marco": "TCFG_ADC_NODE_ENABLE",
+     "subId": 1,
+     "itemId": "id_1731582257627_0",
+     "configs": {
+      "name": "ADC1",
+      "list": [
+       {
+        "modeId": "id_1731582257627_1",
+        "name": "ADC1",
+        "current": "arg0",
+        "bypass": false,
+        "list": [
+         {
+          "name": "arg0",
+          "data": [
+           {
+            "id": "id_1671070268689_0",
+            "list": [
+             {
+              "id": "id_1671070296872_1",
+              "value": [
+               1
+              ]
+             }
+            ]
+           },
+           {
+            "id": "id_1675824280474_161",
+            "list": [
+             {
+              "id": "id_1671073072823_3",
+              "value": 0
+             },
+             {
+              "id": "id_1727164994754_0",
+              "value": 0
+             }
+            ]
+           }
+          ],
+          "enable": true,
+          "bypass": false
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "ports": {
+     "groups": {
+      "in": {
+       "position": "left"
+      },
+      "out": {
+       "position": "right",
+       "attrs": {
+        "text": {
+         "fill": "#2b3f57",
+         "font-size": "12",
+         "visibility": "visible",
+         "text": ""
+        },
+        "circle": {
+         "r": 6,
+         "magnet": true,
+         "stroke": "#7DC06E",
+         "strokeWidth": 2,
+         "fill": "#f2f2f2",
+         "event": "port:click",
+         "style": {
+          "visibility": "visible"
+         }
+        }
+       }
+      }
+     },
+     "items": [
+      {
+       "group": "out",
+       "id": "5114f0b1-23ea-4659-844f-a8bd9b1e634d",
+       "index": 0
+      }
+     ]
+    }
+   },
+   {
+    "shape": "edge",
+    "attrs": {
+     "line": {
+      "stroke": "#A4A5A9",
+      "strokeWidth": "2px",
+      "targetMarker": {
+       "tagName": "path",
+       "d": "M 12 -5 0 0 12 5 Z",
+       "strokeWidth": 2,
+       "fill": "#A4A5A9",
+       "stroke": "#A4A5A9"
+      },
+      "distance": 40
+     }
+    },
+    "id": "41c48d8c-503a-48ea-809a-47cd92a88363",
+    "data": {
+     "itemId": "id_1731582257627_0"
+    },
+    "source": {
+     "cell": "26835d63-646e-4ad0-9330-801693b17d9d",
+     "port": "5114f0b1-23ea-4659-844f-a8bd9b1e634d"
+    },
+    "target": {
+     "cell": "b9f8eb35-c96d-4888-b78c-5c39f29927e6",
+     "port": "33b19f43-b00e-4fe0-ac29-8da7c779b47c"
+    }
+   },
+   {
+    "position": {
+     "x": -200,
+     "y": -40
+    },
+    "size": {
+     "width": 80,
+     "height": 80
+    },
+    "view": "vue-shape-view",
+    "shape": "vue-shape",
+    "id": "b9f8eb35-c96d-4888-b78c-5c39f29927e6",
+    "component": "node-cust",
+    "group": "hardware",
+    "data": {
+     "name": "Channel Expander",
+     "group": "渲染",
+     "uuid": "0XDA15",
+     "type": 1,
+     "fun": 1,
+     "formFile": "../../.channel_expander配置.json",
+     "marco": "TCFG_CHANNEL_EXPANDER_NODE_ENABLE",
+     "nodeDoc": "\\docs\\html\\SDK\\audio_effects\\ChannelAdapter_manual.html",
+     "inBit": 2,
+     "bitConsistency": true,
+     "outBit": 2,
+     "subId": 1,
+     "itemId": "id_1731582257627_0",
+     "configs": {
+      "name": "ChannelExpDA151",
+      "list": [
+       {
+        "modeId": "id_1731582257627_1",
+        "name": "ChannelExpDA151",
+        "current": "",
+        "bypass": false,
+        "list": [
+         {
+          "name": "arg0",
+          "data": [
+           {
+            "id": "id_1666765139448_1",
+            "list": [
+             {
+              "id": "id_1675923289365_0",
+              "value": 0
+             }
+            ]
+           }
+          ],
+          "enable": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "ports": {
+     "groups": {
+      "in": {
+       "position": "left"
+      },
+      "out": {
+       "position": "right",
+       "attrs": {
+        "text": {
+         "fill": "#2b3f57",
+         "font-size": "12",
+         "visibility": "visible",
+         "text": ""
+        },
+        "circle": {
+         "r": 6,
+         "magnet": true,
+         "stroke": "#7DC06E",
+         "strokeWidth": 2,
+         "fill": "#f2f2f2",
+         "event": "port:click",
+         "style": {
+          "visibility": "visible"
+         }
+        }
+       }
+      }
+     },
+     "items": [
+      {
+       "group": "in",
+       "index": 1,
+       "id": "33b19f43-b00e-4fe0-ac29-8da7c779b47c"
+      },
+      {
+       "group": "out",
+       "index": 1,
+       "id": "26a73669-18e9-4f00-8182-803e041a07e5"
+      }
+     ]
+    }
+   },
+   {
+    "shape": "edge",
+    "attrs": {
+     "line": {
+      "stroke": "#A4A5A9",
+      "strokeWidth": "2px",
+      "targetMarker": {
+       "tagName": "path",
+       "d": "M 12 -5 0 0 12 5 Z",
+       "strokeWidth": 2,
+       "fill": "#A4A5A9",
+       "stroke": "#A4A5A9"
+      },
+      "distance": 40
+     }
+    },
+    "id": "f4b2fccf-eb82-4cfe-983c-a7c65fb21a7c",
+    "data": {
+     "itemId": "id_1731582257627_0"
+    },
+    "source": {
+     "cell": "b9f8eb35-c96d-4888-b78c-5c39f29927e6",
+     "port": "26a73669-18e9-4f00-8182-803e041a07e5"
+    },
+    "target": {
+     "cell": "32f27cb9-b43b-44f2-a5b6-7ae00599a0fe",
+     "port": "14c9c71a-e725-4f0f-abf1-78be39cbb35f"
+    }
+   },
+   {
+    "position": {
+     "x": -40,
+     "y": -40
+    },
+    "size": {
+     "width": 80,
+     "height": 80
+    },
+    "view": "vue-shape-view",
+    "shape": "vue-shape",
+    "id": "32f27cb9-b43b-44f2-a5b6-7ae00599a0fe",
+    "component": "node-cust",
+    "group": "hardware",
+    "data": {
+     "name": "SRC",
+     "group": "渲染",
+     "uuid": "0X1ECD",
+     "type": 1,
+     "fun": 0,
+     "itemId": "id_1731582257627_0",
+     "inBit": 2,
+     "bitConsistency": true,
+     "outBit": 2,
+     "subId": 2,
+     "configs": {
+      "name": "",
+      "list": []
+     }
+    },
+    "ports": {
+     "groups": {
+      "in": {
+       "position": "left"
+      },
+      "out": {
+       "position": "right",
+       "attrs": {
+        "text": {
+         "fill": "#2b3f57",
+         "font-size": "12",
+         "visibility": "visible",
+         "text": ""
+        },
+        "circle": {
+         "r": 6,
+         "magnet": true,
+         "stroke": "#7DC06E",
+         "strokeWidth": 2,
+         "fill": "#f2f2f2",
+         "event": "port:click",
+         "style": {
+          "visibility": "visible"
+         }
+        }
+       }
+      }
+     },
+     "items": [
+      {
+       "group": "in",
+       "index": 0,
+       "id": "14c9c71a-e725-4f0f-abf1-78be39cbb35f"
+      },
+      {
+       "group": "out",
+       "index": 0,
+       "id": "49d0bf9f-e0f8-49fc-9103-30eabb9a687d"
+      }
+     ]
+    }
+   },
+   {
+    "shape": "edge",
+    "attrs": {
+     "line": {
+      "stroke": "#A4A5A9",
+      "strokeWidth": "2px",
+      "targetMarker": {
+       "tagName": "path",
+       "d": "M 12 -5 0 0 12 5 Z",
+       "strokeWidth": 2,
+       "fill": "#A4A5A9",
+       "stroke": "#A4A5A9"
+      },
+      "distance": 40
+     }
+    },
+    "id": "7ee395b8-0c88-4f46-bd61-63d6a71e56dd",
+    "data": {
+     "itemId": "id_1731582257627_0"
+    },
+    "source": {
+     "cell": "32f27cb9-b43b-44f2-a5b6-7ae00599a0fe",
+     "port": "49d0bf9f-e0f8-49fc-9103-30eabb9a687d"
+    },
+    "target": {
+     "cell": "8bbc2684-457d-437b-98dd-c16db08e1f98",
+     "port": "25ac1764-1e03-461d-8a28-4d109b881a7f"
+    }
+   },
+   {
+    "position": {
+     "x": 120,
+     "y": -40
+    },
+    "size": {
+     "width": 80,
+     "height": 80
+    },
+    "view": "vue-shape-view",
+    "shape": "vue-shape",
+    "id": "8bbc2684-457d-437b-98dd-c16db08e1f98",
+    "component": "node-cust",
+    "group": "hardware",
+    "data": {
+     "num": 2,
+     "name": "编码器",
+     "group": "编解码",
+     "type": 1,
+     "fun": 1,
+     "formFile": "../../.encoder_fmt.json",
+     "uuid": "0XA2C",
+     "itemId": "id_1731582257627_0",
+     "sAlias": "",
+     "dynamicPort": {
+      "iMax": 0,
+      "iMin": 0,
+      "oMax": 0,
+      "oMin": 0
+     },
+     "subId": 1,
+     "configs": {
+      "name": "A2C1",
+      "list": [
+       {
+        "modeId": "id_1731582257627_1",
+        "name": "A2C1",
+        "current": "arg0",
+        "bypass": false,
+        "list": [
+         {
+          "name": "arg0",
+          "data": [
+           {
+            "id": "id_1682580902370_0",
+            "list": [
+             {
+              "id": "id_1682666755532_2",
+              "value": 2
+             },
+             {
+              "id": "id_1713834265905_0",
+              "value": 0
+             },
+             {
+              "id": "id_1682666801718_3",
+              "value": 44100
+             },
+             {
+              "id": "id_1682667012781_7",
+              "value": 64000
+             },
+             {
+              "id": "id_1682580918689_1",
+              "value": 1
+             }
+            ]
+           }
+          ],
+          "enable": true,
+          "bypass": false
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "ports": {
+     "groups": {
+      "in": {
+       "position": "left"
+      },
+      "out": {
+       "position": "right",
+       "attrs": {
+        "text": {
+         "fill": "#2b3f57",
+         "font-size": "12",
+         "visibility": "visible",
+         "text": ""
+        },
+        "circle": {
+         "r": 6,
+         "magnet": true,
+         "stroke": "#7DC06E",
+         "strokeWidth": 2,
+         "fill": "#f2f2f2",
+         "event": "port:click",
+         "style": {
+          "visibility": "visible"
+         }
+        }
+       }
+      }
+     },
+     "items": [
+      {
+       "group": "in",
+       "id": "25ac1764-1e03-461d-8a28-4d109b881a7f",
+       "index": 0
+      },
+      {
+       "group": "out",
+       "id": "5114f0b1-23ea-4659-844f-a8bd9b1e634d",
+       "index": 0
+      }
+     ]
+    }
+   },
+   {
+    "shape": "edge",
+    "attrs": {
+     "line": {
+      "stroke": "#A4A5A9",
+      "strokeWidth": "2px",
+      "targetMarker": {
+       "tagName": "path",
+       "d": "M 12 -5 0 0 12 5 Z",
+       "strokeWidth": 2,
+       "fill": "#A4A5A9",
+       "stroke": "#A4A5A9"
+      },
+      "distance": 40
+     }
+    },
+    "id": "94fc1a3b-86c5-4866-b413-b54b289b7495",
+    "data": {
+     "itemId": "id_1731582257627_0"
+    },
+    "source": {
+     "cell": "8bbc2684-457d-437b-98dd-c16db08e1f98",
+     "port": "5114f0b1-23ea-4659-844f-a8bd9b1e634d"
+    },
+    "target": {
+     "cell": "a8602d30-df98-44a5-aa3d-1168c43bc5fe",
+     "port": "30139dee-4daf-449f-a0fa-a01e295cf63c"
+    }
+   },
+   {
+    "position": {
+     "x": 280,
+     "y": -40
+    },
+    "size": {
+     "width": 80,
+     "height": 80
+    },
+    "view": "vue-shape-view",
+    "shape": "vue-shape",
+    "id": "a8602d30-df98-44a5-aa3d-1168c43bc5fe",
+    "component": "node-cust",
+    "group": "hardware",
+    "data": {
+     "name": "封装",
+     "group": "编解码",
+     "uuid": "0XE2CB",
+     "type": 1,
+     "fun": 1,
+     "formFile": "../../.package_fmt.json",
+     "sAlias": "",
+     "marco": "TCFG_FILE_PACKAGE_NODE_ENABLE",
+     "subId": 1,
+     "itemId": "id_1731582257627_0",
+     "configs": {
+      "name": "E2CB1",
+      "list": [
+       {
+        "name": "E2CB1",
+        "current": "",
+        "list": [
+         {
+          "name": "arg0",
+          "data": [
+           {
+            "id": "id_1682646307477_1",
+            "list": [
+             {
+              "id": "id_1682646315278_2",
+              "value": "AUTO"
+             }
+            ]
+           }
+          ],
+          "enable": true
+         }
+        ],
+        "modeId": "id_1731582257627_1"
+       }
+      ]
+     },
+     "dynamicPort": {
+      "iMax": 0,
+      "iMin": 0,
+      "oMax": 0,
+      "oMin": 0
+     }
+    },
+    "ports": {
+     "groups": {
+      "in": {
+       "position": "left"
+      },
+      "out": {
+       "position": "right",
+       "attrs": {
+        "text": {
+         "fill": "#2b3f57",
+         "font-size": "12",
+         "visibility": "visible",
+         "text": ""
+        },
+        "circle": {
+         "r": 6,
+         "magnet": true,
+         "stroke": "#7DC06E",
+         "strokeWidth": 2,
+         "fill": "#f2f2f2",
+         "event": "port:click",
+         "style": {
+          "visibility": "visible"
+         }
+        }
+       }
+      }
+     },
+     "items": [
+      {
+       "group": "in",
+       "index": 0,
+       "id": "30139dee-4daf-449f-a0fa-a01e295cf63c"
+      },
+      {
+       "group": "out",
+       "index": 1,
+       "id": "a5629dbf-0979-4975-aefc-34460eee3f1c"
+      }
+     ]
+    }
+   },
+   {
+    "shape": "edge",
+    "attrs": {
+     "line": {
+      "stroke": "#A4A5A9",
+      "strokeWidth": "2px",
+      "targetMarker": {
+       "tagName": "path",
+       "d": "M 12 -5 0 0 12 5 Z",
+       "strokeWidth": 2,
+       "fill": "#A4A5A9",
+       "stroke": "#A4A5A9"
+      },
+      "distance": 40
+     }
+    },
+    "id": "9ac21c73-7860-4084-a78e-12b13db81130",
+    "data": {
+     "itemId": "id_1731582257627_0"
+    },
+    "source": {
+     "cell": "a8602d30-df98-44a5-aa3d-1168c43bc5fe",
+     "port": "a5629dbf-0979-4975-aefc-34460eee3f1c"
+    },
+    "target": {
+     "cell": "9150fd1e-2797-4eff-b29e-efb6a73cfc21",
+     "port": "7790b1af-d350-4108-a6c9-cf743b81c5cf"
+    }
+   },
+   {
+    "position": {
+     "x": 440,
+     "y": -40
+    },
+    "size": {
+     "width": 80,
+     "height": 80
+    },
+    "view": "vue-shape-view",
+    "shape": "vue-shape",
+    "id": "9150fd1e-2797-4eff-b29e-efb6a73cfc21",
+    "component": "node-cust",
+    "group": "hardware",
+    "data": {
+     "name": "写文件",
+     "group": "输入输出",
+     "uuid": "0X23C1",
+     "type": 2,
+     "fun": 9,
+     "sAlias": "",
+     "marco": "TCFG_WRITE_FILE_NODE_ENABLE",
+     "subId": 1,
+     "itemId": "id_1731582257627_0",
+     "nodeName": "23C11",
+     "configs": {
+      "name": "",
+      "list": []
+     },
+     "dynamicPort": {
+      "iMax": 0,
+      "iMin": 0,
+      "oMax": 0,
+      "oMin": 0
+     }
+    },
+    "ports": {
+     "groups": {
+      "in": {
+       "position": "left"
+      },
+      "out": {
+       "position": "right",
+       "attrs": {
+        "text": {
+         "fill": "#2b3f57",
+         "font-size": "12",
+         "visibility": "visible",
+         "text": ""
+        },
+        "circle": {
+         "r": 6,
+         "magnet": true,
+         "stroke": "#7DC06E",
+         "strokeWidth": 2,
+         "fill": "#f2f2f2",
+         "event": "port:click",
+         "style": {
+          "visibility": "visible"
+         }
+        }
+       }
+      }
+     },
+     "items": [
+      {
+       "group": "in",
+       "index": 0,
+       "id": "7790b1af-d350-4108-a6c9-cf743b81c5cf"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "bitWidth": 16,
+ "showConfigName": false,
+ "version": {
+  "code": 1,
+  "tool": "4.4.0"
+ }
+}
