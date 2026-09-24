@@ -10,6 +10,33 @@
 
 #if CONFIG_DEBUG_ENABLE || CONFIG_DEBUG_LITE_ENABLE
 
+#if AC7076A3_DEMO_ENABLE
+/* Keep CONFIG_DEBUG_ENABLE so the SDK printf implementation remains linked,
+ * but do not claim PA2: the board exposes logs through the CDC demo task.
+ * putbyte may run before USB enumeration or from an interrupt, so it only
+ * queues one byte and never calls the USB stack directly.
+ */
+extern void ac7076a3_demo_usb_log_init(void);
+extern void ac7076a3_demo_usb_log_putbyte(char c);
+
+void debug_uart_init(void)
+{
+#if DEMO_USB_CDC_ENABLE
+    ac7076a3_demo_usb_log_init();
+#endif
+}
+
+void putbyte(char a)
+{
+#if DEMO_USB_CDC_ENABLE
+    ac7076a3_demo_usb_log_putbyte(a);
+#else
+    (void)a; /* PA2 is unavailable on Board1; LCD demo has no serial sink. */
+#endif
+}
+
+#else
+
 #define     DEBUG_UART_NUM  0
 
 static u8 uart_mode = 0;        //0:typical putbyte, 1:exception putbyte
@@ -96,6 +123,8 @@ void putbyte(char a)
 
 #endif
 }
+
+#endif /* AC7076A3_DEMO_ENABLE */
 
 
 /* --------------------------------------------------------------------------*/

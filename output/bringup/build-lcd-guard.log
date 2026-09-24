@@ -1,0 +1,10 @@
++CC build/genFileList.c
+In file included from build/genFileList.c:1:
+In file included from apps/watch/include\app_config.h:8:
+In file included from apps/watch/board/br35\board_config.h:10:
+apps/watch/board/br35/../../bringup/ac7076a3_demo_config.h:73:2: error: "JD9855: confirm module resolution and provide vendor init table first"
+#error "JD9855: confirm module resolution and provide vendor init table first"
+ ^
+1 error generated.
+Makefile:215: recipe for target 'pre_build' failed
+make: *** [pre_build] Error 1

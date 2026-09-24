@@ -14,7 +14,11 @@
 #ifdef TCFG_SPI_LCD_ENABLE
 #undef TCFG_SPI_LCD_ENABLE
 #endif
-#define TCFG_SPI_LCD_ENABLE					0
+#if AC7076A3_DEMO_ENABLE && DEMO_LCD_ENABLE
+#define TCFG_SPI_LCD_ENABLE                 1 /* LCD hardware without watch UI */
+#else
+#define TCFG_SPI_LCD_ENABLE                 0
+#endif
 
 #ifdef TCFG_TOUCH_PANEL_ENABLE
 #undef TCFG_TOUCH_PANEL_ENABLE

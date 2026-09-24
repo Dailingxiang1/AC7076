@@ -1,0 +1,137 @@
+********************************************************************************
+SDK BR35
+********************************************************************************
+周四 2026/09/24
+
+sdk.elf:	file format ELF32-pi32v2
+
+Sections:
+Idx Name          Size      Address          Type
+  0               00000000 0000000000000000 
+  1 .boot_info    000000a0 0000000000100560 DATA 
+  2 .irq_stack    00000800 0000000000100600 DATA 
+  3 .mmu_tlb      00000a80 0000000000101000 DATA 
+  4 .bss          00003c40 0000000000101a80 BSS
+  5 .data         00000b00 00000000001056c0 DATA 
+  6 .data_code    00004280 00000000001061c0 TEXT DATA 
+  7 .overlay_bank0 00000000 000000000010a440 DATA 
+  8 .overlay_bank1 00000000 000000000010a440 DATA 
+  9 .overlay_bank2 00000000 000000000010a440 DATA 
+ 10 .overlay_bank3 00000000 000000000010a440 DATA 
+ 11 .overlay_bank4 00000000 000000000010a440 DATA 
+ 12 .overlay_bank5 00000000 000000000010a440 DATA 
+ 13 .overlay_bank6 00000000 000000000010a440 DATA 
+ 14 .overlay_bank7 00000000 000000000010a440 DATA 
+ 15 .overlay_bank8 00000000 000000000010a440 DATA 
+ 16 .overlay_bank9 00000000 000000000010a440 DATA 
+ 17 .ps_ram_data_code 00000000 0000000008000000 DATA 
+ 18 .ps_ram_bss   00000000 0000000008000000 DATA 
+ 19 .ps_ram_noinit 00000000 0000000008000000 DATA 
+ 20 .text         00059d60 000000000c000100 TEXT DATA 
+ 21 .dcache_ram_data 00000000 0000000000372000 DATA 
+ 22 .dcache_ram_bss 00006000 0000000000372000 DATA 
+ 23 .icache_ram_data_code 00000000 00000000003c4000 DATA 
+ 24 .icache_ram_bss 00004000 00000000003c4000 BSS
+ 25 .debug_str    000914b0 0000000000000000 
+ 26 .debug_loc    0003b7ce 0000000000000000 
+ 27 .debug_abbrev 00001944 0000000000000000 
+ 28 .debug_info   00176dc4 0000000000000000 
+ 29 .debug_ranges 00006e88 0000000000000000 
+ 30 .debug_macinfo 00000005 0000000000000000 
+ 31 .debug_pubnames 00037494 0000000000000000 
+ 32 .debug_pubtypes 0002ce16 0000000000000000 
+ 33 .debug_frame  00010290 0000000000000000 
+ 34 .debug_line   00088a00 0000000000000000 
+ 35 .debug_aranges 00000048 0000000000000000 
+ 36 .shstrtab     000001f5 0000000000000000 
+ 37 .symtab       0011ee00 0000000000000000 
+ 38 .strtab       0001cbd0 0000000000000000 
+text.bin
+data.bin
+data_code.bin
+aec.bin
+aac.bin
+psr_data_code.bin
+d_ram_data.bin
+i_ram_data_code.bin
+        1 file(s) copied.
+********************************************************************************
+			SDK BR35			
+********************************************************************************
+周四 2026/09/24
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+�������ݱ���ɹ���
+���ݱ�����:
+E:/��Ŀ/AC7076A3/AC707N3.2.1SDK/SDK/cpu/br35/tools/download/watch/config.dat
+E:\项目\AC7076A3\AC707N3.2.1SDK\output\cfg_tool.bin
+E:\项目\AC7076A3\AC707N3.2.1SDK\output\jl_isd.bin
+E:\项目\AC7076A3\AC707N3.2.1SDK\output\stream.bin
+        3 file(s) copied.
+INI PATH: E:\��Ŀ\AC7076A3\AC707N3.2.1SDK\SDK\cpu\br35\tools\download\watch\isd_config.ini
+INI C PATH: cpu\br35\tools\isd_config_rule.c
+-----------------------------------FLASH INFO-----------------------------------
+|  FLASH_BIN_SIZE : 0x6e000                                                    |
+|  FLASH_NEED_SIZE : 0x1ff000                                                  |
+|  FLASH_REAL_SIZE : UNLIMITED                                                 |
+|  VM_REAL_SIZE : 0x167000                                                     |
+|  VM_START_ADDR : 0x6e000                                                     |
+|  VM_END_ADDR : 0x1d5000                                                      |
+|  BTIF_SIZE : 0x1000                                                          |
+|  BTIF_START_ADDR : 0x1d5000                                                  |
+|  BTIF_END_ADDR : 0x1d6000                                                    |
+|  DATA_SIZE : 0x28000                                                         |
+|  DATA_START_ADDR : 0x1d6000                                                  |
+|  DATA_END_ADDR : 0x1fe000                                                    |
+|  LAVE_SIZE : 0x15f000                                                        |
+|  ENTRY_ADDR : 0xc000100                                                      |
+|  ERASE MODE : NONE                                                           |
+|  UBOOT VERSION : 2025-03-17 16:37:27,uboot-$-@20250317-$a663820              |
+|  OTA VERSION : 2025-10-15 14:35:05,OTA_LOADER-$-@20251015-$c21a040           |
+|  LOADER VERSION : 2026-03-02 15:05:38,loader-$-@20260302-$1112377            |
+--------------------------------------------------------------------------------
+ota.bin: E:/��Ŀ/AC7076A3/AC707N3.2.1SDK/SDK/cpu/br35/tools/download/watch/ota.bin
+--------------------------- OTA UPDATE INFO ---------------------------
+| VM size = 0x167000
+|        PASS: testbox classic Bluetooth upgrade(size=0x8a65) require minial space size 0x9000
+|        PASS: testbox BLE upgrade(size=0xac23) require minial space size 0xb000
+|        PASS: BLE rcsp upgrade(size=0x105f7) require minial space size 0x11000
+|        PASS: external flash upgrade(size=0x62cc) require minial space size 0x7000
+|        PASS: SD card upgrade(size=0x18a8) require minial space size 0x2000
+| INFO: unknown upgrade file lcflash_ota.bin(size=0x5ce0) in ota.bin, ignore
+| INFO: unknown upgrade file sd_sec_ota.bin(size=0x62e0) in ota.bin, ignore
+| INFO: unknown upgrade file nand_ota.bin(size=0x6e83) in ota.bin, ignore
+| support the following ota upgrade:       
+| * testbox classic Bluetooth upgrade        
+| * testbox BLE upgrade                      
+| * BLE rcsp upgrade                         
+| * external flash upgrade                   
+| * SD card upgrade                          
+-----------------------------------------------------------------------
+Device online
+Chip Version  : C
+Flash ID      : 856016
+Flash Capacity: 4M
+Flash UUID    : 41 50 34 5A 39 39 34 0F 00 42 68 52 4C 01 4B 78
+
+Start downloading data to flash ...... 
+Write sector: 109. 108. 107. 106. 105. 104. 103. 102. 101. 100. 99. 98. 97. 96.
+Write block: 5. 4. 3. 2. 1. 0.
+Download completed.
+Write flash params to OTP_CFG successfully.
+INI PATH: E:\��Ŀ\AC7076A3\AC707N3.2.1SDK\SDK\cpu\br35\tools\download\watch\isd_config.ini
+INI C PATH: cpu\br35\tools\isd_config_rule.c
+No uboot/app file.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.

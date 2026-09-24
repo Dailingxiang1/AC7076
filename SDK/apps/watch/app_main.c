@@ -10,6 +10,7 @@
 #include "app_tone.h"
 #include "gpio_config.h"
 #include "app_main.h"
+#include "bringup/ac7076a3_demo.h"
 #include "asm/charge.h"
 #include "update.h"
 #include "app_power_manage.h"
@@ -66,7 +67,12 @@ extern u8 check_vbat_low_power(void);
 
 /*任务列表 */
 const struct task_info task_info_table[] = {
-#if TCFG_PAY_ALIOS_ENABLE
+#if AC7076A3_DEMO_ENABLE
+    {"app_core",            0 + TASK_PRIO_BASE,      0,  2048,  1024},
+#if DEMO_LCD_ENABLE
+    {"lcd_demo",            5 + TASK_PRIO_BASE,      0,  1536,  128},
+#endif
+#elif TCFG_PAY_ALIOS_ENABLE
     {"app_core",            0 + TASK_PRIO_BASE,      0,  2048,  1024  },
 #else
     {"app_core",            0 + TASK_PRIO_BASE,      0,  768,  768},
@@ -805,11 +811,14 @@ void app_main()
 #endif
 #endif
 
+#if AC7076A3_DEMO_ENABLE
+    task_create(ac7076a3_demo_task, NULL, "app_core");
+#else
     task_create(app_task_loop, NULL, "app_core");
+#endif
 
     os_start(); //no return
     while (1) {
         asm("idle");
     }
 }
-

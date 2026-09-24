@@ -14,7 +14,7 @@
 #include "dbi_sfr.h"
 #include "battery_manager.h"
 
-#if (TCFG_UI_ENABLE && TCFG_SPI_LCD_ENABLE)
+#if ((TCFG_UI_ENABLE || (AC7076A3_DEMO_ENABLE && DEMO_LCD_ENABLE)) && TCFG_SPI_LCD_ENABLE)
 #define lcd_debug printf
 
 
@@ -1445,6 +1445,5 @@ REGISTER_LP_TARGET(lcd_lp_target) = {
 };
 
 
-#endif /* #if (TCFG_UI_ENABLE && TCFG_SPI_LCD_ENABLE) */
-
+#endif /* TCFG_UI_ENABLE or standalone AC7076A3 LCD demo */
 

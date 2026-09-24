@@ -1,0 +1,674 @@
++CC build/genFileList.c
+E:/��Ŀ/AC7076A3/AC707N3.2.1SDK/SDK/tools/utils/make -f build/Makefile.mk pre_build
+make[1]: Entering directory 'E:/��Ŀ/AC7076A3/AC707N3.2.1SDK/SDK'
++PRE-BUILD
+make[1]: Leaving directory 'E:/��Ŀ/AC7076A3/AC707N3.2.1SDK/SDK'
+E:/��Ŀ/AC7076A3/AC707N3.2.1SDK/SDK/tools/utils/make -f build/Makefile.mk cpu/br35/tools/sdk.elf
+make[1]: Entering directory 'E:/��Ŀ/AC7076A3/AC707N3.2.1SDK/SDK'
++CC apps/common/bt_common/bt_test_api.c
++CC apps/common/charge_box/chargeIc_manage.c
++CC apps/common/charge_box/charge_ic/charge_ic_ac982.c
++CC apps/common/charge_box/charge_ic/charge_ic_sy7609.c
++CC apps/common/charge_box/chgbox_box.c
++CC apps/common/charge_box/chgbox_ctrl.c
++CC apps/common/charge_box/chgbox_det.c
++CC apps/common/charge_box/chgbox_full_timer.c
++CC apps/common/charge_box/chgbox_handshake.c
++CC apps/common/charge_box/chgbox_ui.c
++CC apps/common/charge_box/chgbox_wireless.c
++CC apps/common/charge_box/soc.c
++CC apps/common/clock_manager/clock_manager.c
++CC apps/common/config/app_config.c
++CC apps/common/config/bt_profile_config.c
++CC apps/common/config/cfg_tool_cdc.c
++CC apps/common/config/cfg_tool_statistics_functions/cfg_tool_statistics.c
++CC apps/common/config/ci_transport_uart.c
++CC apps/common/config/new_cfg_tool.c
++CC apps/common/debug/debug.c
++CC apps/common/debug/debug_lite.c
++CC apps/common/debug/debug_uart_config.c
++CC apps/common/dev_manager/dev_manager.c
++CC apps/common/dev_manager/dev_reg.c
++CC apps/common/dev_manager/dev_update.c
++CC apps/common/device/in_ear_detect/in_ear_detect.c
++CC apps/common/device/in_ear_detect/in_ear_manage.c
++CC apps/common/device/key/adkey.c
++CC apps/common/device/key/adkey_rtcvdd.c
++CC apps/common/device/key/ctmu_touch_key.c
++CC apps/common/device/key/iokey.c
++CC apps/common/device/key/irkey.c
++CC apps/common/device/key/rdec_key.c
++CC apps/common/device/key/touch_key.c
++CC apps/common/device/key/uart_key.c
++CC apps/common/device/sensor/ir_sensor/ir_manage.c
++CC apps/common/device/sensor/ir_sensor/jsa1221.c
++CC apps/common/device/sensor/ntc/ntc_det.c
++CC apps/common/device/storage_device/nandflash/ftl_device.c
++CC apps/common/device/storage_device/nandflash/nandflash.c
++CC apps/common/device/storage_device/nandflash/nandflash_part.c
++CC apps/common/device/storage_device/norflash/inside_norflash.c
++CC apps/common/device/storage_device/norflash/norflash_espi.c
++CC apps/common/device/storage_device/norflash/norflash_sfc.c
++CC apps/common/device/touch_panel/cst816d/cst816d.c
++CC apps/common/device/touch_panel/ft3x68/ft3x68.c
++CC apps/common/fat_nor/virfat_flash.c
++CC apps/common/file_operate/file_manager.c
++CC apps/common/flashdb/fal.c
++CC apps/common/music/breakpoint.c
++CC apps/common/music/music_decrypt.c
++CC apps/common/music/music_id3.c
++CC apps/common/music/music_player.c
++CC apps/common/net/lwip_2_2_0/port/LwIP.c
++CC apps/common/net/lwip_2_2_0/port/fixme.c
++CC apps/common/netapps/iflytek/SparkDesk/sparkdesk_main.c
++CC apps/common/netapps/iflytek/authentication.c
++CC apps/common/netapps/iflytek/demo.c
++CC apps/common/netapps/iflytek/ifly_common.c
++CC apps/common/netapps/iflytek/ifly_socket.c
++CC apps/common/netapps/iflytek/tts/ifly_dec_file.c
++CC apps/common/netapps/iflytek/tts/tts_main.c
++CC apps/common/netapps/iflytek/vad/vad_main.c
++CC apps/common/netapps/intelligent_duer/duer_auth/duer_auth_algorithm.c
++CC apps/common/netapps/intelligent_duer/duer_network/duer_http_req.c
++CC apps/common/netapps/intelligent_duer/duer_network/duer_socket.c
++CC apps/common/netapps/intelligent_duer/duer_parse/duer_json_parse.c
++CC apps/common/netapps/intelligent_duer/duer_parse/duer_json_request.c
++CC apps/common/netapps/intelligent_duer/duer_task.c
++CC apps/common/netapps/intelligent_duer/duer_voice/duer_ai_rx_get_frame.c
++CC apps/common/netapps/net_interface/net_http.c
++CC apps/common/netapps/net_interface/net_list_download.c
++CC apps/common/netapps/net_interface/net_mem.c
++CC apps/common/netapps/net_interface/net_record.c
++CC apps/common/netapps/net_interface/net_time.c
++CC apps/common/netapps/net_interface/net_url_list.c
++CC apps/common/pay/upay_t_head_v2/app/antchain/src/bot_adapter.c
++CC apps/common/pay/upay_t_head_v2/hal/csi/hsc32i1/hs_private.c
++CC apps/common/pay/upay_t_head_v2/hal/csi/vendor_cache.c
++CC apps/common/pay/upay_t_head_v2/hal/csi/vendor_crypto.c
++CC apps/common/pay/upay_t_head_v2/hal/csi/vendor_product.c
++CC apps/common/pay/upay_t_head_v2/hal/csi/vendor_rot.c
++CC apps/common/pay/upay_t_head_v2/hal/csi/vendor_ssp.c
++CC apps/common/pay/upay_t_head_v2/hal/network/alipay_net_kal.c
++CC apps/common/pay/upay_t_head_v2/jl_transitcode/transit_other_adapation.c
++CC apps/common/pay/upay_t_head_v2/jl_transitcode/transit_task.c
++CC apps/common/perf_counter/perf_counter.c
++CC apps/common/temp_trim/dtemp_pll_trim.c
++CC apps/common/test/fs_test.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/mass_data/mass_data.c
++CC apps/common/ui/lcd/lcd_ui_api.c
++CC apps/common/ui/lcd/lcd_ui_return_page.c
++CC apps/common/ui/lvgl_v8/porting/lv_port_disp.c
++CC apps/common/ui/lvgl_v8/porting/lv_port_indev.c
++CC apps/common/ui/lvgl_v8/src/core/lv_refr.c
++CC apps/common/update/ex_flash_file_download.c
++CC apps/common/update/lc_flash_ufw_update.c
++CC apps/common/update/nandflash_ufw_update.c
++CC apps/common/update/norflash_ufw_update.c
++CC apps/common/update/reusable_update.c
++CC apps/common/update/testbox_uart_update.c
++CC apps/common/update/testbox_update.c
++CC apps/common/update/uart_update.c
++CC apps/common/update/uart_update_master.c
++CC apps/common/update/update.c
++CC apps/common/update/user_file_download/ext_flash_file_download.c
++CC apps/common/update/user_file_download/nand_zone_file_download.c
++CC apps/common/update/user_file_download/reserve_file_download.c
++CC apps/common/update/user_file_download/user_file_download.c
++CC apps/watch/app_main.c
++CC apps/watch/bringup/ac7076a3_demo.c
++CC apps/watch/bringup/ac7076a3_demo_audio.c
++CC apps/watch/bringup/lcd_qspi_jd9855.c
++CC apps/watch/audio/jlstream_event_handler.c
++CC apps/watch/audio/mix_record_api.c
++CC apps/watch/audio/scene_switch.c
++CC apps/watch/audio/tone_table.c
++CC apps/watch/audio/vol_sync.c
++CC apps/watch/board/adkey_config.c
++CC apps/watch/board/br35/board_ac7074_demo/board_ac7074_demo.c
++CC apps/watch/board/br35/board_ac707n_csc_demo/board_ac707n_csc_demo.c
++CC apps/watch/board/br35/board_ac707n_demo/board_ac707n_demo.c
++CC apps/watch/board/iokey_config.c
++CC apps/watch/board/rdeckey_config.c
++CC apps/watch/call/call_common.c
++CC apps/watch/data_storage/data_call_log_storage.c
++CC apps/watch/data_storage/data_message_storage.c
++CC apps/watch/data_storage/data_phonebook_storage.c
++CC apps/watch/data_storage/data_rcsp_interface.c
++CC apps/watch/data_storage/data_storage_fdb.c
++CC apps/watch/data_storage/data_storage_null.c
++CC apps/watch/data_storage/data_storage_vm.c
++CC apps/watch/data_storage/data_weather_storage.c
++CC apps/watch/demo/pbg_demo.c
++CC apps/watch/demo/trans_data_demo.c
++CC apps/watch/health_manager/algo/shm_algo_gsensor.c
++CC apps/watch/health_manager/common/health_manager.c
++CC apps/watch/health_manager/common/shm_common_api.c
++CC apps/watch/health_manager/common/shm_file_api.c
++CC apps/watch/health_manager/common/shm_info_storage.c
++CC apps/watch/health_manager/detect/shm_det_mense.c
++CC apps/watch/health_manager/module/shm_mod_blood_oxygen.c
++CC apps/watch/health_manager/module/shm_mod_daily_active.c
++CC apps/watch/health_manager/module/shm_mod_heart_rate.c
++CC apps/watch/health_manager/module/shm_mod_sleep.c
++CC apps/watch/health_manager/module/shm_mod_sport.c
++CC apps/watch/health_manager/rcsp_adaptor/sport_data_info_opt/sport_info_bt_disconn.c
++CC apps/watch/health_manager/rcsp_adaptor/sport_data_info_opt/sport_info_continuous_heart_rate.c
++CC apps/watch/health_manager/rcsp_adaptor/sport_data_info_opt/sport_info_exercise_heart_rate.c
++CC apps/watch/health_manager/rcsp_adaptor/sport_data_info_opt/sport_info_fall_detection.c
++CC apps/watch/health_manager/rcsp_adaptor/sport_data_info_opt/sport_info_personal_info.c
++CC apps/watch/health_manager/rcsp_adaptor/sport_data_info_opt/sport_info_pressure_detection.c
++CC apps/watch/health_manager/rcsp_adaptor/sport_data_info_opt/sport_info_raise_wrist.c
++CC apps/watch/health_manager/rcsp_adaptor/sport_data_info_opt/sport_info_rcsp_interface.c
++CC apps/watch/health_manager/rcsp_adaptor/sport_data_info_opt/sport_info_sedentary.c
++CC apps/watch/health_manager/rcsp_adaptor/sport_data_info_opt/sport_info_sensor_opt.c
++CC apps/watch/health_manager/rcsp_adaptor/sport_data_info_opt/sport_info_sleep_detection.c
++CC apps/watch/health_manager/rcsp_adaptor/sport_data_opt/sport_data_rcsp_interface.c
++CC apps/watch/health_manager/rcsp_adaptor/sport_data_sync_opt/sport_data_sync_rcsp_interface.c
++CC apps/watch/log_config/lib_btctrler_config.c
++CC apps/watch/log_config/lib_btstack_config.c
++CC apps/watch/log_config/lib_driver_config.c
++CC apps/watch/log_config/lib_jlui_config.c
++CC apps/watch/log_config/lib_media_config.c
++CC apps/watch/log_config/lib_net_config.c
++CC apps/watch/log_config/lib_system_config.c
++CC apps/watch/log_config/lib_update_config.c
++CC apps/watch/log_config/lib_video_config.c
++CC apps/watch/message/adapter/btstack.c
++CC apps/watch/message/adapter/driver.c
++CC apps/watch/mode/bt/a2dp_play.c
++CC apps/watch/mode/bt/bt.c
++CC apps/watch/mode/bt/bt_app_msg_handler.c
++CC apps/watch/mode/bt/bt_background.c
++CC apps/watch/mode/bt/bt_emitter.c
++CC apps/watch/mode/bt/bt_event_func.c
++CC apps/watch/mode/bt/bt_key_func.c
++CC apps/watch/mode/bt/bt_key_msg_table.c
++CC apps/watch/mode/bt/bt_slience_detect.c
++CC apps/watch/mode/bt/dual_conn.c
++CC apps/watch/mode/bt/low_latency.c
++CC apps/watch/mode/bt/phone_call.c
++CC apps/watch/mode/bt/poweroff.c
++CC apps/watch/mode/bt/sniff.c
++CC apps/watch/mode/bt/tone.c
++CC apps/watch/mode/common/app_default_msg_handler.c
++CC apps/watch/mode/common/dev_multiplex_api.c
++CC apps/watch/mode/common/dev_status.c
++CC apps/watch/mode/idle/idle.c
++CC apps/watch/mode/idle/idle_app_msg_handler.c
++CC apps/watch/mode/idle/idle_key_msg_table.c
++CC apps/watch/mode/key_tone.c
++CC apps/watch/mode/music/music.c
++CC apps/watch/mode/music/music_app_msg_handler.c
++CC apps/watch/mode/music/music_key_msg_table.c
++CC apps/watch/mode/power_on/power_on.c
++CC apps/watch/mode/update/update.c
++CC apps/watch/mode/video/video.c
++CC apps/watch/product_test/product_test.c
++CC apps/watch/product_test/pt_gpio.c
++CC apps/watch/product_test/pt_gsensor.c
++CC apps/watch/product_test/pt_hr.c
++CC apps/watch/product_test/pt_lcd_tp.c
++CC apps/watch/product_test/pt_motor.c
++CC apps/watch/product_test/pt_sd.c
++CC apps/watch/product_test/pt_speaker_mic.c
++CC apps/watch/sensor_hub/gsensor/sc7a20.c
++CC apps/watch/sensor_hub/msensor/driver_mmc5603.c
++CC apps/watch/sensor_hub/sensor_driver.c
++CC apps/watch/sensor_hub/sensor_driver_p11.c
++CC apps/watch/sensor_hub/sensor_hal_acceler.c
++CC apps/watch/sensor_hub/sensor_hal_gyro.c
++CC apps/watch/sensor_hub/sensor_hal_magnetic.c
++CC apps/watch/sensor_hub/sensor_hal_vc_hr_11.c
++CC apps/watch/sensor_hub/sensor_hal_wrist_tilt.c
++CC apps/watch/sensor_hub/sensor_hub.c
++CC apps/watch/sensor_hub/sensor_service_compass.c
++CC apps/watch/sensor_hub/sensor_service_motion.c
++CC apps/watch/sensor_hub/sensor_service_vc_hr_spo2.c
++CC apps/watch/sensor_hub/sensor_service_wrist_tilt.c
++CC apps/watch/test/rssi.c
++CC apps/watch/third_part/ai_interaction/ai_audio.c
++CC apps/watch/third_part/ai_interaction/ai_interaction.c
++CC apps/watch/third_part/ai_interaction/ai_text.c
++CC apps/watch/third_part/app_protocol_deal.c
++CC apps/watch/tools/app_testbox.c
++CC apps/watch/ui/jlgpu_demo/demo_lcd_dual_buf.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_affine.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_blend.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_color_swap.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_compress.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_custom.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_dither.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_flash_565.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_football.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_gaussianblur.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_main.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_mask.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_output.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_permult.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_perspective.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_ram_565.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_ram_L1.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_res.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_scale_inherit.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_task.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_task_fill.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_task_linegrad.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_texture.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_texture_affine.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_texture_crop.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_texture_edge.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_texture_input.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_texture_mask.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_texture_perspective.c
++CC apps/watch/ui/jlgpu_demo/gpu_demo_with_psram.c
++CC apps/watch/ui/jlgpu_demo/jpeg_demo.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/smartbox_info_manager.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_alarm_clock.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_bg_manage.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_bt_emitter.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_charging.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_cube.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_cube_reflection.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_denoise.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_dial.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_dial_sel.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_eq.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_find_earphone.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_football_menu.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_hexagon.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_hexagon_reflection.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_language_select.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_lock_select.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_menu_list.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_menu_manage.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_music.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_notice.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_phone_call_status.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_sd_music.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_set.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_setting.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_take_picture.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_time_set.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_topbar.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_upgrade.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_volue_controls.c
++CC apps/watch/ui/jlui_app/STYLE_CSC_PUBLIC_MOLDS/ui_weather.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_aidial.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_alarm_clock.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_alipay.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_animation_demo.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_batchtcharge.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_bedside_watch.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_bloodpress.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_breathtrain.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_bt_emitter.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_calculator.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_calendar.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_camera.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_compass.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_cube.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_cube_reflection.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_dial.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_dial_mode.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_dial_sel.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_draw_demo.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_engineering_mode.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_findmy.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_flashlight.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_football.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_heart.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_heat.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_hexagon.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_hexagon_reflection.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_iflytek.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_indoor_sports.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_mense_manage.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_menu_list.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_menu_waterfalls.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_momentum.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_music.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_music_bg.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_netapp_iflytek.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_notice.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_outdoor_sports.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_oxygen.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_password.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_phone.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_phone_call_status.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_phone_keypad.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_photogragh.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_pullup_menu.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_rubiks_cube.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_runlight.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_sd_music.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_set.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_shortcut_menu.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_sidebar.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_sleep.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_sleepaid.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_smartwin.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_sport_intensity_action.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_sport_result.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_sport_target.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_sport_target_set.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_sporting.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_stopwatch.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_timer.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_upgrate.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_uvc_show.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_voice_assistant.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_action_weather.c
++CC apps/watch/ui/jlui_app/STYLE_WATCH_PUBLIC_MOLDS/ui_menu_manage.c
++CC apps/watch/ui/jlui_app/lyrics_api.c
++CC apps/watch/ui/jlui_app/ui_app_msg_watch_style.c
++CC apps/watch/ui/jlui_app/ui_dial_manage.c
++CC apps/watch/ui/jlui_app/ui_screen_saver.c
++CC apps/watch/ui/jlui_app/ui_sys_param_api.c
++CC apps/watch/ui/jlui_app/watch_syscfg_manage.c
++CC apps/watch/ui/smart_voice_user.c
++CC apps/watch/ui/ui_app_module/mense_manage/mense_manage.c
++CC apps/watch/ui/ui_app_module/ui_app_effect/ui_app_effect.c
++CC apps/watch/ui/ui_app_module/ui_global_msg/ui_global_msg.c
++CC apps/watch/ui/ui_key_remap.c
++CC apps/watch/user_cfg.c
++CC apps/watch/video/avi/avilib.c
++CC apps/watch/video/avi_video.c
++CC apps/watch/video/camera/bf30a2/bf30a2_cfg.c
++CC apps/watch/video/camera/camera_manager.c
++CC apps/watch/video/camera/camera_queue_buf.c
++CC apps/watch/video/jpeg/software_jpegenc.c
++CC apps/watch/video/pcm/mic_data.c
++CC apps/watch/video/pcm/pcm_data.c
++CC apps/watch/video/video_dec.c
++CC apps/watch/video/video_rec.c
++CC cpu/br35/charge/charge.c
++CC cpu/br35/charge/charge_config.c
++CC cpu/br35/charge/chargebox_hw.c
++CC cpu/br35/charge/chargestore.c
++CC cpu/br35/charge/chargestore_config.c
++CC cpu/br35/periph/led/pwm_led.c
++CC cpu/br35/periph/touch/lpctmu_hw.c
++CC cpu/br35/power/key_wakeup.c
++CC cpu/br35/power/power_app.c
++CC cpu/br35/power/power_config.c
++CC cpu/br35/power/power_gate.c
++CC cpu/br35/power/power_port.c
++CC cpu/br35/setup.c
++CC cpu/br35/ui_driver/interface/gpu_demo.c
++CC cpu/br35/ui_driver/interface/gpu_draw.c
++CC cpu/br35/ui_driver/interface/gpu_port_demo.c
++CC cpu/br35/ui_driver/interface/gpu_task.c
++CC cpu/br35/ui_driver/interface/jpeg_manager.c
++CC cpu/br35/ui_driver/interface/jpeg_stream.c
++CC cpu/br35/ui_driver/interface/lcd_task.c
++CC cpu/br35/ui_driver/interface/ui_buf_manager.c
++CC cpu/br35/ui_driver/interface/ui_platform.c
++CC cpu/br35/ui_driver/interface/ui_resource.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_drive.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_mcu/lcd_mcu_JD5858_360x360.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_rgb/lcd_rgb_480x272.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_rgb/lcd_rgb_st7789v_240x240.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_spi/lcd_qspi_GC9B71_320x386.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_spi/lcd_qspi_ICNA3310B_466x466.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_spi/lcd_qspi_JD9161C_480x480.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_spi/lcd_qspi_JD9853_320x172.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_spi/lcd_qspi_SD3302_466x466.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_spi/lcd_qspi_ST77903_400x400_v2.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_spi/lcd_qspi_sh8501a_240x296.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_spi/lcd_qspi_st77916_320x385.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_spi/lcd_spi_gc9307_RQ_BOE_172x320.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_spi/lcd_spi_rm69330_454x454.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_spi/lcd_spi_sh8601a_454x454.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_spi/lcd_spi_st7789_BOE1.54_update_240x240.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_spi/lcd_spi_st7789v_240x240.c
++CC cpu/br35/ui_driver/lcd_drive/lcd_spi/oled_spi_nb3030_172x320.c
++CC cpu/config/gpio_config.c
++CC cpu/config/lib_power_config.c
++CC apps/common/device/usb/device/msd_upgrade.c
++CC apps/common/third_party_profile/jieli/online_db/spp_online_db.c
++CC apps/common/third_party_profile/jieli/online_db/online_db_deal.c
++CC apps/common/third_party_profile/jieli/trans_data_demo/spp_trans_data.c
++CC apps/common/third_party_profile/jieli/trans_data_demo/le_trans_data.c
++CC apps/common/third_party_profile/wechat_sport/wechat_sport_demo.c
++CC apps/common/third_party_profile/multi_protocol_common.c
++CC apps/common/third_party_profile/multi_protocol_event.c
++CC apps/common/third_party_profile/multi_protocol_main.c
++CC apps/common/third_party_profile/common/3th_profile_api.c
++CC apps/common/third_party_profile/common/custom_cfg.c
++CC apps/common/third_party_profile/common/mic_rec.c
++CC apps/common/third_party_profile/jieli/rcsp/ble_rcsp_multi_common.c
++CC apps/common/third_party_profile/jieli/rcsp/ble_rcsp_server.c
++CC apps/common/third_party_profile/jieli/rcsp/ble_rcsp_multi_client.c
++CC apps/common/third_party_profile/jieli/rcsp/adv/ble_rcsp_adv.c
++CC apps/common/third_party_profile/jieli/rcsp/rcsp_functions/rcsp.c
++CC apps/common/third_party_profile/jieli/rcsp/rcsp_functions/rcsp_config.c
++CC apps/common/third_party_profile/jieli/rcsp/rcsp_functions/rcsp_task.c
++CC apps/common/third_party_profile/jieli/rcsp/rcsp_functions/rcsp_event.c
++CC apps/common/third_party_profile/jieli/rcsp/rcsp_functions/rcsp_manage.c
++CC apps/common/third_party_profile/jieli/rcsp/rcsp_functions/rcsp_bt_manage.c
++CC apps/common/third_party_profile/jieli/rcsp/server/rcsp_cmd_recieve.c
++CC apps/common/third_party_profile/jieli/rcsp/server/rcsp_cmd_recieve_no_respone.c
++CC apps/common/third_party_profile/jieli/rcsp/server/rcsp_cmd_respone.c
++CC apps/common/third_party_profile/jieli/rcsp/server/rcsp_data_recieve.c
++CC apps/common/third_party_profile/jieli/rcsp/server/rcsp_data_recieve_no_respone.c
++CC apps/common/third_party_profile/jieli/rcsp/server/rcsp_data_respone.c
++CC apps/common/third_party_profile/jieli/rcsp/server/rcsp_cmd_user.c
++CC apps/common/third_party_profile/jieli/rcsp/server/rcsp_command.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_switch_device.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/rcsp_setting_opt.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/rcsp_setting_sync.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/rcsp_adv_bluetooth.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/rcsp_screen_box_earphone_info.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/rcsp_eq_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/rcsp_high_low_vol_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/rcsp_music_info_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/rcsp_vol_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/rcsp_color_led_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/rcsp_karaoke_eq_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/rcsp_karaoke_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/adv_anc_voice.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/adv_anc_voice_key.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/adv_hearing_aid_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/adv_bt_name_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/adv_key_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/adv_led_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/adv_mic_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/adv_time_stamp_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/adv_work_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/adv_adaptive_noise_reduction.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/adv_ai_no_pick.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/adv_scene_noise_reduction.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/adv_wind_noise_detection.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/adv_voice_enhancement_mode.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/adv_1t2_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/rcsp_misc_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/rcsp_misc_reverbration_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_setting_opt/settings/rcsp_misc_drc_setting.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/device_info/rcsp_device_feature.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/device_info/rcsp_device_status.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/device_info/device_status_cmd/rcsp_fm_func.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/device_info/device_status_cmd/rcsp_rtc_func.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/device_info/device_status_cmd/rcsp_music_func.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/device_info/device_status_cmd/rcsp_linein_func.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/device_info/device_status_cmd/rcsp_bt_func.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_update/rcsp_update.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_update/rcsp_update_tws.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/rcsp_update/rcsp_ch_loader_download.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/external_flash/rcsp_extra_flash_cmd.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/external_flash/rcsp_extra_flash_opt.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/file_transfer/file_transfer.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/file_transfer/file_delete.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/file_transfer/dev_format.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/file_transfer/file_trans_back.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/file_transfer/file_bluk_trans_prepare.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/file_transfer/file_simple_transfer.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/sensors/sensors_data_opt.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/sensors/sport_data_func.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/sensors/sensor_log_notify.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/sensors/nfc_data_opt.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/sensors/sport_info_opt.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/sensors/sport_info_sync.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/browser/rcsp_browser.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/watch_expand/rcsp_watch_info.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/watch_expand/rcsp_watch_device_config.c
++CC apps/common/third_party_profile/jieli/rcsp/server/functions/watch_expand/rcsp_common_info_res_file_handler.c
++CC apps/common/third_party_profile/jieli/rcsp/client/rcsp_c_cmd_recieve.c
++CC apps/common/third_party_profile/jieli/rcsp/client/rcsp_c_cmd_recieve_no_response.c
++CC apps/common/third_party_profile/jieli/rcsp/client/rcsp_c_cmd_response.c
++CC apps/common/third_party_profile/jieli/rcsp/client/rcsp_m_update/rcsp_update_master.c
++CC apps/common/third_party_profile/jieli/screen_trans/screen_ear_protocol_received.c
++CC apps/common/third_party_profile/jieli/screen_trans/smartbox_user_app.c
++CC apps/common/third_party_profile/swift_pair/swift_pair_protocol.c
++CC apps/common/third_party_profile/custom_protocol_demo/custom_protocol.c
++CC apps/common/third_party_profile/bt_fmy/ble_fmy.c
++CC apps/common/third_party_profile/bt_fmy/ble_fmy_fmna.c
++CC apps/common/third_party_profile/bt_fmy/ble_fmy_ota.c
++CC apps/common/third_party_profile/bt_fmy/ble_fmy_modet.c
++CC apps/common/third_party_profile/interface/app_protocol_api.c
++CC apps/common/third_party_profile/interface/app_protocol_ota.c
++CC apps/common/third_party_profile/interface/app_protocol_common.c
++CC apps/common/third_party_profile/interface/app_protocol_gma.c
++CC apps/common/third_party_profile/interface/app_protocol_dma.c
++CC apps/common/third_party_profile/interface/app_protocol_mma.c
++CC apps/common/third_party_profile/interface/app_protocol_tme.c
++CC apps/common/third_party_profile/alipay/le_alipay.c
++CC audio/framework/plugs/source/a2dp_file.c
++CC audio/framework/plugs/source/esco_file.c
++CC audio/framework/plugs/source/adc_file.c
++CC audio/framework/nodes/esco_tx_node.c
++CC audio/framework/nodes/plc_node.c
++CC audio/framework/nodes/volume_node.c
++CC audio/framework/nodes/cvp_sms_node.c
++CC audio/framework/nodes/cvp_dms_node.c
++CC audio/framework/nodes/ai_tx_node.c
++CC audio/framework/nodes/a2dp_tx_node.c
++CC audio/framework/nodes/ai_rx_file.c
++CC audio/interface/player/ai_rx_player.c
++CC audio/framework/nodes/avi_audio_file.c
++CC audio/interface/player/avi_audio_player.c
++CC audio/common/audio_node_config.c
++CC audio/common/audio_dvol.c
++CC audio/common/audio_general.c
++CC audio/common/online_debug/aud_data_export.c
++CC audio/common/online_debug/audio_online_debug.c
++CC audio/common/online_debug/audio_capture.c
++CC audio/common/audio_plc.c
++CC audio/common/audio_export_demo.c
++CC audio/common/bt_audio_energy_detection.c
++CC audio/common/debug/audio_debug.c
++CC audio/common/audio_volume_mixer.c
++CC audio/interface/player/tone_player.c
++CC audio/interface/player/ring_player.c
++CC audio/interface/player/a2dp_player.c
++CC audio/interface/player/esco_player.c
++CC audio/interface/player/key_tone_player.c
++CC audio/interface/player/dev_flow_player.c
++CC audio/interface/player/adda_loop_player.c
++CC audio/interface/recoder/esco_recoder.c
++CC audio/interface/recoder/ai_voice_recoder.c
++CC audio/effect/eq_config.c
++CC audio/effect/spk_eq.c
++CC audio/effect/audio_voice_changer_api.c
++CC audio/effect/esco_ul_voice_changer.c
++CC audio/effect/bass_treble.c
++CC audio/effect/audio_dc_offset_remove.c
++CC audio/effect/effects_adj.c
++CC audio/effect/effects_default_param.c
++CC audio/CVP/audio_cvp.c
++CC audio/CVP/audio_cvp_dms.c
++CC audio/CVP/audio_cvp_3mic.c
++CC audio/CVP/audio_cvp_online.c
++CC audio/CVP/audio_cvp_demo.c
++CC audio/CVP/audio_cvp_develop.c
++CC audio/CVP/audio_cvp_sync.c
++CC audio/CVP/audio_cvp_ais_3mic.c
++CC audio/CVP/audio_cvp_ref_task.c
++CC audio/cpu/br35/audio_setup.c
++CC audio/cpu/br35/audio_config.c
++CC audio/cpu/br35/media_memory_manager.c
++CC audio/cpu/br35/audio_demo/audio_adc_demo.c
++CC audio/cpu/br35/audio_demo/audio_dac_demo.c
++CC apps/watch/ble/bt_ble.c
++CC apps/watch/ble/ble_adv.c
++CC apps/watch/battery/charge.c
++CC apps/watch/battery/charge_device_handle.c
++CC apps/watch/battery/battery_level.c
++CC apps/watch/battery/battery_offset.c
++CC apps/watch/mode/rtc/rtc.c
++CC apps/watch/mode/rtc/rtc_app_msg_handler.c
++CC apps/watch/mode/rtc/rtc_key_msg_table.c
++CC apps/watch/mode/rtc/alarm_api.c
++CC apps/watch/mode/rtc/alarm_user.c
++LINK cpu/br35/tools/sdk.elf
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (268) in tzflash_pdown_wps_recover
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (336) in alipay_send_request
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (384) in sec_sha256_process
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (612) in alipay_secure_read_data_overridable
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (348) in ifaa_sha256_transform
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (2392) in profile_get_certficate
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (376) in alipay_inner_storage_delete
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (268) in ALIPAY_uECC_shared_secret
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (560) in saveData_deal_cryptFactor
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (592) in field_data_handle
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (264) in deal_receive_data
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (260) in single_bank_update_loop
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (812) in custom_cfg_item_write
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (532) in hci_send_event
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (360) in ui_core_element_release_probe
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (380) in ui_core_show_rect
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (364) in __ui_core_element_hide
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (356) in ui_core_element_hide
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (364) in __ui_core_element_show
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (356) in ui_core_element_show
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (364) in __ui_core_element_delete
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (356) in ui_core_element_delete
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (368) in list_for_all
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (1072) in code_128_encode
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (268) in jlgpu_task_texture_affine_config
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (428) in jlgpu_task_texture_perspective_config
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (428) in ui_custom_draw_curve_grad
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (336) in ui_draw
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (296) in alipay_inner_get_binding_string
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (316) in gpu_fill_rect
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (336) in gif_keyframe_decode
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (380) in gif_decode
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (712) in jlui_draw_image
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (328) in hexagon_draw_modle
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (300) in cube_reflection_draw
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (364) in dial_sel_touch
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (380) in jlgpu_task_list_copy_create
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (336) in hexagon_draw_modle.26310
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (324) in reflection_draw
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (388) in football_draw_image_bg
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (308) in football_draw_image
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (268) in football_draw_modle
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (372) in _Z8getPlaneP4Vec3S0_4Vec2ii
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (340) in solve_dlt_plu
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (276) in draw_quadrilateral
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (356) in _Z8drawCubeP4Vec3S0_4Vec2PA9_j
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (356) in _Z16drawLayer_AcrossP4Vec3S0_4Vec2PA3_jPj
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (332) in _Z18drawLayer_StraightP4Vec3S0_4Vec2PA3_jPj
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (336) in _Z18drawLayer_VerticalP4Vec3S0_4Vec2PA3_jPj
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (732) in _Z16drawRotationCube13RotationPointP4Vec3S1_4Vec2PA9_jff
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (404) in config_gpu_task
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (264) in jlui_create_bg_task_list
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (268) in jlgpu_task_list_copy_create_with_backcolor
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (288) in create_board_flip_fill_task
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (296) in tzflash_get_wps_addr
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (572) in jljpeg_decode_start
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (628) in _ZN13Shadow_BFNLMSI9floatReal12floatComplex11fixHalfRealE6filterER6VectorIS2_ES6_S6_P9AllocatorIS0_E
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (320) in _ZN20IMCRA_NoiseEstimatorI9floatRealE8EstimateERK6VectorIS0_ERS3_R9AllocatorIS0_E
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (380) in _ZN34SingleChannelNoiseSuppressorInBarkI9floatReal12floatComplexE8SuppressERK11VectorArrayIS1_ERKS3_IS0_ES9_RS4_R9AllocatorIS0_E
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (440) in NoiseSuppress_Process
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (440) in _ZN18NonlinearProcessorI9floatReal12floatComplexE7ProcessERK11VectorArrayIS1_ES6_S6_RS4_P9AllocatorIS0_E
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (488) in EchoSuppress_Process
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (296) in sbc_pack_frame_internal
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (264) in Decod_ld8k
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (340) in send_data_stream
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (1000) in f_short_name_deal
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (368) in f_Move
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (632) in f_Open
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (380) in draw_circular_arc
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (328) in draw_line_skew
+C:\JL\pi32\bin\pi32v2-ld.exe: warning: LLVM gold plugin: stack size limit exceeded (560) in ui_draw_default
+make[1]: Leaving directory 'E:/��Ŀ/AC7076A3/AC707N3.2.1SDK/SDK'

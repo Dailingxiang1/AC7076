@@ -102,6 +102,7 @@ static void usb_cdc_wakeup(struct usb_device_t *usb_device)
 #endif
 
 }
+#if TCFG_CFG_TOOL_ENABLE && (TCFG_COMM_TYPE == TCFG_USB_COMM)
 static int cdc_rx_data(int *msg)
 {
     /* log_debug("msg[0]:0x%x\n", (u32)msg[0]); */
@@ -124,6 +125,7 @@ APP_MSG_HANDLER(cdc_data_msg_entry) = {
     .from       = MSG_FROM_CDC_DATA,
     .handler    = cdc_rx_data,
 };
+#endif /* Configuration-tool CDC message consumer. */
 #endif
 
 

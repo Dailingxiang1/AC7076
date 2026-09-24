@@ -468,6 +468,14 @@ static int clock_manager_init(void)
 }
 early_initcall(clock_manager_init);
 
+#if AC7076A3_DEMO_ENABLE
+/* The exclusive board demo deliberately skips the product initcall lists. */
+int ac7076a3_demo_clock_init(void)
+{
+    return clock_manager_init();
+}
+#endif
+
 /* --------------------------------------------------------------------------*/
 /**
  * @brief clock_manager_test
@@ -504,4 +512,3 @@ void clock_manager_test3(void)
     /* u32 addr = (u32)(&clk_locker.freq); */
     /* mpu_set(2, addr, addr+3, 0, "Cr"); */
 }
-

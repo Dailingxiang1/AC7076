@@ -1,0 +1,11 @@
+{
+  "profile": "Screen",
+  "defines": "-DAC7076A3_DEMO_ENABLE=1 -DDEMO_MIC_ENABLE=0 -DDEMO_SPEAKER_ENABLE=0 -DDEMO_USB_CDC_ENABLE=0 -DDEMO_LCD_ENABLE=1",
+  "builtAt": "2026-09-24T15:55:33.0986146+08:00",
+  "elf": "E:\\项目\\AC7076A3\\AC707N3.2.1SDK\\SDK\\cpu\\br35\\tools\\sdk.elf",
+  "sha256": "D89DE7EDBD94E27206FB15D0743E36760ED89E5055BE7F0817088E0AA9169274",
+  "bytes": 5168908,
+  "warningLines": 14,
+  "hardwareValidated": false,
+  "log": "E:\\项目\\AC7076A3\\AC707N3.2.1SDK\\output\\bringup\\build-Screen.log"
+}

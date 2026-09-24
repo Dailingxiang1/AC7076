@@ -1,0 +1,11 @@
+{
+  "profile": "Original",
+  "defines": "-DAC7076A3_DEMO_ENABLE=0",
+  "builtAt": "2026-09-10T09:05:56.7738448+08:00",
+  "elf": "E:\\项目\\AC7076A3\\AC707N3.2.1SDK\\SDK\\cpu\\br35\\tools\\sdk.elf",
+  "sha256": "2F43F395C775B244174D0FE59DD7719375B29B0DFF15E314A16B4FF7523C3D74",
+  "bytes": 11112000,
+  "warningLines": 103,
+  "hardwareValidated": false,
+  "log": "E:\\项目\\AC7076A3\\AC707N3.2.1SDK\\output\\bringup\\build-Original.log"
+}

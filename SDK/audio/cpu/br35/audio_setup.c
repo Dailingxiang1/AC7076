@@ -405,6 +405,14 @@ static int audio_init()
 }
 platform_initcall(audio_init);
 
+#if AC7076A3_DEMO_ENABLE && (DEMO_SPEAKER_ENABLE || DEMO_MIC_ENABLE)
+/* Exclusive bringup calls only audio init, not every product initcall. */
+int ac7076a3_demo_audio_init(void)
+{
+    return __this->audio_inited ? 0 : audio_init();
+}
+#endif
+
 static void audio_uninit()
 {
     dac_power_off();

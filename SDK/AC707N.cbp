@@ -1659,6 +1659,14 @@
 <Unit filename="apps/common/update/user_file_download/reserve_file_download.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="apps/common/update/user_file_download/user_file_download.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="apps/watch/app_main.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/watch/bringup/ac7076a3_demo_config.h" />
+<Unit filename="apps/watch/bringup/ac7076a3_demo_overrides.h" />
+<Unit filename="apps/watch/bringup/ac7076a3_demo.h" />
+<Unit filename="apps/watch/bringup/jd9855_panel_init.h" />
+<Unit filename="apps/watch/bringup/ac7076a3_demo.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/watch/bringup/ac7076a3_demo_audio.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/watch/bringup/ac7076a3_demo_usb.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="apps/watch/bringup/lcd_qspi_jd9855.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="apps/watch/audio/jlstream_event_handler.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="apps/watch/audio/mix_record_api.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="apps/watch/audio/scene_switch.c"><Option compilerVer="CC"/></Unit>

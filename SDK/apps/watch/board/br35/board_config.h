@@ -7,6 +7,7 @@
 // 3、app_config.h   包含有board_config.h
 //
 #include "sdk_config.h"
+#include "../../bringup/ac7076a3_demo_config.h"
 #include "audio_type.h"
 
 /*
@@ -21,6 +22,7 @@
 #include "board_ac707n_demo/board_ac707n_demo_cfg.h"
 #include "board_ac7074_demo/board_ac7074_demo_cfg.h"
 #include "board_ac707n_csc_demo/board_ac707n_csc_demo_cfg.h"
+#include "../../bringup/ac7076a3_demo_overrides.h"
 
 
 #define  DUT_AUDIO_DAC_LDO_VOLT                 DACVDD_LDO_1_35V

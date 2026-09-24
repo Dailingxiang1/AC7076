@@ -1,0 +1,11 @@
+{
+  "profile": "AudioUsb",
+  "defines": "-DAC7076A3_DEMO_ENABLE=1 -DDEMO_MIC_ENABLE=1 -DDEMO_SPEAKER_ENABLE=1 -DDEMO_USB_CDC_ENABLE=1 -DDEMO_LCD_ENABLE=0",
+  "builtAt": "2026-09-24T14:15:48.4142225+08:00",
+  "elf": "E:\\项目\\AC7076A3\\AC707N3.2.1SDK\\SDK\\cpu\\br35\\tools\\sdk.elf",
+  "sha256": "291370D57FF6AB2981766DC5EFEDB163EBC616910D60D75D822E871187BB9190",
+  "bytes": 5180616,
+  "warningLines": 14,
+  "hardwareValidated": false,
+  "log": "E:\\项目\\AC7076A3\\AC707N3.2.1SDK\\output\\bringup\\build-AudioUsb.log"
+}

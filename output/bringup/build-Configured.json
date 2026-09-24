@@ -1,0 +1,11 @@
+﻿{
+    "profile":  "Configured",
+    "defines":  "",
+    "builtAt":  "2026-09-14T18:57:08.3136680+08:00",
+    "elf":  "E:\\项目\\AC7076A3\\AC707N3.2.1SDK\\SDK\\cpu\\br35\\tools\\sdk.elf",
+    "sha256":  "1225FD2ACC4CA2D7381CB97252831B088AED514236872C7524F10835E9DB6E48",
+    "bytes":  8287908,
+    "warningLines":  71,
+    "hardwareValidated":  false,
+    "log":  "E:\\项目\\AC7076A3\\AC707N3.2.1SDK\\output\\bringup\\build-Configured.log"
+}

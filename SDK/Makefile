@@ -197,7 +197,7 @@ export LINK_AT ?= 1
 # 表示下面的不是一个文件的名字，无论是否存在 all, clean, pre_build 这样的文件
 # 还是要执行命令
 # see: https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html
-.PHONY: all clean pre_build
+.PHONY: all clean pre_build build-only
 
 # 不要使用 make 预设置的规则
 # see: https://www.gnu.org/software/make/manual/html_node/Suffix-Rules.html
@@ -205,6 +205,11 @@ export LINK_AT ?= 1
 
 all: pre_build 
 	make -f build/Makefile.mk
+
+# Generate shared configuration before parallel compilation. No pack/flash.
+build-only: pre_build
+	$(MAKE) -f build/Makefile.mk pre_build
+	$(MAKE) -f build/Makefile.mk $(OUT_ELF)
 
 pre_build:
 	$(info +CC build/genFileList.c)
@@ -214,4 +219,3 @@ pre_build:
 clean:
 	$(QUITE) $(RM) $(OUT_ELF)
 	$(QUITE) $(RM) $(BUILD_DIR)
-

@@ -211,12 +211,18 @@ struct linein_dev_data linein_data = {
 };
 #endif
 
-#if TCFG_UI_ENABLE
+#if TCFG_UI_ENABLE || (AC7076A3_DEMO_ENABLE && DEMO_LCD_ENABLE)
 
 #if TCFG_SPI_LCD_ENABLE
 //推屏使用有专门硬件模块,不是普通spi模块,io固定,根据屏幕驱动类似输出时序
 LCD_SPI_PLATFORM_DATA_BEGIN(lcd_spi_data) = {
-#if (TCFG_NANDFLASH_DEV_ENABLE||TCFG_7074_EX_NORFLASH_CONFIG)//7074顶板差异
+#if AC7076A3_DEMO_ENABLE
+    .pin_reset = IO_PORTC_03,
+    .pin_en = NO_CONFIG_PORT, /* Board1: fixed 3V3, PC1/PC2 are not power GPIOs */
+    .pin_en_ex = NO_CONFIG_PORT,
+    .pin_te = NO_CONFIG_PORT, /* bringup does not wait for TE */
+    .pin_bl = IO_LCD_PG,
+#elif (TCFG_NANDFLASH_DEV_ENABLE||TCFG_7074_EX_NORFLASH_CONFIG)//7074顶板差异
     .pin_reset = IO_PORTA_03,
     .pin_en = IO_PORTA_01 ,
     .pin_en_ex = NO_CONFIG_PORT,

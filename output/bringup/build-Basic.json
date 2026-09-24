@@ -1,0 +1,11 @@
+{
+  "profile": "Basic",
+  "defines": "-DAC7076A3_DEMO_ENABLE=1 -DDEMO_MIC_ENABLE=0 -DDEMO_SPEAKER_ENABLE=0 -DDEMO_USB_CDC_ENABLE=1 -DDEMO_LCD_ENABLE=0",
+  "builtAt": "2026-09-24T15:33:36.8130305+08:00",
+  "elf": "E:\\项目\\AC7076A3\\AC707N3.2.1SDK\\SDK\\cpu\\br35\\tools\\sdk.elf",
+  "sha256": "F54B70A4073171811667E1B8EE348CEDAF54AB61AB8FDA97D8E3543AA465EC4B",
+  "bytes": 5173976,
+  "warningLines": 14,
+  "hardwareValidated": false,
+  "log": "E:\\项目\\AC7076A3\\AC707N3.2.1SDK\\output\\bringup\\build-Basic.log"
+}

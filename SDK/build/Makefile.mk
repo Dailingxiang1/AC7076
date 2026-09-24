@@ -542,6 +542,10 @@ c_SRC_FILES := \
 	apps/common/update/user_file_download/reserve_file_download.c \
 	apps/common/update/user_file_download/user_file_download.c \
 	apps/watch/app_main.c \
+	apps/watch/bringup/ac7076a3_demo.c \
+	apps/watch/bringup/ac7076a3_demo_audio.c \
+	apps/watch/bringup/ac7076a3_demo_usb.c \
+	apps/watch/bringup/lcd_qspi_jd9855.c \
 	apps/watch/audio/jlstream_event_handler.c \
 	apps/watch/audio/mix_record_api.c \
 	apps/watch/audio/scene_switch.c \
