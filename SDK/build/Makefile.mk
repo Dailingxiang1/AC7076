@@ -544,6 +544,7 @@ c_SRC_FILES := \
 	apps/watch/app_main.c \
 	apps/watch/bringup/ac7076a3_demo.c \
 	apps/watch/bringup/ac7076a3_demo_audio.c \
+	apps/watch/bringup/ac7076a3_demo_ble.c \
 	apps/watch/bringup/ac7076a3_demo_usb.c \
 	apps/watch/bringup/lcd_qspi_jd9855.c \
 	apps/watch/audio/jlstream_event_handler.c \

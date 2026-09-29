@@ -48,7 +48,7 @@ while i < len(text):
     elif line.startswith('## '):
         if line.startswith('## 1.'):
             story.extend([Spacer(1, 18), Image(str(ROOT / 'tmp/pdfs/schematic.png'), width=499, height=353), Spacer(1, 12)])
-            story.append(Paragraph('原理图缩略图。精确引脚请查第 3 页接线表及 doc 目录下的原始 PDF。<br/>当前 demo 默认通过 USB CDC 虚拟 COM 输出日志；JD9855 模组参数仍待确认。早期编译下载指南记录的是原 SDK 基线。', styles['body']))
+            story.append(Paragraph('原理图缩略图。精确引脚请查后文接线表及 doc 目录下的原始 PDF。<br/>当前 demo 暂停 USB CDC，保留 PB0 LED。待烧录屏幕诊断版会在 20%/80% 背光之间切换，并发送五色画面。', styles['body']))
         story.append(PageBreak())
         story.append(Paragraph(inline(line[3:]), styles['h2']))
         i += 1
